@@ -1,0 +1,11 @@
+flask==3.0.2
+pdfplumber==0.10.3
+werkzeug==3.0.1 
+pytesseract==0.3.10
+pdf2image==1.16.3
+python-docx==0.8.11
+Pillow==10.0.0
+google-generativeai==0.3.2
+httpx==0.27.0
+python-dotenv==1.0.1
+google-cloud-aiplatform>=1.36.0
