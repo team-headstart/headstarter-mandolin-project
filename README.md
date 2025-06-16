@@ -1,24 +1,11 @@
-### Task: Automate the Prior Authorization (PA) Form Filling Workflow
+README: Prior Authorization (PA) Form Automation Pipeline
 
----
+📄 Project Overview
 
-### **Purpose of this assignment**
+This project is an automation pipeline designed to process Prior Authorization (PA) forms using OCR and text extraction from scanned documents. It aims to extract relevant patient information from scanned referral packages and fill it into a structured PA form PDF.
 
-This task is designed to assess the candidate's skills, creativity, and problem-solving abilities in a practical setting. Specifically, we are looking for:
+This is my first major project as a Headstarter Software Engineering Resident. I approached this challenge with a mindset to struggle intentionally and grow through exploration before seeking heavy external support. The current submission represents an MVP (Minimum Viable Product), demonstrating key pipeline logic with room for future extension.
 
-1. The ability to quickly learn and adapt to domain knowledge (in this case, healthcare) from a new vertical.
-2. Existing skills and knowledge in building multimodal ML pipelines.
-3. The capacity to think outside of the box, discovering novel solutions when existing methods fall short.
-4. The ability to effectively leverage existing resources, tools, and libraries to resolve challenges.
-5. Strong fundamental coding skills, including clean, readable, and maintainable code.
-6. Thoughtful handling of ambiguous or incomplete requirements, demonstrating sound judgment in decision-making.
-
-### Background:
-
-**Prior Authorization (PA)** is a process where healthcare providers must obtain approval from a health insurance plan before delivering a specific service (e.g., a drug infusion) to a patient. This process requires assembling evidence to demonstrate that the patient meets specific criteria, such as:
-
-- **Severity of illness**
-- **Ineffectiveness of alternative treatments**
 
 The process typically involves comparing two main documents:
 
