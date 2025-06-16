@@ -1,0 +1,14 @@
+{
+  "timestamp": "20250615_230209",
+  "source_file": "20250615_230209_source_referral_package.pdf",
+  "template_file": "20250615_230209_template_pa.pdf",
+  "extracted_data": {
+    "start_of_treatment": null,
+    "last_treatment_date": null,
+    "patient_first_name": null,
+    "patient_last_name": null,
+    "patient_address": null,
+    "insurance_member_id": null,
+    "insurance_group": "Information"
+  }
+}
