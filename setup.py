@@ -51,21 +51,22 @@ def install_requirements():
 
 def verify_installation():
     """Verify that key packages are installed correctly"""
-    packages_to_check = [
-        "google.generativeai",
-        "mistralai", 
-        "fitz",  # PyMuPDF
-        "dotenv"
-    ]
+    # Dictionary mapping import names to their actual package names for clarity
+    packages_to_check = {
+        "google.generativeai": "google-generativeai",
+        "mistralai": "mistralai", 
+        "fitz": "PyMuPDF",  # fitz is the import name for PyMuPDF package
+        "dotenv": "python-dotenv"
+    }
     
     print("\n🔍 Verifying installation...")
     
-    for package in packages_to_check:
+    for import_name, package_name in packages_to_check.items():
         try:
-            __import__(package)
-            print(f"✅ {package}")
+            __import__(import_name)
+            print(f"✅ {package_name} (imports as '{import_name}')")
         except ImportError:
-            print(f"❌ {package} - Failed to import")
+            print(f"❌ {package_name} (imports as '{import_name}') - Failed to import")
             return False
     
     return True
