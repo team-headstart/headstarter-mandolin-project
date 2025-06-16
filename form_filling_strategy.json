@@ -3,371 +3,332 @@
     "reportlab_instructions": [
         {
             "method": "drawString",
-            "x": 78,
-            "y": 493,
+            "x": 75.0,
+            "y": 560.0,
             "text": "Shakh",
             "field_name": "patient_information.First Name",
             "font_size": 10,
-            "validation": "Valid: Coordinates within field boundary, text fits."
+            "validation": "OK"
         },
         {
             "method": "drawString",
-            "x": 200,
-            "y": 493,
+            "x": 210.0,
+            "y": 560.0,
             "text": "Abdulla",
             "field_name": "patient_information.Last Name",
             "font_size": 10,
-            "validation": "Valid: Coordinates within field boundary, text fits."
+            "validation": "OK"
         },
         {
             "method": "drawString",
-            "x": 100,
-            "y": 458,
-            "text": "425 Sherman Ave",
+            "x": 320.0,
+            "y": 560.0,
+            "text": "04/01/2001",
+            "field_name": "patient_information.DOB",
+            "font_size": 10,
+            "validation": "OK"
+        },
+        {
+            "method": "drawString",
+            "x": 75.0,
+            "y": 530.0,
+            "text": "425 Sherman Ave, Nashville TN 37995",
             "field_name": "patient_information.Address",
             "font_size": 10,
-            "validation": "Valid: Coordinates within field boundary, text fits."
+            "validation": "OK"
         },
         {
             "method": "drawString",
-            "x": 78,
-            "y": 423,
-            "text": "Nashville",
-            "field_name": "patient_information.City",
-            "font_size": 10,
-            "validation": "Valid: Coordinates within field boundary, text fits."
-        },
-        {
-            "method": "drawString",
-            "x": 211,
-            "y": 423,
-            "text": "TN",
-            "field_name": "patient_information.State",
-            "font_size": 10,
-            "validation": "Valid: Coordinates within field boundary, text fits."
-        },
-        {
-            "method": "drawString",
-            "x": 297,
-            "y": 423,
-            "text": "37995",
-            "field_name": "patient_information.ZIP",
-            "font_size": 10,
-            "validation": "Valid: Coordinates within field boundary, text fits."
-        },
-        {
-            "method": "drawString",
-            "x": 108,
-            "y": 389,
+            "x": 75.0,
+            "y": 500.0,
             "text": "865-395-3958",
             "field_name": "patient_information.Home Phone",
             "font_size": 10,
-            "validation": "Valid: Coordinates within field boundary, text fits."
+            "validation": "OK"
         },
         {
             "method": "drawString",
-            "x": 329,
-            "y": 389,
+            "x": 290.0,
+            "y": 500.0,
             "text": "865-395-0481",
             "field_name": "patient_information.Cell Phone",
             "font_size": 10,
-            "validation": "Valid: Coordinates within field boundary, text fits."
+            "validation": "OK"
         },
         {
             "method": "drawString",
-            "x": 78,
-            "y": 334,
+            "x": 75.0,
+            "y": 415.0,
+            "text": "Hao",
+            "field_name": "provider_information.First Name",
+            "font_size": 10,
+            "validation": "OK"
+        },
+        {
+            "method": "drawString",
+            "x": 210.0,
+            "y": 415.0,
+            "text": "Gu",
+            "field_name": "provider_information.Last Name",
+            "font_size": 10,
+            "validation": "OK"
+        },
+        {
+            "method": "drawString",
+            "x": 75.0,
+            "y": 385.0,
+            "text": "3320 Montgomery Dr NASHVILLE TN 37361",
+            "field_name": "provider_information.Address",
+            "font_size": 10,
+            "validation": "OK"
+        },
+        {
+            "method": "drawString",
+            "x": 75.0,
+            "y": 355.0,
+            "text": "614-936-0065",
+            "field_name": "provider_information.Phone",
+            "font_size": 10,
+            "validation": "OK"
+        },
+        {
+            "method": "drawString",
+            "x": 75.0,
+            "y": 470.0,
             "text": "LAJM14345116",
             "field_name": "insurance_information.Member ID #",
             "font_size": 10,
-            "validation": "Valid: Coordinates within field boundary, text fits."
+            "validation": "OK"
         },
         {
             "method": "drawString",
-            "x": 217,
-            "y": 334,
+            "x": 210.0,
+            "y": 470.0,
             "text": "435000",
             "field_name": "insurance_information.Group #",
             "font_size": 10,
-            "validation": "Valid: Coordinates within field boundary, text fits."
+            "validation": "OK"
         },
         {
             "method": "drawString",
-            "x": 78,
-            "y": 261,
-            "text": "Asriel",
-            "field_name": "provider_information.First Name",
+            "x": 75.0,
+            "y": 258.0,
+            "text": "694 mg",
+            "field_name": "medication_details.Dose",
             "font_size": 10,
-            "validation": "Valid: Coordinates within field boundary, text fits."
+            "validation": "OK"
         },
         {
             "method": "drawString",
-            "x": 200,
-            "y": 261,
-            "text": "Han",
-            "field_name": "provider_information.Last Name",
+            "x": 170.0,
+            "y": 258.0,
+            "text": "intraVENOUS, Once, Starting 30 minutes after treatment start time.",
+            "field_name": "medication_details.Directions for Use",
             "font_size": 10,
-            "validation": "Valid: Coordinates within field boundary, text fits."
-        },
-                {
-            "method": "drawString",
-            "x": 78,
-            "y": 227,
-            "text": "3320 Montgomery Dr",
-            "field_name": "provider_information.Address",
-            "font_size": 10,
-            "validation": "Valid: Coordinates within field boundary, text fits."
-        },
-        {
-            "method": "drawString",
-            "x": 78,
-            "y": 192,
-            "text": "Nashville",
-            "field_name": "provider_information.City",
-            "font_size": 10,
-            "validation": "Valid: Coordinates within field boundary, text fits."
-        },
-        {
-            "method": "drawString",
-            "x": 211,
-            "y": 192,
-            "text": "TN",
-            "field_name": "provider_information.State",
-            "font_size": 10,
-            "validation": "Valid: Coordinates within field boundary, text fits."
-        },
-        {
-            "method": "drawString",
-            "x": 297,
-            "y": 192,
-            "text": "37361",
-            "field_name": "provider_information.ZIP",
-            "font_size": 10,
-            "validation": "Valid: Coordinates within field boundary, text fits."
-        },
-        {
-            "method": "drawString",
-            "x": 78,
-            "y": 158,
-            "text": "615-562-4848",
-            "field_name": "provider_information.Phone",
-            "font_size": 10,
-            "validation": "Valid: Coordinates within field boundary, text fits."
+            "validation": "OK"
         },
         {
             "method": "rect",
-            "x": 434.6,
-            "y": 578,
-            "width": 6,
-            "height": 6,
+            "x": 140.0,
+            "y": 415.0,
+            "width": 8,
+            "height": 8,
             "stroke": 1,
             "fill": 1,
-            "field_name": "medication_details.Truxima (rituximab-abbs)"
+            "field_name": "provider_type.M.D."
+        },
+        {
+            "method": "drawString",
+            "x": 100.0,
+            "y": 615.0,
+            "text": "05/22",
+            "field_name": "Start of treatment date",
+            "font_size": 10,
+            "validation": "OK"
         }
     ],
     "coordinate_mappings": {
         "patient_information.First Name": {
             "coordinates": {
-                "x": 78,
-                "y": 493
+                "x": 75.0,
+                "y": 560.0
             },
             "value": "Shakh",
             "field_type": "text",
             "text_size": 10,
             "alignment": "left",
-            "validation": "Valid: Coordinates within field boundary, text fits."
+            "validation": "OK"
         },
         "patient_information.Last Name": {
             "coordinates": {
-                "x": 200,
-                "y": 493
+                "x": 210.0,
+                "y": 560.0
             },
             "value": "Abdulla",
             "field_type": "text",
             "text_size": 10,
             "alignment": "left",
-            "validation": "Valid: Coordinates within field boundary, text fits."
+            "validation": "OK"
+        },
+        "patient_information.DOB": {
+            "coordinates": {
+                "x": 320.0,
+                "y": 560.0
+            },
+            "value": "04/01/2001",
+            "field_type": "text",
+            "text_size": 10,
+            "alignment": "left",
+            "validation": "OK"
         },
         "patient_information.Address": {
             "coordinates": {
-                "x": 100,
-                "y": 458
+                "x": 75.0,
+                "y": 530.0
             },
-            "value": "425 Sherman Ave",
+            "value": "425 Sherman Ave, Nashville TN 37995",
             "field_type": "text",
             "text_size": 10,
             "alignment": "left",
-            "validation": "Valid: Coordinates within field boundary, text fits."
-        },
-        "patient_information.City": {
-            "coordinates": {
-                "x": 78,
-                "y": 423
-            },
-            "value": "Nashville",
-            "field_type": "text",
-            "text_size": 10,
-            "alignment": "left",
-            "validation": "Valid: Coordinates within field boundary, text fits."
-        },
-        "patient_information.State": {
-            "coordinates": {
-                "x": 211,
-                "y": 423
-            },
-            "value": "TN",
-            "field_type": "text",
-            "text_size": 10,
-            "alignment": "left",
-            "validation": "Valid: Coordinates within field boundary, text fits."
-        },
-        "patient_information.ZIP": {
-            "coordinates": {
-                "x": 297,
-                "y": 423
-            },
-            "value": "37995",
-            "field_type": "text",
-            "text_size": 10,
-            "alignment": "left",
-            "validation": "Valid: Coordinates within field boundary, text fits."
+            "validation": "OK"
         },
         "patient_information.Home Phone": {
             "coordinates": {
-                "x": 108,
-                "y": 389
+                "x": 75.0,
+                "y": 500.0
             },
             "value": "865-395-3958",
             "field_type": "text",
             "text_size": 10,
             "alignment": "left",
-            "validation": "Valid: Coordinates within field boundary, text fits."
+            "validation": "OK"
         },
         "patient_information.Cell Phone": {
             "coordinates": {
-                "x": 329,
-                "y": 389
+                "x": 290.0,
+                "y": 500.0
             },
             "value": "865-395-0481",
             "field_type": "text",
             "text_size": 10,
             "alignment": "left",
-            "validation": "Valid: Coordinates within field boundary, text fits."
+            "validation": "OK"
+        },
+        "provider_information.First Name": {
+            "coordinates": {
+                "x": 75.0,
+                "y": 415.0
+            },
+            "value": "Hao",
+            "field_type": "text",
+            "text_size": 10,
+            "alignment": "left",
+            "validation": "OK"
+        },
+        "provider_information.Last Name": {
+            "coordinates": {
+                "x": 210.0,
+                "y": 415.0
+            },
+            "value": "Gu",
+            "field_type": "text",
+            "text_size": 10,
+            "alignment": "left",
+            "validation": "OK"
+        },
+        "provider_information.Address": {
+            "coordinates": {
+                "x": 75.0,
+                "y": 385.0
+            },
+            "value": "3320 Montgomery Dr NASHVILLE TN 37361",
+            "field_type": "text",
+            "text_size": 10,
+            "alignment": "left",
+            "validation": "OK"
+        },
+        "provider_information.Phone": {
+            "coordinates": {
+                "x": 75.0,
+                "y": 355.0
+            },
+            "value": "614-936-0065",
+            "field_type": "text",
+            "text_size": 10,
+            "alignment": "left",
+            "validation": "OK"
         },
         "insurance_information.Member ID #": {
             "coordinates": {
-                "x": 78,
-                "y": 334
+                "x": 75.0,
+                "y": 470.0
             },
             "value": "LAJM14345116",
             "field_type": "text",
             "text_size": 10,
             "alignment": "left",
-            "validation": "Valid: Coordinates within field boundary, text fits."
+            "validation": "OK"
         },
         "insurance_information.Group #": {
             "coordinates": {
-                "x": 217,
-                "y": 334
+                "x": 210.0,
+                "y": 470.0
             },
             "value": "435000",
             "field_type": "text",
             "text_size": 10,
             "alignment": "left",
-            "validation": "Valid: Coordinates within field boundary, text fits."
+            "validation": "OK"
         },
-         "provider_information.First Name": {
+        "medication_details.Dose": {
             "coordinates": {
-                "x": 78,
-                "y": 261
+                "x": 75.0,
+                "y": 258.0
             },
-            "value": "Asriel",
+            "value": "694 mg",
             "field_type": "text",
             "text_size": 10,
             "alignment": "left",
-            "validation": "Valid: Coordinates within field boundary, text fits."
+            "validation": "OK"
         },
-        "provider_information.Last Name": {
+        "medication_details.Directions for Use": {
             "coordinates": {
-                "x": 200,
-                "y": 261
+                "x": 170.0,
+                "y": 258.0
             },
-            "value": "Han",
+            "value": "intraVENOUS, Once, Starting 30 minutes after treatment start time.",
             "field_type": "text",
             "text_size": 10,
             "alignment": "left",
-            "validation": "Valid: Coordinates within field boundary, text fits."
+            "validation": "OK"
         },
-         "provider_information.Address": {
+        "provider_type.M.D.": {
             "coordinates": {
-                "x": 78,
-                "y": 227
+                "x": 140.0,
+                "y": 415.0
             },
-            "value": "3320 Montgomery Dr",
-            "field_type": "text",
-            "text_size": 10,
-            "alignment": "left",
-            "validation": "Valid: Coordinates within field boundary, text fits."
-        },
-        "provider_information.City": {
-            "coordinates": {
-                "x": 78,
-                "y": 192
-            },
-            "value": "Nashville",
-            "field_type": "text",
-            "text_size": 10,
-            "alignment": "left",
-            "validation": "Valid: Coordinates within field boundary, text fits."
-        },
-        "provider_information.State": {
-            "coordinates": {
-                "x": 211,
-                "y": 192
-            },
-            "value": "TN",
-            "field_type": "text",
-            "text_size": 10,
-            "alignment": "left",
-            "validation": "Valid: Coordinates within field boundary, text fits."
-        },
-         "provider_information.ZIP": {
-            "coordinates": {
-                "x": 297,
-                "y": 192
-            },
-            "value": "37361",
-            "field_type": "text",
-            "text_size": 10,
-            "alignment": "left",
-            "validation": "Valid: Coordinates within field boundary, text fits."
-        },
-         "provider_information.Phone": {
-            "coordinates": {
-                "x": 78,
-                "y": 158
-            },
-            "value": "615-562-4848",
-            "field_type": "text",
-            "text_size": 10,
-            "alignment": "left",
-            "validation": "Valid: Coordinates within field boundary, text fits."
-        },
-         "medication_details.Truxima (rituximab-abbs)": {
-            "coordinates": {
-                "x": 434.6,
-                "y": 578
-            },
-            "value": true,
+            "value": "X",
             "field_type": "checkbox",
-            "text_size": null,
-            "alignment": null,
-            "validation": "Valid: Coordinates within checkbox boundary"
+            "text_size": 10,
+            "alignment": "left",
+            "validation": "OK"
+        },
+        "start_of_treatment_date":{
+            "coordinates": {
+                "x": 100.0,
+                "y": 615.0
+            },
+            "value": "05/22",
+            "field_type": "text",
+            "text_size": 10,
+            "alignment": "left",
+            "validation": "OK"
         }
+
     },
     "placement_summary": {
-        "total_fields_mapped": 18,
-        "text_fields_count": 17,
+        "total_fields_mapped": 16,
+        "text_fields_count": 15,
         "checkbox_fields_count": 1,
         "radio_button_fields_count": 0
     },
