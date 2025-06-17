@@ -32,6 +32,16 @@ class FormField:
     semantic_purpose: Optional[str] = None # To be filled by the Refinement Agent
     options: List[str] = field(default_factory=list)  # For checkboxes/radios
     
+    def to_dict(self):
+        return {
+            "field_id": self.field_id,
+            "page_num": self.page_num,
+            "field_type": self.field_type,
+            "context": self.context,
+            "semantic_purpose": self.semantic_purpose,
+            "options": self.options,
+        }
+
 @dataclass
 class ConditionalRule:
     """Represents a conditional logic rule between fields."""
@@ -47,6 +57,11 @@ class FormSchema:
     # Removing conditional rules for now to improve reliability
     # conditional_rules: List[ConditionalRule]
     
+    def to_dict(self):
+        return {
+            "fields": {field_id: field.to_dict() for field_id, field in self.fields.items()}
+        }
+
 @dataclass
 class ExtractedData:
     """Structured data extracted from referral documents, keyed by semantic purpose."""
@@ -59,6 +74,14 @@ class Correction:
     semantic_purpose: str
     correct_value: Any
     reason: str
+
+    def to_dict(self):
+        return {
+            "field_id": self.field_id,
+            "semantic_purpose": self.semantic_purpose,
+            "correct_value": self.correct_value,
+            "reason": self.reason
+        }
 
 # --- Agent Components ---
 
@@ -143,11 +166,14 @@ class FormUnderstandingAgent:
             try:
                 field_id, context, field_type, page_num_str = entry
                 field_id = field_id.strip()
-                page_num = int(page_num_str.strip())
                 
+                if not context.strip():
+                    print(f"⚠️ Skipping field '{field_id}' due to empty context.")
+                    continue
+
                 fields[field_id] = FormField(
                     field_id=field_id,
-                    page_num=page_num,
+                    page_num=int(page_num_str.strip()),
                     field_type=field_type.strip(),
                     context=context.strip()
                 )
@@ -163,119 +189,113 @@ class FormUnderstandingAgent:
         
         return f"""
         You are an expert in analyzing healthcare Prior Authorization (PA) forms.
-        Your task is to analyze the provided images of a PA form and the raw field data to extract the basic properties of each field.
+        Your task is to analyze the provided images of a PA form and the raw field data to extract the VISUAL text label for each field.
 
         **1. Goal**
-        Create a simple text list of all fields. For each field, provide the following on separate lines:
-        - `ID: [The Field ID]`
-        - `Context: [The clean, readable text label]`
-        - `Type: [The field type]`
-        - `Page: [The page number]`
+        Create a simple text list of all fields. For each field, you MUST find the corresponding text label on the form image and provide it as the context. DO NOT simply use the field ID as the context.
 
         **2. Raw Field Data (from the PDF):**
         ```json
         {raw_fields_json}
         ```
 
-        **3. Task**
+        **3. Task & Output Format**
         Generate a simple text list of all fields. For each field, provide the following on separate lines:
         - `ID: [The Field ID]`
-        - `Context: [The clean, readable text label]`
+        - `Context: [The VISUAL, HUMAN-READABLE TEXT LABEL from the form image]`
         - `Type: [The field type]`
         - `Page: [The page number]`
 
-        **Example Output:**
-        ID: T.7
-        Context: First Name:
-        Type: text
-        Page: 0
+        **Example GOOD vs. BAD Output:**
 
-        ID: C.1.Yes
-        Context: Has the patient been diagnosed with moderately to severely active Crohn's disease?
-        Type: checkbox
-        Page: 1
+        *   **GOOD:**
+            ID: T.7
+            Context: Patient First Name:
+            Type: text
+            Page: 0
+
+        *   **BAD (YOU MUST AVOID THIS):**
+            ID: T.7
+            Context: T.7
+            Type: text
+            Page: 0
         
         Return ONLY the list of fields in this text format.
         """
 
 class SchemaRefinementAgent:
-    """Takes a raw schema and enriches it with semantic meaning."""
+    """Takes a raw schema and uses an LLM to assign meaningful semantic purposes."""
+
     def __init__(self):
-        self.model = genai.GenerativeModel('gemini-2.0-flash')
-        
+        self.model = genai.GenerativeModel('gemini-1.5-pro-latest')
+
     def refine_schema(self, schema: FormSchema) -> FormSchema:
-        """Adds the `semantic_purpose` to each field in the schema."""
         print(f"🧐 Activating Schema Refinement Agent for {len(schema.fields)} fields.")
         if not schema.fields:
             return schema
 
-        # Create a simplified list of fields for the prompt
-        field_contexts = [
-            {"field_id": f.field_id, "context": f.context} 
-            for f in schema.fields.values()
-        ]
+        field_contexts = [{
+            "field_id": field.field_id,
+            "context": field.context
+        } for field in schema.fields.values()]
         
-        prompt = self._build_refinement_prompt(field_contexts)
+        prompt = self._build_prompt(field_contexts)
         
         try:
             response = self.model.generate_content(prompt)
             
             # Update the original schema with the new semantic purposes
-            refined_fields = self._parse_refinement_text(response.text)
-            
-            for field_id, semantic_purpose in refined_fields.items():
-                if field_id in schema.fields:
-                    schema.fields[field_id].semantic_purpose = semantic_purpose
-            
+            # Use splitlines() to handle newlines correctly
+            for line in response.text.strip().splitlines():
+                if '|' in line:
+                    parts = [x.strip() for x in line.split('|', 1)]
+                    if len(parts) == 2:
+                        field_id, purpose = parts
+                        if field_id in schema.fields:
+                            schema.fields[field_id].semantic_purpose = purpose
+                    else:
+                        print(f"⚠️ Skipping malformed line in schema refinement: {line}")
+
             print("✅ Schema refined successfully.")
             return schema
-
         except Exception as e:
-            print(f"❌ Error during Schema Refinement AI call: {e}")
-            return schema # Return the original schema on failure
+            print(f"❌ Schema refinement failed: {e}")
+            return schema
 
-    def _parse_refinement_text(self, text: str) -> Dict[str, str]:
-        """Parses the text output from the refinement agent."""
-        refined_fields = {}
-        # Regex to find "ID: [id] -> Purpose: [purpose]" lines
-        matches = re.findall(r"ID: (.*?) -> Purpose: (.*?)\n", text)
-        for match in matches:
-            field_id, purpose = match
-            refined_fields[field_id.strip()] = purpose.strip()
-        return refined_fields
-
-    def _build_refinement_prompt(self, field_contexts: List[Dict]) -> str:
-        """Builds the prompt to assign semantic purpose to fields."""
+    def _build_prompt(self, field_contexts: list) -> str:
+        """Builds the detailed prompt for the LLM."""
         
+        raw_fields_text = "\\n".join([f"{f['field_id']} | {f['context']}" for f in field_contexts])
+
         return f"""
-        You are a schema mapping expert for an AI automation system.
-        Your task is to assign a `semantic_purpose` to a list of form fields based on their context (the text labels next to them).
+You are an expert in medical billing and data mapping. Your task is to analyze a list of raw form fields from a Prior Authorization PDF and assign a precise, machine-readable 'semantic_purpose' to each one.
 
-        **1. Goal:**
-        Analyze the list of fields below. For each field, determine its purpose and assign it a `semantic_purpose` using a specific convention.
+**Instructions:**
+1.  Analyze the provided list of fields. Each field has an ID and nearby text context.
+2.  For each field, determine its real-world meaning (its semantic purpose).
+3.  Create a `snake_case` version of this purpose. This will be used as a key for data extraction.
+4.  Use the context of surrounding fields to resolve ambiguity. For example, an "Address" field under a "Pharmacy Information" section should be `pharmacy_address`, not just `address`.
+5.  If a field is a clinical question that requires a "Yes" or "No" answer, prefix its purpose with `clinical_question_`.
 
-        **2. Field Naming Convention (CRITICAL):**
-        You MUST use the following naming convention:
-        - **For standard demographic or medical data:** Use clear, snake_case names like `patient_first_name`, `prescriber_npi`, `drug_name`.
-        - **For clinical "Yes/No" or multiple-choice questions:** You MUST use the prefix `clinical_question_` followed by a summary of the question. Examples: `clinical_question_has_used_biologic`, `clinical_question_is_active_infection`, `clinical_question_patient_has_crohns_disease`.
+**Crucial: Good vs. Bad Examples**
 
-        **3. List of Fields to Analyze:**
-        ```json
-        {json.dumps(field_contexts, indent=2)}
-        ```
+*   **BAD:**
+    *   Context: "Patient First Name" -> `semantic_purpose: "T11"` (This is just the ID)
+    *   Context: "Indicate" -> `semantic_purpose: "indication_cb_1"` (This is generic and meaningless)
+    *   Context: "Fax T" -> `semantic_purpose: "fax_t"` (Useless suffix)
 
-        **4. Output Format:**
-        Your output MUST be a simple text list. For each field, provide a single line in the format:
-        `ID: [original_field_id] -> Purpose: [assigned_semantic_purpose]`
+*   **GOOD:**
+    *   Context: "Patient First Name" -> `semantic_purpose: "patient_first_name"`
+    *   Context: "Prescriber's NPI#" -> `semantic_purpose: "prescriber_npi"`
+    *   Context: "Is the patient currently hospitalized?" -> `semantic_purpose: "clinical_question_is_patient_hospitalized"`
+    *   Context: "Diagnosis (ICD-10)" -> `semantic_purpose: "primary_diagnosis_icd_10"`
 
-        **Example Output:**
-        ID: T.7 -> Purpose: patient_first_name
-        ID: Presc_Info_T.12 -> Purpose: prescriber_npi
-        ID: C.1.Yes -> Purpose: clinical_question_has_active_crohns_disease
-        
-        Assign a `semantic_purpose` to every field in the input list.
-        Now, begin.
-        """
+**Output Format:**
+Return ONLY the list of fields in the exact same order you received them, with the `semantic_purpose` filled in for each. Each line must be a pipe-separated value with the format: `field_id | semantic_purpose`
+
+**Raw Fields to Process:**
+{raw_fields_text}
+"""
 
 class DataExtractionAgent:
     """Extracts required information from referral packets based on a form schema."""
@@ -692,9 +712,19 @@ class MANDOLIN_PA_SYSTEM:
             return
 
         schema = self.schema_refiner.refine_schema(raw_schema)
+        # Add logging for the refined schema
+        schema_log_path = output_dir / f"{patient_name}_refined_schema.json"
+        with open(schema_log_path, 'w') as f:
+            json.dump(schema.to_dict(), f, indent=2)
+        print(f"📄 Refined schema saved to: {schema_log_path}")
 
         # 2. Extract Data
         extracted_data = self.data_extractor.extract_data(referral_path, schema)
+        # Add logging for extracted data
+        extracted_data_log_path = output_dir / f"{patient_name}_extracted_data.json"
+        with open(extracted_data_log_path, 'w') as f:
+            json.dump(extracted_data.data, f, indent=2)
+        print(f"📄 Extracted data saved to: {extracted_data_log_path}")
 
         # 3. Clinical Q&A
         clinical_questions = {k: v for k, v in schema.fields.items() if v.semantic_purpose and v.semantic_purpose.startswith("clinical_question_")}
@@ -715,6 +745,11 @@ class MANDOLIN_PA_SYSTEM:
         # 5. Validation and Correction Loop
         final_output_path = output_dir / f"{patient_name}_PA_filled.pdf"
         corrections = self.validator.validate_and_correct(temp_output_path, schema, extracted_data)
+        # Add logging for corrections
+        corrections_log_path = output_dir / f"{patient_name}_corrections.json"
+        with open(corrections_log_path, 'w') as f:
+            json.dump([c.to_dict() for c in corrections], f, indent=2)
+        print(f"📄 Corrections saved to: {corrections_log_path}")
 
         if corrections:
             print(f"✍️ Applying {len(corrections)} corrections...")
