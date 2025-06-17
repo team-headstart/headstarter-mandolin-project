@@ -8,4 +8,8 @@ __pycache__/
 # Output directories
 output_examples/
 output_improved/
-output_mandolin/ 
+output_mandolin/
+
+# Additional directories to exclude
+/Output Data/
+.DS_Store 

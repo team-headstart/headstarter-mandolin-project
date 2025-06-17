@@ -15,6 +15,7 @@ import os
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, field
 import datetime
+import re
 
 load_dotenv()
 genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
@@ -27,7 +28,8 @@ class FormField:
     field_id: str
     page_num: int
     field_type: str  # e.g., 'text', 'checkbox', 'radio'
-    semantic_purpose: str  # e.g., 'patient_first_name', 'diagnosis_code'
+    context: str  # The raw text label near the field
+    semantic_purpose: Optional[str] = None # To be filled by the Refinement Agent
     options: List[str] = field(default_factory=list)  # For checkboxes/radios
     
 @dataclass
@@ -42,7 +44,8 @@ class ConditionalRule:
 class FormSchema:
     """A structured representation of the entire PA form."""
     fields: Dict[str, FormField]
-    conditional_rules: List[ConditionalRule]
+    # Removing conditional rules for now to improve reliability
+    # conditional_rules: List[ConditionalRule]
     
 @dataclass
 class ExtractedData:
@@ -110,27 +113,14 @@ class FormUnderstandingAgent:
         max_retries = 3
         for attempt in range(max_retries):
             try:
-                response = self.model.generate_content(model_input,
-                    generation_config=genai.types.GenerationConfig(
-                        response_mime_type="application/json"
-                    )
-                )
+                response = self.model.generate_content(model_input)
                 
                 # 5. Parse the response and create the FormSchema object
-                schema_json = json.loads(response.text)
+                # This is now a text-based parsing, not JSON
+                form_fields = self._parse_text_to_fields(response.text)
                 
-                form_fields = {
-                    f['field_id']: FormField(**f) 
-                    for f in schema_json.get('fields', [])
-                }
-                
-                conditional_rules = [
-                    ConditionalRule(**r)
-                    for r in schema_json.get('conditional_rules', [])
-                ]
-                
-                schema = FormSchema(fields=form_fields, conditional_rules=conditional_rules)
-                print(f"✅ Schema created successfully with {len(schema.fields)} fields and {len(schema.conditional_rules)} rules.")
+                schema = FormSchema(fields=form_fields)
+                print(f"✅ Schema created successfully with {len(schema.fields)} fields.")
                 return schema
 
             except Exception as e:
@@ -138,10 +128,33 @@ class FormUnderstandingAgent:
                 if attempt + 1 == max_retries:
                     print(f"❌ Critical Error: AI failed to create form schema after {max_retries} attempts.")
                     # Return an empty schema on final failure
-                    return FormSchema(fields={}, conditional_rules=[])
-                print("Retrying...")
+                    return FormSchema(fields={})
 
-        return FormSchema(fields={}, conditional_rules=[]) # Should not be reached
+        return FormSchema(fields={})
+
+    def _parse_text_to_fields(self, text: str) -> Dict[str, FormField]:
+        """Parses a text-based list of fields into FormField objects."""
+        fields = {}
+        # This regex is designed to be very forgiving
+        # It looks for lines starting with a field ID, then grabs the rest
+        field_entries = re.findall(r"ID: (.*?)\nContext: (.*?)\nType: (.*?)\nPage: (.*?)\n", text, re.DOTALL)
+        
+        for entry in field_entries:
+            try:
+                field_id, context, field_type, page_num_str = entry
+                field_id = field_id.strip()
+                page_num = int(page_num_str.strip())
+                
+                fields[field_id] = FormField(
+                    field_id=field_id,
+                    page_num=page_num,
+                    field_type=field_type.strip(),
+                    context=context.strip()
+                )
+            except (ValueError, IndexError) as e:
+                print(f"⚠️ Could not parse field entry: {entry} due to {e}")
+                continue
+        return fields
 
     def _build_schema_creation_prompt(self, raw_fields: List[Dict]) -> str:
         """Constructs the detailed prompt for schema generation."""
@@ -150,49 +163,118 @@ class FormUnderstandingAgent:
         
         return f"""
         You are an expert in analyzing healthcare Prior Authorization (PA) forms.
-        Your task is to analyze the provided images of a PA form and the raw field data extracted from the PDF.
-        Create a structured JSON schema that describes the form's fields and their relationships.
+        Your task is to analyze the provided images of a PA form and the raw field data to extract the basic properties of each field.
 
-        **Step 1: Understand the Goal**
-        The goal is to create a JSON object representing the form's structure so that a different AI can use it to (1) know what information to look for in a patient's medical records and (2) know how to fill out the form correctly, including handling conditional logic.
+        **1. Goal**
+        Create a simple text list of all fields. For each field, provide the following on separate lines:
+        - `ID: [The Field ID]`
+        - `Context: [The clean, readable text label]`
+        - `Type: [The field type]`
+        - `Page: [The page number]`
 
-        **Step 2: Analyze the Form Fields**
-        Here is a JSON list of all the interactive form fields detected in the PDF. Use this as your ground-truth for field IDs.
+        **2. Raw Field Data (from the PDF):**
         ```json
         {raw_fields_json}
         ```
 
-        **Step 3: Create the JSON Schema**
-        Based on the images and the field data, generate a single JSON object with two main keys: "fields" and "conditional_rules".
+        **3. Task**
+        Generate a simple text list of all fields. For each field, provide the following on separate lines:
+        - `ID: [The Field ID]`
+        - `Context: [The clean, readable text label]`
+        - `Type: [The field type]`
+        - `Page: [The page number]`
 
-        **"fields" Key:**
-        This should be a list of objects, where each object represents a single form field. For each field, provide:
-        - `field_id`: (string) The exact ID of the field from the raw data (e.g., "T.7", "Presc Info T.1"). THIS IS CRITICAL.
-        - `page_num`: (integer) The page number the field is on.
-        - `field_type`: (string) The type of the field. Use one of: 'text', 'checkbox', 'radio', 'dropdown', 'signature'.
-        - `semantic_purpose`: (string) This is the MOST IMPORTANT part. Describe what the field is for using a consistent snake_case convention. Examples: 'patient_first_name', 'patient_dob', 'insurance_member_id', 'drug_name', 'diagnosis_code_icd10', 'clinical_question_previous_medications'.
-        - `options`: (list of strings, OPTIONAL) If the field is a checkbox or radio button, list the possible options. For example, for a "Yes/No" question, this would be `["Yes", "No"]`.
+        **Example Output:**
+        ID: T.7
+        Context: First Name:
+        Type: text
+        Page: 0
 
-        **"conditional_rules" Key:**
-        This should be a list of objects, where each object defines a rule governing field interactions.
-        - `primary_field`: (string) The ID of the field that triggers the rule.
-        - `primary_value`: (string/boolean) The value of the primary field that activates the rule (e.g., "Yes", true).
-        - `action`: (string) The action to take. Use one of: 'DISABLE' (the target fields cannot be filled), 'ENABLE' (the target fields can now be filled), 'REQUIRE' (the target fields must be filled).
-        - `target_fields`: (list of strings) A list of the field IDs that are affected by this rule.
+        ID: C.1.Yes
+        Context: Has the patient been diagnosed with moderately to severely active Crohn's disease?
+        Type: checkbox
+        Page: 1
+        
+        Return ONLY the list of fields in this text format.
+        """
 
-        **Example of a Conditional Rule:**
-        If checking a box named "has_allergies_yes" (semantic_purpose: 'has_allergies', option: 'Yes') makes a text field "allergies_details" appear, the rule would be:
-        `{{ "primary_field": "has_allergies_yes", "primary_value": true, "action": "REQUIRE", "target_fields": ["allergies_details"] }}`
+class SchemaRefinementAgent:
+    """Takes a raw schema and enriches it with semantic meaning."""
+    def __init__(self):
+        self.model = genai.GenerativeModel('gemini-2.0-flash')
+        
+    def refine_schema(self, schema: FormSchema) -> FormSchema:
+        """Adds the `semantic_purpose` to each field in the schema."""
+        print(f"🧐 Activating Schema Refinement Agent for {len(schema.fields)} fields.")
+        if not schema.fields:
+            return schema
 
-        If there are two radio buttons for a question, "q1_yes" and "q1_no", they are mutually exclusive. You can represent this with two rules:
-        `{{ "primary_field": "q1_yes", "primary_value": true, "action": "DISABLE", "target_fields": ["q1_no"] }}`
-        `{{ "primary_field": "q1_no", "primary_value": true, "action": "DISABLE", "target_fields": ["q1_yes"] }}`
+        # Create a simplified list of fields for the prompt
+        field_contexts = [
+            {"field_id": f.field_id, "context": f.context} 
+            for f in schema.fields.values()
+        ]
+        
+        prompt = self._build_refinement_prompt(field_contexts)
+        
+        try:
+            response = self.model.generate_content(prompt)
+            
+            # Update the original schema with the new semantic purposes
+            refined_fields = self._parse_refinement_text(response.text)
+            
+            for field_id, semantic_purpose in refined_fields.items():
+                if field_id in schema.fields:
+                    schema.fields[field_id].semantic_purpose = semantic_purpose
+            
+            print("✅ Schema refined successfully.")
+            return schema
 
-        **Final Instructions:**
-        - Be meticulous. The accuracy of this schema is critical for the entire automation process.
-        - Use ONLY the field IDs provided in the raw data JSON. Do not invent new ones.
-        - The `semantic_purpose` should be descriptive and consistent.
-        - Return ONLY the final JSON object, and nothing else.
+        except Exception as e:
+            print(f"❌ Error during Schema Refinement AI call: {e}")
+            return schema # Return the original schema on failure
+
+    def _parse_refinement_text(self, text: str) -> Dict[str, str]:
+        """Parses the text output from the refinement agent."""
+        refined_fields = {}
+        # Regex to find "ID: [id] -> Purpose: [purpose]" lines
+        matches = re.findall(r"ID: (.*?) -> Purpose: (.*?)\n", text)
+        for match in matches:
+            field_id, purpose = match
+            refined_fields[field_id.strip()] = purpose.strip()
+        return refined_fields
+
+    def _build_refinement_prompt(self, field_contexts: List[Dict]) -> str:
+        """Builds the prompt to assign semantic purpose to fields."""
+        
+        return f"""
+        You are a schema mapping expert for an AI automation system.
+        Your task is to assign a `semantic_purpose` to a list of form fields based on their context (the text labels next to them).
+
+        **1. Goal:**
+        Analyze the list of fields below. For each field, determine its purpose and assign it a `semantic_purpose` using a specific convention.
+
+        **2. Field Naming Convention (CRITICAL):**
+        You MUST use the following naming convention:
+        - **For standard demographic or medical data:** Use clear, snake_case names like `patient_first_name`, `prescriber_npi`, `drug_name`.
+        - **For clinical "Yes/No" or multiple-choice questions:** You MUST use the prefix `clinical_question_` followed by a summary of the question. Examples: `clinical_question_has_used_biologic`, `clinical_question_is_active_infection`, `clinical_question_patient_has_crohns_disease`.
+
+        **3. List of Fields to Analyze:**
+        ```json
+        {json.dumps(field_contexts, indent=2)}
+        ```
+
+        **4. Output Format:**
+        Your output MUST be a simple text list. For each field, provide a single line in the format:
+        `ID: [original_field_id] -> Purpose: [assigned_semantic_purpose]`
+
+        **Example Output:**
+        ID: T.7 -> Purpose: patient_first_name
+        ID: Presc_Info_T.12 -> Purpose: prescriber_npi
+        ID: C.1.Yes -> Purpose: clinical_question_has_active_crohns_disease
+        
+        Assign a `semantic_purpose` to every field in the input list.
+        Now, begin.
         """
 
 class DataExtractionAgent:
@@ -290,6 +372,88 @@ class DataExtractionAgent:
         }}
 
         Return ONLY the final JSON object.
+        """
+
+class ClinicalQAAgent:
+    """A specialized agent to answer specific clinical questions from the referral packet."""
+    def __init__(self):
+        self.model = genai.GenerativeModel('gemini-2.0-flash')
+    
+    def answer_questions(self, referral_path: Path, clinical_questions: Dict[str, FormField]) -> Dict[str, Any]:
+        """
+        Given the referral documents and a list of clinical questions from the form schema,
+        find the answers.
+        """
+        print(f"🩺 Activating Clinical Q&A Agent for {len(clinical_questions)} questions.")
+        if not clinical_questions:
+            return {}
+
+        # This agent also needs to see the document
+        doc = fitz.open(referral_path)
+        page_images_b64 = []
+        for page in doc:
+            mat = fitz.Matrix(2.0, 2.0)
+            pix = page.get_pixmap(matrix=mat)
+            img_data = pix.tobytes("png")
+            page_images_b64.append(base64.b64encode(img_data).decode())
+        doc.close()
+
+        prompt = self._build_qa_prompt(clinical_questions)
+        
+        model_input = [prompt]
+        for img_b64 in page_images_b64:
+            model_input.append({"mime_type": "image/png", "data": img_b64})
+
+        print("🤖 Asking AI to answer targeted clinical questions...")
+        try:
+            response = self.model.generate_content(model_input,
+                generation_config=genai.types.GenerationConfig(
+                    response_mime_type="application/json"
+                )
+            )
+            answers = json.loads(response.text)
+            print(f"✅ Clinical Q&A complete. Found answers for {len(answers)} questions.")
+            return answers
+        except Exception as e:
+            print(f"❌ Error during Clinical Q&A AI call: {e}")
+            return {}
+
+    def _build_qa_prompt(self, clinical_questions: Dict[str, FormField]) -> str:
+        """Constructs a prompt to answer very specific clinical questions."""
+        
+        question_list = {
+            purpose: f.context or f.semantic_purpose 
+            for purpose, f in clinical_questions.items()
+        }
+        
+        return f"""
+        You are a clinical review specialist. Your task is to answer a specific list of "Yes/No" questions based on a patient's medical records.
+
+        **1. Your Task:**
+        For each question listed below, you must carefully read the provided medical document images and determine the correct answer.
+
+        **2. Clinical Questions to Answer:**
+        ```json
+        {json.dumps(question_list, indent=2)}
+        ```
+
+        **3. Rules for Answering:**
+        - **Provide Direct Answers**: Your answers in the final JSON should be `true` (for Yes), `false` (for No), or `null` if the information is not found.
+        - **Infer When Necessary**: Unlike simple data extraction, you may need to make logical inferences. For example, if the records show the patient is taking a biologic drug, the answer to "Has the patient used a biologic?" is `true`, even if that exact phrase isn't written.
+        - **Justify Your Answers (Implicitly)**: Base your answer on the entirety of the clinical context provided.
+
+        **4. Output Format:**
+        Your output MUST be a single JSON object. The keys of this object MUST be the semantic purposes from the question list, and the values must be your answers (`true`, `false`, or `null`).
+
+        **Example Output:**
+        {{
+          "clinical_question_has_used_biologic": true,
+          "clinical_question_has_tb_test": true,
+          "clinical_question_is_active_infection": false,
+          "clinical_question_has_tried_advil": null
+        }}
+
+        Now, begin your clinical review.
         """
 
 class ValidationAgent:
@@ -417,138 +581,165 @@ class ValidationAgent:
         """
 
 class FormFillingAgent:
-    """Fills the PA form using the schema and extracted data, handling logic."""
+    """Handles the mechanical process of filling the PDF."""
 
-    def fill_form(self, 
-                  pa_form_path: Path, 
-                  schema: FormSchema, 
-                  data_to_fill: Dict[str, Any], 
+    def fill_form(self,
+                  schema: FormSchema,
+                  data_to_fill: Dict[str, Any],
                   output_path: Path,
+                  base_form_path: Path, # Path to the PDF to be opened
                   is_correction: bool = False):
         """
-        Fills the PDF form. Can be used for initial fill or for applying corrections.
+        Fills the PDF form fields based on the provided data.
+        It opens `base_form_path` and saves the result to `output_path`.
         """
-        if is_correction:
-            print(f"✍️ Applying corrections to: {output_path.name}")
-        else:
-            print(f"✍️ Activating Form Filling Agent for: {output_path.name}")
-
-        # If it's a correction, we work on the existing file. Otherwise, create a new one.
-        if is_correction and pa_form_path.exists():
-            doc = fitz.open(pa_form_path)
-        elif not is_correction and pa_form_path.exists():
-            doc = fitz.open(pa_form_path)
-        else:
-            print("❌ Source PDF not found.")
+        if not base_form_path.exists():
+            print(f"❌ Input form not found at {base_form_path}")
             return
 
-        filled_count = 0
-        
-        # Create a map of semantic purpose to field object for easy lookup
-        purpose_to_field_map: Dict[str, FormField] = {
-            field.semantic_purpose: field for field in schema.fields.values()
-        }
-
-        for purpose, value in data_to_fill.items():
-            if value is None or value == 'null':
-                continue
-
-            if purpose in purpose_to_field_map:
-                field = purpose_to_field_map[purpose]
-                page = doc[field.page_num]
-                
-                # Correctly find the widget by iterating
-                widget = None
-                for w in page.widgets():
-                    if w.field_name == field.field_id:
-                        widget = w
-                        break
-
-                if not widget:
-                    print(f"  ❌ Could not find widget for field ID: {field.field_id} on page {field.page_num}")
-                    continue
-
-                try:
-                    # Update widget value
-                    if field.field_type in ('text', 'dropdown'):
-                        widget.field_value = str(value)
-                    elif field.field_type == 'checkbox':
-                        widget.field_value = bool(value)
-                    elif field.field_type == 'radio':
-                        # For radio buttons, the name refers to the group. We need to select the right option.
-                        if widget.field_value == value:
-                             widget.field_value = True
-
-                    widget.update()
-                    print(f"  ✅ Filled '{purpose}': {str(value)}")
-                    filled_count += 1
-                except Exception as e:
-                    print(f"  ❌ Failed to fill field '{purpose}' ({field.field_id}): {e}")
-
-        doc.save(str(output_path), garbage=4, deflate=True, clean=True)
-        doc.close()
+        doc = fitz.open(str(base_form_path))
         
         if is_correction:
-            print(f"✅ Corrections applied. Final PDF saved to {output_path}")
+            print(f"✍️ Applying corrections to existing form: {base_form_path.name}")
         else:
-            print(f"✅ Initial form filled with {filled_count} data points and saved to {output_path}")
+            print(f"✍️ Filling new form: {base_form_path.name}")
 
+        try:
+            for purpose, value in data_to_fill.items():
+                # Find the field(s) with this semantic purpose
+                target_fields = [f for f in schema.fields.values() if f.semantic_purpose == purpose]
+                
+                if not target_fields:
+                    continue
 
-# --- Main Orchestrator ---
+                for field in target_fields:
+                    try:
+                        page = doc[field.page_num]
+                        
+                        # Correct way to find the widget
+                        widget = None
+                        for w in page.widgets():
+                            if w.field_name == field.field_id:
+                                widget = w
+                                break
+                        
+                        if widget is None:
+                            # This can happen if the field ID from the schema isn't a real widget
+                            # It's a low-probability error but good to handle.
+                            print(f"  ⚠️ Widget not found for field ID: {field.field_id}")
+                            continue
+                        
+                        # Handle different field types
+                        if widget.field_type == fitz.PDF_WIDGET_TYPE_CHECKBOX:
+                            if isinstance(value, str) and value.lower() in ['yes', 'true', 'on']:
+                                widget.field_value = True
+                            elif value is True:
+                                widget.field_value = True
+                            else:
+                                widget.field_value = False
+                        
+                        elif widget.field_type == fitz.PDF_WIDGET_TYPE_RADIOBUTTON:
+                            if value in widget.choices:
+                                widget.field_value = value
+                        else: # Text fields
+                            widget.field_value = str(value)
+                        
+                        widget.update()
+                        
+                    except Exception as e:
+                        print(f"  ❌ Failed to fill field '{purpose}' ({field.field_id}): {e}")
 
-class MandolinPASystem:
-    """Orchestrates the PA automation process using specialized agents."""
+            # Set the NeedAppearances flag to ensure viewers update field values
+            doc.need_appearances = True
+            
+            # Save with garbage collection to clean up
+            doc.save(str(output_path), garbage=4, deflate=True, clean=True)
+            
+            if is_correction:
+                print("✅ Corrections applied successfully.")
+            else:
+                print(f"✅ Form filled and saved to: {output_path}")
 
+        except Exception as e:
+            print(f"❌ Critical Error during form filling process: {e}")
+        finally:
+            # Correctly check if the document is still open before closing
+            if 'doc' in locals() and not doc.is_closed:
+                doc.close()
+
+class MANDOLIN_PA_SYSTEM:
     def __init__(self):
-        self.understanding_agent = FormUnderstandingAgent()
-        self.extraction_agent = DataExtractionAgent()
-        self.validation_agent = ValidationAgent()
-        self.filling_agent = FormFillingAgent()
+        self.form_understander = FormUnderstandingAgent()
+        self.schema_refiner = SchemaRefinementAgent()
+        self.data_extractor = DataExtractionAgent()
+        self.clinical_qa = ClinicalQAAgent()
+        self.validator = ValidationAgent()
+        self.form_filler = FormFillingAgent()
 
     def process_pa(self, patient_name: str, referral_path: Path, pa_form_path: Path, output_dir: Path):
-        """
-        Runs the end-to-end automated PA process for a single patient.
-        """
-        print(f"\n{'='*60}")
+        """Main processing pipeline for a single patient."""
+        print("="*60)
         print(f"🚀 PROCESSING PA FOR: {patient_name.upper()}")
-        print(f"{'='*60}\n")
+        print("="*60 + "\n")
 
-        # Step 1: Understand the form's structure and logic
-        form_schema = self.understanding_agent.create_schema(pa_form_path)
+        # Ensure output directory exists
+        output_dir.mkdir(exist_ok=True)
 
-        # Step 2: Extract only the necessary data from the referral packet
-        extracted_data = self.extraction_agent.extract_data(referral_path, form_schema)
+        # 1. Understand and Refine Schema
+        raw_schema = self.form_understander.create_schema(pa_form_path)
+        if not raw_schema.fields:
+            print("❌ Halting process due to schema creation failure.")
+            return
 
-        # Step 3: Perform initial form fill
+        schema = self.schema_refiner.refine_schema(raw_schema)
+
+        # 2. Extract Data
+        extracted_data = self.data_extractor.extract_data(referral_path, schema)
+
+        # 3. Clinical Q&A
+        clinical_questions = {k: v for k, v in schema.fields.items() if v.semantic_purpose and v.semantic_purpose.startswith("clinical_question_")}
+        if clinical_questions:
+            clinical_answers = self.clinical_qa.answer_questions(referral_path, clinical_questions)
+            extracted_data.data.update(clinical_answers)
+
+        # 4. First Pass: Fill the form
         temp_output_path = output_dir / f"{patient_name}_PA_filled_v1.pdf"
-        self.filling_agent.fill_form(pa_form_path, form_schema, extracted_data.data, temp_output_path)
+        self.form_filler.fill_form(
+            schema=schema,
+            data_to_fill=extracted_data.data,
+            output_path=temp_output_path,
+            base_form_path=pa_form_path,
+            is_correction=False
+        )
 
-        # Step 4: Validate the filled form and generate corrections
-        corrections = self.validation_agent.validate_and_correct(temp_output_path, form_schema, extracted_data)
-
-        # Step 5: Apply corrections to generate the final version
+        # 5. Validation and Correction Loop
         final_output_path = output_dir / f"{patient_name}_PA_filled.pdf"
+        corrections = self.validator.validate_and_correct(temp_output_path, schema, extracted_data)
+
         if corrections:
-            # Create a dictionary of corrections to pass to the filling agent
+            print(f"✍️ Applying {len(corrections)} corrections...")
             correction_data = {c.semantic_purpose: c.correct_value for c in corrections}
-            # The source for corrections is the v1 filled form
-            self.filling_agent.fill_form(temp_output_path, form_schema, correction_data, final_output_path, is_correction=True)
+            
+            self.form_filler.fill_form(
+                schema=schema, 
+                data_to_fill=correction_data, 
+                output_path=final_output_path,
+                base_form_path=temp_output_path, # Use the v1 form as the base
+                is_correction=True
+            )
         else:
-            # If no corrections, the v1 is the final version
             print("✅ No corrections needed. Finalizing document.")
-            import shutil
-            shutil.copy(temp_output_path, final_output_path)
+            # If no corrections, the v1 file is the final one
+            if temp_output_path.exists():
+                temp_output_path.rename(final_output_path)
 
-        # Clean up the temporary file
-        if temp_output_path.exists():
-            temp_output_path.unlink()
-
-        # Step 6: Generate a report (can be enhanced)
-        self.generate_report(patient_name, form_schema, extracted_data, output_dir)
+        # 6. Generate final report
+        self.generate_report(patient_name, schema, extracted_data, output_dir)
         
-        print(f"\n🎉 AUTOMATION COMPLETE FOR {patient_name.upper()}")
+        print(f"\n🎉 AUTOMATION COMPLETE FOR {patient_name.upper()}\n")
 
     def generate_report(self, patient_name: str, schema: FormSchema, extracted_data: ExtractedData, output_dir: Path):
+        """Generates a markdown report of the automation process."""
         report_path = output_dir / f"{patient_name}_processing_report.md"
         # Basic report, can be improved
         with open(report_path, 'w') as f:
@@ -556,31 +747,40 @@ class MandolinPASystem:
             f.write(f"Generated on: {datetime.datetime.now()}\n\n")
             f.write(f"## Form Schema Summary\n")
             f.write(f"- Identified {len(schema.fields)} fields.\n")
-            f.write(f"- Identified {len(schema.conditional_rules)} conditional rules.\n\n")
             f.write(f"## Extraction Summary\n")
             f.write(f"- Extracted {len(extracted_data.data)} data points.\n")
         print(f"📄 Report generated at {report_path}")
-
 
 def main():
     """Main function to run the Mandolin PA System."""
     print("🏥 MANDOLIN PRIOR AUTHORIZATION AUTOMATION SYSTEM 🏥")
     print("="*60)
 
-    system = MandolinPASystem()
-    output_dir = Path("output_mandolin")
+    system = MANDOLIN_PA_SYSTEM()
+    output_dir = Path("Output Data")
     output_dir.mkdir(exist_ok=True)
 
-    # This can be expanded to process a directory of patients
-    patient_dir = Path("Input Data/Akshay")
-    patient_name = "Akshay"
-    referral_path = patient_dir / "referral_package.pdf"
-    pa_path = patient_dir / "pa.pdf"
+    patients_to_process = ["Akshay", "Adbulla"]
 
-    if referral_path.exists() and pa_path.exists():
-        system.process_pa(patient_name, referral_path, pa_path, output_dir)
-    else:
-        print(f"❌ Critical files not found for patient {patient_name} in {patient_dir}")
+    for patient_name in patients_to_process:
+        print(f"\n\n--- Starting processing for patient: {patient_name.upper()} ---")
+        patient_dir = Path(f"Input Data/{patient_name}")
+        
+        # Handle case-sensitive PA form names
+        if (patient_dir / "PA.pdf").exists():
+            pa_path = patient_dir / "PA.pdf"
+        elif (patient_dir / "pa.pdf").exists():
+            pa_path = patient_dir / "pa.pdf"
+        else:
+            print(f"❌ PA form not found for patient {patient_name}")
+            continue
+
+        referral_path = patient_dir / "referral_package.pdf"
+        
+        if referral_path.exists():
+            system.process_pa(patient_name, referral_path, pa_path, output_dir)
+        else:
+            print(f"❌ Referral package not found for patient {patient_name}")
 
 if __name__ == "__main__":
-    main() 
+    main()
