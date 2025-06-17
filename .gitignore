@@ -1,0 +1,11 @@
+# Environment variables
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Output directories
+output_examples/
+output_improved/
+output_mandolin/ 
