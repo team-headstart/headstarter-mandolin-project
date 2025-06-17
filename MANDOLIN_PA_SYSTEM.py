@@ -49,6 +49,14 @@ class ExtractedData:
     """Structured data extracted from referral documents, keyed by semantic purpose."""
     data: Dict[str, Any] = field(default_factory=dict)
 
+@dataclass
+class Correction:
+    """Represents a single correction to be made to the form."""
+    field_id: str
+    semantic_purpose: str
+    correct_value: Any
+    reason: str
+
 # --- Agent Components ---
 
 class FormUnderstandingAgent:
@@ -284,32 +292,164 @@ class DataExtractionAgent:
         Return ONLY the final JSON object.
         """
 
+class ValidationAgent:
+    """Analyzes a filled form to identify errors and propose corrections."""
+    def __init__(self):
+        self.model = genai.GenerativeModel('gemini-2.0-flash')
+
+    def validate_and_correct(self, 
+                             filled_form_path: Path, 
+                             schema: FormSchema, 
+                             extracted_data: ExtractedData) -> List[Correction]:
+        """
+        Looks at the filled form and compares it to the source data,
+        identifying mistakes and proposing a list of corrections.
+        """
+        print(f"🕵️ Activating Validation Agent for: {filled_form_path.name}")
+        
+        if not filled_form_path.exists():
+            print("❌ Validation failed: Filled form PDF not found.")
+            return []
+
+        # 1. Convert filled PDF to image for analysis
+        doc = fitz.open(filled_form_path)
+        page_images_b64 = []
+        for page in doc:
+            mat = fitz.Matrix(2.0, 2.0)
+            pix = page.get_pixmap(matrix=mat)
+            img_data = pix.tobytes("png")
+            page_images_b64.append(base64.b64encode(img_data).decode())
+        doc.close()
+
+        # 2. Build the validation prompt
+        prompt = self._build_validation_prompt(schema, extracted_data)
+
+        # 3. Call the model
+        model_input = [prompt]
+        for img_b64 in page_images_b64:
+            model_input.append({"mime_type": "image/png", "data": img_b64})
+
+        print("🤖 Asking AI to audit the filled form...")
+        try:
+            response = self.model.generate_content(model_input,
+                generation_config=genai.types.GenerationConfig(
+                    response_mime_type="application/json"
+                )
+            )
+            
+            corrections_json = json.loads(response.text)
+            corrections = [Correction(**c) for c in corrections_json.get('corrections', [])]
+            
+            print(f"✅ Validation complete. Found {len(corrections)} potential corrections.")
+            return corrections
+
+        except Exception as e:
+            print(f"❌ Error during validation AI call: {e}")
+            return []
+
+    def _build_validation_prompt(self, schema: FormSchema, extracted_data: ExtractedData) -> str:
+        """Constructs the prompt for the validation agent."""
+
+        schema_dict = {fid: f.__dict__ for fid, f in schema.fields.items()}
+
+        return f"""
+        You are a meticulous quality assurance auditor for a healthcare automation company.
+        Your task is to review a PA form that has been filled out by an AI and identify any errors.
+
+        You will be given three pieces of information:
+        1.  The `Form Schema`: A JSON description of what each field on the form means.
+        2.  The `Extracted Data`: The ground-truth information extracted from the patient's medical records.
+        3.  The `Filled Form Images`: Images of the actual PDF form after the AI filled it out.
+
+        Your job is to find mismatches, empty fields that should be filled, and data placed in the wrong fields.
+
+        **1. Form Schema:**
+        ```json
+        {json.dumps(schema_dict, indent=2)}
+        ```
+
+        **2. Extracted Data (Ground Truth):**
+        ```json
+        {json.dumps(extracted_data.data, indent=2)}
+        ```
+
+        **3. Analysis Task:**
+        Carefully examine the `Filled Form Images`. For every field defined in the `Form Schema`, perform the following checks:
+        - **Check for Mismatches**: Does the value visible in the form image for a field (e.g., 'prescriber_zip') match the corresponding value in the `Extracted Data`?
+        - **Check for Hallucinations**: Is there data in a field on the form that doesn't belong there? For example, is a ZIP code in an email field?
+        - **Check for Missing Data**: Is a field on the form empty, even though you have the data for it in the `Extracted Data`? (e.g., the NPI field is blank, but you have the NPI number).
+        - **Check for Incorrect Checkboxes/Radios**: Based on the `Extracted Data`, is the correct checkbox or radio button selected? For example, if the extracted 'prescriber_specialty' is 'Gastroenterologist', ensure that specific box is checked.
+
+        **4. Output Format:**
+        Your output MUST be a JSON object containing a single key, "corrections". This key should hold a list of objects, where each object represents a single error you found.
+        For each correction, provide:
+        - `field_id`: (string) The ID of the field that needs to be corrected (from the schema).
+        - `semantic_purpose`: (string) The semantic purpose of the field (from the schema).
+        - `correct_value`: (string/boolean) The correct value that SHOULD be in the field.
+        - `reason`: (string) A brief explanation of why this is a correction (e.g., "Field was empty but data was available," or "Incorrect value found in field; was '20176' but should be 'Intake@thealth.com'").
+
+        **Example Output:**
+        {{
+          "corrections": [
+            {{
+              "field_id": "Presc_Info_T.6",
+              "semantic_purpose": "prescriber_zip",
+              "correct_value": "20176",
+              "reason": "Field was empty but data was available."
+            }},
+            {{
+              "field_id": "Presc_Info_T.12",
+              "semantic_purpose": "prescriber_npi",
+              "correct_value": "1331124163",
+              "reason": "Field was empty, but found NPI number in extracted data."
+            }},
+            {{
+              "field_id": "Specialty.Check.1",
+              "semantic_purpose": "prescriber_specialty_gastroenterologist",
+              "correct_value": true,
+              "reason": "Checkbox was not checked despite specialty matching."
+            }}
+          ]
+        }}
+        
+        If you find no errors, return an empty list: `{{ "corrections": [] }}`.
+        Now, begin your audit.
+        """
+
 class FormFillingAgent:
     """Fills the PA form using the schema and extracted data, handling logic."""
 
-    def fill_form(self, pa_form_path: Path, schema: FormSchema, extracted_data: ExtractedData, output_path: Path):
+    def fill_form(self, 
+                  pa_form_path: Path, 
+                  schema: FormSchema, 
+                  data_to_fill: Dict[str, Any], 
+                  output_path: Path,
+                  is_correction: bool = False):
         """
-        Fills the PDF form, intelligently applying conditional rules.
+        Fills the PDF form. Can be used for initial fill or for applying corrections.
         """
-        print(f"✍️ Activating Form Filling Agent for: {output_path.name}")
+        if is_correction:
+            print(f"✍️ Applying corrections to: {output_path.name}")
+        else:
+            print(f"✍️ Activating Form Filling Agent for: {output_path.name}")
 
-        if not schema.fields or not extracted_data.data:
-            print("⚠️ Warning: Schema or extracted data is empty. Cannot fill form.")
-            # Still, save a copy to indicate processing was attempted
-            if pa_form_path.exists():
-                import shutil
-                shutil.copy(pa_form_path, output_path)
+        # If it's a correction, we work on the existing file. Otherwise, create a new one.
+        if is_correction and pa_form_path.exists():
+            doc = fitz.open(pa_form_path)
+        elif not is_correction and pa_form_path.exists():
+            doc = fitz.open(pa_form_path)
+        else:
+            print("❌ Source PDF not found.")
             return
 
-        doc = fitz.open(pa_form_path)
         filled_count = 0
-
+        
         # Create a map of semantic purpose to field object for easy lookup
         purpose_to_field_map: Dict[str, FormField] = {
             field.semantic_purpose: field for field in schema.fields.values()
         }
 
-        for purpose, value in extracted_data.data.items():
+        for purpose, value in data_to_fill.items():
             if value is None or value == 'null':
                 continue
 
@@ -329,53 +469,30 @@ class FormFillingAgent:
                     continue
 
                 try:
+                    # Update widget value
                     if field.field_type in ('text', 'dropdown'):
                         widget.field_value = str(value)
-                        widget.update()
-                        print(f"  ✅ Filled Text/Dropdown '{purpose}': {str(value)}")
-                        filled_count += 1
-                    
                     elif field.field_type == 'checkbox':
-                        # For checkboxes, the value is often 'Yes' or the option text itself
-                        if str(value).lower() == 'yes' or str(value).lower() == 'true' or str(value) in field.options:
-                            widget.field_value = True
-                            widget.update()
-                            print(f"  ✅ Checked Box '{purpose}'")
-                            filled_count += 1
-
+                        widget.field_value = bool(value)
                     elif field.field_type == 'radio':
-                        # For radio buttons, we need to find which button in the group to press
-                        # The field_id in the schema should point to the specific radio button to check.
-                        widget.field_value = True
-                        widget.update()
-                        print(f"  ✅ Selected Radio Button for '{purpose}'")
-                        filled_count += 1
-                        # Note: PyMuPDF handles de-selecting other radio buttons in the same group.
+                        # For radio buttons, the name refers to the group. We need to select the right option.
+                        if widget.field_value == value:
+                             widget.field_value = True
 
+                    widget.update()
+                    print(f"  ✅ Filled '{purpose}': {str(value)}")
+                    filled_count += 1
                 except Exception as e:
                     print(f"  ❌ Failed to fill field '{purpose}' ({field.field_id}): {e}")
 
-        # Placeholder for applying conditional logic
-        self._apply_conditional_logic(doc, schema)
-
-        doc.save(str(output_path))
+        doc.save(str(output_path), garbage=4, deflate=True, clean=True)
         doc.close()
         
-        print(f"✅ Form filled with {filled_count} data points and saved to {output_path}")
+        if is_correction:
+            print(f"✅ Corrections applied. Final PDF saved to {output_path}")
+        else:
+            print(f"✅ Initial form filled with {filled_count} data points and saved to {output_path}")
 
-    def _apply_conditional_logic(self, doc: fitz.Document, schema: FormSchema):
-        """
-        (Future Enhancement)
-        This function will apply the conditional rules from the schema.
-        For example, disabling fields that are mutually exclusive with filled fields.
-        """
-        if schema.conditional_rules:
-            print(f"ℹ️ Applying {len(schema.conditional_rules)} conditional rules (placeholder).")
-        # Implementation would go here. For example:
-        # for rule in schema.conditional_rules:
-        #   # check if primary field was filled with primary_value
-        #   # if so, find target_fields widgets and apply action (e.g., widget.is_read_only = True)
-        pass
 
 # --- Main Orchestrator ---
 
@@ -385,6 +502,7 @@ class MandolinPASystem:
     def __init__(self):
         self.understanding_agent = FormUnderstandingAgent()
         self.extraction_agent = DataExtractionAgent()
+        self.validation_agent = ValidationAgent()
         self.filling_agent = FormFillingAgent()
 
     def process_pa(self, patient_name: str, referral_path: Path, pa_form_path: Path, output_dir: Path):
@@ -401,11 +519,31 @@ class MandolinPASystem:
         # Step 2: Extract only the necessary data from the referral packet
         extracted_data = self.extraction_agent.extract_data(referral_path, form_schema)
 
-        # Step 3: Fill the form using the data and the form's logic
-        output_path = output_dir / f"{patient_name}_PA_filled.pdf"
-        self.filling_agent.fill_form(pa_form_path, form_schema, extracted_data, output_path)
+        # Step 3: Perform initial form fill
+        temp_output_path = output_dir / f"{patient_name}_PA_filled_v1.pdf"
+        self.filling_agent.fill_form(pa_form_path, form_schema, extracted_data.data, temp_output_path)
 
-        # Step 4: Generate a report (can be enhanced)
+        # Step 4: Validate the filled form and generate corrections
+        corrections = self.validation_agent.validate_and_correct(temp_output_path, form_schema, extracted_data)
+
+        # Step 5: Apply corrections to generate the final version
+        final_output_path = output_dir / f"{patient_name}_PA_filled.pdf"
+        if corrections:
+            # Create a dictionary of corrections to pass to the filling agent
+            correction_data = {c.semantic_purpose: c.correct_value for c in corrections}
+            # The source for corrections is the v1 filled form
+            self.filling_agent.fill_form(temp_output_path, form_schema, correction_data, final_output_path, is_correction=True)
+        else:
+            # If no corrections, the v1 is the final version
+            print("✅ No corrections needed. Finalizing document.")
+            import shutil
+            shutil.copy(temp_output_path, final_output_path)
+
+        # Clean up the temporary file
+        if temp_output_path.exists():
+            temp_output_path.unlink()
+
+        # Step 6: Generate a report (can be enhanced)
         self.generate_report(patient_name, form_schema, extracted_data, output_dir)
         
         print(f"\n🎉 AUTOMATION COMPLETE FOR {patient_name.upper()}")
