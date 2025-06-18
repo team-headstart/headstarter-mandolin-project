@@ -330,26 +330,50 @@ class DataExtractionAgent:
             model_input.append({"mime_type": "image/png", "data": img_b64})
             
         print("🤖 Asking AI to perform targeted data extraction...")
-        try:
-            response = self.model.generate_content(model_input,
-                generation_config=genai.types.GenerationConfig(
-                    response_mime_type="application/json"
-                )
-            )
-            
-            # 4. Parse the response and create the ExtractedData object
-            extracted_json = json.loads(response.text)
-            extracted_data = ExtractedData(data=extracted_json)
-            
-            print(f"✅ Targeted data extracted for {len(extracted_data.data)} fields.")
-            return extracted_data
+        max_retries = 3
+        for attempt in range(max_retries):
+            try:
+                response = self.model.generate_content(model_input)
+                extracted_data = self._parse_extraction_response(response.text)
+                print(f"✅ Targeted data extracted for {len(extracted_data.data)} fields.")
+                return extracted_data
+            except Exception as e:
+                print(f"❌ Data extraction attempt {attempt + 1}/{max_retries} failed: {e}")
+        
+        return ExtractedData() # Return empty data on failure
 
-        except Exception as e:
-            print(f"❌ Critical Error: AI failed to extract data. Reason: {e}")
+    def _parse_extraction_response(self, response_text: str) -> ExtractedData:
+        """Parses the model's text response to extract the JSON data."""
+        
+        # 1. Look for a markdown JSON block
+        match = re.search(r"```json\s*(\{.*?\})\s*```", response_text, re.DOTALL)
+        if match:
+            json_str = match.group(1)
+        else:
+            # 2. If no markdown, find the first and last curly brace
+            first_brace = response_text.find('{')
+            last_brace = response_text.rfind('}')
+            if first_brace != -1 and last_brace != -1:
+                json_str = response_text[first_brace:last_brace+1]
+            else:
+                print("⚠️ Could not find a JSON object in the model's response.")
+                print("--- Raw Response ---")
+                print(response_text)
+                print("--------------------")
+                return ExtractedData()
+
+        try:
+            data = json.loads(json_str)
+            return ExtractedData(data=data)
+        except json.JSONDecodeError as e:
+            print(f"⚠️ Failed to decode JSON from the model's response: {e}")
+            print("--- Extracted JSON String ---")
+            print(json_str)
+            print("-----------------------------")
             return ExtractedData()
 
     def _build_extraction_prompt(self, schema: FormSchema) -> str:
-        """Constructs a targeted prompt to extract only necessary data."""
+        """Builds the prompt for the data extraction LLM call."""
         
         desired_fields = {}
         for field in schema.fields.values():
@@ -762,26 +786,26 @@ class MANDOLIN_PA_SYSTEM:
             if temp_output_path.exists():
                 temp_output_path.rename(final_output_path)
 
-        # 6. Generate final report
+        # 6. Generate a report
         self.generate_report(patient_name, schema, extracted_data, output_dir)
         
         print(f"\n🎉 AUTOMATION COMPLETE FOR {patient_name.upper()}\n")
 
     def generate_report(self, patient_name: str, schema: FormSchema, extracted_data: ExtractedData, output_dir: Path):
-        """Generates a markdown report of the automation process."""
+        """Generates a summary report of the PA processing."""
         report_path = output_dir / f"{patient_name}_processing_report.md"
-        # Basic report, can be improved
+        now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
         with open(report_path, 'w') as f:
-            f.write(f"# PA Processing Report for {patient_name}\n")
-            f.write(f"Generated on: {datetime.datetime.now()}\n\n")
-            f.write(f"## Form Schema Summary\n")
-            f.write(f"- Identified {len(schema.fields)} fields.\n")
-            f.write(f"## Extraction Summary\n")
-            f.write(f"- Extracted {len(extracted_data.data)} data points.\n")
-        print(f"📄 Report generated at {report_path}")
+            f.write(f"# PA Processing Report for {patient_name}\\n")
+            f.write(f"Generated on: {now}\\n\\n")
+            f.write("## Form Schema Summary\\n")
+            f.write(f"- Identified {len(schema.fields)} fields.\\n")
+            f.write("## Extraction Summary\\n")
+            f.write(f"- Extracted {len(extracted_data.data)} data points.\\n")
 
 def main():
-    """Main function to run the Mandolin PA System."""
+    """Main entry point for the PA automation pipeline."""
     print("🏥 MANDOLIN PRIOR AUTHORIZATION AUTOMATION SYSTEM 🏥")
     print("="*60)
 
