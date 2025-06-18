@@ -11,5 +11,7 @@ output_improved/
 output_mandolin/
 
 # Additional directories to exclude
-/Output Data/
+/Output Data/*
+/output_examples/*
+!.gitignore
 .DS_Store 

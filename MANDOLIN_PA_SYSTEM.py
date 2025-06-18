@@ -298,16 +298,13 @@ Return ONLY the list of fields in the exact same order you received them, with t
 """
 
 class DataExtractionAgent:
-    """Extracts required information from referral packets based on a form schema."""
-    
+    """Uses an LLM to extract structured data from referral documents based on a schema."""
     def __init__(self):
-        self.model = genai.GenerativeModel('gemini-2.0-flash')
+        # Using a powerful model for extraction accuracy
+        self.model = genai.GenerativeModel('gemini-2.5-pro')
 
     def extract_data(self, referral_path: Path, schema: FormSchema) -> ExtractedData:
-        """
-        Performs targeted extraction from the referral packet.
-        It only looks for the information needed by the form schema.
-        """
+        """Performs targeted data extraction based on the semantic purposes in the schema."""
         print(f"🔎 Activating Data Extraction Agent for: {referral_path.name}")
 
         if not schema.fields:
@@ -395,15 +392,12 @@ class DataExtractionAgent:
         """
 
 class ClinicalQAAgent:
-    """A specialized agent to answer specific clinical questions from the referral packet."""
+    """Answers specific clinical 'Yes/No' questions based on the documents."""
     def __init__(self):
-        self.model = genai.GenerativeModel('gemini-2.0-flash')
+        self.model = genai.GenerativeModel('gemini-2.5-pro')
     
     def answer_questions(self, referral_path: Path, clinical_questions: Dict[str, FormField]) -> Dict[str, Any]:
-        """
-        Given the referral documents and a list of clinical questions from the form schema,
-        find the answers.
-        """
+        """Looks through the document to find answers to specific clinical questions."""
         print(f"🩺 Activating Clinical Q&A Agent for {len(clinical_questions)} questions.")
         if not clinical_questions:
             return {}
@@ -477,9 +471,9 @@ class ClinicalQAAgent:
         """
 
 class ValidationAgent:
-    """Analyzes a filled form to identify errors and propose corrections."""
+    """Visually inspects the filled form and corrects it against source data."""
     def __init__(self):
-        self.model = genai.GenerativeModel('gemini-2.0-flash')
+        self.model = genai.GenerativeModel('gemini-2.5-pro')
 
     def validate_and_correct(self, 
                              filled_form_path: Path, 

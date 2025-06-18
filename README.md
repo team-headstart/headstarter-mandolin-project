@@ -1,196 +1,99 @@
-# 🏥 PA Form Automation System
+# Mandolin AI: Automated Prior Authorization Filling System
 
-**Production-Ready Prior Authorization Automation**
+This repository contains an advanced AI pipeline designed to automate the filling of Prior Authorization (PA) forms for specialty drugs, aiming to reduce the manual administrative burden on healthcare providers and accelerate patient access to critical treatments.
 
-## 🎯 Overview
+## 1. The Problem: The Prior Authorization Bottleneck
 
-This system automates the Prior Authorization (PA) form filling workflow for healthcare providers, reducing processing time from 30 days to 15 minutes through AI-powered document analysis and intelligent form completion.
+Getting approval for life-saving specialty drugs is a complex, manual process that can delay patient care by up to 30 days. Healthcare staff must manually:
+1.  Analyze a patient's **Referral Package** (a 30-50 page document with medical history, lab results, etc.).
+2.  Find the correct drug- and insurance-specific **PA Form**.
+3.  Painstakingly extract key data points from the referral.
+4.  Manually transcribe that data onto the PA form.
 
-## ✨ Key Features
+This workflow is slow and prone to human error, creating a significant bottleneck. This project's goal is to automate this entire process with a high degree of accuracy and reliability.
 
-- **🤖 Fully Automated**: Zero human intervention required
-- **📄 Advanced OCR**: Handles scanned documents and handwritten text
-- **🧠 AI-Powered**: Uses Gemini 2.0 Flash for intelligent extraction and mapping
-- **🔄 Conditional Logic**: Handles mutually exclusive fields and dependencies
-- **📊 Comprehensive Reporting**: Detailed missing field analysis
-- **🎯 Universal**: Works with any PA form and drug type
+## 2. The Solution: A Multi-Agent AI Assembly Line
 
-## 📁 Project Structure
+This system solves the problem by breaking it down into a sequence of specialized tasks, each handled by a dedicated AI agent. This "AI Assembly Line" approach ensures each step is simple, reliable, and auditable, leading to a more robust and accurate system than a single monolithic model.
 
+### Architectural Diagram
+
+```mermaid
+graph TD;
+    A[Start: PA Form & Referral] --> B{FormUnderstandingAgent};
+    B -- Raw Schema --> C{SchemaRefinementAgent};
+    C -- Refined Schema --> D{DataExtractionAgent};
+    A --> D;
+    C -- Clinical Questions --> E{ClinicalQAAgent};
+    A --> E;
+    D -- Extracted Data --> F{FormFillingAgent - Pass 1};
+    E -- Clinical Answers --> F;
+    A -- Blank PA Form --> F;
+    F -- Filled PDF v1 --> G{ValidationAgent};
+    D -- Extracted Data --> G;
+    C -- Refined Schema --> G;
+    G -- Corrections List --> H{FormFillingAgent - Pass 2};
+    F -- Filled PDF v1 --> H;
+    H -- Final Filled PDF --> I[End: Final PDF & Report];
+    G -- Missing Info --> J{ReportGenerator};
+    J -- Report --> I;
 ```
-├── Input Data/                    # Patient test data
-│   ├── Adbulla/                  # Multiple Sclerosis case
-│   │   ├── PA.pdf               # Aetna Riabni PA form
-│   │   └── referral_package.pdf # 15-page referral packet
-│   ├── Akshay/                   # Crohn's Disease case
-│   │   ├── pa.pdf               # Aetna Skyrizi PA form
-│   │   └── referral_package.pdf # 10-page referral packet
-│   └── Amy/                      # Additional test case
-│       ├── PA.pdf
-│       └── referral_package.pdf
-├── PRODUCTION_PA_SYSTEM.py       # Main automation system
-├── requirements.txt              # Dependencies
-├── README.md                     # This file
-└── .env                         # API configuration (create this)
-```
 
-## 🚀 Quick Start
+### The Agents
 
-### 1. Install Dependencies
+-   **`FormUnderstandingAgent` (The Blueprint Maker):** Uses `gemini-2.0-flash` to visually analyze the blank PA form, identifying every field and its human-readable text label.
+-   **`SchemaRefinementAgent` (The Translator):** Uses a powerful LLM (`gemini-1.5-pro-latest`) to translate human labels (e.g., "Patient First Name") into standardized, machine-readable keys (e.g., `patient_first_name`). This is a critical step for generalization.
+-   **`DataExtractionAgent` (The Detective):** Uses `gemini-2.5-pro` to read the entire referral package, using the refined schema as a "shopping list" to find the required data.
+-   **`ClinicalQAAgent` (The Specialist):** A specialized `gemini-2.5-pro` agent that focuses only on answering the complex "Yes/No" clinical questions on the form.
+-   **`FormFillingAgent` (The Scribe):** A non-AI agent that mechanically fills the PDF form fields using `PyMuPDF`.
+-   **`ValidationAgent` (The Auditor):** The system's core "fill and verify" loop. This `gemini-2.5-pro` agent visually inspects the first-pass filled form, compares it to the source data, and generates a list of corrections to fix hallucinations or formatting errors.
+
+## 3. Installation
+
+To set up the project locally, follow these steps.
+
+**Prerequisites:**
+- Python 3.9+
+- An API key for Google's Gemini models.
+
+**Setup:**
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/alhridoy/automate_pa.git
+    cd headstarter-mandolin-project
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+3.  **Configure your environment:**
+    -   Create a file named `.env` in the project root.
+    -   Add your Google Gemini API key to this file:
+        ```
+        GEMINI_API_KEY="YOUR_API_KEY_HERE"
+        ```
+
+## 4. How to Run the Pipeline
+
+Execute the main script from the project's root directory:
+
 ```bash
-pip install -r requirements.txt
+python3 MANDOLIN_PA_SYSTEM.py
 ```
 
-### 2. Configure API Key
-Create a `.env` file in the project root:
-```env
-GEMINI_API_KEY=your_gemini_api_key_here
-```
+The script will automatically find the patient data in the `Input Data/` directory, process each patient one by one, and place the results in the `Output Data/` directory.
 
-### 3. Run the System
-```bash
-python3 PRODUCTION_PA_SYSTEM.py
-```
+The output for each patient will include:
+-   `{PatientName}_PA_filled.pdf`: The final, filled PDF.
+-   `{PatientName}_processing_report.md`: A report detailing any information that could not be found.
+-   Intermediate log files (schemas, extracted data) for debugging.
 
-## 📊 Output
+## 5. Assumptions & Limitations
 
-For each patient, the system generates:
-
-1. **Filled PA Form**: `{patient_name}_PA_filled.pdf`
-   - Complete PA form with extracted information
-   - Handles conditional logic and field dependencies
-   - Ready for insurance submission
-
-2. **Missing Information Report**: `{patient_name}_missing_info_report.md`
-   - Lists required fields that couldn't be filled
-   - Provides recommendations for improvement
-   - Shows extraction success rates
-
-### Example Output Structure:
-```
-output_examples/
-├── Akshay_PA_filled.pdf
-├── Akshay_missing_info_report.md
-├── Abdullah_PA_filled.pdf
-├── Abdullah_missing_info_report.md
-├── Amy_PA_filled.pdf
-└── Amy_missing_info_report.md
-```
-
-## 🔧 How It Works
-
-### 1. **PA Form Analysis**
-- Automatically detects form fields and their purposes
-- Identifies required vs optional fields
-- Maps conditional dependencies and mutual exclusions
-
-### 2. **Referral Package Extraction**
-- High-resolution OCR processing
-- Comprehensive medical data extraction
-- Handles handwritten text and scanned documents
-
-### 3. **Intelligent Mapping**
-- AI-powered field matching
-- Alternative mapping strategies
-- Conditional logic application
-
-### 4. **Form Completion**
-- Automated field filling
-- Validation and error handling
-- Comprehensive result tracking
-
-### 5. **Reporting**
-- Missing field analysis
-- Success rate calculations
-- Actionable recommendations
-
-## 📋 Supported Data Types
-
-**Patient Information:**
-- Demographics (name, DOB, address, phone)
-- Insurance details (member ID, plan, group number)
-- Contact information
-
-**Provider Information:**
-- Prescriber details (name, NPI, contact info)
-- Clinic information
-- Specialty and credentials
-
-**Clinical Information:**
-- Diagnosis and ICD codes
-- Medication details (name, dose, strength)
-- Medical history and allergies
-- Previous treatments and failures
-
-**Administrative:**
-- Treatment urgency
-- Prior authorization numbers
-- Request dates
-
-## 🎯 Key Capabilities
-
-### Conditional Logic Handling
-- **Mutually Exclusive Fields**: Automatically selects appropriate options (e.g., "New Patient" vs "Existing Patient")
-- **Conditional Dependencies**: Only fills dependent fields when prerequisites are met
-- **Smart Validation**: Ensures logical consistency across form sections
-
-### Advanced OCR
-- **High-Resolution Processing**: 3x matrix scaling for better text recognition
-- **Handwriting Interpretation**: AI-powered interpretation of unclear text
-- **Multi-Format Support**: Handles various document layouts and formats
-
-### Error Handling
-- **Graceful Degradation**: Continues processing when individual fields fail
-- **Detailed Logging**: Comprehensive error tracking and reporting
-- **Recovery Mechanisms**: Alternative matching strategies for edge cases
-
-## 📈 Performance Metrics
-
-The system provides detailed metrics including:
-- **Overall Success Rate**: Percentage of fields successfully filled
-- **Required Field Completion**: Completion rate for mandatory fields
-- **Processing Time**: Time taken for each patient
-- **Extraction Accuracy**: Quality of data extraction from referral packages
-
-## 🔒 Requirements
-
-### Dependencies
-- Python 3.8+
-- google-generativeai>=0.8.0
-- PyMuPDF>=1.23.0
-- python-dotenv>=1.0.0
-
-### API Access
-- Google Gemini 2.0 Flash API key required
-- Standard rate limits apply
-
-## 🏗️ Architecture
-
-The system is built with a modular architecture:
-
-- **`FormField`**: Represents form fields with metadata and relationships
-- **`ProcessingResult`**: Comprehensive processing outcomes
-- **`ProductionPASystem`**: Main orchestration class
-- **Extraction Engine**: Advanced OCR and data extraction
-- **Mapping Engine**: Intelligent field mapping with conditional logic
-- **Reporting Engine**: Comprehensive analysis and recommendations
-
-## 🚀 Production Deployment
-
-This system is designed for production use with:
-- **Scalable Architecture**: Handles multiple concurrent requests
-- **Error Recovery**: Robust error handling and logging
-- **Monitoring**: Comprehensive metrics and reporting
-- **Security**: Safe handling of medical data
-
-## 📞 Support
-
-For issues or questions:
-1. Check the generated missing information reports for troubleshooting
-2. Review processing logs for detailed error information
-3. Ensure API keys are properly configured
-4. Verify input document quality and format
-
----
-
-*This PA automation system demonstrates advanced AI/ML capabilities for healthcare workflow automation, designed to meet production requirements for accuracy, scalability, and reliability.*
+-   **Widget-Based PDFs:** The system is currently designed to work only with interactive, widget-based PDF forms. It cannot fill "flat" PDFs that do not have fillable AcroForm fields. This was a primary requirement, with flat PDF support noted as a potential bonus feature.
+-   **API Access & Cost:** The system relies on powerful, and therefore not free, LLMs. Execution will incur costs based on token usage. The system also assumes that the specified models (`gemini-2.0-flash`, `gemini-1.5-pro-latest`, `gemini-2.5-pro`) are available to the provided API key.
+-   **Fax Quality:** The accuracy of the OCR-dependent steps (`DataExtractionAgent`, `ClinicalQAAgent`) is highly dependent on the image quality of the scanned documents in the referral package. Extremely poor handwriting or low-quality scans may reduce accuracy.
+-   **No Hallucination Guarantee:** While the `ValidationAgent` significantly mitigates the risk of AI hallucinations, it is not a perfect guarantee. It represents a robust best-effort attempt to catch and correct errors. 
