@@ -3,333 +3,471 @@
     "reportlab_instructions": [
         {
             "method": "drawString",
-            "x": 75.0,
-            "y": 560.0,
+            "x": 78.0,
+            "y": 454.0,
             "text": "Shakh",
-            "field_name": "patient_information.First Name",
-            "font_size": 10,
-            "validation": "OK"
+            "field_name": "patient_first_name",
+            "font_size": 8,
+            "validation": "Valid"
         },
         {
             "method": "drawString",
-            "x": 210.0,
-            "y": 560.0,
+            "x": 197.0,
+            "y": 454.0,
             "text": "Abdulla",
-            "field_name": "patient_information.Last Name",
-            "font_size": 10,
-            "validation": "OK"
+            "field_name": "patient_last_name",
+            "font_size": 8,
+            "validation": "Valid"
         },
         {
             "method": "drawString",
-            "x": 320.0,
-            "y": 560.0,
+            "x": 300.0,
+            "y": 454.0,
             "text": "04/01/2001",
-            "field_name": "patient_information.DOB",
-            "font_size": 10,
-            "validation": "OK"
+            "field_name": "patient_dob",
+            "font_size": 8,
+            "validation": "Valid"
         },
         {
             "method": "drawString",
-            "x": 75.0,
-            "y": 530.0,
-            "text": "425 Sherman Ave, Nashville TN 37995",
-            "field_name": "patient_information.Address",
-            "font_size": 10,
-            "validation": "OK"
+            "x": 78.0,
+            "y": 430.0,
+            "text": "425 Sherman Ave",
+            "field_name": "patient_address",
+            "font_size": 8,
+            "validation": "Valid"
         },
         {
             "method": "drawString",
-            "x": 75.0,
-            "y": 500.0,
+            "x": 78.0,
+            "y": 406.0,
+            "text": "Nashville",
+            "field_name": "patient_city",
+            "font_size": 8,
+            "validation": "Valid"
+        },
+        {
+            "method": "drawString",
+            "x": 211.0,
+            "y": 406.0,
+            "text": "TN",
+            "field_name": "patient_state",
+            "font_size": 8,
+            "validation": "Valid"
+        },
+        {
+            "method": "drawString",
+            "x": 249.0,
+            "y": 406.0,
+            "text": "37995",
+            "field_name": "patient_zip",
+            "font_size": 8,
+            "validation": "Valid"
+        },
+        {
+            "method": "drawString",
+            "x": 78.0,
+            "y": 382.0,
             "text": "865-395-3958",
-            "field_name": "patient_information.Home Phone",
-            "font_size": 10,
-            "validation": "OK"
+            "field_name": "patient_home_phone",
+            "font_size": 8,
+            "validation": "Valid"
         },
         {
             "method": "drawString",
-            "x": 290.0,
-            "y": 500.0,
+            "x": 347.0,
+            "y": 382.0,
             "text": "865-395-0481",
-            "field_name": "patient_information.Cell Phone",
-            "font_size": 10,
-            "validation": "OK"
+            "field_name": "patient_cell_phone",
+            "font_size": 8,
+            "validation": "Valid"
         },
         {
             "method": "drawString",
-            "x": 75.0,
-            "y": 415.0,
-            "text": "Hao",
-            "field_name": "provider_information.First Name",
-            "font_size": 10,
-            "validation": "OK"
-        },
-        {
-            "method": "drawString",
-            "x": 210.0,
-            "y": 415.0,
-            "text": "Gu",
-            "field_name": "provider_information.Last Name",
-            "font_size": 10,
-            "validation": "OK"
-        },
-        {
-            "method": "drawString",
-            "x": 75.0,
-            "y": 385.0,
-            "text": "3320 Montgomery Dr NASHVILLE TN 37361",
-            "field_name": "provider_information.Address",
-            "font_size": 10,
-            "validation": "OK"
-        },
-        {
-            "method": "drawString",
-            "x": 75.0,
-            "y": 355.0,
-            "text": "614-936-0065",
-            "field_name": "provider_information.Phone",
-            "font_size": 10,
-            "validation": "OK"
-        },
-        {
-            "method": "drawString",
-            "x": 75.0,
-            "y": 470.0,
+            "x": 78.0,
+            "y": 334.0,
             "text": "LAJM14345116",
-            "field_name": "insurance_information.Member ID #",
-            "font_size": 10,
-            "validation": "OK"
+            "field_name": "member_id",
+            "font_size": 8,
+            "validation": "Valid"
         },
         {
             "method": "drawString",
-            "x": 210.0,
-            "y": 470.0,
+            "x": 197.0,
+            "y": 334.0,
             "text": "435000",
-            "field_name": "insurance_information.Group #",
-            "font_size": 10,
-            "validation": "OK"
+            "field_name": "group_number",
+            "font_size": 8,
+            "validation": "Valid"
+        },
+	{
+            "method": "drawString",
+            "x": 316.0,
+            "y": 334.0,
+            "text": "BC TENNCARE",
+            "field_name": "carrier_name",
+            "font_size": 8,
+            "validation": "Valid"
         },
         {
             "method": "drawString",
-            "x": 75.0,
-            "y": 258.0,
+            "x": 78.0,
+            "y": 286.0,
+            "text": "Hao H",
+            "field_name": "prescriber_first_name",
+            "font_size": 8,
+            "validation": "Valid"
+        },
+        {
+            "method": "drawString",
+            "x": 197.0,
+            "y": 286.0,
+            "text": "Gu",
+            "field_name": "prescriber_last_name",
+            "font_size": 8,
+            "validation": "Valid"
+        },
+        {
+            "method": "drawString",
+            "x": 78.0,
+            "y": 262.0,
+            "text": "3320 Montgomery Dr",
+            "field_name": "prescriber_address",
+            "font_size": 8,
+            "validation": "Valid"
+        },
+        {
+            "method": "drawString",
+            "x": 78.0,
+            "y": 238.0,
+            "text": "NASHVILLE",
+            "field_name": "prescriber_city",
+            "font_size": 8,
+            "validation": "Valid"
+        },
+        {
+            "method": "drawString",
+            "x": 211.0,
+            "y": 238.0,
+            "text": "TN",
+            "field_name": "prescriber_state",
+            "font_size": 8,
+            "validation": "Valid"
+        },
+        {
+            "method": "drawString",
+            "x": 249.0,
+            "y": 238.0,
+            "text": "37361",
+            "field_name": "prescriber_zip",
+            "font_size": 8,
+            "validation": "Valid"
+        },
+        {
+            "method": "drawString",
+            "x": 78.0,
+            "y": 214.0,
+            "text": "614-936-0065",
+            "field_name": "prescriber_phone",
+            "font_size": 8,
+            "validation": "Valid"
+        },
+        {
+            "method": "drawString",
+            "x": 347.0,
+            "y": 214.0,
+            "text": "1154611523",
+            "field_name": "prescriber_npi",
+            "font_size": 8,
+            "validation": "Valid"
+        },
+	{
+            "method": "drawString",
+            "x": 78.0,
+            "y": 105.0,
             "text": "694 mg",
-            "field_name": "medication_details.Dose",
-            "font_size": 10,
-            "validation": "OK"
+            "field_name": "product_dose",
+            "font_size": 8,
+            "validation": "Valid"
         },
         {
             "method": "drawString",
-            "x": 170.0,
-            "y": 258.0,
-            "text": "intraVENOUS, Once, Starting 30 minutes after treatment start time.",
-            "field_name": "medication_details.Directions for Use",
-            "font_size": 10,
-            "validation": "OK"
-        },
-        {
-            "method": "rect",
-            "x": 140.0,
-            "y": 415.0,
-            "width": 8,
-            "height": 8,
-            "stroke": 1,
-            "fill": 1,
-            "field_name": "provider_type.M.D."
+            "x": 197.0,
+            "y": 105.0,
+            "text": "intraVENOUS, Once, Starting 30 minutes after treatment start time",
+            "field_name": "product_directions",
+            "font_size": 8,
+            "validation": "Valid"
         },
         {
             "method": "drawString",
-            "x": 100.0,
-            "y": 615.0,
-            "text": "05/22",
-            "field_name": "Start of treatment date",
-            "font_size": 10,
-            "validation": "OK"
+            "x": 78.0,
+            "y": 81.0,
+            "text": "G35",
+            "field_name": "primary_icd_code",
+            "font_size": 8,
+            "validation": "Valid"
         }
     ],
     "coordinate_mappings": {
-        "patient_information.First Name": {
+        "patient_first_name": {
             "coordinates": {
-                "x": 75.0,
-                "y": 560.0
+                "x": 78.0,
+                "y": 454.0
             },
             "value": "Shakh",
             "field_type": "text",
-            "text_size": 10,
+            "text_size": 8,
             "alignment": "left",
-            "validation": "OK"
+            "validation": "Valid"
         },
-        "patient_information.Last Name": {
+        "patient_last_name": {
             "coordinates": {
-                "x": 210.0,
-                "y": 560.0
+                "x": 197.0,
+                "y": 454.0
             },
             "value": "Abdulla",
             "field_type": "text",
-            "text_size": 10,
+            "text_size": 8,
             "alignment": "left",
-            "validation": "OK"
+            "validation": "Valid"
         },
-        "patient_information.DOB": {
+        "patient_dob": {
             "coordinates": {
-                "x": 320.0,
-                "y": 560.0
+                "x": 300.0,
+                "y": 454.0
             },
             "value": "04/01/2001",
             "field_type": "text",
-            "text_size": 10,
+            "text_size": 8,
             "alignment": "left",
-            "validation": "OK"
+            "validation": "Valid"
         },
-        "patient_information.Address": {
+        "patient_address": {
             "coordinates": {
-                "x": 75.0,
-                "y": 530.0
+                "x": 78.0,
+                "y": 430.0
             },
-            "value": "425 Sherman Ave, Nashville TN 37995",
+            "value": "425 Sherman Ave",
             "field_type": "text",
-            "text_size": 10,
+            "text_size": 8,
             "alignment": "left",
-            "validation": "OK"
+            "validation": "Valid"
         },
-        "patient_information.Home Phone": {
+        "patient_city": {
             "coordinates": {
-                "x": 75.0,
-                "y": 500.0
+                "x": 78.0,
+                "y": 406.0
+            },
+            "value": "Nashville",
+            "field_type": "text",
+            "text_size": 8,
+            "alignment": "left",
+            "validation": "Valid"
+        },
+        "patient_state": {
+            "coordinates": {
+                "x": 211.0,
+                "y": 406.0
+            },
+            "value": "TN",
+            "field_type": "text",
+            "text_size": 8,
+            "alignment": "left",
+            "validation": "Valid"
+        },
+        "patient_zip": {
+            "coordinates": {
+                "x": 249.0,
+                "y": 406.0
+            },
+            "value": "37995",
+            "field_type": "text",
+            "text_size": 8,
+            "alignment": "left",
+            "validation": "Valid"
+        },
+        "patient_home_phone": {
+            "coordinates": {
+                "x": 78.0,
+                "y": 382.0
             },
             "value": "865-395-3958",
             "field_type": "text",
-            "text_size": 10,
+            "text_size": 8,
             "alignment": "left",
-            "validation": "OK"
+            "validation": "Valid"
         },
-        "patient_information.Cell Phone": {
+        "patient_cell_phone": {
             "coordinates": {
-                "x": 290.0,
-                "y": 500.0
+                "x": 347.0,
+                "y": 382.0
             },
             "value": "865-395-0481",
             "field_type": "text",
-            "text_size": 10,
+            "text_size": 8,
             "alignment": "left",
-            "validation": "OK"
+            "validation": "Valid"
         },
-        "provider_information.First Name": {
+        "member_id": {
             "coordinates": {
-                "x": 75.0,
-                "y": 415.0
-            },
-            "value": "Hao",
-            "field_type": "text",
-            "text_size": 10,
-            "alignment": "left",
-            "validation": "OK"
-        },
-        "provider_information.Last Name": {
-            "coordinates": {
-                "x": 210.0,
-                "y": 415.0
-            },
-            "value": "Gu",
-            "field_type": "text",
-            "text_size": 10,
-            "alignment": "left",
-            "validation": "OK"
-        },
-        "provider_information.Address": {
-            "coordinates": {
-                "x": 75.0,
-                "y": 385.0
-            },
-            "value": "3320 Montgomery Dr NASHVILLE TN 37361",
-            "field_type": "text",
-            "text_size": 10,
-            "alignment": "left",
-            "validation": "OK"
-        },
-        "provider_information.Phone": {
-            "coordinates": {
-                "x": 75.0,
-                "y": 355.0
-            },
-            "value": "614-936-0065",
-            "field_type": "text",
-            "text_size": 10,
-            "alignment": "left",
-            "validation": "OK"
-        },
-        "insurance_information.Member ID #": {
-            "coordinates": {
-                "x": 75.0,
-                "y": 470.0
+                "x": 78.0,
+                "y": 334.0
             },
             "value": "LAJM14345116",
             "field_type": "text",
-            "text_size": 10,
+            "text_size": 8,
             "alignment": "left",
-            "validation": "OK"
+            "validation": "Valid"
         },
-        "insurance_information.Group #": {
+        "group_number": {
             "coordinates": {
-                "x": 210.0,
-                "y": 470.0
+                "x": 197.0,
+                "y": 334.0
             },
             "value": "435000",
             "field_type": "text",
-            "text_size": 10,
+            "text_size": 8,
             "alignment": "left",
-            "validation": "OK"
+            "validation": "Valid"
         },
-        "medication_details.Dose": {
+	"carrier_name": {
             "coordinates": {
-                "x": 75.0,
-                "y": 258.0
+                "x": 316.0,
+                "y": 334.0
+            },
+            "value": "BC TENNCARE",
+            "field_type": "text",
+            "text_size": 8,
+            "alignment": "left",
+            "validation": "Valid"
+        },
+        "prescriber_first_name": {
+            "coordinates": {
+                "x": 78.0,
+                "y": 286.0
+            },
+            "value": "Hao H",
+            "field_type": "text",
+            "text_size": 8,
+            "alignment": "left",
+            "validation": "Valid"
+        },
+        "prescriber_last_name": {
+            "coordinates": {
+                "x": 197.0,
+                "y": 286.0
+            },
+            "value": "Gu",
+            "field_type": "text",
+            "text_size": 8,
+            "alignment": "left",
+            "validation": "Valid"
+        },
+        "prescriber_address": {
+            "coordinates": {
+                "x": 78.0,
+                "y": 262.0
+            },
+            "value": "3320 Montgomery Dr",
+            "field_type": "text",
+            "text_size": 8,
+            "alignment": "left",
+            "validation": "Valid"
+        },
+        "prescriber_city": {
+            "coordinates": {
+                "x": 78.0,
+                "y": 238.0
+            },
+            "value": "NASHVILLE",
+            "field_type": "text",
+            "text_size": 8,
+            "alignment": "left",
+            "validation": "Valid"
+        },
+        "prescriber_state": {
+            "coordinates": {
+                "x": 211.0,
+                "y": 238.0
+            },
+            "value": "TN",
+            "field_type": "text",
+            "text_size": 8,
+            "alignment": "left",
+            "validation": "Valid"
+        },
+        "prescriber_zip": {
+            "coordinates": {
+                "x": 249.0,
+                "y": 238.0
+            },
+            "value": "37361",
+            "field_type": "text",
+            "text_size": 8,
+            "alignment": "left",
+            "validation": "Valid"
+        },
+        "prescriber_phone": {
+            "coordinates": {
+                "x": 78.0,
+                "y": 214.0
+            },
+            "value": "614-936-0065",
+            "field_type": "text",
+            "text_size": 8,
+            "alignment": "left",
+            "validation": "Valid"
+        },
+        "prescriber_npi": {
+            "coordinates": {
+                "x": 347.0,
+                "y": 214.0
+            },
+            "value": "1154611523",
+            "field_type": "text",
+            "text_size": 8,
+            "alignment": "left",
+            "validation": "Valid"
+        },
+	"product_dose": {
+            "coordinates": {
+                "x": 78.0,
+                "y": 105.0
             },
             "value": "694 mg",
             "field_type": "text",
-            "text_size": 10,
+            "text_size": 8,
             "alignment": "left",
-            "validation": "OK"
+            "validation": "Valid"
         },
-        "medication_details.Directions for Use": {
+        "product_directions": {
             "coordinates": {
-                "x": 170.0,
-                "y": 258.0
+                "x": 197.0,
+                "y": 105.0
             },
-            "value": "intraVENOUS, Once, Starting 30 minutes after treatment start time.",
+            "value": "intraVENOUS, Once, Starting 30 minutes after treatment start time",
             "field_type": "text",
-            "text_size": 10,
+            "text_size": 8,
             "alignment": "left",
-            "validation": "OK"
+            "validation": "Valid"
         },
-        "provider_type.M.D.": {
+        "primary_icd_code": {
             "coordinates": {
-                "x": 140.0,
-                "y": 415.0
+                "x": 78.0,
+                "y": 81.0
             },
-            "value": "X",
-            "field_type": "checkbox",
-            "text_size": 10,
-            "alignment": "left",
-            "validation": "OK"
-        },
-        "start_of_treatment_date":{
-            "coordinates": {
-                "x": 100.0,
-                "y": 615.0
-            },
-            "value": "05/22",
+            "value": "G35",
             "field_type": "text",
-            "text_size": 10,
+            "text_size": 8,
             "alignment": "left",
-            "validation": "OK"
+            "validation": "Valid"
         }
-
     },
     "placement_summary": {
-        "total_fields_mapped": 16,
-        "text_fields_count": 15,
-        "checkbox_fields_count": 1,
+        "total_fields_mapped": 23,
+        "text_fields_count": 23,
+        "checkbox_fields_count": 0,
         "radio_button_fields_count": 0
     },
     "quality_assurance": {
