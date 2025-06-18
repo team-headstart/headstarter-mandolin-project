@@ -1,0 +1,654 @@
+```json
+{
+    "reportlab_instructions": [
+        {
+            "method": "drawString",
+            "page": 1,
+            "x": 75.0,
+            "y": 554.0,
+            "text": "Shakh",
+            "field_name": "Patient First Name",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 1,
+            "x": 210.0,
+            "y": 554.0,
+            "text": "Abdulla",
+            "field_name": "Patient Last Name",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 1,
+            "x": 355.0,
+            "y": 554.0,
+            "text": "04/01/2001",
+            "field_name": "Patient DOB",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 1,
+            "x": 75.0,
+            "y": 529.0,
+            "text": "425 Sherman Ave APT D, Nashville TN 37995",
+            "field_name": "Patient Address",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 1,
+            "x": 75.0,
+            "y": 479.0,
+            "text": "865-395-3958",
+            "field_name": "Patient Home Phone",
+            "font_size": 10
+        },
+                {
+            "method": "drawString",
+            "page": 1,
+            "x": 75.0,
+            "y": 429.0,
+            "text": "LAJM14345116",
+            "field_name": "Member ID #",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 1,
+            "x": 235.0,
+            "y": 429.0,
+            "text": "Yes",
+            "field_name": "Other Coverage - Yes",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 1,
+            "x": 350.0,
+            "y": 429.0,
+            "text": "435000",
+            "field_name": "Group #",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 1,
+            "x": 75.0,
+            "y": 379.0,
+            "text": "James",
+            "field_name": "Prescriber First Name",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 1,
+            "x": 210.0,
+            "y": 379.0,
+            "text": "David",
+            "field_name": "Prescriber Last Name",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 1,
+            "x": 290.0,
+            "y": 379.0,
+            "text": "N.P.",
+            "field_name": "Prescriber Type",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 1,
+            "x": 75.0,
+            "y": 354.0,
+            "text": "3320 Montgomery Dr NASHVILLE TN 37361",
+            "field_name": "Prescriber Address",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 1,
+            "x": 340.0,
+            "y": 304.0,
+            "text": "1154611523",
+            "field_name": "Prescriber NPI",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 1,
+            "x": 75.0,
+            "y": 224.0,
+            "text": "Truxima (rituximab-abbs)",
+            "field_name": "Product Requested",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 1,
+            "x": 110.0,
+            "y": 200.0,
+            "text": "694 mg (rounded from 693.75 mg = 375 mg/m2 x 1.85 m2 - BSA might be out of date)",
+            "field_name": "Product Dose",
+            "font_size": 10
+        },
+                {
+            "method": "drawString",
+            "page": 1,
+            "x": 110.0,
+            "y": 140.0,
+            "text": "G35",
+            "field_name": "Primary ICD Code",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 2,
+            "x": 110.0,
+            "y": 740.0,
+            "text": "Yes",
+            "field_name": "Prior therapy with requested product in last 365 days?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 2,
+            "x": 75.0,
+            "y": 715.0,
+            "text": "No",
+            "field_name": "Trial and Failure of Rituximab Biosimilars?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 2,
+            "x": 75.0,
+            "y": 640.0,
+            "text": "No",
+            "field_name": "Adverse reaction to rituximab biosimilars?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 2,
+            "x": 75.0,
+            "y": 580.0,
+            "text": "Ruxience (rituximab-pvvr) Truxima (rituximab-abbs)",
+            "field_name": "Contraindications",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 3,
+            "x": 75.0,
+            "y": 690.0,
+            "text": "No",
+            "field_name": "Trial and Failure Inflectra Renflexis Simponi Aria",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 3,
+            "x": 75.0,
+            "y": 615.0,
+            "text": "No",
+            "field_name": "Adverse reaction to Inflectra Renflexis Simponi Aria",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 3,
+            "x": 75.0,
+            "y": 540.0,
+            "text": "No",
+            "field_name": "Trial and Failure Enbrel Humira Idacio Rinvoq Tyenne SC Xeljanz",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 3,
+            "x": 75.0,
+            "y": 465.0,
+            "text": "No",
+            "field_name": "Adverse reaction to Enbrel Humira Idacio Rinvoq Tyenne SC Xeljanz",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 3,
+            "x": 75.0,
+            "y": 405.0,
+            "text": "Inflectra (infliximab-dyyb) Renflexis (infliximab-abda) Simponi Aria (golimumab)",
+            "field_name": "Contraindications",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 3,
+            "x": 75.0,
+            "y": 335.0,
+            "text": "Enbrel (etanercept) Humira (adalimumab) Idacio (adalimumab-aacf) Rinvoq (upadacitinib) Tyenne SC (tocilizumab-aazg) Xeljanz/Xeljanz XR (tofacitinib)",
+            "field_name": "Contraindications",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 3,
+            "x": 75.0,
+            "y": 275.0,
+            "text": "Yes",
+            "field_name": "Rituxan concomitantly with apremilast, tofacitinib, or other biologic DMARDs",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 3,
+            "x": 75.0,
+            "y": 245.0,
+            "text": "Yes",
+            "field_name": "Acute lymphoid leukemia - Does the patient have a documented diagnosis of Philadelphia chromosome-negative acute lymphoid leukemia (ALL)?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 3,
+            "x": 75.0,
+            "y": 215.0,
+            "text": "Yes",
+            "field_name": "Is Rituxan being used as induction/consolidation therapy?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 3,
+            "x": 75.0,
+            "y": 185.0,
+            "text": "Yes",
+            "field_name": "Autoimmune hemolytic anemia - Does the patient have a documented diagnosis of refractory autoimmune hemolytic anemia?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 3,
+            "x": 75.0,
+            "y": 130.0,
+            "text": "Wegener granulomatosis",
+            "field_name": "Anti-neutrophil cytoplasmic antibody-associated (ANCA-associated) vasculitides",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 3,
+            "x": 75.0,
+            "y": 85.0,
+            "text": "Yes",
+            "field_name": "Will Rituxan be given in conjunction with glucocorticoids?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 3,
+            "x": 75.0,
+            "y": 55.0,
+            "text": "Yes",
+            "field_name": "Autoimmune blistering diseases, corticosteroid-refractory - Does the patient have a documented diagnosis of corticosteroid-refractory autoimmune blistering disease?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 4,
+            "x": 75.0,
+            "y": 130.0,
+            "text": "leptomeningeal metastases from lymphoma",
+            "field_name": "Central nervous system lymphomas",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 4,
+            "x": 75.0,
+            "y": 100.0,
+            "text": "chronic lymphocytic leukemia (CLL)",
+            "field_name": "Chronic or small lymphocytic leukemia",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 4,
+            "x": 75.0,
+            "y": 70.0,
+            "text": "Yes",
+            "field_name": "Cryoglobulinemia - Does the patient have a documented diagnosis of cryoglobulinemia?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 4,
+            "x": 75.0,
+            "y": 40.0,
+            "text": "Yes",
+            "field_name": "Is there clinical documentation that the treatment with corticosteroids and other immunosuppressive agents was ineffective?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 4,
+            "x": 75.0,
+            "y": 740.0,
+            "text": "relapsed hairy cell leukemia",
+            "field_name": "Hairy cell leukemia",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 4,
+            "x": 75.0,
+            "y": 710.0,
+            "text": "Yes",
+            "field_name": "Is there a documentation that Rituxan (rituximab) is being used for treatment or prevention (desensitization) of highly sensitized patients with antibody mediated rejection in heart transplant recipients and other solid organ transplant recipients?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 4,
+            "x": 75.0,
+            "y": 675.0,
+            "text": "heart transplant recipient",
+            "field_name": "Heart and solid organ transplant",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 4,
+            "x": 75.0,
+            "y": 615.0,
+            "text": "Keytruda (pembrolizumab)",
+            "field_name": "Immune checkpoint-inhibitor related encephalitis",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 4,
+            "x": 75.0,
+            "y": 585.0,
+            "text": "Yes",
+            "field_name": "Immune or idiopathic thrombocytopenic purpura - Does the patient have a documented diagnosis of refractory immune or idiopathic thrombocytopenic purpura (ITP)?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 4,
+            "x": 75.0,
+            "y": 555.0,
+            "text": "refractory immune thrombocytopenic purpura",
+            "field_name": "Immune or idiopathic thrombocytopenic purpura",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 4,
+            "x": 75.0,
+            "y": 525.0,
+            "text": "Yes",
+            "field_name": "Kidney transplant, rejection prophylaxis - Is Rituxan (rituximab) being used as rejection prophylaxis in sensitized kidney transplant recipients with donor specific antibodies?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 4,
+            "x": 75.0,
+            "y": 495.0,
+            "text": "Yes",
+            "field_name": "Lymphocyte-predominant Hodgkin's lymphoma - Does the patient have a documented diagnosis of lymphocyte-predominant Hodgkin’s lymphoma?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 4,
+            "x": 75.0,
+            "y": 455.0,
+            "text": "Relapsing-remitting MS (RRMS)",
+            "field_name": "Multiple Sclerosis",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 4,
+            "x": 75.0,
+            "y": 425.0,
+            "text": "Yes",
+            "field_name": "Has the patient discontinued other medications used for treating MS (not including Ampyra)?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 4,
+            "x": 75.0,
+            "y": 395.0,
+            "text": "Yes",
+            "field_name": "Myasthenia gravis (MuSk-MG) - Does the patient have a documented diagnosis of muscle-specific tyrosine kinase myasthenia gravis (MuSK-MG)?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 4,
+            "x": 75.0,
+            "y": 365.0,
+            "text": "Yes",
+            "field_name": "Has the patient had an unsatisfactory response to initial immunotherapy?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 4,
+            "x": 75.0,
+            "y": 335.0,
+            "text": "Yes",
+            "field_name": "Neuromyelitis optica (Devic’s disease) - Does the patient have a documented diagnosis of neuromyelitis optica (Devic’s disease)?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 4,
+            "x": 75.0,
+            "y": 305.0,
+            "text": "Yes",
+            "field_name": "Was the treatment with at least one immunotherapy ineffective?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 4,
+            "x": 75.0,
+            "y": 275.0,
+            "text": "Yes",
+            "field_name": "Opsoclonus-myoclonus-ataxia (opsoclonus myoclonus syndrome) - Does the patient have a documented diagnosis of opsoclonus-myoclonus-ataxia (OMA) associated with neuroblastoma?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 4,
+            "x": 75.0,
+            "y": 245.0,
+            "text": "Yes",
+            "field_name": "Is the patient refractory to steroids, chemotherapy and intravenous immunoglobulins?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 4,
+            "x": 75.0,
+            "y": 185.0,
+            "text": "Yes",
+            "field_name": "Is Rituxan (rituximab) being used as treatment of post-transplant lymphoproliferative disorder?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 4,
+            "x": 75.0,
+            "y": 155.0,
+            "text": "Yes",
+            "field_name": "Is Rituxan (rituximab) being used as prophylaxis for Epstein-Barr virus (EBV) post-transplant lymphoproliferative disorder?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 5,
+            "x": 75.0,
+            "y": 740.0,
+            "text": "Moderate",
+            "field_name": "Severity of rheumatoid arthritis",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 5,
+            "x": 75.0,
+            "y": 710.0,
+            "text": "Yes",
+            "field_name": "Evidence that the disease is active?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 5,
+            "x": 75.0,
+            "y": 680.0,
+            "text": "Yes",
+            "field_name": "Rituxan (rituximab) be used in combination with methotrexate?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 5,
+            "x": 75.0,
+            "y": 650.0,
+            "text": "Yes",
+            "field_name": "Was treatment with methotrexate ineffective, not tolerated or contraindicated?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 5,
+            "x": 75.0,
+            "y": 605.0,
+            "text": "ineffective",
+            "field_name": "ineffective",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 5,
+            "x": 75.0,
+            "y": 575.0,
+            "text": "Yes",
+            "field_name": "Was treatment with another conventional DMARD ineffective?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 5,
+            "x": 75.0,
+            "y": 530.0,
+            "text": "azathioprine",
+            "field_name": "conventional DMARD ineffective",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 5,
+            "x": 75.0,
+            "y": 500.0,
+            "text": "Yes",
+            "field_name": "Does the patient have a documented diagnosis of Sjögren’s syndrome?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 5,
+            "x": 75.0,
+            "y": 470.0,
+            "text": "Yes",
+            "field_name": "Was treatment with corticosteroids and other immunosuppressive agents ineffective?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 5,
+            "x": 75.0,
+            "y": 410.0,
+            "text": "Yes",
+            "field_name": "Does the patient have a documented diagnosis of refractory thrombotic thrombocytopenic purpura (TTP)?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 5,
+            "x": 75.0,
+            "y": 380.0,
+            "text": "Yes",
+            "field_name": "Does the patient have a documented diagnosis of Waldenström macroglobulinemia?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 5,
+            "x": 75.0,
+            "y": 320.0,
+            "text": "Yes",
+            "field_name": "Is this continuation request a result of the patient receiving samples of Rituxan (rituximab)?",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 5,
+            "x": 75.0,
+            "y": 245.0,
+            "text": "Moderate",
+            "field_name": "severity of the disease at baseline",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 5,
+            "x": 75.0,
+            "y": 215.0,
+            "text": "Yes",
+            "field_name": "clinical documentation supporting disease stability",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 5,
+            "x": 190.0,
+            "y": 215.0,
+            "text": "Yes",
+            "field_name": "clinical documentation supporting disease improvement",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 5,
+            "x": 75.0,
+            "y": 155.0,
+            "text": "Yes",
+            "field_name": "clinical documentation supporting disease stability all other indications",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 5,
+            "x": 190.0,
+            "y": 155.0,
+            "text": "Yes",
+            "field_name": "clinical documentation supporting disease improvement all other indications",
+            "font_size": 10
+        }
+    ]
+}
+```
