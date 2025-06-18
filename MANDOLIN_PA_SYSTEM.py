@@ -227,7 +227,7 @@ class SchemaRefinementAgent:
     """Takes a raw schema and uses an LLM to assign meaningful semantic purposes."""
 
     def __init__(self):
-        self.model = genai.GenerativeModel('gemini-1.5-pro-latest')
+        self.model = genai.GenerativeModel('gemini-2.5-pro')
 
     def refine_schema(self, schema: FormSchema) -> FormSchema:
         print(f"🧐 Activating Schema Refinement Agent for {len(schema.fields)} fields.")
