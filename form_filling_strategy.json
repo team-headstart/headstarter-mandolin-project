@@ -4,492 +4,491 @@
         {
             "method": "drawString",
             "x": 75.0,
-            "y": 478.0,
+            "y": 575.0,
             "text": "Shakh",
-            "field_name": "patient_information.First Name",
-            "font_size": 8,
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "field_name": "patient_first_name",
+            "font_size": 9,
+            "validation": "coordinates within patient first name field"
         },
         {
             "method": "drawString",
-            "x": 175.0,
-            "y": 478.0,
+            "x": 185.0,
+            "y": 575.0,
             "text": "Abdulla",
-            "field_name": "patient_information.Last Name",
-            "font_size": 8,
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "field_name": "patient_last_name",
+            "font_size": 9,
+            "validation": "coordinates within patient last name field"
         },
         {
             "method": "drawString",
-            "x": 275.0,
-            "y": 478.0,
+            "x": 310.0,
+            "y": 575.0,
             "text": "04/01/2001",
-            "field_name": "patient_information.DOB",
-            "font_size": 8,
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "field_name": "patient_dob",
+            "font_size": 9,
+            "validation": "coordinates within patient dob field"
         },
         {
             "method": "drawString",
             "x": 75.0,
-            "y": 448.0,
-            "text": "425 Sherman Ave APT D",
-            "field_name": "patient_information.Address",
-            "font_size": 8,
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "y": 545.0,
+            "text": "425 Sherman Ave",
+            "field_name": "patient_address",
+            "font_size": 9,
+            "validation": "coordinates within patient address field"
         },
         {
             "method": "drawString",
             "x": 75.0,
-            "y": 420.0,
+            "y": 520.0,
             "text": "Nashville",
-            "field_name": "patient_information.City",
-            "font_size": 8,
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "field_name": "patient_city",
+            "font_size": 9,
+            "validation": "coordinates within patient city field"
         },
         {
             "method": "drawString",
-            "x": 175.0,
-            "y": 420.0,
+            "x": 250.0,
+            "y": 520.0,
             "text": "TN",
-            "field_name": "patient_information.State",
-            "font_size": 8,
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "field_name": "patient_state",
+            "font_size": 9,
+            "validation": "coordinates within patient state field"
         },
         {
             "method": "drawString",
-            "x": 225.0,
-            "y": 420.0,
+            "x": 310.0,
+            "y": 520.0,
             "text": "37995",
-            "field_name": "patient_information.ZIP",
-            "font_size": 8,
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "field_name": "patient_zip",
+            "font_size": 9,
+            "validation": "coordinates within patient zip field"
         },
         {
             "method": "drawString",
             "x": 75.0,
-            "y": 392.0,
-            "text": "865-395-3958",
-            "field_name": "patient_information.Home Phone",
-            "font_size": 8,
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "y": 495.0,
+            "text": "(865)-395-3958",
+            "field_name": "patient_home_phone",
+            "font_size": 9,
+            "validation": "coordinates within patient home phone field"
         },
         {
             "method": "drawString",
-            "x": 225.0,
-            "y": 392.0,
-            "text": "865-395-0481",
-            "field_name": "patient_information.Cell Phone",
-            "font_size": 8,
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "x": 310.0,
+            "y": 495.0,
+            "text": "(865)-395-0481",
+            "field_name": "patient_cell_phone",
+            "font_size": 9,
+            "validation": "coordinates within patient cell phone field"
         },
         {
             "method": "drawString",
             "x": 75.0,
-            "y": 342.0,
+            "y": 440.0,
             "text": "LAJM14345116",
-            "field_name": "insurance_information.Member ID #",
-            "font_size": 8,
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "field_name": "member_id",
+            "font_size": 9,
+            "validation": "coordinates within member id field"
         },
         {
             "method": "drawString",
-            "x": 175.0,
-            "y": 342.0,
+            "x": 230.0,
+            "y": 440.0,
             "text": "435000",
-            "field_name": "insurance_information.Group #",
-            "font_size": 8,
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "field_name": "group_number",
+            "font_size": 9,
+            "validation": "coordinates within group number field"
         },
         {
             "method": "drawString",
             "x": 75.0,
-            "y": 314.0,
-            "text": "Abdulla, Shakh",
-            "field_name": "insurance_information.Insured",
-            "font_size": 8,
-            "validation": "Valid Coordinates, Text fits within field boundaries"
-        },
-        {
-            "method": "drawString",
-            "x": 75.0,
-            "y": 264.0,
+            "y": 390.0,
             "text": "Hao",
-            "field_name": "prescriber_information.First Name",
-            "font_size": 8,
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "field_name": "prescriber_first_name",
+            "font_size": 9,
+            "validation": "coordinates within prescriber first name field"
         },
         {
             "method": "drawString",
-            "x": 175.0,
-            "y": 264.0,
+            "x": 185.0,
+            "y": 390.0,
             "text": "Gu",
-            "field_name": "prescriber_information.Last Name",
-            "font_size": 8,
-            "validation": "Valid Coordinates, Text fits within field boundaries"
-        },
-        {
-            "method": "drawString",
-            "x": 75.0,
-            "y": 234.0,
-            "text": "3320 Montgomery Dr",
-            "field_name": "prescriber_information.Address",
-            "font_size": 8,
-            "validation": "Valid Coordinates, Text fits within field boundaries"
-        },
-        {
-            "method": "drawString",
-            "x": 75.0,
-            "y": 206.0,
-            "text": "NASHVILLE",
-            "field_name": "prescriber_information.City",
-            "font_size": 8,
-            "validation": "Valid Coordinates, Text fits within field boundaries"
-        },
-        {
-            "method": "drawString",
-            "x": 175.0,
-            "y": 206.0,
-            "text": "TN",
-            "field_name": "prescriber_information.State",
-            "font_size": 8,
-            "validation": "Valid Coordinates, Text fits within field boundaries"
-        },
-        {
-            "method": "drawString",
-            "x": 225.0,
-            "y": 206.0,
-            "text": "37361",
-            "field_name": "prescriber_information.ZIP",
-            "font_size": 8,
-            "validation": "Valid Coordinates, Text fits within field boundaries"
-        },
-        {
-            "method": "drawString",
-            "x": 75.0,
-            "y": 178.0,
-            "text": "614-936-0065",
-            "field_name": "prescriber_information.Phone",
-            "font_size": 8,
-            "validation": "Valid Coordinates, Text fits within field boundaries"
-        },
-        {
-            "method": "drawString",
-            "x": 275.0,
-            "y": 178.0,
-            "text": "1154611523",
-            "field_name": "prescriber_information.NPI #",
-            "font_size": 8,
-            "validation": "Valid Coordinates, Text fits within field boundaries"
-        },
-        {
-            "method": "drawString",
-            "x": 85.0,
-            "y": 101.0,
-            "text": "694",
-            "field_name": "product_information.Dose",
-            "font_size": 8,
-            "validation": "Valid Coordinates, Text fits within field boundaries"
-        },
-        {
-            "method": "drawString",
-            "x": 80.0,
-            "y": 73.0,
-            "text": "G35",
-            "field_name": "diagnosis_information.Primary ICD Code",
-            "font_size": 8,
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "field_name": "prescriber_last_name",
+            "font_size": 9,
+            "validation": "coordinates within prescriber last name field"
         },
         {
             "method": "drawString",
             "x": 270.0,
-            "y": 342.0,
-            "text": "BC TENNCARE",
-            "field_name": "insurance_information.Carrier Name",
-            "font_size": 8,
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "y": 390.0,
+            "text": "X",
+            "field_name": "prescriber_md",
+            "font_size": 9,
+            "validation": "coordinates within prescriber md field"
         },
-         {
-            "method": "rect",
-            "x": 407.0,
-            "y": 102.0,
-            "width": 6,
-            "height": 6,
-            "stroke": 1,
-            "fill": 1,
-            "field_name": "product_information.Truxima (rituximab-abbs)"
+        {
+            "method": "drawString",
+            "x": 75.0,
+            "y": 365.0,
+            "text": "3320 Montgomery Dr",
+            "field_name": "prescriber_address",
+            "font_size": 9,
+            "validation": "coordinates within prescriber address field"
+        },
+        {
+            "method": "drawString",
+            "x": 75.0,
+            "y": 340.0,
+            "text": "NASHVILLE",
+            "field_name": "prescriber_city",
+            "font_size": 9,
+            "validation": "coordinates within prescriber city field"
+        },
+        {
+            "method": "drawString",
+            "x": 210.0,
+            "y": 340.0,
+            "text": "TN",
+            "field_name": "prescriber_state",
+            "font_size": 9,
+            "validation": "coordinates within prescriber state field"
+        },
+        {
+            "method": "drawString",
+            "x": 270.0,
+            "y": 340.0,
+            "text": "37361",
+            "field_name": "prescriber_zip",
+            "font_size": 9,
+            "validation": "coordinates within prescriber zip field"
+        },
+        {
+            "method": "drawString",
+            "x": 75.0,
+            "y": 315.0,
+            "text": "(614)-936-0065",
+            "field_name": "prescriber_phone",
+            "font_size": 9,
+            "validation": "coordinates within prescriber phone field"
+        },
+        {
+            "method": "drawString",
+            "x": 270.0,
+            "y": 315.0,
+            "text": "1154611523",
+            "field_name": "prescriber_npi",
+            "font_size": 9,
+            "validation": "coordinates within prescriber npi field"
+        },
+        {
+             "method": "drawString",
+            "x": 75.0,
+            "y": 200.0,
+            "text": "694 mg",
+            "field_name": "dose",
+            "font_size": 9,
+            "validation": "coordinates within dose field"
+        },
+        {
+            "method": "drawString",
+            "x": 180.0,
+            "y": 200.0,
+            "text": "Days 1, 15 Load Then Once Every 24 Weeks",
+            "field_name": "directions_for_use",
+            "font_size": 9,
+            "validation": "coordinates within directions for use field"
+        },
+        {
+            "method": "drawString",
+            "x": 75.0,
+            "y": 150.0,
+            "text": "G35",
+            "field_name": "primary_icd_code",
+            "font_size": 9,
+            "validation": "coordinates within primary icd code field"
+        },
+        {
+            "method": "drawString",
+            "x": 75.0,
+            "y": 240.0,
+            "text": "X",
+            "field_name": "prior_therapy_within_365_days",
+            "font_size": 9,
+            "validation": "coordinates within prior therapy within 365 days checkbox"
         }
     ],
     "coordinate_mappings": {
-        "patient_information.First Name": {
+        "patient_first_name": {
             "coordinates": {
                 "x": 75.0,
-                "y": 478.0
+                "y": 575.0
             },
             "value": "Shakh",
             "field_type": "text",
-            "text_size": 8,
+            "text_size": 9,
             "alignment": "left",
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "validation": "coordinates within patient first name field"
         },
-        "patient_information.Last Name": {
+        "patient_last_name": {
             "coordinates": {
-                "x": 175.0,
-                "y": 478.0
+                "x": 185.0,
+                "y": 575.0
             },
             "value": "Abdulla",
             "field_type": "text",
-            "text_size": 8,
+            "text_size": 9,
             "alignment": "left",
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "validation": "coordinates within patient last name field"
         },
-        "patient_information.DOB": {
+        "patient_dob": {
             "coordinates": {
-                "x": 275.0,
-                "y": 478.0
+                "x": 310.0,
+                "y": 575.0
             },
             "value": "04/01/2001",
             "field_type": "text",
-            "text_size": 8,
+            "text_size": 9,
             "alignment": "left",
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "validation": "coordinates within patient dob field"
         },
-        "patient_information.Address": {
+        "patient_address": {
             "coordinates": {
                 "x": 75.0,
-                "y": 448.0
+                "y": 545.0
             },
-            "value": "425 Sherman Ave APT D",
+            "value": "425 Sherman Ave",
             "field_type": "text",
-            "text_size": 8,
+            "text_size": 9,
             "alignment": "left",
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "validation": "coordinates within patient address field"
         },
-        "patient_information.City": {
+        "patient_city": {
             "coordinates": {
                 "x": 75.0,
-                "y": 420.0
+                "y": 520.0
             },
             "value": "Nashville",
             "field_type": "text",
-            "text_size": 8,
+            "text_size": 9,
             "alignment": "left",
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "validation": "coordinates within patient city field"
         },
-        "patient_information.State": {
+        "patient_state": {
             "coordinates": {
-                "x": 175.0,
-                "y": 420.0
+                "x": 250.0,
+                "y": 520.0
             },
             "value": "TN",
             "field_type": "text",
-            "text_size": 8,
+            "text_size": 9,
             "alignment": "left",
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "validation": "coordinates within patient state field"
         },
-        "patient_information.ZIP": {
+        "patient_zip": {
             "coordinates": {
-                "x": 225.0,
-                "y": 420.0
+                "x": 310.0,
+                "y": 520.0
             },
             "value": "37995",
             "field_type": "text",
-            "text_size": 8,
+            "text_size": 9,
             "alignment": "left",
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "validation": "coordinates within patient zip field"
         },
-        "patient_information.Home Phone": {
+        "patient_home_phone": {
             "coordinates": {
                 "x": 75.0,
-                "y": 392.0
+                "y": 495.0
             },
-            "value": "865-395-3958",
+            "value": "(865)-395-3958",
             "field_type": "text",
-            "text_size": 8,
+            "text_size": 9,
             "alignment": "left",
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "validation": "coordinates within patient home phone field"
         },
-        "patient_information.Cell Phone": {
+        "patient_cell_phone": {
             "coordinates": {
-                "x": 225.0,
-                "y": 392.0
+                "x": 310.0,
+                "y": 495.0
             },
-            "value": "865-395-0481",
+            "value": "(865)-395-0481",
             "field_type": "text",
-            "text_size": 8,
+            "text_size": 9,
             "alignment": "left",
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "validation": "coordinates within patient cell phone field"
         },
-        "insurance_information.Member ID #": {
+        "member_id": {
             "coordinates": {
                 "x": 75.0,
-                "y": 342.0
+                "y": 440.0
             },
             "value": "LAJM14345116",
             "field_type": "text",
-            "text_size": 8,
+            "text_size": 9,
             "alignment": "left",
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "validation": "coordinates within member id field"
         },
-        "insurance_information.Group #": {
+        "group_number": {
             "coordinates": {
-                "x": 175.0,
-                "y": 342.0
+                "x": 230.0,
+                "y": 440.0
             },
             "value": "435000",
             "field_type": "text",
-            "text_size": 8,
+            "text_size": 9,
             "alignment": "left",
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "validation": "coordinates within group number field"
         },
-        "insurance_information.Insured": {
+        "prescriber_first_name": {
             "coordinates": {
                 "x": 75.0,
-                "y": 314.0
-            },
-            "value": "Abdulla, Shakh",
-            "field_type": "text",
-            "text_size": 8,
-            "alignment": "left",
-            "validation": "Valid Coordinates, Text fits within field boundaries"
-        },
-        "prescriber_information.First Name": {
-            "coordinates": {
-                "x": 75.0,
-                "y": 264.0
+                "y": 390.0
             },
             "value": "Hao",
             "field_type": "text",
-            "text_size": 8,
+            "text_size": 9,
             "alignment": "left",
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "validation": "coordinates within prescriber first name field"
         },
-        "prescriber_information.Last Name": {
+        "prescriber_last_name": {
             "coordinates": {
-                "x": 175.0,
-                "y": 264.0
+                "x": 185.0,
+                "y": 390.0
             },
             "value": "Gu",
             "field_type": "text",
-            "text_size": 8,
+            "text_size": 9,
             "alignment": "left",
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "validation": "coordinates within prescriber last name field"
         },
-        "prescriber_information.Address": {
+        "prescriber_md": {
+            "coordinates": {
+                "x": 270.0,
+                "y": 390.0
+            },
+            "value": "X",
+            "field_type": "radio",
+            "text_size": 9,
+            "alignment": "left",
+            "validation": "coordinates within prescriber md field"
+        },
+        "prescriber_address": {
             "coordinates": {
                 "x": 75.0,
-                "y": 234.0
+                "y": 365.0
             },
             "value": "3320 Montgomery Dr",
             "field_type": "text",
-            "text_size": 8,
+            "text_size": 9,
             "alignment": "left",
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "validation": "coordinates within prescriber address field"
         },
-        "prescriber_information.City": {
+        "prescriber_city": {
             "coordinates": {
                 "x": 75.0,
-                "y": 206.0
+                "y": 340.0
             },
             "value": "NASHVILLE",
             "field_type": "text",
-            "text_size": 8,
+            "text_size": 9,
             "alignment": "left",
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "validation": "coordinates within prescriber city field"
         },
-        "prescriber_information.State": {
+        "prescriber_state": {
             "coordinates": {
-                "x": 175.0,
-                "y": 206.0
+                "x": 210.0,
+                "y": 340.0
             },
             "value": "TN",
             "field_type": "text",
-            "text_size": 8,
+            "text_size": 9,
             "alignment": "left",
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "validation": "coordinates within prescriber state field"
         },
-        "prescriber_information.ZIP": {
+        "prescriber_zip": {
             "coordinates": {
-                "x": 225.0,
-                "y": 206.0
+                "x": 270.0,
+                "y": 340.0
             },
             "value": "37361",
             "field_type": "text",
-            "text_size": 8,
+            "text_size": 9,
             "alignment": "left",
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "validation": "coordinates within prescriber zip field"
         },
-        "prescriber_information.Phone": {
+        "prescriber_phone": {
             "coordinates": {
                 "x": 75.0,
-                "y": 178.0
+                "y": 315.0
             },
-            "value": "614-936-0065",
+            "value": "(614)-936-0065",
             "field_type": "text",
-            "text_size": 8,
+            "text_size": 9,
             "alignment": "left",
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "validation": "coordinates within prescriber phone field"
         },
-        "prescriber_information.NPI #": {
+        "prescriber_npi": {
             "coordinates": {
-                "x": 275.0,
-                "y": 178.0
+                "x": 270.0,
+                "y": 315.0
             },
             "value": "1154611523",
             "field_type": "text",
-            "text_size": 8,
+            "text_size": 9,
             "alignment": "left",
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "validation": "coordinates within prescriber npi field"
         },
-        "product_information.Dose": {
+         "dose": {
             "coordinates": {
-                "x": 85.0,
-                "y": 101.0
+                "x": 75.0,
+                "y": 200.0
             },
-            "value": "694",
+            "value": "694 mg",
             "field_type": "text",
-            "text_size": 8,
+            "text_size": 9,
             "alignment": "left",
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "validation": "coordinates within dose field"
         },
-        "diagnosis_information.Primary ICD Code": {
+        "directions_for_use": {
             "coordinates": {
-                "x": 80.0,
-                "y": 73.0
+                "x": 180.0,
+                "y": 200.0
+            },
+            "value": "Days 1, 15 Load Then Once Every 24 Weeks",
+            "field_type": "text",
+            "text_size": 9,
+            "alignment": "left",
+            "validation": "coordinates within directions for use field"
+        },
+        "primary_icd_code": {
+            "coordinates": {
+                "x": 75.0,
+                "y": 150.0
             },
             "value": "G35",
             "field_type": "text",
-            "text_size": 8,
+            "text_size": 9,
             "alignment": "left",
-            "validation": "Valid Coordinates, Text fits within field boundaries"
+            "validation": "coordinates within primary icd code field"
         },
-        "insurance_information.Carrier Name": {
+        "prior_therapy_within_365_days": {
             "coordinates": {
-                "x": 270.0,
-                "y": 342.0
+                "x": 75.0,
+                "y": 240.0
             },
-            "value": "BC TENNCARE",
-            "field_type": "text",
-            "text_size": 8,
-            "alignment": "left",
-            "validation": "Valid Coordinates, Text fits within field boundaries"
-        },
-         "product_information.Truxima (rituximab-abbs)": {
-            "coordinates": {
-                "x": 407.0,
-                "y": 102.0
-            },
-            "value": "True",
+            "value": "X",
             "field_type": "checkbox",
-            "text_size": 8,
+            "text_size": 9,
             "alignment": "left",
-            "validation": "Valid Coordinates"
+            "validation": "coordinates within prior therapy within 365 days checkbox"
         }
     },
     "placement_summary": {
         "total_fields_mapped": 24,
-        "text_fields_count": 23,
+        "text_fields_count": 22,
         "checkbox_fields_count": 1,
-        "radio_button_fields_count": 0
+        "radio_button_fields_count": 1
     },
     "quality_assurance": {
         "coordinate_conflicts": [],
