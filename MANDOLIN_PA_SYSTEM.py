@@ -16,9 +16,13 @@ from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, field
 import datetime
 import re
+import logging
 
 load_dotenv()
 genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
+
+# --- Setup Basic Logging ---
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # --- Data Structures ---
 
@@ -562,9 +566,21 @@ class ValidationAgent:
             
             corrections = [Correction(**c) for c in corrections_data]
             if corrections:
-                print(f" Validation complete. Found {len(corrections)} corrections.")
-            else:
-                print(" Validation complete. No corrections needed.")
+                print(f" Correcting {len(corrections)} fields in: {os.path.basename(filled_form_path)}")
+                correction_data = {c.semantic_purpose: c.correct_value for c in corrections}
+                
+                # The `fill_form` method is now robust enough to handle this.
+                # We overwrite the file with the corrected data.
+                self.filling_agent.fill_form(
+                    schema=schema,
+                    data_to_fill=correction_data,
+                    output_path=Path(filled_form_path), # Overwrite the existing file
+                    base_form_path=pa_form_path,   # CRITICAL: Always use the original blank form as the base
+                    is_correction=True
+                )
+
+            print(f" Successfully processed PA for {patient_name}.")
+            print(f"  Filled PDF: {filled_form_path}")
             return corrections
             
         except Exception as e:
@@ -659,20 +675,30 @@ class FormFillingAgent:
         the file at `output_path` to modify it. Otherwise, it uses the `base_form_path`.
         """
         
-        if is_correction:
-            print(f" Correcting {len(data_to_fill)} fields in: {output_path.name}")
-            doc = fitz.open(output_path)
-        else:
-            print(f" Filling {len(data_to_fill)} fields in a new form.")
-            doc = fitz.open(base_form_path)
+        doc = None # Initialize doc to None
+        try:
+            if is_correction:
+                print(f" Correcting {len(data_to_fill)} fields in: {output_path.name}")
+                doc = fitz.open(output_path)
+            else:
+                print(f" Filling {len(data_to_fill)} fields in a new form.")
+                doc = fitz.open(base_form_path)
 
-        purpose_to_field_map = {field.semantic_purpose: field for field in schema.fields.values() if field.semantic_purpose}
+            purpose_to_field_map = {field.semantic_purpose: field for field in schema.fields.values() if field.semantic_purpose}
 
-        for purpose, value in data_to_fill.items():
-            if value is None: continue
+            filled_data_tracker = {}
 
-            if purpose in purpose_to_field_map:
-                field = purpose_to_field_map[purpose]
+            for purpose, value in data_to_fill.items():
+                if value is None: continue
+
+                field = purpose_to_field_map.get(purpose)
+                if not field: continue
+
+                # --- ROBUSTNESS FIX 1: Page bounds check ---
+                if field.page_num >= len(doc):
+                    logging.warning(f"Skipping field '{field.field_id}' for purpose '{purpose}'. Reason: Page {field.page_num} is out of bounds for the document.")
+                    continue
+
                 page = doc[field.page_num]
                 
                 try:
@@ -698,14 +724,28 @@ class FormFillingAgent:
                 except Exception as e:
                     print(f"  Could not fill field '{field.field_id}' for purpose '{purpose}'. Reason: {e}")
 
-        # Flatten form fields to make them non-editable after filling
-        if doc.is_form:
-            doc.flatten_widgets()
+            # Flatten form fields to make them non-editable after filling
+            if any(page.widgets() for page in doc):
+                for page in doc:
+                    for widget in page.widgets():
+                        # Set the read-only flag for each widget
+                        widget.field_flags |= fitz.PDF_FIELD_IS_READ_ONLY
+                        widget.update()
 
-        # Save the file
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        doc.save(str(output_path), garbage=4, deflate=True)
-        doc.close()
+            # Save the file
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            doc.save(str(output_path), garbage=4, deflate=True)
+            doc.close()
+
+            return output_path, filled_data_tracker
+
+        except Exception as e:
+            logging.error(f"An error occurred during form filling: {e}", exc_info=True)
+            # --- ROBUSTNESS FIX 2: Always return a tuple ---
+            return None, {}
+        finally:
+            if doc:
+                doc.close()
 
 class MANDOLIN_PA_SYSTEM:
     def __init__(self):
@@ -722,75 +762,94 @@ class MANDOLIN_PA_SYSTEM:
         """
         Executes the full, multi-agent pipeline for processing a single PA request.
         """
-        print("\n" + "="*50)
-        print(f" Starting Mandolin Pipeline for Patient: {patient_name}")
-        print(f"   Referral Doc: {referral_path.name}")
-        print(f"   PA Form: {pa_form_path.name}")
-        print("="*50 + "\n")
+        logging.info(f"--- Starting processing for {patient_name} ---")
+        try:
+            print("\n" + "="*50)
+            print(f" Starting Mandolin Pipeline for Patient: {patient_name}")
+            print(f"   Referral Doc: {referral_path.name}")
+            print(f"   PA Form: {pa_form_path.name}")
+            print("="*50 + "\n")
 
-        # --- Phase 1: Schema Creation (or loading from cache) ---
-        if pa_form_path.name in self.schema_cache:
-            schema = self.schema_cache[pa_form_path.name]
-            print(" Loaded schema from cache.")
-        else:
-            raw_schema = self.understanding_agent.create_schema(pa_form_path)
-            schema = self.refinement_agent.refine_schema(raw_schema)
-            self.schema_cache[pa_form_path.name] = schema
-        
-        if not schema.fields:
-            print(f" Halting processing for {patient_name}: Schema creation failed.")
-            return
+            # --- Phase 1: Schema Creation (or loading from cache) ---
+            if pa_form_path.name in self.schema_cache:
+                schema = self.schema_cache[pa_form_path.name]
+                print(" Loaded schema from cache.")
+            else:
+                raw_schema = self.understanding_agent.create_schema(pa_form_path)
+                schema = self.refinement_agent.refine_schema(raw_schema)
+                self.schema_cache[pa_form_path.name] = schema
+            
+            if not schema.fields:
+                print(f" Halting processing for {patient_name}: Schema creation failed.")
+                return
 
-        # --- Phase 2: Parallel Data Extraction ---
-        # 2a. Extract structured data (demographics, etc.)
-        extracted_data = self.extraction_agent.extract_data(referral_path, schema)
-        
-        # 2b. Answer specific clinical questions
-        clinical_questions = {
-            f.semantic_purpose: f for f in schema.fields.values() 
-            if f.semantic_purpose and f.semantic_purpose.startswith("clinical_")
-        }
-        clinical_answers = self.qa_agent.answer_questions(referral_path, clinical_questions)
-        
-        # Merge all data into one dictionary for filling
-        all_data_to_fill = {**extracted_data.data, **clinical_answers}
+            # --- Phase 2: Parallel Data Extraction ---
+            # 2a. Extract structured data (demographics, etc.)
+            logging.info("Step 2: Extracting data from referral.")
+            extracted_data = self.extraction_agent.extract_data(referral_path, schema)
+            
+            # 2b. Answer specific clinical questions
+            logging.info("Step 3: Answering clinical questions.")
+            clinical_questions = {
+                f.semantic_purpose: f for f in schema.fields.values() 
+                if f.semantic_purpose and f.semantic_purpose.startswith("clinical_")
+            }
+            clinical_answers = self.qa_agent.answer_questions(referral_path, clinical_questions)
+            
+            # Merge all data into one dictionary for filling
+            all_data_to_fill = {**extracted_data.data, **clinical_answers}
 
-        if not all_data_to_fill:
-            print(f" Halting processing for {patient_name}: No data could be extracted.")
-            self.generate_report(patient_name, schema, extracted_data, output_dir)
-            return
+            if not all_data_to_fill:
+                print(f" Halting processing for {patient_name}: No data could be extracted.")
+                self.generate_report(patient_name, schema, extracted_data, output_dir)
+                return
 
-        # --- Phase 3: Initial Form Filling ---
-        timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-        output_filename = f"{patient_name.replace(' ', '_')}_PA_{timestamp}.pdf"
-        output_path = output_dir / output_filename
-        
-        self.filling_agent.fill_form(
-            schema=schema,
-            data_to_fill=all_data_to_fill,
-            output_path=output_path,
-            base_form_path=pa_form_path
-        )
-
-        # --- Phase 4: Validation and Correction ---
-        corrections = self.validation_agent.validate_and_correct(output_path, schema, extracted_data)
-        if corrections:
-            # Create a dictionary of corrections to pass to the filling agent
-            correction_data = {c.semantic_purpose: c.correct_value for c in corrections}
-            self.filling_agent.fill_form(
+            # --- Phase 3: Initial Form Filling ---
+            logging.info("Step 4: Initial form filling.")
+            timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+            output_filename = f"{patient_name.replace(' ', '_')}_PA_{timestamp}.pdf"
+            output_path = output_dir / output_filename
+            
+            filled_pdf_path, filled_data = self.filling_agent.fill_form(
                 schema=schema,
-                data_to_fill=correction_data,
-                output_path=output_path, # Overwrite the previous file
-                base_form_path=pa_form_path,
-                is_correction=True
+                data_to_fill=all_data_to_fill,
+                output_path=output_path,
+                base_form_path=pa_form_path
             )
+            if not filled_pdf_path:
+                logging.error(f"Form filling failed for {patient_name}. Halting.")
+                return
+            logging.info(f"Initial form filled successfully: {filled_pdf_path}")
 
-        # --- Phase 5: Reporting ---
-        self.generate_report(patient_name, schema, extracted_data, output_dir)
-        
-        print("\n" + "="*50)
-        print(f" Mandolin Pipeline finished for {patient_name}.")
-        print("="*50 + "\n")
+            # --- Phase 4: Validation and Correction ---
+            if self.validation_agent:
+                logging.info("Step 5: Validating and correcting form.")
+                corrections = self.validation_agent.validate_and_correct(filled_pdf_path, schema, extracted_data)
+                if corrections:
+                    logging.info(f"Applying {len(corrections)} corrections.")
+                    # Create a dictionary of corrections to pass to the filling agent
+                    correction_data = {c.semantic_purpose: c.correct_value for c in corrections}
+                    self.filling_agent.fill_form(
+                        schema=schema,
+                        data_to_fill=correction_data,
+                        output_path=filled_pdf_path, # Overwrite the previous file
+                        base_form_path=pa_form_path,
+                        is_correction=True
+                    )
+                else:
+                    logging.info("Validation complete, no corrections needed.")
+
+            # --- Phase 5: Reporting ---
+            logging.info("Step 6: Generating report.")
+            self.generate_report(patient_name, schema, extracted_data, output_dir)
+            
+            print("\n" + "="*50)
+            print(f" Mandolin Pipeline finished for {patient_name}.")
+            print("="*50 + "\n")
+            logging.info(f"--- Finished processing for {patient_name} ---")
+
+        except Exception as e:
+            logging.error(f"An unhandled exception occurred while processing {patient_name}: {e}", exc_info=True)
 
     def generate_report(self, patient_name: str, schema: FormSchema, extracted_data: ExtractedData, output_dir: Path):
         """Generates a markdown report of missing information."""

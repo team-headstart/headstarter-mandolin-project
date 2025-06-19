@@ -1,4 +1,4 @@
-# Mandolin AI: Automated Prior Authorization Filling System
+## Automated Prior Authorization Filling System
 
 This repository contains an advanced AI pipeline designed to automate the filling of both interactive (widget-based) and flat (non-interactive) Prior Authorization (PA) forms. The system uses a sophisticated multi-agent architecture to analyze, extract, and populate forms, significantly reducing the manual administrative burden on healthcare providers.
 
@@ -6,7 +6,7 @@ This repository contains an advanced AI pipeline designed to automate the fillin
 
 The primary challenge of this project was the need to handle two fundamentally different types of PDFs. A single system cannot reliably process both widget-based and flat forms. My solution was to develop two distinct, specialized pipelines, each orchestrated by its own script.
 
-### Architecture 1: The Interactive Pipeline (`MANDOLIN_PA_SYSTEM.py`)
+### Multi-Agent Architecture 1: The Interactive Pipeline (`MANDOLIN_PA_SYSTEM.py`)
 
 This system is designed for modern, widget-based PDFs that have pre-defined, interactive fields (text boxes, checkboxes, etc.).
 
@@ -18,7 +18,7 @@ This system is designed for modern, widget-based PDFs that have pre-defined, int
 -   **Validation & Correction:** In a critical "fill-and-verify" loop, the system performs a first-pass fill of the form and then hands it off to a `ValidationAgent`. This powerful AI (`gemini-2.5-pro`) visually inspects the filled document, compares it against the source data, and generates a list of corrections for any hallucinations, formatting errors, or misplaced data. This self-correction loop dramatically increases the final accuracy.
 -   **Finalization:** The corrections are applied, and a final, flattened PDF is generated alongside a report detailing any information that could not be found.
 
-### Architecture 2: The "Text-Anchor" Pipeline for Flat PDFs (`FLAT_PA_SYSTEM.py`)
+###  Multi-AgentArchitecture 2: The "Text-Anchor" Pipeline for Flat PDFs (`FLAT_PA_SYSTEM.py`)
 
 Flat PDFs are much more challenging as they have no structured fields. Attempting to use AI to visually "guess" the coordinates of where to write text is notoriously unreliable and prone to alignment errors.
 
@@ -90,4 +90,34 @@ python3 MANDOLIN_PA_SYSTEM.py
 
 ## 5. Output Examples
 
-This submission includes generated examples of the filled PDF and its corresponding missing information report in the `output_examples/` directory. These files demonstrate the output of the `FLAT_PA_SYSTEM.py` pipeline. 
+This submission includes comprehensive examples of filled PA forms and processing reports demonstrating both pipeline architectures:
+
+### Interactive PDF Pipeline Results (`Output Data/`)
+- **Adbulla**:
+  - `Adbulla_PA_filled.pdf` & `Adbulla_PA_filled_v1.pdf` - Filled forms with validation corrections
+  - `Adbulla_processing_report.md` - Missing information report (18.0% fill rate)
+  - `Adbulla_extracted_data.json` - Raw extracted data (249 fields)
+  - `Adbulla_corrections.json` - Validation corrections applied
+
+- **Akshay**:
+  - `Akshay_PA_filled.pdf` & `Akshay_PA_filled_v1.pdf` - Filled forms with validation corrections
+  - `Akshay_processing_report.md` - Missing information report (40.7% fill rate)
+  - `Akshay_extracted_data.json` - Raw extracted data (120 fields)
+  - `Akshay_corrections.json` - Validation corrections applied
+
+### Flat PDF Pipeline Results (`output_examples/`)
+- **Amy Chen**:
+  - `Amy_Chen_PA_20250618_183606.pdf` - Text-anchor filled form
+  - `Amy_Chen_processing_report.md` - Missing information report
+
+- **Additional Test Results**:
+  - Multiple timestamped versions showing iterative improvements
+  - `Adbulla_PA_*.pdf` - Various test runs with different configurations
+  - `Amy_PA_*.pdf` - Flat PDF system test results
+
+### Performance Summary
+- **Interactive Pipeline**: Handles complex widget-based forms with validation loop
+- **Flat PDF Pipeline**: Deterministic text-anchor positioning for non-interactive forms
+- **Fill Rates**: 18.0% - 40.7% depending on form complexity and data availability
+- **Self-Correction**: Validation agent identifies and fixes AI hallucinations
+- **Universal Design**: Works with any unseen PA form through schema-first approach
