@@ -97,7 +97,7 @@ class FormUnderstandingAgent:
         Analyzes the PA form and generates a complete schema.
         This is the most critical step for universality.
         """
-        print(f"🧠 Activating Form Understanding Agent for: {pa_form_path.name}")
+        print(f" Activating Form Understanding Agent for: {pa_form_path.name}")
         
         doc = fitz.open(pa_form_path)
         
@@ -131,7 +131,7 @@ class FormUnderstandingAgent:
         for img_b64 in page_images_b64:
             model_input.append({"mime_type": "image/png", "data": img_b64})
             
-        print("🤖 Asking AI to analyze form structure and logic...")
+        print(" Asking AI to analyze form structure and logic...")
 
         max_retries = 3
         for attempt in range(max_retries):
@@ -143,13 +143,13 @@ class FormUnderstandingAgent:
                 form_fields = self._parse_text_to_fields(response.text)
                 
                 schema = FormSchema(fields=form_fields)
-                print(f"✅ Schema created successfully with {len(schema.fields)} fields.")
+                print(f" Schema created successfully with {len(schema.fields)} fields.")
                 return schema
 
             except Exception as e:
-                print(f"❌ Attempt {attempt + 1}/{max_retries} failed. Reason: {e}")
+                print(f" Attempt {attempt + 1}/{max_retries} failed. Reason: {e}")
                 if attempt + 1 == max_retries:
-                    print(f"❌ Critical Error: AI failed to create form schema after {max_retries} attempts.")
+                    print(f" Critical Error: AI failed to create form schema after {max_retries} attempts.")
                     # Return an empty schema on final failure
                     return FormSchema(fields={})
 
@@ -168,7 +168,7 @@ class FormUnderstandingAgent:
                 field_id = field_id.strip()
                 
                 if not context.strip():
-                    print(f"⚠️ Skipping field '{field_id}' due to empty context.")
+                    print(f" Skipping field '{field_id}' due to empty context.")
                     continue
 
                 fields[field_id] = FormField(
@@ -178,7 +178,7 @@ class FormUnderstandingAgent:
                     context=context.strip()
                 )
             except (ValueError, IndexError) as e:
-                print(f"⚠️ Could not parse field entry: {entry} due to {e}")
+                print(f" Could not parse field entry: {entry} due to {e}")
                 continue
         return fields
 
@@ -230,7 +230,7 @@ class SchemaRefinementAgent:
         self.model = genai.GenerativeModel('gemini-2.5-pro')
 
     def refine_schema(self, schema: FormSchema) -> FormSchema:
-        print(f"🧐 Activating Schema Refinement Agent for {len(schema.fields)} fields.")
+        print(f" Activating Schema Refinement Agent for {len(schema.fields)} fields.")
         if not schema.fields:
             return schema
 
@@ -248,201 +248,216 @@ class SchemaRefinementAgent:
             # Use splitlines() to handle newlines correctly
             for line in response.text.strip().splitlines():
                 if '|' in line:
-                    parts = [x.strip() for x in line.split('|', 1)]
+                    parts = [p.strip() for p in line.split('|')]
                     if len(parts) == 2:
                         field_id, purpose = parts
-                        if field_id in schema.fields:
+                        if field_id in schema.fields and purpose.lower() != 'null':
                             schema.fields[field_id].semantic_purpose = purpose
-                    else:
-                        print(f"⚠️ Skipping malformed line in schema refinement: {line}")
+            
+            # Heuristic to find radio button groups
+            self._group_radio_buttons(schema)
 
-            print("✅ Schema refined successfully.")
+            print(" Schema refinement complete.")
             return schema
         except Exception as e:
-            print(f"❌ Schema refinement failed: {e}")
-            return schema
+            print(f" Schema refinement failed: {e}")
+            return schema # Return original schema on failure
+
+    def _group_radio_buttons(self, schema: FormSchema):
+        """A heuristic to add options to radio buttons based on shared purposes."""
+        purpose_groups = {}
+        for field in schema.fields.values():
+            if field.field_type == 'radio' and field.semantic_purpose:
+                # Group by the purpose, but remove the specific option (e.g., _yes, _no)
+                base_purpose = '_'.join(field.semantic_purpose.split('_')[:-1])
+                if base_purpose not in purpose_groups:
+                    purpose_groups[base_purpose] = []
+                purpose_groups[base_purpose].append(field)
+        
+        for base_purpose, group in purpose_groups.items():
+            if len(group) > 1: # It's a real group
+                options = [f.semantic_purpose for f in group]
+                for field in group:
+                    field.options = options
+
 
     def _build_prompt(self, field_contexts: list) -> str:
-        """Builds the detailed prompt for the LLM."""
+        """Constructs the prompt for the refinement agent."""
         
-        raw_fields_text = "\\n".join([f"{f['field_id']} | {f['context']}" for f in field_contexts])
-
+        context_str = "\n".join([f"- ID: {f['field_id']}, Context: \"{f['context']}\"" for f in field_contexts])
+        
         return f"""
-You are an expert in medical billing and data mapping. Your task is to analyze a list of raw form fields from a Prior Authorization PDF and assign a precise, machine-readable 'semantic_purpose' to each one.
+        You are an expert in medical data mapping. Your task is to assign a precise `semantic_purpose` to a list of form fields based on their context.
 
-**Instructions:**
-1.  Analyze the provided list of fields. Each field has an ID and nearby text context.
-2.  For each field, determine its real-world meaning (its semantic purpose).
-3.  Create a `snake_case` version of this purpose. This will be used as a key for data extraction.
-4.  Use the context of surrounding fields to resolve ambiguity. For example, an "Address" field under a "Pharmacy Information" section should be `pharmacy_address`, not just `address`.
-5.  If a field is a clinical question that requires a "Yes" or "No" answer, prefix its purpose with `clinical_question_`.
+        **1. Goal**
+        For each field, determine its exact purpose and assign a standardized key.
 
-**Crucial: Good vs. Bad Examples**
+        **2. Standardized Keys**
+        Use keys like these: `patient_last_name`, `prescriber_npi`, `drug_name`, `clinical_question_[question_summary]`.
+        For Yes/No questions, append `_yes` or `_no` to the key. Example: `clinical_question_is_patient_over_18_yes`.
 
-*   **BAD:**
-    *   Context: "Patient First Name" -> `semantic_purpose: "T11"` (This is just the ID)
-    *   Context: "Indicate" -> `semantic_purpose: "indication_cb_1"` (This is generic and meaningless)
-    *   Context: "Fax T" -> `semantic_purpose: "fax_t"` (Useless suffix)
+        **3. Input**
+        A list of fields with their `ID` and `Context` (the text label from the form).
 
-*   **GOOD:**
-    *   Context: "Patient First Name" -> `semantic_purpose: "patient_first_name"`
-    *   Context: "Prescriber's NPI#" -> `semantic_purpose: "prescriber_npi"`
-    *   Context: "Is the patient currently hospitalized?" -> `semantic_purpose: "clinical_question_is_patient_hospitalized"`
-    *   Context: "Diagnosis (ICD-10)" -> `semantic_purpose: "primary_diagnosis_icd_10"`
+        **4. Output Format**
+        Return ONLY a pipe-separated list of mappings, one per line:
+        `field_id | semantic_purpose`
+        If a field is not for data entry (e.g., a title, instruction), assign `null` as the purpose.
 
-**Output Format:**
-Return ONLY the list of fields in the exact same order you received them, with the `semantic_purpose` filled in for each. Each line must be a pipe-separated value with the format: `field_id | semantic_purpose`
+        **Example Input:**
+        - ID: T.7, Context: "Patient First Name:"
+        - ID: C.1, Context: "Yes" (For the question "Is the patient over 18?")
 
-**Raw Fields to Process:**
-{raw_fields_text}
-"""
+        **Example Output:**
+        T.7 | patient_first_name
+        C.1 | clinical_question_is_patient_over_18_yes
+
+        **Fields to Process:**
+        {context_str}
+        """
 
 class DataExtractionAgent:
-    """Uses an LLM to extract structured data from referral documents based on a schema."""
+    """Uses an LLM to extract structured data from referral documents."""
     def __init__(self):
         # Using a powerful model for extraction accuracy
         self.model = genai.GenerativeModel('gemini-2.5-pro')
 
     def extract_data(self, referral_path: Path, schema: FormSchema) -> ExtractedData:
-        """Performs targeted data extraction based on the semantic purposes in the schema."""
-        print(f"🔎 Activating Data Extraction Agent for: {referral_path.name}")
-
-        if not schema.fields:
-            print("⚠️ Warning: Form schema is empty. Skipping extraction.")
+        """Performs targeted data extraction based on a refined schema."""
+        print(f" Activating Data Extraction Agent for: {referral_path.name}")
+        
+        if not any(f.semantic_purpose for f in schema.fields.values()):
+            print(" Skipping extraction: No semantic purposes found in schema.")
             return ExtractedData()
 
         # 1. Convert referral document to images
         doc = fitz.open(referral_path)
         page_images_b64 = []
         for page in doc:
-            mat = fitz.Matrix(2.0, 2.0)  # 2x resolution
-            pix = page.get_pixmap(matrix=mat)
+            mat = fitz.Matrix(2.0, 2.0)
+            pix = page.get_pixmap(matrix=mat, alpha=False)
             img_data = pix.tobytes("png")
             page_images_b64.append(base64.b64encode(img_data).decode())
         doc.close()
 
-        # 2. Build the targeted extraction prompt
+        # 2. Build and execute the prompt
         prompt = self._build_extraction_prompt(schema)
-        
-        # 3. Call the model with the prompt and all page images
         model_input = [prompt]
         for img_b64 in page_images_b64:
             model_input.append({"mime_type": "image/png", "data": img_b64})
-            
-        print("🤖 Asking AI to perform targeted data extraction...")
-        max_retries = 3
-        for attempt in range(max_retries):
-            try:
-                response = self.model.generate_content(model_input)
-                extracted_data = self._parse_extraction_response(response.text)
-                print(f"✅ Targeted data extracted for {len(extracted_data.data)} fields.")
-                return extracted_data
-            except Exception as e:
-                print(f"❌ Data extraction attempt {attempt + 1}/{max_retries} failed: {e}")
+
+        print(" Asking AI to extract patient data...")
         
-        return ExtractedData() # Return empty data on failure
+        try:
+            response = self.model.generate_content(model_input,
+                generation_config=genai.types.GenerationConfig(
+                    response_mime_type="application/json"
+                )
+            )
+            return self._parse_extraction_response(response.text)
+        except Exception as e:
+            print(f" Data extraction failed: {e}")
+            return ExtractedData()
 
     def _parse_extraction_response(self, response_text: str) -> ExtractedData:
-        """Parses the model's text response to extract the JSON data."""
-        
-        # 1. Look for a markdown JSON block
-        match = re.search(r"```json\s*(\{.*?\})\s*```", response_text, re.DOTALL)
-        if match:
-            json_str = match.group(1)
-        else:
-            # 2. If no markdown, find the first and last curly brace
-            first_brace = response_text.find('{')
-            last_brace = response_text.rfind('}')
-            if first_brace != -1 and last_brace != -1:
-                json_str = response_text[first_brace:last_brace+1]
+        try:
+            data = json.loads(response_text)
+            print(" Data extraction successful.")
+            
+            # The AI doesn't always follow the "extracted_data" nesting instruction.
+            # This makes our parsing more robust.
+            if "extracted_data" in data and isinstance(data["extracted_data"], dict):
+                # Ideal case: the AI followed instructions perfectly.
+                return ExtractedData(data=data["extracted_data"])
+            elif isinstance(data, dict) and any(data.values()):
+                # Common case: the AI returned a flat JSON object with the data.
+                print("   AI did not use the 'extracted_data' key. Processing flat JSON response.")
+                return ExtractedData(data=data)
             else:
-                print("⚠️ Could not find a JSON object in the model's response.")
-                print("--- Raw Response ---")
-                print(response_text)
-                print("--------------------")
+                # The JSON is valid but empty or in an unexpected format.
+                print("   AI returned a valid but empty or unrecognized JSON structure.")
                 return ExtractedData()
 
-        try:
-            data = json.loads(json_str)
-            return ExtractedData(data=data)
         except json.JSONDecodeError as e:
-            print(f"⚠️ Failed to decode JSON from the model's response: {e}")
-            print("--- Extracted JSON String ---")
-            print(json_str)
-            print("-----------------------------")
+            print(f" Error decoding JSON from extraction response: {e}")
+            print(f"   Raw response: {response_text}")
             return ExtractedData()
 
     def _build_extraction_prompt(self, schema: FormSchema) -> str:
-        """Builds the prompt for the data extraction LLM call."""
+        """Builds a targeted prompt for data extraction."""
         
-        desired_fields = {}
-        for field in schema.fields.values():
-            desired_fields[field.semantic_purpose] = f"Description: The information needed for the form field labeled '{field.semantic_purpose}'. This could be a date, name, diagnosis, answer to a clinical question, etc."
-
-        desired_fields_json = json.dumps(desired_fields, indent=2)
+        data_points_to_extract = {
+            field.semantic_purpose: field.context
+            for field in schema.fields.values() if field.semantic_purpose and not field.semantic_purpose.startswith("clinical_")
+        }
+        
+        data_points_str = "\n".join([f'- `{key}` (related to "{label}")' for key, label in data_points_to_extract.items()])
 
         return f"""
-        You are a medical data extraction specialist. Your task is to analyze the provided images of a patient's referral packet and extract specific pieces of information needed to fill out a Prior Authorization form.
+        You are a specialized data extraction bot for medical documents.
+        Your task is to analyze the provided images of a patient's referral document and extract specific pieces of information.
 
-        **Step 1: Understand the Goal**
-        You have been given a "shopping list" of required information, defined in the JSON object below. For each key in the JSON, you must find the corresponding value in the provided documents.
+        **1. Goal**
+        Find and extract the values for the following data points. The text in parentheses is the label from the form where this data will be placed, use it as a hint to find the correct value.
 
-        **Step 2: This is the Information You Must Find**
-        The keys of this JSON object are the `semantic_purpose` of each field on the form. Find the value for each.
+        **Data to Extract:**
+        {data_points_str}
+
+        **2. Rules**
+        - Read the entire document carefully to find the most accurate information.
+        - Provide the data in the requested JSON format.
+        - If you cannot find a value for a specific field, return `null` for that key. Do not make up information.
+        - For dates, use the format `MM/DD/YYYY`.
+        
+        **3. Output Format**
+        You MUST return your findings as a single JSON object.
+
+        **Example JSON Output:**
         ```json
-        {desired_fields_json}
+        {{
+          "extracted_data": {{
+            "patient_last_name": "Chen",
+            "patient_first_name": "Amy",
+            "patient_dob": "05/23/1983",
+            "prescriber_npi": "1234567890"
+          }}
+        }}
         ```
 
-        **Step 3: Extraction Rules**
-        1.  **Accuracy is Paramount**: Only extract information that is clearly present in the documents. DO NOT INFER, GUESS, OR MAKE UP a value if it's not there.
-        2.  **Handle Bad Handwriting**: Do your best to interpret handwritten notes.
-        3.  **Use `null` for Missing Information**: If you cannot find a piece of information for a specific key, you MUST return `null` for that key. Do not omit the key.
-        4.  **Format Correctly**: For dates, use MM/DD/YYYY format. For names, preserve the exact spelling.
-        5.  **Distinguish Patient vs. Provider**: Pay close attention to context to avoid mixing up patient information with prescriber information.
-
-        **Step 4: Generate the Final JSON Output**
-        Your final output must be a single JSON object. The keys of this object MUST be the `semantic_purpose` strings from the "shopping list" above. The values will be the data you extracted from the documents.
-
-        Example Output Format:
-        {{
-            "patient_first_name": "John",
-            "patient_last_name": "Doe",
-            "diagnosis_code_icd10": "M54.5",
-            "clinical_question_has_tried_other_meds": "Yes",
-            "prescriber_npi": null  // Example of missing information
-        }}
-
-        Return ONLY the final JSON object.
+        Now, analyze the document and return the extracted data.
         """
 
 class ClinicalQAAgent:
-    """Answers specific clinical 'Yes/No' questions based on the documents."""
+    """A specialized agent to answer clinical 'Yes/No' questions."""
     def __init__(self):
         self.model = genai.GenerativeModel('gemini-2.5-pro')
-    
+
     def answer_questions(self, referral_path: Path, clinical_questions: Dict[str, FormField]) -> Dict[str, Any]:
-        """Looks through the document to find answers to specific clinical questions."""
-        print(f"🩺 Activating Clinical Q&A Agent for {len(clinical_questions)} questions.")
+        """
+        Analyzes the referral document to answer a specific list of clinical questions.
+        """
+        print(f" Activating Clinical QA Agent for {len(clinical_questions)} questions.")
         if not clinical_questions:
             return {}
-
-        # This agent also needs to see the document
+        
+        # 1. Convert referral document to images
         doc = fitz.open(referral_path)
         page_images_b64 = []
         for page in doc:
             mat = fitz.Matrix(2.0, 2.0)
-            pix = page.get_pixmap(matrix=mat)
+            pix = page.get_pixmap(matrix=mat, alpha=False)
             img_data = pix.tobytes("png")
             page_images_b64.append(base64.b64encode(img_data).decode())
         doc.close()
-
-        prompt = self._build_qa_prompt(clinical_questions)
         
+        # 2. Build and execute the prompt
+        prompt = self._build_qa_prompt(clinical_questions)
         model_input = [prompt]
         for img_b64 in page_images_b64:
             model_input.append({"mime_type": "image/png", "data": img_b64})
 
-        print("🤖 Asking AI to answer targeted clinical questions...")
+        print(" Asking AI to answer clinical questions...")
+
         try:
             response = self.model.generate_content(model_input,
                 generation_config=genai.types.GenerationConfig(
@@ -450,53 +465,54 @@ class ClinicalQAAgent:
                 )
             )
             answers = json.loads(response.text)
-            print(f"✅ Clinical Q&A complete. Found answers for {len(answers)} questions.")
-            return answers
+            print(" Clinical questions answered successfully.")
+            return answers.get("answers", {})
         except Exception as e:
-            print(f"❌ Error during Clinical Q&A AI call: {e}")
+            print(f" Clinical QA failed: {e}")
             return {}
 
     def _build_qa_prompt(self, clinical_questions: Dict[str, FormField]) -> str:
-        """Constructs a prompt to answer very specific clinical questions."""
+        """Builds a targeted prompt for answering clinical questions."""
         
-        question_list = {
-            purpose: f.context or f.semantic_purpose 
-            for purpose, f in clinical_questions.items()
-        }
+        question_list_str = "\n".join(
+            [f'- `{q.semantic_purpose}`: {q.context}' for q in clinical_questions.values()]
+        )
         
         return f"""
-        You are a clinical review specialist. Your task is to answer a specific list of "Yes/No" questions based on a patient's medical records.
+        You are a clinical expert AI. Your task is to analyze a patient's medical record and answer a series of Yes/No questions based on the provided information.
 
-        **1. Your Task:**
-        For each question listed below, you must carefully read the provided medical document images and determine the correct answer.
+        **1. Goal**
+        For each clinical question below, carefully review the entire patient record to find the answer.
 
-        **2. Clinical Questions to Answer:**
+        **Questions to Answer:**
+        {question_list_str}
+
+        **2. Rules**
+        - You must answer with "Yes", "No", or "Not Found".
+        - Base your answers ONLY on the provided document. Do not make assumptions.
+        - The `semantic_purpose` is the key you will use in your JSON output.
+
+        **3. Output Format**
+        You MUST return your findings as a single JSON object.
+
+        **Example JSON Output:**
         ```json
-        {json.dumps(question_list, indent=2)}
-        ```
-
-        **3. Rules for Answering:**
-        - **Provide Direct Answers**: Your answers in the final JSON should be `true` (for Yes), `false` (for No), or `null` if the information is not found.
-        - **Infer When Necessary**: Unlike simple data extraction, you may need to make logical inferences. For example, if the records show the patient is taking a biologic drug, the answer to "Has the patient used a biologic?" is `true`, even if that exact phrase isn't written.
-        - **Justify Your Answers (Implicitly)**: Base your answer on the entirety of the clinical context provided.
-
-        **4. Output Format:**
-        Your output MUST be a single JSON object. The keys of this object MUST be the semantic purposes from the question list, and the values must be your answers (`true`, `false`, or `null`).
-
-        **Example Output:**
         {{
-          "clinical_question_has_used_biologic": true,
-          "clinical_question_has_tb_test": true,
-          "clinical_question_is_active_infection": false,
-          "clinical_question_has_tried_advil": null
+          "answers": {{
+            "clinical_question_has_prior_treatment_yes": "Yes",
+            "clinical_question_meets_criteria_xyz_no": "No",
+            "clinical_question_is_diagnosis_confirmed_yes": "Not Found"
+          }}
         }}
-
-        Now, begin your clinical review.
+        ```
+        Now, analyze the document and provide your answers.
         """
 
 class ValidationAgent:
-    """Visually inspects the filled form and corrects it against source data."""
+    """Visually inspects a filled form, compares it to source data, and suggests corrections."""
+    
     def __init__(self):
+        # Using the most powerful model for this critical validation task
         self.model = genai.GenerativeModel('gemini-2.5-pro')
 
     def validate_and_correct(self, 
@@ -504,34 +520,35 @@ class ValidationAgent:
                              schema: FormSchema, 
                              extracted_data: ExtractedData) -> List[Correction]:
         """
-        Looks at the filled form and compares it to the source data,
-        identifying mistakes and proposing a list of corrections.
+        The core 'fill and verify' loop. Compares the filled form to the
+        source data and generates a list of corrections.
         """
-        print(f"🕵️ Activating Validation Agent for: {filled_form_path.name}")
+        print(f" Activating Validation Agent for: {filled_form_path.name}")
         
-        if not filled_form_path.exists():
-            print("❌ Validation failed: Filled form PDF not found.")
+        if not extracted_data.data:
+            print(" Skipping validation: No data was extracted.")
             return []
-
-        # 1. Convert filled PDF to image for analysis
+            
+        # 1. Convert the FILLED PDF to an image
         doc = fitz.open(filled_form_path)
         page_images_b64 = []
         for page in doc:
             mat = fitz.Matrix(2.0, 2.0)
-            pix = page.get_pixmap(matrix=mat)
+            pix = page.get_pixmap(matrix=mat, alpha=False)
             img_data = pix.tobytes("png")
             page_images_b64.append(base64.b64encode(img_data).decode())
         doc.close()
-
-        # 2. Build the validation prompt
+        
+        # 2. Build the detailed validation prompt
         prompt = self._build_validation_prompt(schema, extracted_data)
-
+        
         # 3. Call the model
         model_input = [prompt]
         for img_b64 in page_images_b64:
             model_input.append({"mime_type": "image/png", "data": img_b64})
 
-        print("🤖 Asking AI to audit the filled form...")
+        print(" Asking AI to validate the filled form...")
+        
         try:
             response = self.model.generate_content(model_input,
                 generation_config=genai.types.GenerationConfig(
@@ -539,87 +556,97 @@ class ValidationAgent:
                 )
             )
             
-            corrections_json = json.loads(response.text)
-            corrections = [Correction(**c) for c in corrections_json.get('corrections', [])]
+            # 4. Parse the corrections from the response
+            response_data = json.loads(response.text)
+            corrections_data = response_data.get("corrections", [])
             
-            print(f"✅ Validation complete. Found {len(corrections)} potential corrections.")
+            corrections = [Correction(**c) for c in corrections_data]
+            if corrections:
+                print(f" Validation complete. Found {len(corrections)} corrections.")
+            else:
+                print(" Validation complete. No corrections needed.")
             return corrections
-
+            
         except Exception as e:
-            print(f"❌ Error during validation AI call: {e}")
+            print(f" Validation failed: {e}")
             return []
 
     def _build_validation_prompt(self, schema: FormSchema, extracted_data: ExtractedData) -> str:
         """Constructs the prompt for the validation agent."""
 
-        schema_dict = {fid: f.__dict__ for fid, f in schema.fields.items()}
+        schema_dict = schema.to_dict()
+        extracted_dict = extracted_data.data
+        
+        # We need to create a simplified structure for the prompt that links
+        # the semantic purpose to the field ID for the AI.
+        validation_map = {}
+        for field in schema.fields.values():
+            if field.semantic_purpose in extracted_dict:
+                validation_map[field.semantic_purpose] = {
+                    "field_id": field.field_id,
+                    "expected_value": extracted_dict[field.semantic_purpose],
+                    "context": field.context
+                }
+
+        validation_map_json = json.dumps(validation_map, indent=2)
 
         return f"""
-        You are a meticulous quality assurance auditor for a healthcare automation company.
-        Your task is to review a PA form that has been filled out by an AI and identify any errors.
+        You are a meticulous quality assurance auditor for medical forms.
+        Your task is to compare a filled-out PDF form against the original source data and identify any mistakes.
 
-        You will be given three pieces of information:
-        1.  The `Form Schema`: A JSON description of what each field on the form means.
-        2.  The `Extracted Data`: The ground-truth information extracted from the patient's medical records.
-        3.  The `Filled Form Images`: Images of the actual PDF form after the AI filled it out.
+        **1. Goal**
+        You will be given:
+        1.  Images of the **FILLED** PA form.
+        2.  A JSON object (`validation_map`) containing the `field_id`, the `expected_value` that SHOULD be on the form, and the `context` (the label for that field).
 
-        Your job is to find mismatches, empty fields that should be filled, and data placed in the wrong fields.
+        Your job is to visually inspect the images and create a list of corrections for any fields that are incorrect, misplaced, or illegible.
 
-        **1. Form Schema:**
+        **2. The `validation_map` (Source of Truth):**
         ```json
-        {json.dumps(schema_dict, indent=2)}
+        {validation_map_json}
         ```
 
-        **2. Extracted Data (Ground Truth):**
+        **3. Types of Errors to Look For:**
+        - **Incorrect Value:** The wrong information is entered (e.g., wrong birth date).
+        - **Misplaced Value:** The data is in the wrong field (e.g., patient's name in the doctor's name field).
+        - **Formatting Error:** The data is correct but formatted poorly (e.g., date is `2023-05-19` instead of `05/19/2023`).
+        - **Illegible Text:** The text is garbled, cut off, or unreadable.
+        - **Checkbox/Radio Error:** The wrong option is selected, or multiple radio buttons in a group are selected.
+
+        **4. Output Format**
+        You MUST return your findings as a single JSON object containing a list called `corrections`.
+        Each item in the list must have the following keys:
+        - `field_id`: The ID of the field that needs fixing.
+        - `semantic_purpose`: The semantic key for the data.
+        - `correct_value`: The value that SHOULD be in the field.
+        - `reason`: A brief explanation of why the correction is needed (e.g., "Incorrect value filled", "Text is misplaced").
+
+        **Example JSON Output:**
         ```json
-        {json.dumps(extracted_data.data, indent=2)}
-        ```
-
-        **3. Analysis Task:**
-        Carefully examine the `Filled Form Images`. For every field defined in the `Form Schema`, perform the following checks:
-        - **Check for Mismatches**: Does the value visible in the form image for a field (e.g., 'prescriber_zip') match the corresponding value in the `Extracted Data`?
-        - **Check for Hallucinations**: Is there data in a field on the form that doesn't belong there? For example, is a ZIP code in an email field?
-        - **Check for Missing Data**: Is a field on the form empty, even though you have the data for it in the `Extracted Data`? (e.g., the NPI field is blank, but you have the NPI number).
-        - **Check for Incorrect Checkboxes/Radios**: Based on the `Extracted Data`, is the correct checkbox or radio button selected? For example, if the extracted 'prescriber_specialty' is 'Gastroenterologist', ensure that specific box is checked.
-
-        **4. Output Format:**
-        Your output MUST be a JSON object containing a single key, "corrections". This key should hold a list of objects, where each object represents a single error you found.
-        For each correction, provide:
-        - `field_id`: (string) The ID of the field that needs to be corrected (from the schema).
-        - `semantic_purpose`: (string) The semantic purpose of the field (from the schema).
-        - `correct_value`: (string/boolean) The correct value that SHOULD be in the field.
-        - `reason`: (string) A brief explanation of why this is a correction (e.g., "Field was empty but data was available," or "Incorrect value found in field; was '20176' but should be 'Intake@thealth.com'").
-
-        **Example Output:**
         {{
           "corrections": [
             {{
-              "field_id": "Presc_Info_T.6",
-              "semantic_purpose": "prescriber_zip",
-              "correct_value": "20176",
-              "reason": "Field was empty but data was available."
+              "field_id": "T.8",
+              "semantic_purpose": "patient_dob",
+              "correct_value": "05/23/1983",
+              "reason": "Incorrect value filled. Form shows 05/22/1983."
             }},
             {{
-              "field_id": "Presc_Info_T.12",
-              "semantic_purpose": "prescriber_npi",
-              "correct_value": "1331124163",
-              "reason": "Field was empty, but found NPI number in extracted data."
-            }},
-            {{
-              "field_id": "Specialty.Check.1",
-              "semantic_purpose": "prescriber_specialty_gastroenterologist",
-              "correct_value": true,
-              "reason": "Checkbox was not checked despite specialty matching."
+              "field_id": "T.12",
+              "semantic_purpose": "drug_name",
+              "correct_value": "Vyepti",
+              "reason": "Text is cut off and illegible."
             }}
           ]
         }}
-        
-        If you find no errors, return an empty list: `{{ "corrections": [] }}`.
-        Now, begin your audit.
+        ```
+        If no errors are found, return an empty list: `{{"corrections": []}}`.
+
+        Now, meticulously audit the form images against the `validation_map`.
         """
 
 class FormFillingAgent:
-    """Handles the mechanical process of filling the PDF."""
+    """A non-AI agent that mechanically fills PDF form fields using PyMuPDF."""
 
     def fill_form(self,
                   schema: FormSchema,
@@ -628,212 +655,198 @@ class FormFillingAgent:
                   base_form_path: Path, # Path to the PDF to be opened
                   is_correction: bool = False):
         """
-        Fills the PDF form fields based on the provided data.
-        It opens `base_form_path` and saves the result to `output_path`.
+        Fills or corrects a PDF form. If `is_correction` is true, it opens
+        the file at `output_path` to modify it. Otherwise, it uses the `base_form_path`.
         """
-        if not base_form_path.exists():
-            print(f"❌ Input form not found at {base_form_path}")
-            return
-
-        doc = fitz.open(str(base_form_path))
         
         if is_correction:
-            print(f"✍️ Applying corrections to existing form: {base_form_path.name}")
+            print(f" Correcting {len(data_to_fill)} fields in: {output_path.name}")
+            doc = fitz.open(output_path)
         else:
-            print(f"✍️ Filling new form: {base_form_path.name}")
+            print(f" Filling {len(data_to_fill)} fields in a new form.")
+            doc = fitz.open(base_form_path)
 
-        try:
-            for purpose, value in data_to_fill.items():
-                # Find the field(s) with this semantic purpose
-                target_fields = [f for f in schema.fields.values() if f.semantic_purpose == purpose]
+        purpose_to_field_map = {field.semantic_purpose: field for field in schema.fields.values() if field.semantic_purpose}
+
+        for purpose, value in data_to_fill.items():
+            if value is None: continue
+
+            if purpose in purpose_to_field_map:
+                field = purpose_to_field_map[purpose]
+                page = doc[field.page_num]
                 
-                if not target_fields:
-                    continue
+                try:
+                    widget = next((w for w in page.widgets() if w.field_name == field.field_id), None)
+                    if widget:
+                        # Handle radio buttons specially
+                        if widget.field_type_string == "radio":
+                            # This logic finds the correct radio button in a group to turn on
+                            # It assumes the `value` matches one of the `options`
+                            for opt_purpose in field.options:
+                                opt_field = purpose_to_field_map.get(opt_purpose)
+                                if not opt_field: continue
+                                
+                                opt_widget = next((w for w in page.widgets() if w.field_name == opt_field.field_id), None)
+                                if opt_widget:
+                                    # Turn on the selected one, turn off others
+                                    opt_widget.field_value = (opt_purpose == purpose)
+                                    opt_widget.update()
+                        else:
+                            # For all other fields (text, checkbox)
+                            widget.field_value = value
+                            widget.update() # Apply the change
+                except Exception as e:
+                    print(f"  Could not fill field '{field.field_id}' for purpose '{purpose}'. Reason: {e}")
 
-                for field in target_fields:
-                    try:
-                        page = doc[field.page_num]
-                        
-                        # Correct way to find the widget
-                        widget = None
-                        for w in page.widgets():
-                            if w.field_name == field.field_id:
-                                widget = w
-                                break
-                        
-                        if widget is None:
-                            # This can happen if the field ID from the schema isn't a real widget
-                            # It's a low-probability error but good to handle.
-                            print(f"  ⚠️ Widget not found for field ID: {field.field_id}")
-                            continue
-                        
-                        # Handle different field types
-                        if widget.field_type == fitz.PDF_WIDGET_TYPE_CHECKBOX:
-                            if isinstance(value, str) and value.lower() in ['yes', 'true', 'on']:
-                                widget.field_value = True
-                            elif value is True:
-                                widget.field_value = True
-                            else:
-                                widget.field_value = False
-                        
-                        elif widget.field_type == fitz.PDF_WIDGET_TYPE_RADIOBUTTON:
-                            if value in widget.choices:
-                                widget.field_value = value
-                        else: # Text fields
-                            widget.field_value = str(value)
-                        
-                        widget.update()
-                        
-                    except Exception as e:
-                        print(f"  ❌ Failed to fill field '{purpose}' ({field.field_id}): {e}")
+        # Flatten form fields to make them non-editable after filling
+        if doc.is_form:
+            doc.flatten_widgets()
 
-            # Set the NeedAppearances flag to ensure viewers update field values
-            doc.need_appearances = True
-            
-            # Save with garbage collection to clean up
-            doc.save(str(output_path), garbage=4, deflate=True, clean=True)
-            
-            if is_correction:
-                print("✅ Corrections applied successfully.")
-            else:
-                print(f"✅ Form filled and saved to: {output_path}")
-
-        except Exception as e:
-            print(f"❌ Critical Error during form filling process: {e}")
-        finally:
-            # Correctly check if the document is still open before closing
-            if 'doc' in locals() and not doc.is_closed:
-                doc.close()
+        # Save the file
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        doc.save(str(output_path), garbage=4, deflate=True)
+        doc.close()
 
 class MANDOLIN_PA_SYSTEM:
     def __init__(self):
-        self.form_understander = FormUnderstandingAgent()
-        self.schema_refiner = SchemaRefinementAgent()
-        self.data_extractor = DataExtractionAgent()
-        self.clinical_qa = ClinicalQAAgent()
-        self.validator = ValidationAgent()
-        self.form_filler = FormFillingAgent()
+        self.understanding_agent = FormUnderstandingAgent()
+        self.refinement_agent = SchemaRefinementAgent()
+        self.extraction_agent = DataExtractionAgent()
+        self.qa_agent = ClinicalQAAgent()
+        self.filling_agent = FormFillingAgent()
+        self.validation_agent = ValidationAgent()
+        self.schema_cache = {}
+        self.processed_patients = []
 
     def process_pa(self, patient_name: str, referral_path: Path, pa_form_path: Path, output_dir: Path):
-        """Main processing pipeline for a single patient."""
-        print("="*60)
-        print(f"🚀 PROCESSING PA FOR: {patient_name.upper()}")
-        print("="*60 + "\n")
+        """
+        Executes the full, multi-agent pipeline for processing a single PA request.
+        """
+        print("\n" + "="*50)
+        print(f" Starting Mandolin Pipeline for Patient: {patient_name}")
+        print(f"   Referral Doc: {referral_path.name}")
+        print(f"   PA Form: {pa_form_path.name}")
+        print("="*50 + "\n")
 
-        # Ensure output directory exists
-        output_dir.mkdir(exist_ok=True)
-
-        # 1. Understand and Refine Schema
-        raw_schema = self.form_understander.create_schema(pa_form_path)
-        if not raw_schema.fields:
-            print("❌ Halting process due to schema creation failure.")
+        # --- Phase 1: Schema Creation (or loading from cache) ---
+        if pa_form_path.name in self.schema_cache:
+            schema = self.schema_cache[pa_form_path.name]
+            print(" Loaded schema from cache.")
+        else:
+            raw_schema = self.understanding_agent.create_schema(pa_form_path)
+            schema = self.refinement_agent.refine_schema(raw_schema)
+            self.schema_cache[pa_form_path.name] = schema
+        
+        if not schema.fields:
+            print(f" Halting processing for {patient_name}: Schema creation failed.")
             return
 
-        schema = self.schema_refiner.refine_schema(raw_schema)
-        # Add logging for the refined schema
-        schema_log_path = output_dir / f"{patient_name}_refined_schema.json"
-        with open(schema_log_path, 'w') as f:
-            json.dump(schema.to_dict(), f, indent=2)
-        print(f"📄 Refined schema saved to: {schema_log_path}")
+        # --- Phase 2: Parallel Data Extraction ---
+        # 2a. Extract structured data (demographics, etc.)
+        extracted_data = self.extraction_agent.extract_data(referral_path, schema)
+        
+        # 2b. Answer specific clinical questions
+        clinical_questions = {
+            f.semantic_purpose: f for f in schema.fields.values() 
+            if f.semantic_purpose and f.semantic_purpose.startswith("clinical_")
+        }
+        clinical_answers = self.qa_agent.answer_questions(referral_path, clinical_questions)
+        
+        # Merge all data into one dictionary for filling
+        all_data_to_fill = {**extracted_data.data, **clinical_answers}
 
-        # 2. Extract Data
-        extracted_data = self.data_extractor.extract_data(referral_path, schema)
-        # Add logging for extracted data
-        extracted_data_log_path = output_dir / f"{patient_name}_extracted_data.json"
-        with open(extracted_data_log_path, 'w') as f:
-            json.dump(extracted_data.data, f, indent=2)
-        print(f"📄 Extracted data saved to: {extracted_data_log_path}")
+        if not all_data_to_fill:
+            print(f" Halting processing for {patient_name}: No data could be extracted.")
+            self.generate_report(patient_name, schema, extracted_data, output_dir)
+            return
 
-        # 3. Clinical Q&A
-        clinical_questions = {k: v for k, v in schema.fields.items() if v.semantic_purpose and v.semantic_purpose.startswith("clinical_question_")}
-        if clinical_questions:
-            clinical_answers = self.clinical_qa.answer_questions(referral_path, clinical_questions)
-            extracted_data.data.update(clinical_answers)
-
-        # 4. First Pass: Fill the form
-        temp_output_path = output_dir / f"{patient_name}_PA_filled_v1.pdf"
-        self.form_filler.fill_form(
+        # --- Phase 3: Initial Form Filling ---
+        timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        output_filename = f"{patient_name.replace(' ', '_')}_PA_{timestamp}.pdf"
+        output_path = output_dir / output_filename
+        
+        self.filling_agent.fill_form(
             schema=schema,
-            data_to_fill=extracted_data.data,
-            output_path=temp_output_path,
-            base_form_path=pa_form_path,
-            is_correction=False
+            data_to_fill=all_data_to_fill,
+            output_path=output_path,
+            base_form_path=pa_form_path
         )
 
-        # 5. Validation and Correction Loop
-        final_output_path = output_dir / f"{patient_name}_PA_filled.pdf"
-        corrections = self.validator.validate_and_correct(temp_output_path, schema, extracted_data)
-        # Add logging for corrections
-        corrections_log_path = output_dir / f"{patient_name}_corrections.json"
-        with open(corrections_log_path, 'w') as f:
-            json.dump([c.to_dict() for c in corrections], f, indent=2)
-        print(f"📄 Corrections saved to: {corrections_log_path}")
-
+        # --- Phase 4: Validation and Correction ---
+        corrections = self.validation_agent.validate_and_correct(output_path, schema, extracted_data)
         if corrections:
-            print(f"✍️ Applying {len(corrections)} corrections...")
+            # Create a dictionary of corrections to pass to the filling agent
             correction_data = {c.semantic_purpose: c.correct_value for c in corrections}
-            
-            self.form_filler.fill_form(
-                schema=schema, 
-                data_to_fill=correction_data, 
-                output_path=final_output_path,
-                base_form_path=temp_output_path, # Use the v1 form as the base
+            self.filling_agent.fill_form(
+                schema=schema,
+                data_to_fill=correction_data,
+                output_path=output_path, # Overwrite the previous file
+                base_form_path=pa_form_path,
                 is_correction=True
             )
-        else:
-            print("✅ No corrections needed. Finalizing document.")
-            # If no corrections, the v1 file is the final one
-            if temp_output_path.exists():
-                temp_output_path.rename(final_output_path)
 
-        # 6. Generate a report
+        # --- Phase 5: Reporting ---
         self.generate_report(patient_name, schema, extracted_data, output_dir)
         
-        print(f"\n🎉 AUTOMATION COMPLETE FOR {patient_name.upper()}\n")
+        print("\n" + "="*50)
+        print(f" Mandolin Pipeline finished for {patient_name}.")
+        print("="*50 + "\n")
 
     def generate_report(self, patient_name: str, schema: FormSchema, extracted_data: ExtractedData, output_dir: Path):
-        """Generates a summary report of the PA processing."""
-        report_path = output_dir / f"{patient_name}_processing_report.md"
-        now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        """Generates a markdown report of missing information."""
+        
+        # Find purposes that were in the schema but not found in the extracted data
+        schema_purposes = {f.semantic_purpose for f in schema.fields.values() if f.semantic_purpose}
+        extracted_purposes = set(extracted_data.data.keys())
+        missing_purposes = schema_purposes - extracted_purposes
+        
+        missing_info = {
+            purpose: schema.fields[field_id].context
+            for field_id, field in schema.fields.items()
+            if (purpose := field.semantic_purpose) in missing_purposes
+        }
 
+        if not missing_info:
+            return
+
+        report_path = output_dir / f"{patient_name.replace(' ', '_')}_processing_report.md"
         with open(report_path, 'w') as f:
-            f.write(f"# PA Processing Report for {patient_name}\\n")
-            f.write(f"Generated on: {now}\\n\\n")
-            f.write("## Form Schema Summary\\n")
-            f.write(f"- Identified {len(schema.fields)} fields.\\n")
-            f.write("## Extraction Summary\\n")
-            f.write(f"- Extracted {len(extracted_data.data)} data points.\\n")
+            f.write(f"# Processing Report for {patient_name}\n\n")
+            f.write("The following information could not be found in the referral documents:\n\n")
+            for purpose, context in missing_info.items():
+                f.write(f"- **{context}** (Needed for field with purpose: `{purpose}`)\n")
+        print(f" Report generated for missing information at: {report_path.name}")
+
 
 def main():
-    """Main entry point for the PA automation pipeline."""
-    print("🏥 MANDOLIN PRIOR AUTHORIZATION AUTOMATION SYSTEM 🏥")
-    print("="*60)
-
-    system = MANDOLIN_PA_SYSTEM()
-    output_dir = Path("Output Data")
-    output_dir.mkdir(exist_ok=True)
-
-    patients_to_process = ["Akshay", "Adbulla"]
-
-    for patient_name in patients_to_process:
-        print(f"\n\n--- Starting processing for patient: {patient_name.upper()} ---")
-        patient_dir = Path(f"Input Data/{patient_name}")
-        
-        # Handle case-sensitive PA form names
-        if (patient_dir / "PA.pdf").exists():
-            pa_path = patient_dir / "PA.pdf"
-        elif (patient_dir / "pa.pdf").exists():
-            pa_path = patient_dir / "pa.pdf"
-        else:
-            print(f"❌ PA form not found for patient {patient_name}")
-            continue
-
-        referral_path = patient_dir / "referral_package.pdf"
-        
-        if referral_path.exists():
-            system.process_pa(patient_name, referral_path, pa_path, output_dir)
-        else:
-            print(f"❌ Referral package not found for patient {patient_name}")
+    """Main function to run the Mandolin PA processing pipeline."""
+    # Define directories
+    base_dir = Path(__file__).parent
+    input_dir = base_dir / "Input Data"
+    output_dir = base_dir / "Output Data"
+    
+    # Create output directory if it doesn't exist
+    output_dir.mkdir(parents=True, exist_ok=True)
+    
+    # Process each patient folder in the input directory
+    pipeline = MANDOLIN_PA_SYSTEM()
+    for patient_dir in input_dir.iterdir():
+        if patient_dir.is_dir():
+            patient_name = patient_dir.name
+            
+            # Find the referral and form files
+            referral_doc_path = next(patient_dir.glob("*_Referral_*"), None)
+            pa_form_path = next(patient_dir.glob("*_FORM_*"), None)
+            
+            if referral_doc_path and pa_form_path:
+                pipeline.process_pa(
+                    patient_name=patient_name,
+                    referral_path=referral_doc_path,
+                    pa_form_path=pa_form_path,
+                    output_dir=output_dir
+                )
+            else:
+                print(f" Skipping {patient_name}: Could not find required Referral and/or FORM file.")
 
 if __name__ == "__main__":
     main()

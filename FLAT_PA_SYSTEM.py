@@ -70,7 +70,7 @@ class TextAnchorAgent:
     """Finds the precise coordinates of text labels on a PDF using PyMuPDF."""
     def find_text_anchors(self, pa_form_path: Path) -> List[FormLabel]:
         """Extracts all text blocks from a PDF and returns them as FormLabel objects."""
-        print(f"⚓️ Activating Text Anchor Agent for: {pa_form_path.name}")
+        print(f" Activating Text Anchor Agent for: {pa_form_path.name}")
         labels = []
         doc = fitz.open(pa_form_path)
 
@@ -108,7 +108,7 @@ class TextAnchorAgent:
         doc.close()
         # Filter out very long text blocks that are likely paragraphs, not labels
         labels = [l for l in labels if len(l.text) < 100]
-        print(f"✅ Found {len(labels)} potential text anchors.")
+        print(f" Found {len(labels)} potential text anchors.")
         return labels
 
 class SemanticMapperAgent:
@@ -118,7 +118,7 @@ class SemanticMapperAgent:
 
     def map_semantics(self, labels: List[FormLabel]) -> List[FormLabel]:
         """Assigns a semantic purpose to each label based on its text content."""
-        print(f"🗺️  Activating Semantic Mapper...")
+        print(f"  Activating Semantic Mapper...")
         if not labels:
             return []
 
@@ -147,11 +147,11 @@ class SemanticMapperAgent:
             
             # Count how many labels were successfully mapped
             mapped_count = sum(1 for label in updated_labels if label.semantic_purpose)
-            print(f"✅ Semantic mapping complete. {mapped_count} labels were assigned a purpose.")
+            print(f" Semantic mapping complete. {mapped_count} labels were assigned a purpose.")
             return updated_labels
 
         except (Exception, json.JSONDecodeError) as e:
-            print(f"❌ Semantic mapping AI call failed: {e}")
+            print(f" Semantic mapping AI call failed: {e}")
             # On failure, return the original, unmapped labels
             return labels
 
@@ -211,10 +211,10 @@ class DataExtractionAgent:
 
     def extract_data(self, referral_path: Path, required_purposes: List[str]) -> Dict[str, Any]:
         """Performs targeted data extraction based on a list of required semantic purposes."""
-        print(f"🔎 Activating Data Extraction Agent for: {referral_path.name}")
+        print(f" Activating Data Extraction Agent for: {referral_path.name}")
 
         if not required_purposes:
-            print("⚠️ Warning: No required data points provided. Skipping extraction.")
+            print(" Warning: No required data points provided. Skipping extraction.")
             return {}
 
         doc = fitz.open(referral_path)
@@ -226,7 +226,7 @@ class DataExtractionAgent:
         # Prepare the multi-modal input for the Gemini model
         model_input = [prompt] + [Image.frombytes("RGB", [pix.width, pix.height], pix.samples) for pix in page_images]
 
-        print(f"🤖 Asking AI to extract {len(required_purposes)} data points...")
+        print(f" Asking AI to extract {len(required_purposes)} data points...")
 
         try:
             response = self.model.generate_content(model_input,
@@ -239,11 +239,11 @@ class DataExtractionAgent:
             # The AI sometimes nests the result, so we handle that gracefully.
             final_data = extracted_data.get("extracted_data", extracted_data)
             
-            print("✅ Data extraction successful.")
+            print(" Data extraction successful.")
             return final_data if isinstance(final_data, dict) else {}
 
         except (Exception, json.JSONDecodeError) as e:
-            print(f"❌ Data extraction failed: {e}")
+            print(f" Data extraction failed: {e}")
             return {}
 
     def _build_extraction_prompt(self, required_purposes: List[str]) -> str:
@@ -285,12 +285,12 @@ class TextAnchorFillingAgent:
                   output_path: Path,
                   base_form_path: Path):
         
-        print(f"🖋️ Activating Text-Anchor Form Filling Agent.")
+        print(f" Activating Text-Anchor Form Filling Agent.")
         
         labels_with_values = [label for label in schema.labels if label.extracted_value is not None]
 
         if not labels_with_values:
-            print("⚠️ No data to fill. Aborting form filling.")
+            print(" No data to fill. Aborting form filling.")
             return
 
         doc = fitz.open(base_form_path)
@@ -323,7 +323,7 @@ class TextAnchorFillingAgent:
         output_path.parent.mkdir(parents=True, exist_ok=True)
         doc.save(str(output_path), garbage=4, deflate=True, clean=True)
         doc.close()
-        print(f"✅ Form filling complete. {len(labels_with_values)} fields filled. Saved to: {output_path}")
+        print(f" Form filling complete. {len(labels_with_values)} fields filled. Saved to: {output_path}")
 
 
 class MandolinPipeline:
@@ -349,7 +349,7 @@ class MandolinPipeline:
                     labels = [FormLabel(**label_data) for label_data in data.get("labels", [])]
                     return FormSchema(labels=labels)
             except (Exception, json.JSONDecodeError) as e:
-                print(f"⚠️ Warning: Could not load cached schema. Re-processing. Reason: {e}")
+                print(f" Warning: Could not load cached schema. Re-processing. Reason: {e}")
         return None
 
     def save_schema_to_cache(self, form_path: Path, schema: FormSchema):
@@ -360,14 +360,14 @@ class MandolinPipeline:
                 json.dump(schema.to_dict(), f, indent=2)
             print(f"Schema saved to cache: {cache_file.name}")
         except Exception as e:
-            print(f"❌ Error saving schema to cache: {e}")
+            print(f" Error saving schema to cache: {e}")
 
     def process_pa(self, patient_name: str, referral_path: Path, pa_form_path: Path, output_dir: Path):
         """
         Executes the full, robust pipeline for processing a single PA request.
         """
         print("\n" + "="*50)
-        print(f"🚀 Starting Mandolin Pipeline for Patient: {patient_name}")
+        print(f" Starting Mandolin Pipeline for Patient: {patient_name}")
         print(f"   Referral Doc: {referral_path.name}")
         print(f"   PA Form: {pa_form_path.name}")
         print("="*50 + "\n")
@@ -390,13 +390,13 @@ class MandolinPipeline:
         required_purposes = [l.semantic_purpose for l in schema.labels if l.semantic_purpose]
         
         if not required_purposes:
-            print("❌ Pipeline halted: No semantic purposes could be mapped from the form.")
+            print(" Pipeline halted: No semantic purposes could be mapped from the form.")
             return
             
         extracted_data = self.extractor.extract_data(referral_path, required_purposes)
 
         if not extracted_data:
-            print("❌ Pipeline halted: Data extraction failed or returned no data.")
+            print(" Pipeline halted: Data extraction failed or returned no data.")
             return
 
         # --- Phase 3: Data Merging ---
@@ -414,7 +414,7 @@ class MandolinPipeline:
         self.filler.fill_form(schema, output_path, pa_form_path)
 
         print("\n" + "="*50)
-        print("✅ Mandolin Pipeline finished successfully.")
+        print(" Mandolin Pipeline finished successfully.")
         print("="*50 + "\n")
 
 
@@ -437,7 +437,7 @@ def main():
     pa_form_path = find_files(input_dir, "FORM")
 
     if not referral_doc_path or not pa_form_path:
-        print(f"❌ Error: Could not find required 'Referral' and 'FORM' files in '{input_dir}'.")
+        print(f" Error: Could not find required 'Referral' and 'FORM' files in '{input_dir}'.")
         return
 
     patient_name = "Amy Chen" # In a real system, this would be dynamic
