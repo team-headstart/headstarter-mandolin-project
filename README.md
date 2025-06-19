@@ -97,3 +97,42 @@ The output for each patient will include:
 -   **API Access & Cost:** The system relies on powerful, and therefore not free, LLMs. Execution will incur costs based on token usage. The system also assumes that the specified models (`gemini-2.0-flash`, `gemini-1.5-pro-latest`, `gemini-2.5-pro`) are available to the provided API key.
 -   **Fax Quality:** The accuracy of the OCR-dependent steps (`DataExtractionAgent`, `ClinicalQAAgent`) is highly dependent on the image quality of the scanned documents in the referral package. Extremely poor handwriting or low-quality scans may reduce accuracy.
 -   **No Hallucination Guarantee:** While the `ValidationAgent` significantly mitigates the risk of AI hallucinations, it is not a perfect guarantee. It represents a robust best-effort attempt to catch and correct errors. 
+## 6. The "Text-Anchor" Pipeline for Flat PDFs
+
+To handle non-interactive, "flat" PDFs, a separate, more deterministic pipeline was developed. The core challenge with flat PDFs is the absence of pre-defined fields, which makes data placement difficult and prone to error. The Text-Anchor system solves this by abandoning AI for coordinate guessing and instead using a highly reliable, code-centric approach.
+
+This pipeline is orchestrated by `FLAT_PA_SYSTEM.py`.
+
+### Architectural Diagram
+
+```mermaid
+graph TD;
+    subgraph "Phase 1: Schema Creation (Once per Form Type)"
+        A[Blank PA Form] --> B(TextAnchorAgent);
+        B -- List of all text on form --> C(SemanticMapperAgent);
+        C -- Text labels + assigned purposes --> D[Cached Schema (.json)];
+    end
+
+    subgraph "Phase 2: Form Filling (Once per Patient)"
+        E[Patient Referral] --> F(DataExtractionAgent);
+        D -- "Shopping list" of purposes --> F;
+        F -- Extracted JSON data --> G{Data Merger};
+        D -- Schema with purposes --> G;
+        G -- Schema with values to fill --> H(TextAnchorFillingAgent);
+        A --> H;
+        H -- Perfectly aligned text --> I[Final Filled PDF];
+    end
+```
+
+### The "Text-Anchor" Agents
+
+-   **`TextAnchorAgent` (The Surveyor):** This is a 100% deterministic agent that uses `PyMuPDF` to extract every single piece of text from the PDF along with its *exact* pixel coordinates. This forms the unchangeable "ground truth" for the entire system.
+-   **`SemanticMapperAgent` (The Interpreter):** Uses a powerful language model (`gemini-2.5-pro`) to perform a single, crucial task: it takes the list of text labels from the Surveyor and assigns a standardized purpose to each one (e.g., it maps the text "Last name:" to the purpose `patient_last_name`). This is a pure language task, leveraging the AI's core strength. The results are cached for efficiency.
+-   **`DataExtractionAgent` (The Detective):** Given a referral document and the list of required purposes from the mapper, this agent (`gemini-2.0-flash`) extracts the necessary patient data.
+-   **`TextAnchorFillingAgent` (The Scribe):** This agent is the core of the system's reliability. It is a non-AI agent that operates with simple logic:
+    1.  It receives the list of text anchors, now populated with the data to be filled.
+    2.  For each piece of data, it finds the corresponding text label's exact coordinates.
+    3.  It programmatically calculates an insertion point a few pixels to the right of the label.
+    4.  It writes the text directly onto the PDF at that precise location.
+
+This architecture ensures perfect alignment and high accuracy by using each tool for its strength: `PyMuPDF` for geometric precision and the AI for language understanding. 
