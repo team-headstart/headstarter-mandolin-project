@@ -80,14 +80,7 @@ This pipeline is configured to look for interactive forms in the `Input Data/` d
 python3 MANDOLIN_PA_SYSTEM.py
 ```
 
-## 4. Assumptions and Limitations
-
--   **File Locations:** The pipelines assume a specific directory structure. The flat PDF system reads from `pa_forms/patient_documents/`, while the interactive system reads from `Input Data/`. All output is directed to `output_examples/`.
--   **API Costs & Access:** The system relies on powerful Google Gemini models, which will incur costs based on usage. The provided API key must have access to `gemini-2.0-flash` and `gemini-2.5-pro`.
--   **Document Quality:** The accuracy of the AI-powered data extraction is highly dependent on the quality of the source referral documents. Poor scans, heavy handwriting, or unusual formatting may reduce performance.
--   **No Hallucination Guarantee (Interactive Pipeline):** While the `ValidationAgent` in the interactive pipeline is designed to catch and correct AI errors (hallucinations), it is not a perfect guarantee. It represents a robust, best-effort attempt at self-correction. The flat PDF pipeline is significantly less prone to this type of error due to its deterministic design.
-
-## 5. Output Examples
+## 4. Output Examples
 
 This submission includes comprehensive examples of filled PA forms and processing reports demonstrating both pipeline architectures:
 
