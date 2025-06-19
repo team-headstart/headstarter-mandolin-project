@@ -1,0 +1,34 @@
+Filling patient_last_name -> field type: char_boxes, label: 'Last name:', value: 'Chen'
+Filling patient_first_name -> field type: char_boxes, label: 'First name:', value: 'Amy'
+Skipping patient_medicaid_id: value is null
+Filling patient_date_of_birth_month -> field type: char_boxes, label: 'Date of birth:', value: '05'
+Filling patient_date_of_birth_day -> field type: char_boxes, label: 'Date of birth:', value: '23'
+Filling patient_date_of_birth_year -> field type: char_boxes, label: 'Date of birth:', value: '1983'
+Skipping prescriber_last_name: value is null
+Filling prescriber_first_name -> field type: char_boxes, label: 'First name:', value: 'Angela'
+Skipping prescriber_npi: value is null
+Filling prescriber_phone_number_area_code -> field type: char_boxes, label: 'Phone number:', value: '421'
+Filling prescriber_phone_number_prefix -> field type: char_boxes, label: 'Phone number:', value: '771'
+Filling prescriber_phone_number_line -> field type: char_boxes, label: 'Phone number:', value: '9001'
+Filling prescriber_fax_number_area_code -> field type: char_boxes, label: 'Fax number:', value: '1-244'
+Filling prescriber_fax_number_prefix -> field type: char_boxes, label: 'Fax number:', value: '345'
+Filling prescriber_fax_number_line -> field type: char_boxes, label: 'Fax number:', value: '8459'
+Filling patient_weight_kg -> field type: underline, label: 'Weight in kilograms:', value: '50.9'
+Filling drug_name -> field type: underline, label: 'Drug name:', value: 'eptinezumab-jjmr (VYEPTI)'
+Filling drug_strength -> field type: underline, label: 'Drug strength:', value: '100 mg/mL'
+Skipping drug_length_of_therapy: value is null
+Filling drug_formulation -> field type: underline, label: 'Drug form:', value: 'solution'
+Skipping drug_dosing_frequency: value is null
+Skipping drug_quantity: value is null
+Skipping clinical_justification_non_preferred_agent: value is null
+Skipping prescriber_signature: value is null
+Filling form_completion_date -> field type: underline, label: 'Date', value: '4-8-23'
+Skipping clinical_question_has_diagnosis_of_migraine: value is null
+Skipping clinical_question_is_patient_over_18: value is null
+Skipping clinical_question_is_for_prophylactic_intervention: value is null
+Skipping clinical_question_has_diagnosis_of_chronic_migraines: value is null
+Skipping clinical_question_has_diagnosis_of_episodic_migraines: value is null
+Skipping clinical_question_is_drug_not_used_with_other_cgrp_inhibitors: value is null
+Skipping clinical_question_renewal_patient_met_initial_criteria: value is null
+Skipping clinical_question_renewal_absence_of_drug_toxicity: value is null
+Skipping clinical_question_renewal_has_beneficial_clinical_response: value is null
