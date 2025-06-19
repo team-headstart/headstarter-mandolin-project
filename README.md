@@ -24,8 +24,8 @@ Flat PDFs are much more challenging as they have no structured fields. Attemptin
 
 To solve this, I developed the **Text-Anchor** system, a more deterministic and robust approach:
 
--   **The "Surveyor" (`TextAnchorAgent`):** This is a 100% code-based agent that uses the `PyMuPDF` library to get the *exact* pixel coordinates of every text label on the form. This creates a perfect, unchangeable "ground truth" map of the document, completely avoiding AI guesswork for layout.
--   **The "Interpreter" (`SemanticMapperAgent`):** A powerful AI (`gemini-2.5-pro`) is used for what it does best: language understanding. It takes the list of text labels and assigns a `semantic_purpose` to each one. This result is cached to avoid re-processing the same form type.
+-   **The "Surveyor" (`TextAnchorAgent`):** This is a code-based agent that uses the `PyMuPDF` library to get the *exact* pixel coordinates of every text label on the form. This creates a perfect, unchangeable "ground truth" map of the document, completely avoiding AI guesswork for layout.
+-   **The "Interpreter" (`SemanticMapperAgent`):**  (`gemini-2.5-pro`) is used for what it does best: language understanding. It takes the list of text labels and assigns a `semantic_purpose` to each one. This result is cached to avoid re-processing the same form type.
 -   **The "Scribe" (`TextAnchorFillingAgent`):** This non-AI agent is the core of the system's reliability. It operates on simple, predictable logic:
     1.  It finds the coordinates of a label (e.g., the label "Last Name:").
     2.  It programmatically calculates an insertion point a few pixels to the right of that label.
@@ -67,7 +67,6 @@ The project contains two primary pipeline scripts. All output, including filled 
 
 ### To Run the Flat PDF Pipeline:
 
-This pipeline will process the `Anthem_Standard_PA_FORM.pdf` located in `pa_forms/patient_documents/`.
 
 ```bash
 python3 FLAT_PA_SYSTEM.py
