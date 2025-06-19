@@ -6,7 +6,7 @@ This repository contains an advanced AI pipeline designed to automate the fillin
 
 The primary challenge of this project was the need to handle two fundamentally different types of PDFs. A single system cannot reliably process both widget-based and flat forms. My solution was to develop two distinct, specialized pipelines, each orchestrated by its own script.
 
-### Multi-Agent Architecture 1: The Interactive Pipeline (`MANDOLIN_PA_SYSTEM.py`)
+### Multi-Agent  Architecture 1: The Interactive Pipeline (`MANDOLIN_PA_SYSTEM.py`)
 
 This system is designed for modern, widget-based PDFs that have pre-defined, interactive fields (text boxes, checkboxes, etc.).
 
@@ -18,7 +18,7 @@ This system is designed for modern, widget-based PDFs that have pre-defined, int
 -   **Validation & Correction:** In a critical "fill-and-verify" loop, the system performs a first-pass fill of the form and then hands it off to a `ValidationAgent`. This powerful AI (`gemini-2.5-pro`) visually inspects the filled document, compares it against the source data, and generates a list of corrections for any hallucinations, formatting errors, or misplaced data. This self-correction loop dramatically increases the final accuracy.
 -   **Finalization:** The corrections are applied, and a final, flattened PDF is generated alongside a report detailing any information that could not be found.
 
-###  Multi-AgentArchitecture 2: The "Text-Anchor" Pipeline for Flat PDFs (`FLAT_PA_SYSTEM.py`)
+###  Multi-Agent Architecture 2: The "Text-Anchor" Pipeline for Flat PDFs (`FLAT_PA_SYSTEM.py`)
 
 Flat PDFs are much more challenging as they have no structured fields. Attempting to use AI to visually "guess" the coordinates of where to write text is notoriously unreliable and prone to alignment errors.
 
