@@ -107,12 +107,6 @@ This submission includes comprehensive examples of filled PA forms and processin
   - `Adbulla_PA_*.pdf` - Various test runs with different configurations
   - `Amy_PA_*.pdf` - Flat PDF system test results
 
-### Performance Summary
-- **Interactive Pipeline**: Handles complex widget-based forms with validation loop
-- **Flat PDF Pipeline**: Deterministic text-anchor positioning for non-interactive forms
-- **Fill Rates**: 18.0% - 40.7% depending on form complexity and data availability
-- **Self-Correction**: Validation agent identifies and fixes AI hallucinations
-- **Universal Design**: Works with any unseen PA form through schema-first approach
 
 ### Missing report report for Akshey ->  https://github.com/alhridoy/headstarter-mandolin-project/blob/automation-pa-filling-alhridoy/Output%20Data/Akshay_processing_report.md
 [📄 View Akshay_PA_filled_v1.pdf](https://github.com/alhridoy/headstarter-mandolin-project/blob/automation-pa-filling-alhridoy/Output%20Data/Akshay_PA_filled_v1.pdf)
