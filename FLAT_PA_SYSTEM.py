@@ -206,7 +206,7 @@ You are an expert in medical form data mapping. Your task is to analyze a list o
 class DataExtractionAgent:
     """Uses an LLM to extract structured data from referral documents."""
     def __init__(self):
-        # Using a cost-effective model for this structured task
+        
         self.model = genai.GenerativeModel('gemini-2.0-flash')
 
     def extract_data(self, referral_path: Path, required_purposes: List[str]) -> Dict[str, Any]:
@@ -413,9 +413,32 @@ class MandolinPipeline:
 
         self.filler.fill_form(schema, output_path, pa_form_path)
 
+        # --- Phase 5: Reporting ---
+        self.generate_report(patient_name, schema, output_dir)
+
         print("\n" + "="*50)
         print(" Mandolin Pipeline finished successfully.")
         print("="*50 + "\n")
+
+    def generate_report(self, patient_name: str, schema: FormSchema, output_dir: Path):
+        """Generates a markdown report of missing information."""
+        
+        # Find labels that had a purpose but no value was extracted for them
+        missing_labels = [
+            label for label in schema.labels 
+            if label.semantic_purpose and label.extracted_value is None
+        ]
+
+        if not missing_labels:
+            return
+
+        report_path = output_dir / f"{patient_name.replace(' ', '_')}_processing_report.md"
+        with open(report_path, 'w') as f:
+            f.write(f"# Processing Report for {patient_name}\n\n")
+            f.write("The following information could not be found in the referral documents:\n\n")
+            for label in missing_labels:
+                f.write(f"- **{label.text}** (Needed for purpose: `{label.semantic_purpose}`)\n")
+        print(f" Report generated for missing information at: {report_path.name}")
 
 
 def find_files(directory: Path, name_contains: str) -> Optional[Path]:
