@@ -1,0 +1,10 @@
+{
+  "patient_first": "Akshay",
+  "patient_last": "Chaudhari",
+  "dob": "02/17/1987",
+  "diagnosis": "Crohn's disease",
+  "provider_name": "Timothy Adam, MD",
+  "npi": "1331124163",
+  "insurance_id": "1:5VA",
+  "medication": "Skyrizi"
+}
