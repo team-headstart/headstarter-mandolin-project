@@ -115,5 +115,7 @@ This submission includes comprehensive examples of filled PA forms and processin
 - **Universal Design**: Works with any unseen PA form through schema-first approach
 
 ### Missing report report for Akshey ->  https://github.com/alhridoy/headstarter-mandolin-project/blob/automation-pa-filling-alhridoy/Output%20Data/Akshay_processing_report.md
+[![Preview](https://github.com/alhridoy/headstarter-mandolin-project/raw/automation-pa-filling-alhridoy/Output%20Data/preview.png)](https://github.com/alhridoy/headstarter-mandolin-project/blob/automation-pa-filling-alhridoy/Output%20Data/Akshay_PA_filled_v1.pdf)
+
 ### Missing report report for Abdullah -> https://github.com/alhridoy/headstarter-mandolin-project/blob/automation-pa-filling-alhridoy/Output%20Data/Adbulla_processing_report.md
 ### Missing report report for Amy -> https://github.com/alhridoy/headstarter-mandolin-project/blob/automation-pa-filling-alhridoy/output_examples/Amy_Chen_processing_report.md
