@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-"""
-MANDOLIN PA AUTOMATION SYSTEM
-A text-anchor-based system for filling flat (non-interactive) PDF forms.
-This system uses a deterministic approach to locate fields based on their
-text labels, ensuring high accuracy and perfect alignment.
-"""
-
 import json
 import fitz  # PyMuPDF
 import base64
