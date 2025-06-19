@@ -795,18 +795,23 @@ class MANDOLIN_PA_SYSTEM:
     def generate_report(self, patient_name: str, schema: FormSchema, extracted_data: ExtractedData, output_dir: Path):
         """Generates a markdown report of missing information."""
         
-        # Find purposes that were in the schema but not found in the extracted data
-        schema_purposes = {f.semantic_purpose for f in schema.fields.values() if f.semantic_purpose}
-        extracted_purposes = set(extracted_data.data.keys())
-        missing_purposes = schema_purposes - extracted_purposes
-        
-        missing_info = {
-            purpose: schema.fields[field_id].context
-            for field_id, field in schema.fields.items()
-            if (purpose := field.semantic_purpose) in missing_purposes
-        }
+        missing_info = {}
+        # Iterate through all fields in the schema that have a purpose
+        for field in schema.fields.values():
+            if not field.semantic_purpose:
+                continue
+
+            # A field is considered missing if its purpose is not in the extracted data,
+            # or if it is present but the value is None, null, or an empty string.
+            if field.semantic_purpose not in extracted_data.data or \
+               extracted_data.data.get(field.semantic_purpose) is None or \
+               str(extracted_data.data.get(field.semantic_purpose)).lower() == 'null' or \
+               str(extracted_data.data.get(field.semantic_purpose)).strip() == '':
+                
+                missing_info[field.semantic_purpose] = field.context
 
         if not missing_info:
+            print(" No missing information to report.")
             return
 
         report_path = output_dir / f"{patient_name.replace(' ', '_')}_processing_report.md"
@@ -822,32 +827,31 @@ def main():
     """Main function to run the Mandolin PA processing pipeline."""
     # Define directories
     base_dir = Path(__file__).parent
-    # Corrected input directory to match project structure
-    input_dir = base_dir / "pa_forms" / "patient_documents"
+    input_dir = base_dir / "Input Data"
     output_dir = base_dir / "output_examples"
     
     # Create output directory if it doesn't exist
     output_dir.mkdir(parents=True, exist_ok=True)
     
-    # Process the single patient case available
+    # Process each patient folder in the input directory
     pipeline = MANDOLIN_PA_SYSTEM()
-    patient_name = "Amy Chen" # Hardcoding for this example run
-    
-    # Find the referral and form files with the correct names
-    referral_doc_path = next(input_dir.glob("*Referral.pdf"), None)
-    # The interactive form is not present, so this will likely fail,
-    # but we are updating the logic to be correct.
-    pa_form_path = next(input_dir.glob("*_FORM.pdf"), None) 
-    
-    if referral_doc_path and pa_form_path:
-        pipeline.process_pa(
-            patient_name=patient_name,
-            referral_path=referral_doc_path,
-            pa_form_path=pa_form_path,
-            output_dir=output_dir
-        )
-    else:
-        print(f" Skipping {patient_name}: Could not find required Referral and/or FORM file in {input_dir}.")
+    for patient_dir in input_dir.iterdir():
+        if patient_dir.is_dir():
+            patient_name = patient_dir.name
+            
+            # Find the referral and form files more flexibly
+            referral_doc_path = next(patient_dir.glob("*referral*"), None)
+            pa_form_path = next(patient_dir.glob("*PA.pdf"), None)
+            
+            if referral_doc_path and pa_form_path:
+                pipeline.process_pa(
+                    patient_name=patient_name,
+                    referral_path=referral_doc_path,
+                    pa_form_path=pa_form_path,
+                    output_dir=output_dir
+                )
+            else:
+                print(f" Skipping {patient_name}: Could not find required Referral and/or FORM file.")
 
 if __name__ == "__main__":
     main()
