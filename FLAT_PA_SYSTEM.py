@@ -453,7 +453,7 @@ def main():
     """Main function to run the Mandolin PA processing pipeline."""
     base_dir = Path(__file__).parent
     input_dir = base_dir / "pa_forms" / "patient_documents"
-    output_dir = base_dir / "pa_forms" / "completed"
+    output_dir = base_dir / "output_examples"
     output_dir.mkdir(parents=True, exist_ok=True)
 
     referral_doc_path = find_files(input_dir, "Referral")

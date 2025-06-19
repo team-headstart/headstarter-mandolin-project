@@ -1,56 +1,41 @@
 # Mandolin AI: Automated Prior Authorization Filling System
 
-This repository contains an advanced AI pipeline designed to automate the filling of Prior Authorization (PA) forms for specialty drugs, aiming to reduce the manual administrative burden on healthcare providers and accelerate patient access to critical treatments.
+This repository contains an advanced AI pipeline designed to automate the filling of both interactive (widget-based) and flat (non-interactive) Prior Authorization (PA) forms. The system uses a sophisticated multi-agent architecture to analyze, extract, and populate forms, significantly reducing the manual administrative burden on healthcare providers.
 
-## 1. The Problem: The Prior Authorization Bottleneck
+## 1. My Thought Process & Architectural Decisions
 
-Getting approval for life-saving specialty drugs is a complex, manual process that can delay patient care by up to 30 days. Healthcare staff must manually:
-1.  Analyze a patient's **Referral Package** (a 30-50 page document with medical history, lab results, etc.).
-2.  Find the correct drug- and insurance-specific **PA Form**.
-3.  Painstakingly extract key data points from the referral.
-4.  Manually transcribe that data onto the PA form.
+The primary challenge of this project was the need to handle two fundamentally different types of PDFs. A single system cannot reliably process both widget-based and flat forms. My solution was to develop two distinct, specialized pipelines, each orchestrated by its own script.
 
-This workflow is slow and prone to human error, creating a significant bottleneck. This project's goal is to automate this entire process with a high degree of accuracy and reliability.
+### Architecture 1: The Interactive Pipeline (`MANDOLIN_PA_SYSTEM.py`)
 
-## 2. The Solution: A Multi-Agent AI Assembly Line
+This system is designed for modern, widget-based PDFs that have pre-defined, interactive fields (text boxes, checkboxes, etc.).
 
-This system solves the problem by breaking it down into a sequence of specialized tasks, each handled by a dedicated AI agent. This "AI Assembly Line" approach ensures each step is simple, reliable, and auditable, leading to a more robust and accurate system than a single monolithic model.
+-   **Form Understanding:** The pipeline begins by using a vision-capable AI (`gemini-2.0-flash`) to analyze the form's visual layout and structure, creating an initial schema of all available fields.
+-   **Semantic Refinement:** A more powerful AI (`gemini-2.5-pro`) then refines this schema, assigning a precise, machine-readable `semantic_purpose` to each field (e.g., mapping the visual label "Patient First Name" to the key `patient_first_name`). This standardization is key to making the system adaptable to new forms.
+-   **Parallel Extraction:** The system then uses two agents in parallel:
+    -   A `DataExtractionAgent` reads the patient's referral documents to find demographic and other standard information.
+    -   A specialized `ClinicalQAAgent` focuses solely on answering the complex "Yes/No" clinical questions on the form.
+-   **Validation & Correction:** In a critical "fill-and-verify" loop, the system performs a first-pass fill of the form and then hands it off to a `ValidationAgent`. This powerful AI (`gemini-2.5-pro`) visually inspects the filled document, compares it against the source data, and generates a list of corrections for any hallucinations, formatting errors, or misplaced data. This self-correction loop dramatically increases the final accuracy.
+-   **Finalization:** The corrections are applied, and a final, flattened PDF is generated alongside a report detailing any information that could not be found.
 
-### Architectural Diagram
+### Architecture 2: The "Text-Anchor" Pipeline for Flat PDFs (`FLAT_PA_SYSTEM.py`)
 
-```mermaid
-graph TD;
-    A[Start: PA Form & Referral] --> B{FormUnderstandingAgent};
-    B -- Raw Schema --> C{SchemaRefinementAgent};
-    C -- Refined Schema --> D{DataExtractionAgent};
-    A --> D;
-    C -- Clinical Questions --> E{ClinicalQAAgent};
-    A --> E;
-    D -- Extracted Data --> F{FormFillingAgent - Pass 1};
-    E -- Clinical Answers --> F;
-    A -- Blank PA Form --> F;
-    F -- Filled PDF v1 --> G{ValidationAgent};
-    D -- Extracted Data --> G;
-    C -- Refined Schema --> G;
-    G -- Corrections List --> H{FormFillingAgent - Pass 2};
-    F -- Filled PDF v1 --> H;
-    H -- Final Filled PDF --> I[End: Final PDF & Report];
-    G -- Missing Info --> J{ReportGenerator};
-    J -- Report --> I;
-```
+Flat PDFs are much more challenging as they have no structured fields. Attempting to use AI to visually "guess" the coordinates of where to write text is notoriously unreliable and prone to alignment errors.
 
-### The Agents
+To solve this, I developed the **Text-Anchor** system, a more deterministic and robust approach:
 
--   **`FormUnderstandingAgent` (The Blueprint Maker):** Uses `gemini-2.0-flash` to visually analyze the blank PA form, identifying every field and its human-readable text label.
--   **`SchemaRefinementAgent` (The Translator):** Uses a powerful LLM (`gemini-1.5-pro-latest`) to translate human labels (e.g., "Patient First Name") into standardized, machine-readable keys (e.g., `patient_first_name`). This is a critical step for generalization.
--   **`DataExtractionAgent` (The Detective):** Uses `gemini-2.5-pro` to read the entire referral package, using the refined schema as a "shopping list" to find the required data.
--   **`ClinicalQAAgent` (The Specialist):** A specialized `gemini-2.5-pro` agent that focuses only on answering the complex "Yes/No" clinical questions on the form.
--   **`FormFillingAgent` (The Scribe):** A non-AI agent that mechanically fills the PDF form fields using `PyMuPDF`.
--   **`ValidationAgent` (The Auditor):** The system's core "fill and verify" loop. This `gemini-2.5-pro` agent visually inspects the first-pass filled form, compares it to the source data, and generates a list of corrections to fix hallucinations or formatting errors.
+-   **The "Surveyor" (`TextAnchorAgent`):** This is a 100% code-based agent that uses the `PyMuPDF` library to get the *exact* pixel coordinates of every text label on the form. This creates a perfect, unchangeable "ground truth" map of the document, completely avoiding AI guesswork for layout.
+-   **The "Interpreter" (`SemanticMapperAgent`):** A powerful AI (`gemini-2.5-pro`) is used for what it does best: language understanding. It takes the list of text labels and assigns a `semantic_purpose` to each one. This result is cached to avoid re-processing the same form type.
+-   **The "Scribe" (`TextAnchorFillingAgent`):** This non-AI agent is the core of the system's reliability. It operates on simple, predictable logic:
+    1.  It finds the coordinates of a label (e.g., the label "Last Name:").
+    2.  It programmatically calculates an insertion point a few pixels to the right of that label.
+    3.  It writes the corresponding extracted data directly onto the form.
 
-## 3. Installation
+This architecture ensures perfect alignment and accuracy by using each tool for its strength: `PyMuPDF` for geometric precision and the AI for language understanding.
 
-To set up the project locally, follow these steps.
+## 2. Installation
+
+Follow these steps to set up and run the project locally.
 
 **Prerequisites:**
 - Python 3.9+
@@ -60,7 +45,7 @@ To set up the project locally, follow these steps.
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/alhridoy/automate_pa.git
+    git clone https://github.com/[your-username]/headstarter-mandolin-project.git
     cd headstarter-mandolin-project
     ```
 
@@ -76,63 +61,33 @@ To set up the project locally, follow these steps.
         GEMINI_API_KEY="YOUR_API_KEY_HERE"
         ```
 
-## 4. How to Run the Pipeline
+## 3. How to Run the Pipelines
 
-Execute the main script from the project's root directory:
+The project contains two primary pipeline scripts. All output, including filled PDFs and processing reports, will be placed in the `output_examples/` directory.
+
+### To Run the Flat PDF Pipeline:
+
+This pipeline will process the `Anthem_Standard_PA_FORM.pdf` located in `pa_forms/patient_documents/`.
+
+```bash
+python3 FLAT_PA_SYSTEM.py
+```
+
+### To Run the Interactive PDF Pipeline:
+
+This pipeline is configured to look for interactive forms in the `Input Data/` directory. As there are no interactive forms in the base repository, running this script will demonstrate its ability to gracefully skip patients for whom it cannot find a valid form.
 
 ```bash
 python3 MANDOLIN_PA_SYSTEM.py
 ```
 
-The script will automatically find the patient data in the `Input Data/` directory, process each patient one by one, and place the results in the `Output Data/` directory.
+## 4. Assumptions and Limitations
 
-The output for each patient will include:
--   `{PatientName}_PA_filled.pdf`: The final, filled PDF.
--   `{PatientName}_processing_report.md`: A report detailing any information that could not be found.
--   Intermediate log files (schemas, extracted data) for debugging.
+-   **File Locations:** The pipelines assume a specific directory structure. The flat PDF system reads from `pa_forms/patient_documents/`, while the interactive system reads from `Input Data/`. All output is directed to `output_examples/`.
+-   **API Costs & Access:** The system relies on powerful Google Gemini models, which will incur costs based on usage. The provided API key must have access to `gemini-2.0-flash` and `gemini-2.5-pro`.
+-   **Document Quality:** The accuracy of the AI-powered data extraction is highly dependent on the quality of the source referral documents. Poor scans, heavy handwriting, or unusual formatting may reduce performance.
+-   **No Hallucination Guarantee (Interactive Pipeline):** While the `ValidationAgent` in the interactive pipeline is designed to catch and correct AI errors (hallucinations), it is not a perfect guarantee. It represents a robust, best-effort attempt at self-correction. The flat PDF pipeline is significantly less prone to this type of error due to its deterministic design.
 
-## 5. Assumptions & Limitations
+## 5. Output Examples
 
--   **Widget-Based PDFs:** The system is currently designed to work only with interactive, widget-based PDF forms. It cannot fill "flat" PDFs that do not have fillable AcroForm fields. This was a primary requirement, with flat PDF support noted as a potential bonus feature.
--   **API Access & Cost:** The system relies on powerful, and therefore not free, LLMs. Execution will incur costs based on token usage. The system also assumes that the specified models (`gemini-2.0-flash`, `gemini-1.5-pro-latest`, `gemini-2.5-pro`) are available to the provided API key.
--   **Fax Quality:** The accuracy of the OCR-dependent steps (`DataExtractionAgent`, `ClinicalQAAgent`) is highly dependent on the image quality of the scanned documents in the referral package. Extremely poor handwriting or low-quality scans may reduce accuracy.
--   **No Hallucination Guarantee:** While the `ValidationAgent` significantly mitigates the risk of AI hallucinations, it is not a perfect guarantee. It represents a robust best-effort attempt to catch and correct errors. 
-## 6. The "Text-Anchor" Pipeline for Flat PDFs
-
-To handle non-interactive, "flat" PDFs, a separate, more deterministic pipeline was developed. The core challenge with flat PDFs is the absence of pre-defined fields, which makes data placement difficult and prone to error. The Text-Anchor system solves this by abandoning AI for coordinate guessing and instead using a highly reliable, code-centric approach.
-
-This pipeline is orchestrated by `FLAT_PA_SYSTEM.py`.
-
-### Architectural Diagram
-
-```mermaid
-graph TD;
-    subgraph "Phase 1: Schema Creation (Once per Form Type)"
-        A[Blank PA Form] --> B(TextAnchorAgent);
-        B -- List of all text on form --> C(SemanticMapperAgent);
-        C -- Text labels + assigned purposes --> D[Cached Schema (.json)];
-    end
-
-    subgraph "Phase 2: Form Filling (Once per Patient)"
-        E[Patient Referral] --> F(DataExtractionAgent);
-        D -- "Shopping list" of purposes --> F;
-        F -- Extracted JSON data --> G{Data Merger};
-        D -- Schema with purposes --> G;
-        G -- Schema with values to fill --> H(TextAnchorFillingAgent);
-        A --> H;
-        H -- Perfectly aligned text --> I[Final Filled PDF];
-    end
-```
-
-### The "Text-Anchor" Agents
-
--   **`TextAnchorAgent` (The Surveyor):** This is a 100% deterministic agent that uses `PyMuPDF` to extract every single piece of text from the PDF along with its *exact* pixel coordinates. This forms the unchangeable "ground truth" for the entire system.
--   **`SemanticMapperAgent` (The Interpreter):** Uses a powerful language model (`gemini-2.5-pro`) to perform a single, crucial task: it takes the list of text labels from the Surveyor and assigns a standardized purpose to each one (e.g., it maps the text "Last name:" to the purpose `patient_last_name`). This is a pure language task, leveraging the AI's core strength. The results are cached for efficiency.
--   **`DataExtractionAgent` (The Detective):** Given a referral document and the list of required purposes from the mapper, this agent (`gemini-2.0-flash`) extracts the necessary patient data.
--   **`TextAnchorFillingAgent` (The Scribe):** This agent is the core of the system's reliability. It is a non-AI agent that operates with simple logic:
-    1.  It receives the list of text anchors, now populated with the data to be filled.
-    2.  For each piece of data, it finds the corresponding text label's exact coordinates.
-    3.  It programmatically calculates an insertion point a few pixels to the right of the label.
-    4.  It writes the text directly onto the PDF at that precise location.
-
-This architecture ensures perfect alignment and high accuracy by using each tool for its strength: `PyMuPDF` for geometric precision and the AI for language understanding. 
+This submission includes generated examples of the filled PDF and its corresponding missing information report in the `output_examples/` directory. These files demonstrate the output of the `FLAT_PA_SYSTEM.py` pipeline. 

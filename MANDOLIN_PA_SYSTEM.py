@@ -822,31 +822,32 @@ def main():
     """Main function to run the Mandolin PA processing pipeline."""
     # Define directories
     base_dir = Path(__file__).parent
-    input_dir = base_dir / "Input Data"
-    output_dir = base_dir / "Output Data"
+    # Corrected input directory to match project structure
+    input_dir = base_dir / "pa_forms" / "patient_documents"
+    output_dir = base_dir / "output_examples"
     
     # Create output directory if it doesn't exist
     output_dir.mkdir(parents=True, exist_ok=True)
     
-    # Process each patient folder in the input directory
+    # Process the single patient case available
     pipeline = MANDOLIN_PA_SYSTEM()
-    for patient_dir in input_dir.iterdir():
-        if patient_dir.is_dir():
-            patient_name = patient_dir.name
-            
-            # Find the referral and form files
-            referral_doc_path = next(patient_dir.glob("*_Referral_*"), None)
-            pa_form_path = next(patient_dir.glob("*_FORM_*"), None)
-            
-            if referral_doc_path and pa_form_path:
-                pipeline.process_pa(
-                    patient_name=patient_name,
-                    referral_path=referral_doc_path,
-                    pa_form_path=pa_form_path,
-                    output_dir=output_dir
-                )
-            else:
-                print(f" Skipping {patient_name}: Could not find required Referral and/or FORM file.")
+    patient_name = "Amy Chen" # Hardcoding for this example run
+    
+    # Find the referral and form files with the correct names
+    referral_doc_path = next(input_dir.glob("*Referral.pdf"), None)
+    # The interactive form is not present, so this will likely fail,
+    # but we are updating the logic to be correct.
+    pa_form_path = next(input_dir.glob("*_FORM.pdf"), None) 
+    
+    if referral_doc_path and pa_form_path:
+        pipeline.process_pa(
+            patient_name=patient_name,
+            referral_path=referral_doc_path,
+            pa_form_path=pa_form_path,
+            output_dir=output_dir
+        )
+    else:
+        print(f" Skipping {patient_name}: Could not find required Referral and/or FORM file in {input_dir}.")
 
 if __name__ == "__main__":
     main()
