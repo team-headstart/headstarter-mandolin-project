@@ -7,10 +7,3 @@ __pycache__/
 
 # System files
 .DS_Store
-
-# Note: For submission, we're including all output examples to demonstrate system capabilities
-# In production, these directories would typically be excluded:
-# output_examples/
-# output_improved/
-# output_mandolin/
-# /Output Data/*
