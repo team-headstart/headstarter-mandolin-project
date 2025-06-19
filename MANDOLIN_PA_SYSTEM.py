@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-"""
-MANDOLIN PA AUTOMATION SYSTEM
-An agent-based system to handle dynamic, conditional, and complex PA forms.
-This system is designed to be universal and handle any PA form for any drug.
-"""
-
 import json
 import fitz
 import base64
