@@ -5,13 +5,12 @@
 __pycache__/
 *.pyc
 
-# Output directories
-output_examples/
-output_improved/
-output_mandolin/
+# System files
+.DS_Store
 
-# Additional directories to exclude
-/Output Data/*
-/output_examples/*
-!.gitignore
-.DS_Store 
+# Note: For submission, we're including all output examples to demonstrate system capabilities
+# In production, these directories would typically be excluded:
+# output_examples/
+# output_improved/
+# output_mandolin/
+# /Output Data/*

@@ -1,0 +1,948 @@
+{
+  "fields": {
+    "Indicate CB.1": {
+      "field_id": "Indicate CB.1",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "Indicate",
+      "semantic_purpose": "request_type_option_1",
+      "options": []
+    },
+    "Indicate T.2": {
+      "field_id": "Indicate T.2",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "/",
+      "semantic_purpose": "request_date_separator_1",
+      "options": []
+    },
+    "Indicate T.3": {
+      "field_id": "Indicate T.3",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "/",
+      "semantic_purpose": "request_date_separator_2",
+      "options": []
+    },
+    "Indicate T.4": {
+      "field_id": "Indicate T.4",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "/",
+      "semantic_purpose": "unidentified_separator",
+      "options": []
+    },
+    "Indicate CB.5": {
+      "field_id": "Indicate CB.5",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "Indicate",
+      "semantic_purpose": "request_type_option_2",
+      "options": []
+    },
+    "Indicate T.6": {
+      "field_id": "Indicate T.6",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "/",
+      "semantic_purpose": "secondary_date_separator_1",
+      "options": []
+    },
+    "Indicate T.7": {
+      "field_id": "Indicate T.7",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "/",
+      "semantic_purpose": "secondary_date_separator_2",
+      "options": []
+    },
+    "Indicate T.8": {
+      "field_id": "Indicate T.8",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "/",
+      "semantic_purpose": "secondary_date_separator_3",
+      "options": []
+    },
+    "Request by T": {
+      "field_id": "Request by T",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Phone:",
+      "semantic_purpose": "requestor_phone_number",
+      "options": []
+    },
+    "Phone T": {
+      "field_id": "Phone T",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Fax:",
+      "semantic_purpose": "requestor_fax_number",
+      "options": []
+    },
+    "Fax T": {
+      "field_id": "Fax T",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Patient DOB",
+      "semantic_purpose": "request_date",
+      "options": []
+    },
+    "T11": {
+      "field_id": "T11",
+      "page_num": 1,
+      "field_type": "Text",
+      "context": "Patient First Name",
+      "semantic_purpose": "patient_first_name",
+      "options": []
+    },
+    "T12": {
+      "field_id": "T12",
+      "page_num": 1,
+      "field_type": "Text",
+      "context": "Patient Last Name",
+      "semantic_purpose": "patient_last_name",
+      "options": []
+    },
+    "T13": {
+      "field_id": "T13",
+      "page_num": 1,
+      "field_type": "Text",
+      "context": "Patient DOB",
+      "semantic_purpose": "patient_date_of_birth",
+      "options": []
+    },
+    "T14": {
+      "field_id": "T14",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "First Name:",
+      "semantic_purpose": "patient_first_name_2",
+      "options": []
+    },
+    "T15": {
+      "field_id": "T15",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Last Name:",
+      "semantic_purpose": "patient_last_name_2",
+      "options": []
+    },
+    "T16": {
+      "field_id": "T16",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "DOB:",
+      "semantic_purpose": "patient_date_of_birth_2",
+      "options": []
+    },
+    "T17": {
+      "field_id": "T17",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "State:",
+      "semantic_purpose": "patient_state",
+      "options": []
+    },
+    "T18": {
+      "field_id": "T18",
+      "page_num": 1,
+      "field_type": "Text",
+      "context": "Patient Phone",
+      "semantic_purpose": "patient_phone_number",
+      "options": []
+    },
+    "T19": {
+      "field_id": "T19",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "City:",
+      "semantic_purpose": "patient_city",
+      "options": []
+    },
+    "T20": {
+      "field_id": "T20",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Cell Phone:",
+      "semantic_purpose": "patient_cell_phone_number",
+      "options": []
+    },
+    "T21": {
+      "field_id": "T21",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Email:",
+      "semantic_purpose": "patient_email",
+      "options": []
+    },
+    "T21B": {
+      "field_id": "T21B",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "lbs or",
+      "semantic_purpose": "patient_weight_unit_lbs",
+      "options": []
+    },
+    "T21C": {
+      "field_id": "T21C",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "kgs",
+      "semantic_purpose": "patient_weight_unit_kgs",
+      "options": []
+    },
+    "T21D": {
+      "field_id": "T21D",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "inches",
+      "semantic_purpose": "patient_height_unit_inches",
+      "options": []
+    },
+    "T21E": {
+      "field_id": "T21E",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "or",
+      "semantic_purpose": "patient_height_unit_separator",
+      "options": []
+    },
+    "T21F": {
+      "field_id": "T21F",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "cms",
+      "semantic_purpose": "patient_height_unit_cms",
+      "options": []
+    },
+    "Insurance Info T.1": {
+      "field_id": "Insurance Info T.1",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Aetna Member ID #:",
+      "semantic_purpose": "member_id",
+      "options": []
+    },
+    "Insurance Info CB.4": {
+      "field_id": "Insurance Info CB.4",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "Yes",
+      "semantic_purpose": "clinical_question_has_other_coverage_yes",
+      "options": []
+    },
+    "Insurance Info CB.5": {
+      "field_id": "Insurance Info CB.5",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "No",
+      "semantic_purpose": "clinical_question_has_other_coverage_no",
+      "options": []
+    },
+    "Insurance Info T.2": {
+      "field_id": "Insurance Info T.2",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Group #:",
+      "semantic_purpose": "group_number",
+      "options": []
+    },
+    "Insurance Info T.6": {
+      "field_id": "Insurance Info T.6",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Does patient have other coverage?",
+      "semantic_purpose": "question_has_other_coverage",
+      "options": []
+    },
+    "Insurance Info T.7": {
+      "field_id": "Insurance Info T.7",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Carrier Name:",
+      "semantic_purpose": "secondary_insurance_carrier_name",
+      "options": []
+    },
+    "Insurance Info T.3": {
+      "field_id": "Insurance Info T.3",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Insured:",
+      "semantic_purpose": "primary_insured_name",
+      "options": []
+    },
+    "Insurance Info T.8": {
+      "field_id": "Insurance Info T.8",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "If yes, provide ID#:",
+      "semantic_purpose": "secondary_insurance_member_id",
+      "options": []
+    },
+    "Insurance Info CB.9": {
+      "field_id": "Insurance Info CB.9",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "Yes",
+      "semantic_purpose": "clinical_question_has_medicaid_yes",
+      "options": []
+    },
+    "Insurance Info CB.10": {
+      "field_id": "Insurance Info CB.10",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "No",
+      "semantic_purpose": "clinical_question_has_medicaid_no",
+      "options": []
+    },
+    "Insurance Info T.11": {
+      "field_id": "Insurance Info T.11",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Medicaid:",
+      "semantic_purpose": "question_has_medicaid",
+      "options": []
+    },
+    "Insurance Info CB.12": {
+      "field_id": "Insurance Info CB.12",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "Yes",
+      "semantic_purpose": "insurance_info_unspecified_question_yes",
+      "options": []
+    },
+    "Insurance Info CB.13": {
+      "field_id": "Insurance Info CB.13",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "No",
+      "semantic_purpose": "insurance_info_unspecified_question_no",
+      "options": []
+    },
+    "Insurance Info T.14": {
+      "field_id": "Insurance Info T.14",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "If yes, provide ID #:",
+      "semantic_purpose": "medicaid_id_number",
+      "options": []
+    },
+    "Presc Info T.1": {
+      "field_id": "Presc Info T.1",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "First Name:",
+      "semantic_purpose": "prescriber_first_name",
+      "options": []
+    },
+    "Presc Info T.7": {
+      "field_id": "Presc Info T.7",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Address:",
+      "semantic_purpose": "prescriber_address_line_1",
+      "options": []
+    },
+    "Presc Info T.11": {
+      "field_id": "Presc Info T.11",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Provider:",
+      "semantic_purpose": "prescriber_practice_name",
+      "options": []
+    },
+    "Presc Info T.12": {
+      "field_id": "Presc Info T.12",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Provider Email:",
+      "semantic_purpose": "prescriber_email",
+      "options": []
+    },
+    "Presc Info T.17": {
+      "field_id": "Presc Info T.17",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Office Contact Name:",
+      "semantic_purpose": "prescriber_office_contact_name",
+      "options": []
+    },
+    "Presc Info T.2": {
+      "field_id": "Presc Info T.2",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Last Name:",
+      "semantic_purpose": "prescriber_last_name",
+      "options": []
+    },
+    "Presc Info CB.3": {
+      "field_id": "Presc Info CB.3",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "M.D.",
+      "semantic_purpose": "prescriber_credential_md_checkbox",
+      "options": []
+    },
+    "Presc Info CB.4": {
+      "field_id": "Presc Info CB.4",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "D.O.",
+      "semantic_purpose": "prescriber_credential_do_checkbox",
+      "options": []
+    },
+    "Presc Info CB.5": {
+      "field_id": "Presc Info CB.5",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "N.P.",
+      "semantic_purpose": "prescriber_credential_np_checkbox",
+      "options": []
+    },
+    "Presc Info CB.6": {
+      "field_id": "Presc Info CB.6",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "P.A.",
+      "semantic_purpose": "prescriber_credential_pa_checkbox",
+      "options": []
+    },
+    "Presc Info T.8": {
+      "field_id": "Presc Info T.8",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "City:",
+      "semantic_purpose": "prescriber_city",
+      "options": []
+    },
+    "Presc Info T.9": {
+      "field_id": "Presc Info T.9",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "State:",
+      "semantic_purpose": "prescriber_state",
+      "options": []
+    },
+    "Presc Info T.10": {
+      "field_id": "Presc Info T.10",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "ZIP:",
+      "semantic_purpose": "prescriber_zip_code",
+      "options": []
+    },
+    "Presc Info T.13": {
+      "field_id": "Presc Info T.13",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "SL #:",
+      "semantic_purpose": "prescriber_state_license_number",
+      "options": []
+    },
+    "Presc Info T.14": {
+      "field_id": "Presc Info T.14",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "NPI #:",
+      "semantic_purpose": "prescriber_npi",
+      "options": []
+    },
+    "Presc Info T.15": {
+      "field_id": "Presc Info T.15",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "DEA #:",
+      "semantic_purpose": "prescriber_dea_number",
+      "options": []
+    },
+    "Presc Info T.16": {
+      "field_id": "Presc Info T.16",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "UPIN:",
+      "semantic_purpose": "prescriber_upin",
+      "options": []
+    },
+    "Presc Info T.18": {
+      "field_id": "Presc Info T.18",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Other",
+      "semantic_purpose": "prescriber_credential_other",
+      "options": []
+    },
+    "Presc Info T.19": {
+      "field_id": "Presc Info T.19",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Phone:",
+      "semantic_purpose": "prescriber_phone_number",
+      "options": []
+    },
+    "Presc Info CB.20": {
+      "field_id": "Presc Info CB.20",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "Self-administered",
+      "semantic_purpose": "drug_administration_location_self_administered",
+      "options": []
+    },
+    "Presc Info CB.21": {
+      "field_id": "Presc Info CB.21",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "Physician's Office",
+      "semantic_purpose": "drug_administration_location_physicians_office",
+      "options": []
+    },
+    "Presc Info T.23": {
+      "field_id": "Presc Info T.23",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Dispensing Provider/Pharmacy: Patient Selected choice",
+      "semantic_purpose": "dispensing_pharmacy_name",
+      "options": []
+    },
+    "Provider Admin CB.1": {
+      "field_id": "Provider Admin CB.1",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "All",
+      "semantic_purpose": "release_of_information_all_records",
+      "options": []
+    },
+    "Provider Admin CB.2": {
+      "field_id": "Provider Admin CB.2",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "Labs",
+      "semantic_purpose": "release_of_information_labs",
+      "options": []
+    },
+    "Provider Admin CB.3": {
+      "field_id": "Provider Admin CB.3",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "Office visits",
+      "semantic_purpose": "release_of_information_office_visits",
+      "options": []
+    },
+    "Provider Admin T.4": {
+      "field_id": "Provider Admin T.4",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Physician's Office",
+      "semantic_purpose": "place_of_service_physician_office_label",
+      "options": []
+    },
+    "Provider Admin T.5": {
+      "field_id": "Provider Admin T.5",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Center Name:",
+      "semantic_purpose": "servicing_facility_name",
+      "options": []
+    },
+    "Provider Admin CB.6": {
+      "field_id": "Provider Admin CB.6",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "Home Infusion",
+      "semantic_purpose": "place_of_service_home_infusion",
+      "options": []
+    },
+    "Provider Admin T.7": {
+      "field_id": "Provider Admin T.7",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Agency Name:",
+      "semantic_purpose": "home_infusion_agency_name",
+      "options": []
+    },
+    "Provider Admin T.8": {
+      "field_id": "Provider Admin T.8",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Address:",
+      "semantic_purpose": "home_infusion_agency_address",
+      "options": []
+    },
+    "Provider Admin CB.9.0": {
+      "field_id": "Provider Admin CB.9.0",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "Administration code(s) (CPT):",
+      "semantic_purpose": "administration_cpt_codes_checkbox",
+      "options": []
+    },
+    "Provider Admin T.10.0.0": {
+      "field_id": "Provider Admin T.10.0.0",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Address:",
+      "semantic_purpose": "servicing_facility_address",
+      "options": []
+    },
+    "Provider Admin T.10.1.0": {
+      "field_id": "Provider Admin T.10.1.0",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Phone:",
+      "semantic_purpose": "servicing_facility_phone_number",
+      "options": []
+    },
+    "Provider Admin CB.11": {
+      "field_id": "Provider Admin CB.11",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "Retail Pharmacy",
+      "semantic_purpose": "pharmacy_type_retail",
+      "options": []
+    },
+    "Provider Admin CB.12": {
+      "field_id": "Provider Admin CB.12",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "Other",
+      "semantic_purpose": "pharmacy_type_other",
+      "options": []
+    },
+    "Provider Admin CB.13": {
+      "field_id": "Provider Admin CB.13",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "Specialty Pharmacy",
+      "semantic_purpose": "pharmacy_type_specialty",
+      "options": []
+    },
+    "Provider Admin CB.14": {
+      "field_id": "Provider Admin CB.14",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "Other",
+      "semantic_purpose": "place_of_service_other",
+      "options": []
+    },
+    "Provider Admin T.17.0": {
+      "field_id": "Provider Admin T.17.0",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Name:",
+      "semantic_purpose": "pharmacy_name",
+      "options": []
+    },
+    "Provider Admin T.17.1": {
+      "field_id": "Provider Admin T.17.1",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Address:",
+      "semantic_purpose": "pharmacy_address",
+      "options": []
+    },
+    "Provider Admin T.18": {
+      "field_id": "Provider Admin T.18",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Phone:",
+      "semantic_purpose": "pharmacy_phone_number",
+      "options": []
+    },
+    "Provider Admin T.19": {
+      "field_id": "Provider Admin T.19",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "FAX:",
+      "semantic_purpose": "pharmacy_fax_number",
+      "options": []
+    },
+    "Provider Admin T.20": {
+      "field_id": "Provider Admin T.20",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "TIN:",
+      "semantic_purpose": "pharmacy_tin",
+      "options": []
+    },
+    "Provider Admin T.21": {
+      "field_id": "Provider Admin T.21",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "PIN:",
+      "semantic_purpose": "pharmacy_pin",
+      "options": []
+    },
+    "Product T.1": {
+      "field_id": "Product T.1",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Dose:",
+      "semantic_purpose": "medication_dose",
+      "options": []
+    },
+    "Product T.2": {
+      "field_id": "Product T.2",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Frequency:",
+      "semantic_purpose": "medication_frequency",
+      "options": []
+    },
+    "Diagnosis T.1": {
+      "field_id": "Diagnosis T.1",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Primary ICD Code:",
+      "semantic_purpose": "primary_diagnosis_icd_code",
+      "options": []
+    },
+    "Diagnosis T.2": {
+      "field_id": "Diagnosis T.2",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Secondary ICD Code:",
+      "semantic_purpose": "secondary_diagnosis_icd_code",
+      "options": []
+    },
+    "Diagnosis T.3": {
+      "field_id": "Diagnosis T.3",
+      "page_num": 0,
+      "field_type": "Text",
+      "context": "Other ICD Code:",
+      "semantic_purpose": "tertiary_diagnosis_icd_code",
+      "options": []
+    },
+    "Clinical CB.0": {
+      "field_id": "Clinical CB.0",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "No",
+      "semantic_purpose": "clinical_question_1_no",
+      "options": []
+    },
+    "Clinical CB.1": {
+      "field_id": "Clinical CB.1",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "Yes",
+      "semantic_purpose": "clinical_question_1_yes",
+      "options": []
+    },
+    "Clinical CB.2": {
+      "field_id": "Clinical CB.2",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "No",
+      "semantic_purpose": "clinical_question_2_no",
+      "options": []
+    },
+    "Clinical CB.3": {
+      "field_id": "Clinical CB.3",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "Yes",
+      "semantic_purpose": "clinical_question_2_yes",
+      "options": []
+    },
+    "Clinical CB.4": {
+      "field_id": "Clinical CB.4",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "No",
+      "semantic_purpose": "clinical_question_3_no",
+      "options": []
+    },
+    "Clinical CB.5": {
+      "field_id": "Clinical CB.5",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "Yes",
+      "semantic_purpose": "clinical_question_3_yes",
+      "options": []
+    },
+    "Clinical CB.6": {
+      "field_id": "Clinical CB.6",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "No",
+      "semantic_purpose": "clinical_question_tb_tested_no",
+      "options": []
+    },
+    "Clinical CB.7": {
+      "field_id": "Clinical CB.7",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "Yes",
+      "semantic_purpose": "clinical_question_tb_tested_yes",
+      "options": []
+    },
+    "Clinical CB.8": {
+      "field_id": "Clinical CB.8",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "No",
+      "semantic_purpose": "clinical_question_tb_test_positive_no",
+      "options": []
+    },
+    "Clinical CB.9": {
+      "field_id": "Clinical CB.9",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "weeks",
+      "semantic_purpose": "duration_unit_weeks_1",
+      "options": []
+    },
+    "Clinical CB.10": {
+      "field_id": "Clinical CB.10",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "weeks",
+      "semantic_purpose": "duration_unit_weeks_2",
+      "options": []
+    },
+    "Clinical CB.11": {
+      "field_id": "Clinical CB.11",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "weeks",
+      "semantic_purpose": "duration_unit_weeks_3",
+      "options": []
+    },
+    "Clinical CB.12": {
+      "field_id": "Clinical CB.12",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "latent TB and treatment for latent TB has been completed",
+      "semantic_purpose": "clinical_question_tb_status_latent_and_treated",
+      "options": []
+    },
+    "Clinical CB.13": {
+      "field_id": "Clinical CB.13",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "latent TB and treatment for latent TB has not been initiated",
+      "semantic_purpose": "clinical_question_tb_status_latent_and_untreated",
+      "options": []
+    },
+    "Clinical CB.14": {
+      "field_id": "Clinical CB.14",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "latent TB and treatment for latent TB has been completed",
+      "semantic_purpose": "clinical_question_tb_status_latent_and_treated_duplicate",
+      "options": []
+    },
+    "Clinical CB.15": {
+      "field_id": "Clinical CB.15",
+      "page_num": 0,
+      "field_type": "CheckBox",
+      "context": "active TB",
+      "semantic_purpose": "clinical_question_tb_status_active",
+      "options": []
+    },
+    "Clinical CB.19": {
+      "field_id": "Clinical CB.19",
+      "page_num": 1,
+      "field_type": "CheckBox",
+      "context": "Yes",
+      "semantic_purpose": "clinical_question_4_yes",
+      "options": []
+    },
+    "Clinical CB.20": {
+      "field_id": "Clinical CB.20",
+      "page_num": 1,
+      "field_type": "CheckBox",
+      "context": "No",
+      "semantic_purpose": "clinical_question_4_no",
+      "options": []
+    },
+    "Clinical CB.21": {
+      "field_id": "Clinical CB.21",
+      "page_num": 1,
+      "field_type": "CheckBox",
+      "context": "Yes",
+      "semantic_purpose": "clinical_question_5_yes",
+      "options": []
+    },
+    "Clinical CB.22a": {
+      "field_id": "Clinical CB.22a",
+      "page_num": 1,
+      "field_type": "CheckBox",
+      "context": "No",
+      "semantic_purpose": "clinical_question_5_no",
+      "options": []
+    },
+    "Clinical CB.23a": {
+      "field_id": "Clinical CB.23a",
+      "page_num": 1,
+      "field_type": "CheckBox",
+      "context": "Yes",
+      "semantic_purpose": "clinical_question_6_yes",
+      "options": []
+    },
+    "Clinical CB.24a": {
+      "field_id": "Clinical CB.24a",
+      "page_num": 1,
+      "field_type": "CheckBox",
+      "context": "No",
+      "semantic_purpose": "clinical_question_6_no",
+      "options": []
+    },
+    "Clinical CB.25": {
+      "field_id": "Clinical CB.25",
+      "page_num": 1,
+      "field_type": "CheckBox",
+      "context": "Yes",
+      "semantic_purpose": "clinical_question_7_yes",
+      "options": []
+    },
+    "Clinical CB.26": {
+      "field_id": "Clinical CB.26",
+      "page_num": 1,
+      "field_type": "CheckBox",
+      "context": "No",
+      "semantic_purpose": "clinical_question_7_no",
+      "options": []
+    },
+    "Clinical T.16": {
+      "field_id": "Clinical T.16",
+      "page_num": 1,
+      "field_type": "Text",
+      "context": "weeks",
+      "semantic_purpose": "duration_unit_weeks_4",
+      "options": []
+    },
+    "Clinical T.17": {
+      "field_id": "Clinical T.17",
+      "page_num": 1,
+      "field_type": "Text",
+      "context": "weeks",
+      "semantic_purpose": "duration_unit_weeks_5",
+      "options": []
+    },
+    "Clinical T.18": {
+      "field_id": "Clinical T.18",
+      "page_num": 1,
+      "field_type": "Text",
+      "context": "weeks",
+      "semantic_purpose": "duration_unit_weeks_6",
+      "options": []
+    },
+    "Clinical CB.27": {
+      "field_id": "Clinical CB.27",
+      "page_num": 1,
+      "field_type": "CheckBox",
+      "context": "Yes",
+      "semantic_purpose": "clinical_question_8_yes",
+      "options": []
+    },
+    "Clinical CB.28a": {
+      "field_id": "Clinical CB.28a",
+      "page_num": 1,
+      "field_type": "CheckBox",
+      "context": "No",
+      "semantic_purpose": "clinical_question_8_no",
+      "options": []
+    }
+  }
+}
