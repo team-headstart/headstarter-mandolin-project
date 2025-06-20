@@ -268,14 +268,18 @@ TIMEOUT_SECONDS=30
 - **Output Formats**: Customize report generation and formatting
 - **Processing Parameters**: Tune OCR and AI model settings
 
-## 🚧 Limitations & Future Enhancements
+## 👥 Meet the Developers
 
-### Current Limitations
+- **[Rayan Roshan](https://www.linkedin.com/in/rayan-roshan/)**
+- **[Haroon Razzack](https://www.linkedin.com/in/haroonrazzack/)**
 
-1. **Form Type Support**: Primarily optimized for widget-based PDF forms
-2. **Processing Speed**: Sequential processing (could benefit from parallel processing)
-3. **Complex Forms**: Some multi-page conditional logic requires manual review
-4. **Handwritten Content**: Limited support for handwritten notes in referral packages
+## 🚀 Future Enhancements
+
+- **Non-Widget PDF Support**: Extended form filling for image-based PDFs
+- **Batch Processing**: Parallel processing of multiple patients
+- **Quality Assurance**: Automated validation and confidence scoring
+- **Form Template Library**: Pre-configured templates for common PA forms
+- **Web Interface**: Browser-based UI for easier operation
 
 ### Planned Enhancements
 
