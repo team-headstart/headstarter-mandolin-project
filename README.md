@@ -60,6 +60,28 @@ Structured Text + Field Info → Gemini Mapping → Field Values
 Field Values + Coordinates → PDF Generation → Filled PA Form + Report
 ```
 
+## 🏗️ Project Structure
+
+```
+mandolin-project/
+├── Input Data/
+│   ├── Adbulla/
+│   │   ├── PA.pdf
+│   │   └── referral_package.pdf
+│   ├── Akshay/
+│   │   ├── PA.pdf
+│   │   └── referral_package.pdf
+│   └── Amy/
+│       ├── PA.pdf
+│       └── referral_package.pdf
+├── Requirements/
+│   └── requirements.txt
+├── automation_script.ipynb
+├── setup.py
+├── .env.template
+└── README.md
+```
+
 ## 🚀 Installation
 
 ### Prerequisites
@@ -73,7 +95,7 @@ Field Values + Coordinates → PDF Generation → Filled PA Form + Report
 1. **Clone and Navigate**
    ```bash
    git clone <repository-url>
-   cd mandolin-project-2
+   cd mandolin-project
    ```
 
 2. **Run Setup Script**
