@@ -1,0 +1,38 @@
+# Core AI/ML Libraries - Required for document analysis
+google-generativeai>=0.8.0
+mistralai>=1.2.0
+
+# PDF Processing - Required for form filling and document handling
+PyMuPDF>=1.24.0
+PyPDF2>=3.0.1
+reportlab>=4.2.2
+pdfplumber>=0.11.0
+
+# HTTP Client for API requests
+httpx>=0.27.0
+
+# Environment and Configuration
+python-dotenv>=1.0.1
+
+# Data Processing
+pathlib2>=2.3.7; python_version < "3.4"
+
+# Jupyter Notebook Support (if running in notebook environment)
+jupyter>=1.1.1
+notebook>=7.0.0
+ipykernel>=6.29.0
+
+# Optional: Additional utilities for enhanced functionality
+pandas>=2.2.0
+numpy>=1.26.0
+pillow>=10.4.0
+json5>=0.9.25
+
+# Text processing and extraction alternatives
+textract>=1.6.5
+pytesseract>=0.3.10
+
+# Development tools (optional)
+black>=24.0.0
+flake8>=7.0.0
+pytest>=8.0.0

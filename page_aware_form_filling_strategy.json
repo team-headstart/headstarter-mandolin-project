@@ -1,0 +1,406 @@
+```json
+{
+    "reportlab_instructions": [
+        {
+            "method": "drawString",
+            "page": 2,
+            "x": 70,
+            "y": 685,
+            "text": "Shakh",
+            "field_name": "Patient First Name",
+            "section": "A",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 2,
+            "x": 190,
+            "y": 685,
+            "text": "Abdulla",
+            "field_name": "Patient Last Name",
+            "section": "A",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 2,
+            "x": 300,
+            "y": 685,
+            "text": "04/01/2001",
+            "field_name": "Patient DOB",
+            "section": "A",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 2,
+            "x": 70,
+            "y": 660,
+            "text": "425 Sherman Ave",
+            "field_name": "Patient Address",
+            "section": "A",
+            "font_size": 10
+        },
+         {
+            "method": "drawString",
+            "page": 2,
+            "x": 300,
+            "y": 660,
+            "text": "Nashville",
+            "field_name": "Patient City",
+            "section": "A",
+            "font_size": 10
+        },
+         {
+            "method": "drawString",
+            "page": 2,
+            "x": 420,
+            "y": 660,
+            "text": "TN",
+            "field_name": "Patient State",
+            "section": "A",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 2,
+            "x": 490,
+            "y": 660,
+            "text": "37995",
+            "field_name": "Patient Zip",
+            "section": "A",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 2,
+            "x": 70,
+            "y": 635,
+            "text": "865-395-3958",
+            "field_name": "Patient Home Phone",
+            "section": "A",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 2,
+            "x": 190,
+            "y": 635,
+            "text": "865-395-0481",
+            "field_name": "Patient Cell Phone",
+            "section": "A",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 2,
+            "x": 70,
+            "y": 560,
+            "text": "LAJM14345116",
+            "field_name": "Member ID",
+            "section": "B",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 2,
+            "x": 190,
+            "y": 560,
+            "text": "435000",
+            "field_name": "Group #",
+            "section": "B",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 2,
+            "x": 70,
+            "y": 505,
+            "text": "Better Life Multiple Sclerosis Center",
+            "field_name": "Prescriber Address",
+            "section": "C",
+            "font_size": 10
+        },
+         {
+            "method": "drawString",
+            "page": 2,
+            "x": 300,
+            "y": 505,
+            "text": "Nashville",
+            "field_name": "Prescriber City",
+            "section": "C",
+            "font_size": 10
+        },
+         {
+            "method": "drawString",
+            "page": 2,
+            "x": 420,
+            "y": 505,
+            "text": "TN",
+            "field_name": "Prescriber State",
+            "section": "C",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 2,
+            "x": 490,
+            "y": 505,
+            "text": "37361",
+            "field_name": "Prescriber Zip",
+            "section": "C",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 2,
+            "x": 190,
+            "y": 450,
+            "text": "1154611523",
+            "field_name": "Prescriber NPI",
+            "section": "C",
+            "font_size": 10
+        },
+       {
+            "method": "drawString",
+            "page": 2,
+            "x": 70,
+            "y": 350,
+            "text": "Riabni (rituximab-arrx)",
+            "field_name": "Requested Product",
+            "section": "E",
+            "font_size": 10
+        },
+         {
+            "method": "drawString",
+            "page": 2,
+            "x": 190,
+            "y": 350,
+            "text": "Rituxan (rituximab)",
+            "field_name": "Requested Product",
+            "section": "E",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 2,
+            "x": 300,
+            "y": 350,
+            "text": "Ruxience (rituximab-pvvr)",
+            "field_name": "Requested Product",
+            "section": "E",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 2,
+            "x": 420,
+            "y": 350,
+            "text": "Truxima (rituximab-abbs)",
+            "field_name": "Requested Product",
+            "section": "E",
+            "font_size": 10
+        },
+        {
+            "method": "drawString",
+            "page": 2,
+            "x": 70,
+            "y": 310,
+            "text": "G35",
+            "field_name": "Primary ICD Code",
+            "section": "F",
+            "font_size": 10
+        },
+          {
+            "method": "drawString",
+            "page": 3,
+            "x": 100,
+            "y": 720,
+            "text": "Shakh",
+            "field_name": "Patient First Name (Page 3)",
+            "section": "G",
+            "font_size": 8
+        },
+        {
+            "method": "drawString",
+            "page": 2,
+            "x": 190,
+            "y": 720,
+            "text": "Abdulla",
+            "field_name": "Patient Last Name (Page 3)",
+            "section": "G",
+            "font_size": 8
+        },
+         {
+            "method": "drawString",
+            "page": 2,
+            "x": 340,
+            "y": 720,
+            "text": "865-395-0481",
+            "field_name": "Patient Phone (Page 3)",
+            "section": "G",
+            "font_size": 8
+        },
+         {
+            "method": "drawString",
+            "page": 2,
+            "x": 440,
+            "y": 720,
+            "text": "04/01/2001",
+            "field_name": "Patient DOB (Page 3)",
+            "section": "G",
+            "font_size": 8
+        },
+       {
+            "method": "drawString",
+            "page": 3,
+            "x": 470,
+            "y": 330,
+            "text": "Multiple sclerosis in pediatric patient",
+            "field_name": "Clinical Information",
+            "section": "G",
+            "font_size": 8
+        },
+       {
+            "method": "drawString",
+            "page": 4,
+            "x": 100,
+            "y": 720,
+            "text": "Shakh",
+            "field_name": "Patient First Name (Page 4)",
+            "section": "G",
+            "font_size": 8
+        },
+        {
+            "method": "drawString",
+            "page": 4,
+            "x": 190,
+            "y": 720,
+            "text": "Abdulla",
+            "field_name": "Patient Last Name (Page 4)",
+            "section": "G",
+            "font_size": 8
+        },
+         {
+            "method": "drawString",
+            "page": 4,
+            "x": 340,
+            "y": 720,
+            "text": "865-395-0481",
+            "field_name": "Patient Phone (Page 4)",
+            "section": "G",
+            "font_size": 8
+        },
+         {
+            "method": "drawString",
+            "page": 4,
+            "x": 440,
+            "y": 720,
+            "text": "04/01/2001",
+            "field_name": "Patient DOB (Page 4)",
+            "section": "G",
+            "font_size": 8
+        },
+      {
+            "method": "drawString",
+            "page": 5,
+            "x": 100,
+            "y": 720,
+            "text": "Shakh",
+            "field_name": "Patient First Name (Page 5)",
+            "section": "G",
+            "font_size": 8
+        },
+        {
+            "method": "drawString",
+            "page": 5,
+            "x": 190,
+            "y": 720,
+            "text": "Abdulla",
+            "field_name": "Patient Last Name (Page 5)",
+            "section": "G",
+            "font_size": 8
+        },
+         {
+            "method": "drawString",
+            "page": 5,
+            "x": 340,
+            "y": 720,
+            "text": "865-395-0481",
+            "field_name": "Patient Phone (Page 5)",
+            "section": "G",
+            "font_size": 8
+        },
+         {
+            "method": "drawString",
+            "page": 5,
+            "x": 440,
+            "y": 720,
+            "text": "04/01/2001",
+            "field_name": "Patient DOB (Page 5)",
+            "section": "G",
+            "font_size": 8
+        },
+        {
+            "method": "drawString",
+            "page": 5,
+            "x": 100,
+            "y": 520,
+            "text": "Moderate",
+            "field_name": "Severity of RA",
+            "section": "G",
+            "font_size": 8
+        },
+        {
+            "method": "drawString",
+            "page": 5,
+            "x": 70,
+            "y": 230,
+            "text": "MD Signature Required",
+            "field_name": "Signature Placeholder",
+            "section": "H",
+            "font_size": 8
+        }
+
+    ],
+    "page_summary": {
+        "page_0": {
+            "field_count": 0,
+            "sections": []
+        },
+        "page_1": {
+            "field_count": 0,
+            "sections": []
+        },
+        "page_2": {
+            "field_count": 20,
+            "sections": [
+                "A",
+                "B",
+                "C",
+                "E",
+                "F"
+            ]
+        },
+        "page_3": {
+            "field_count": 5,
+            "sections": [
+                "G"
+            ]
+        },
+        "page_4": {
+            "field_count": 4,
+            "sections": [
+                "G"
+            ]
+        },
+        "page_5": {
+            "field_count": 5,
+            "sections": [
+                "G",
+                "H"
+            ]
+        }
+    }
+}
+```
