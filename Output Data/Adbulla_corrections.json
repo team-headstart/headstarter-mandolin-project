@@ -1,0 +1,62 @@
+[
+  {
+    "field_id": "Provider Admin T.27",
+    "semantic_purpose": "requesting_provider_npi",
+    "correct_value": "1154611523",
+    "reason": "Requesting provider NPI field was empty but data was available."
+  },
+  {
+    "field_id": "T84",
+    "semantic_purpose": "additional_medical_information",
+    "correct_value": "Patient is a 23-year-old male with atypical pediatric Multiple Sclerosis, presenting with optic neuritis. Hospitalized from 5/14/2024 to 5/17/2024 and treated with 4 days of high dose IVMP. Starting Rituximab therapy.",
+    "reason": "Field value was truncated on the form."
+  },
+  {
+    "field_id": "CB82",
+    "semantic_purpose": "request_type_initial",
+    "correct_value": true,
+    "reason": "Field was not checked, but data indicates this is an initial request."
+  },
+  {
+    "field_id": "T89",
+    "semantic_purpose": "diagnosis_and_symptoms_icd",
+    "correct_value": "G35",
+    "reason": "Incorrect value found in field; was 'LAJM14345116' but should be 'G35'. The patient's member ID was incorrectly placed in the ICD code field."
+  },
+  {
+    "field_id": "T118",
+    "semantic_purpose": "treatment_effectiveness_monitoring_plan",
+    "correct_value": "Patient will be seen 3 months after completion of 1st course of Rituximab with same day MRI. Labs to be collected: IgG every 24 weeks; CBC with Differential and Flow Lymphocyte Subsets every visit.",
+    "reason": "Field value was truncated on the form."
+  },
+  {
+    "field_id": "Provider Admin T.30a",
+    "semantic_purpose": "ordering_provider_first_name",
+    "correct_value": "Hao",
+    "reason": "Requesting provider first name field was empty but data was available (as requesting provider is the same as ordering provider)."
+  },
+  {
+    "field_id": "Provider Admin T.32",
+    "semantic_purpose": "ordering_provider_last_name",
+    "correct_value": "Gu",
+    "reason": "Requesting provider last name field was empty but data was available (as requesting provider is the same as ordering provider)."
+  },
+  {
+    "field_id": "Provider Admin T.33",
+    "semantic_purpose": "ordering_provider_address_street",
+    "correct_value": "3320 Montgomery Dr",
+    "reason": "Requesting provider street address field was empty but data was available (as requesting provider is the same as ordering provider)."
+  },
+  {
+    "field_id": "Provider Admin T.34",
+    "semantic_purpose": "ordering_provider_address_city_state_zip",
+    "correct_value": "NASHVILLE TN 37361",
+    "reason": "Requesting provider city, state, and ZIP field was empty but data was available (as requesting provider is the same as ordering provider)."
+  },
+  {
+    "field_id": "Provider Admin T.35",
+    "semantic_purpose": "ordering_provider_phone",
+    "correct_value": "615-562-4848",
+    "reason": "Requesting provider phone number field was empty but data was available (as requesting provider is the same as ordering provider)."
+  }
+]

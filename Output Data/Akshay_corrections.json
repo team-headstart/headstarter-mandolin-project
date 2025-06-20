@@ -1,0 +1,20 @@
+[
+  {
+    "field_id": "Provider Admin T.17.0",
+    "semantic_purpose": "pharmacy_name",
+    "correct_value": "",
+    "reason": "Field was filled with the pharmacy phone number '1-866-386-7882' instead of being empty."
+  },
+  {
+    "field_id": "Provider Admin T.18",
+    "semantic_purpose": "pharmacy_phone_number",
+    "correct_value": "1-866-386-7882",
+    "reason": "Field was filled with 'None' but the correct phone number was available in the extracted data."
+  },
+  {
+    "field_id": "Product T.1",
+    "semantic_purpose": "medication_dose",
+    "correct_value": "600mg IV",
+    "reason": "Incorrect value found in field; was '900mg IV' but should be '600mg IV'."
+  }
+]

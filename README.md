@@ -1,133 +1,120 @@
-### Task: Automate the Prior Authorization (PA) Form Filling Workflow
+## Automated Prior Authorization Filling System
 
----
+This repository contains an advanced AI pipeline designed to automate the filling of both interactive (widget-based) and flat (non-interactive) Prior Authorization (PA) forms. The system uses a sophisticated multi-agent architecture to analyze, extract, and populate forms, significantly reducing the manual administrative burden on healthcare providers.
 
-### **Purpose of this assignment**
+## 1. My Thought Process & Architectural Decisions
 
-This task is designed to assess the candidate's skills, creativity, and problem-solving abilities in a practical setting. Specifically, we are looking for:
+The primary challenge of this project was the need to handle two fundamentally different types of PDFs. A single system cannot reliably process both widget-based and flat forms. My solution was to develop two distinct, specialized pipelines, each orchestrated by its own script.
 
-1. The ability to quickly learn and adapt to domain knowledge (in this case, healthcare) from a new vertical.
-2. Existing skills and knowledge in building multimodal ML pipelines.
-3. The capacity to think outside of the box, discovering novel solutions when existing methods fall short.
-4. The ability to effectively leverage existing resources, tools, and libraries to resolve challenges.
-5. Strong fundamental coding skills, including clean, readable, and maintainable code.
-6. Thoughtful handling of ambiguous or incomplete requirements, demonstrating sound judgment in decision-making.
+### Multi-Agent  Architecture 1: The Interactive Pipeline (`MANDOLIN_PA_SYSTEM.py`)
 
-### Background:
+This system is designed for modern, widget-based PDFs that have pre-defined, interactive fields (text boxes, checkboxes, etc.).
 
-**Prior Authorization (PA)** is a process where healthcare providers must obtain approval from a health insurance plan before delivering a specific service (e.g., a drug infusion) to a patient. This process requires assembling evidence to demonstrate that the patient meets specific criteria, such as:
+-   **Form Understanding:** The pipeline begins by using a vision-capable AI (`gemini-2.0-flash`) to analyze the form's visual layout and structure, creating an initial schema of all available fields.
+-   **Semantic Refinement:** A more powerful AI (`gemini-2.5-pro`) then refines this schema, assigning a precise, machine-readable `semantic_purpose` to each field (e.g., mapping the visual label "Patient First Name" to the key `patient_first_name`). This standardization is key to making the system adaptable to new forms.
+-   **Parallel Extraction:** The system then uses two agents in parallel:
+    -   A `DataExtractionAgent` reads the patient's referral documents to find demographic and other standard information.
+    -   A specialized `ClinicalQAAgent` focuses solely on answering the complex "Yes/No" clinical questions on the form.
+-   **Validation & Correction:** In a critical "fill-and-verify" loop, the system performs a first-pass fill of the form and then hands it off to a `ValidationAgent`. This powerful AI (`gemini-2.5-pro`) visually inspects the filled document, compares it against the source data, and generates a list of corrections for any hallucinations, formatting errors, or misplaced data. This self-correction loop dramatically increases the final accuracy.
+-   **Finalization:** The corrections are applied, and a final, flattened PDF is generated alongside a report detailing any information that could not be found.
 
-- **Severity of illness**
-- **Ineffectiveness of alternative treatments**
+###  Multi-Agent Architecture 2: The "Text-Anchor" Pipeline for Flat PDFs (`FLAT_PA_SYSTEM.py`)
 
-The process typically involves comparing two main documents:
+Flat PDFs are much more challenging as they have no structured fields. Attempting to use AI to visually "guess" the coordinates of where to write text is notoriously unreliable and prone to alignment errors.
 
-1. **PA Form:**  
-   A structured PDF form specific to a drug, containing fields for the required information needed for insurance approval.
+To solve this, I developed the **Text-Anchor** system, a more deterministic and robust approach:
 
-2. **Supporting Documentation (Referral Package):**  
-   A collection of scanned documents such as:
-   - Insurance card
-   - Medical history notes
-   - Test results  
-     These are combined into a single PDF, often sent via fax as high-resolution images.
+-   ** (`TextAnchorAgent`):** This is a code-based agent that uses the `PyMuPDF` library to get the *exact* pixel coordinates of every text label on the form. This creates a perfect, unchangeable "ground truth" map of the document, completely avoiding AI guesswork for layout.
+-   ** (`SemanticMapperAgent`):**  (`gemini-2.5-pro`) is used for what it does best: language understanding. It takes the list of text labels and assigns a `semantic_purpose` to each one. This result is cached to avoid re-processing the same form type.
+-   ** (`TextAnchorFillingAgent`):** This non-AI agent is the core of the system's reliability. It operates on simple, predictable logic:
+    1.  It finds the coordinates of a label (e.g., the label "Last Name:").
+    2.  It programmatically calculates an insertion point a few pixels to the right of that label.
+    3.  It writes the corresponding extracted data directly onto the form.
 
-After comparing the documents and confirming that all criteria are met, the PA request is submitted.
+This architecture ensures perfect alignment and accuracy by using each tool for its strength: `PyMuPDF` for geometric precision and the AI for language understanding.
 
----
+## 2. Installation
 
-### Current Manual Workflow:
+Follow these steps to set up and run the project locally.
 
-Currently, a human worker performs the following steps:
+**Prerequisites:**
+- Python 3.9+
+- An API key for Google's Gemini models.
 
-1. **Download the PA Form:**  
-   Retrieve the specific drug's form from the insurance company's website.
+**Setup:**
 
-2. **Review the Referral Package:**  
-   Extract necessary information from the referral package to complete the PA form.
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/[your-username]/headstarter-mandolin-project.git
+    cd headstarter-mandolin-project
+    ```
 
-3. **Complete the PA Form:**  
-   Fill in the required fields on the PA form using information from the referral package.
+2.  **Install dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
 
----
+3.  **Configure your environment:**
+    -   Create a file named `.env` in the project root.
+    -   Add your Google Gemini API key to this file:
+        ```
+        GEMINI_API_KEY="YOUR_API_KEY_HERE"
+        ```
 
-### Goal:
+## 3. How to Run the Pipelines
 
-Develop a pipeline to automate this workflow.
+The project contains two primary pipeline scripts. All output, including filled PDFs and processing reports, will be placed in the `output_examples/` directory.
 
-- **Input:**  
-  Pairs of PA forms and referral packages provided in the input data folder. Input data structure is as follow:
+### To Run the Flat PDF Pipeline:
 
-      📁 Input Data
 
-          📁 Patient A
+```bash
+python3 FLAT_PA_SYSTEM.py
+```
 
-              📄 PA.pdf
+### To Run the Interactive PDF Pipeline:
 
-              📄 referral_package.pdf
+This pipeline is configured to look for interactive forms in the `Input Data/` directory. As there are no interactive forms in the base repository, running this script will demonstrate its ability to gracefully skip patients for whom it cannot find a valid form.
 
-          📁 Patient B
+```bash
+python3 MANDOLIN_PA_SYSTEM.py
+```
 
-              📄 PA.pdf
+## 4. Output Examples
 
-              📄 referral_package.pdf
+This submission includes comprehensive examples of filled PA forms and processing reports demonstrating both pipeline architectures:
 
-          📁 Patient C
+### Interactive PDF Pipeline Results (`Output Data/`)
+- **Adbulla**:
+  - `Adbulla_PA_filled.pdf` & `Adbulla_PA_filled_v1.pdf` - Filled forms with validation corrections
+  - `Adbulla_processing_report.md` - Missing information report (18.0% fill rate)
+  - `Adbulla_extracted_data.json` - Raw extracted data (249 fields)
+  - `Adbulla_corrections.json` - Validation corrections applied
 
-              ...
+- **Akshay**:
+  - `Akshay_PA_filled.pdf` & `Akshay_PA_filled_v1.pdf` - Filled forms with validation corrections
+  - `Akshay_processing_report.md` - Missing information report (40.7% fill rate)
+  - `Akshay_extracted_data.json` - Raw extracted data (120 fields)
+  - `Akshay_corrections.json` - Validation corrections applied
 
-  The dataset includes approximately 10 referrals and 10 different types of forms for different drugs from different insurance companies. **The pipeline should be designed to generalize to any form and any drug, even those unseen during development.**
+### Flat PDF Pipeline Results (`output_examples/`)
+- **Amy Chen**:
+  - `Amy_Chen_PA_20250618_183606.pdf` - Text-anchor filled form
+  - `Amy_Chen_processing_report.md` - Missing information report
 
-- **Output:**
-  - For each patient, the primary output is a **filled PA form as a PDF document**. This PDF will be populated with information extracted and inferred from the provided referral package. Fields for which information could not be found will remain blank on the form.
-  - Accompanying the filled PDF, a **separate report (e.g., a text or markdown file) must be generated for each patient, listing any required fields for which information was missing** from the referral package. This report will clearly indicate what information could not be populated.
-  - The example image below illustrates the general appearance of a filled PA form. Your pipeline will generate the actual filled PDF document.
-    ![Alt text](image/image1.png)
+- **Additional Test Results**:
+  - Multiple timestamped versions showing iterative improvements
+  - `Adbulla_PA_*.pdf` - Various test runs with different configurations
+  - `Amy_PA_*.pdf` - Flat PDF system test results
 
----
 
-### Notes:
+### Missing report report for Akshey ->  https://github.com/alhridoy/headstarter-mandolin-project/blob/automation-pa-filling-alhridoy/Output%20Data/Akshay_processing_report.md
+[📄 View Akshay_PA_filled_v1.pdf](https://github.com/alhridoy/headstarter-mandolin-project/blob/automation-pa-filling-alhridoy/Output%20Data/Akshay_PA_filled_v1.pdf)
 
-1. **Referral Package Complexity:**
 
-   - These packages consist of multiple scanned documents combined into a single PDF.
-   - Since these are high-resolution images, text cannot be directly extracted using standard PDF libraries (e.g., PyMuPDF). Optical Character Recognition (OCR) is required.
+### Missing report report for Abdullah -> https://github.com/alhridoy/headstarter-mandolin-project/blob/automation-pa-filling-alhridoy/Output%20Data/Adbulla_processing_report.md
+[📄 View Adbulla_PA_filled_v1.pdf](https://github.com/alhridoy/headstarter-mandolin-project/blob/automation-pa-filling-alhridoy/output_examples/Adbulla_PA_20250618_220041.pdf)
 
-2. **PA Form Structure:**
+### Missing report report for Amy -> https://github.com/alhridoy/headstarter-mandolin-project/blob/automation-pa-filling-alhridoy/output_examples/Amy_Chen_processing_report.md
+[📄 View Amy_Chen_PA_20250618_154533.pdf](https://github.com/alhridoy/headstarter-mandolin-project/blob/automation-pa-filling-alhridoy/pa_forms/completed/Amy_Chen_PA_20250618_154533.pdf)
 
-   - Unlike referral packages, PA forms are well-structured PDFs with retrievable text blocks, making field identification more straightforward.
-
-3. **PA Fields Format:**
-
-   - Not every field in a PA form should be filled out. The form often contains mutually exclusive options and branching paths, particularly in checkbox sections. For example:
-
-     1. If you check "New Patient", you shouldn't also check "Existing Patient"
-     2. Selecting certain options may make other sections irrelevant or inapplicable
-     3. Some sections are conditional and should only be completed based on previous answers
-
-     The goal is to fill out only the appropriate fields based on the patient's specific situation and the logical flow of the form, not to complete every possible field.
-
-4. **Form Types and Implementation Priority:**
-
-   - PA forms come in two formats: interactive widget-based PDFs (containing AcroForm widgets) and non-widget-based PDFs.
-   - The primary expectation is for the pipeline to work with widget-based PDFs that contain fillable form fields.
-   - While the solution should be designed to handle any form type, successfully implementing support for non-widget-based PDFs will be considered a bonus achievement.
-   - The solution should prioritize robust handling of interactive widget-based forms first, then extend capabilities to non-widget formats if possible.
-
-### Delivery Requirement:
-
-1. **Submission Format:**
-
-   - The automated pipeline, along with all supporting materials, must be submitted as a new branch named `automation-pa-filling-[your name]` in the GitHub repository. Do **not** push changes directly to the `main` branch.
-
-2. **Required Deliverables:**
-   - **Source Code:**
-     - Implement the complete pipeline for automating the PA form-filling workflow. Code should be modular, readable, and include appropriate comments.
-   - **Documentation:**
-     - Replace the current `README.md` file with your own documentation that includes:
-       - Step-by-step installation instructions
-       - Your thought process on how you implement
-       - Any assumptions or limitations of the implementation
-     - Additional documentation in the `docs/` folder if necessary, such as architectural diagrams, workflows, or examples of the expected outputs.
-   - **Output Examples:**
-     - Include examples of the **filled PA form PDFs** and their **corresponding missing information reports** for the sample input data. These examples will demonstrate the expected pipeline behavior and output format. It is recommended to store these example files in a dedicated directory (e.g., `output_examples/`).

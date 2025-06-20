@@ -1,0 +1,5 @@
+# Required libraries for the Mandolin PA Automation System
+PyMuPDF==1.24.1
+google-generativeai==0.7.1
+python-dotenv==1.0.1
+Pillow==10.4.0
