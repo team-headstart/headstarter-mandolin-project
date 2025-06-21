@@ -23,7 +23,7 @@ def check_python_version():
 
 def install_requirements():
     """Install requirements with error handling"""
-    requirements_file = Path("requirements.txt")
+    requirements_file = Path("Requirements/requirements.txt")
     
     if not requirements_file.exists():
         print("❌ requirements.txt not found")
