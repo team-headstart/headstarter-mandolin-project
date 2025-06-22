@@ -302,71 +302,71 @@ patient_name = os.path.basename(os.path.dirname(pa_pdf_path))
 save_processed_data(patient_name, structured_response, json.loads(llm_analysis))
 
 
+# '''
+# Step 5:
+# AI Gathering of Necessary Field Data for Entry
+# - model: gemini-2.5-flash-preview-05-20
+# - text:
+#     - type: application/json
+#         - llm_analysis
+#     - type: application/pdf
+#         - referral_package.pdf
+# - response_format: json_object
+
+# Provided the full referral_package and the OCR derived fields, the AI model will be allowed to collect the information it deems necessary to fill in the fields appropriately. The AI model will be passed the extracted fields and the referral package pdf.
+# '''
+
+# @time_step("Step 5: Direct Field Data Collection")
+# def gather_field_input_data(llm_field_analysis: dict) -> dict:
+#     """Gather and structure field data from PA form and referral package for form entry."""
+    
+#     client = genai.Client(api_key=os.environ["GOOGLE_API_KEY"])
+    
+#     # Referral package path
+#     referral_package_pdf_path = "./Input Data/Abdulla/referral_package.pdf"
+#     filepath = pathlib.Path(referral_package_pdf_path)
+    
+#     system_prompt = get_system_data_collection_prompt()
+#     prompt = get_data_collection_prompt(llm_field_analysis)
+    
+#     # Get the model's analysis
+#     response = client.models.generate_content(
+#         model="gemini-2.5-flash-preview-05-20",
+#         config=types.GenerateContentConfig(
+#             system_instruction=system_prompt,
+#             response_mime_type="application/json"),
+#         contents=[
+#             types.Part.from_bytes(
+#                 data=filepath.read_bytes(),
+#                 mime_type='application/pdf',
+#             ),
+#             prompt]
+#     )
+    
+#     # Parse and return the structured field data
+#     field_data = json.loads(response.text)
+    
+#     # Save the field data
+#     patient_name = os.path.basename(os.path.dirname(pa_pdf_path))
+#     output_dir = os.path.join("Output Data", patient_name)
+#     field_data_file = os.path.join(output_dir, "Field_Data_Direct.json")
+    
+#     with open(field_data_file, 'w') as f:
+#         json.dump(field_data, f, indent=2)
+    
+#     print(f"Field data saved to {field_data_file}")
+#     return field_data
+
+# # Process the field data
+# try:
+#     field_data_direct = gather_field_input_data(json.loads(llm_analysis))
+#     print("Successfully processed PA and referral packaged directly with Gemini Document Analysis")
+# except Exception as e:
+#     print(f"Error in field data gathering: {e}")
+    
+
 '''
 Step 5:
-AI Gathering of Necessary Field Data for Entry
-- model: gemini-2.5-flash-preview-05-20
-- text:
-    - type: application/json
-        - llm_analysis
-    - type: application/pdf
-        - referral_package.pdf
-- response_format: json_object
-
-Provided the full referral_package and the OCR derived fields, the AI model will be allowed to collect the information it deems necessary to fill in the fields appropriately. The AI model will be passed the extracted fields and the referral package pdf.
-'''
-
-@time_step("Step 5: Direct Field Data Collection")
-def gather_field_input_data(llm_field_analysis: dict) -> dict:
-    """Gather and structure field data from PA form and referral package for form entry."""
-    
-    client = genai.Client(api_key=os.environ["GOOGLE_API_KEY"])
-    
-    # Referral package path
-    referral_package_pdf_path = "./Input Data/Abdulla/referral_package.pdf"
-    filepath = pathlib.Path(referral_package_pdf_path)
-    
-    system_prompt = get_system_data_collection_prompt()
-    prompt = get_data_collection_prompt(llm_field_analysis)
-    
-    # Get the model's analysis
-    response = client.models.generate_content(
-        model="gemini-2.5-flash-preview-05-20",
-        config=types.GenerateContentConfig(
-            system_instruction=system_prompt,
-            response_mime_type="application/json"),
-        contents=[
-            types.Part.from_bytes(
-                data=filepath.read_bytes(),
-                mime_type='application/pdf',
-            ),
-            prompt]
-    )
-    
-    # Parse and return the structured field data
-    field_data = json.loads(response.text)
-    
-    # Save the field data
-    patient_name = os.path.basename(os.path.dirname(pa_pdf_path))
-    output_dir = os.path.join("Output Data", patient_name)
-    field_data_file = os.path.join(output_dir, "Field_Data_Direct.json")
-    
-    with open(field_data_file, 'w') as f:
-        json.dump(field_data, f, indent=2)
-    
-    print(f"Field data saved to {field_data_file}")
-    return field_data
-
-# Process the field data
-try:
-    field_data_direct = gather_field_input_data(json.loads(llm_analysis))
-    print("Successfully processed PA and referral packaged directly with Gemini Document Analysis")
-except Exception as e:
-    print(f"Error in field data gathering: {e}")
-    
-
-'''
-Step 6:
 AI Gathering of Necessary Field Data for Entry
 - model: gemini-2.5-flash-preview-05-20
 - text:
