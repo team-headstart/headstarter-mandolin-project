@@ -10,10 +10,25 @@ from google import genai
 from google.genai import types
 from prompts import get_ocr_analysis_prompt, get_system_prompt, get_system_data_collection_prompt, get_data_collection_prompt
 from datetime import datetime
+import pymupdf
+import time
 
 # Load environment variables from .env file
 load_dotenv()
 
+# Timing function
+def time_step(step_name: str):
+    """Decorator to time a function execution."""
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            start_time = time.time()
+            result = func(*args, **kwargs)
+            end_time = time.time()
+            duration = end_time - start_time
+            print(f"⏱️  {step_name} completed in {duration:.2f} seconds")
+            return result
+        return wrapper
+    return decorator
 
 # Pydantic models for structured data
 class ImageData(BaseModel):
@@ -38,6 +53,28 @@ class OCRPage(BaseModel):
 class OCRResponse(BaseModel):
     pages: List[OCRPage]
 
+class PAFormField(BaseModel):
+    name: str
+    type: int
+    value: str
+    page: int
+    field_type: int
+    field_type_string: str
+    field_label: str
+    
+class PAFormAnswer(BaseModel):
+    name: str
+    type: int
+    value: str
+    page: int
+    field_type: int
+    field_type_string: str
+    field_label: str
+    answer: str = Field(default="Answer to the question based on the provided referral package data.")
+
+class PAFormFields(BaseModel):
+    fields: List[PAFormField]
+
 def encode_pdf(pdf_path):
     """Encode the pdf to base64."""
     try:
@@ -56,12 +93,45 @@ pa_pdf_path = "./Input Data/Abdulla/PA.pdf"
 # Getting the base64 string
 base64_pdf = encode_pdf(pa_pdf_path)
 
+# Start overall timing
+overall_start_time = time.time()
 
-mistrtal_api_key = os.environ["MISTRAL_API_KEY"]
-client = Mistral(api_key=mistrtal_api_key)
+'''
+STEP 1:
+PyMuPDF PDF Breakdown
+
+Parses over the PA PDF and returns a breakdown of the PDF with its pages, fields, field options, and more. 
+'''
+
+@time_step("Step 1: PyMuPDF Field Extraction")
+def extract_pa_pdf_fields(pdf_path: str) -> dict:
+    doc = pymupdf.open(pdf_path)
+    fields = []
+    for page_num, page in enumerate(doc, start=1):
+        widgets = page.widgets()
+        for w in widgets:
+            field = {
+                "name": w.field_name,
+                "type": w.field_type,
+                "value": w.field_value,
+                "page": page_num,
+                "field_type": w.field_type,
+                "field_type_string": w.field_type_string,
+                "field_label": w.field_label,
+            }
+            fields.append(field)
+            print(field)
+    return fields
+pa_pdf_fields = extract_pa_pdf_fields(pa_pdf_path)
+
+# Convert list of fields to object format expected by PAFormFields
+pa_pdf_fields_obj = {"fields": pa_pdf_fields}
+
+structured_pa_pdf_fields = PAFormFields.model_validate(pa_pdf_fields_obj)
+
 
 ''' 
-STEP 1:
+STEP 2:
 Mistral OCR API Call
 - model: mistral-ocr-latest
 - document:
@@ -74,6 +144,11 @@ Parses over the Base64 encoded PA PDF and returns a JSON object with markdown te
 containing the contents of the PDF.
 '''
 
+
+mistrtal_api_key = os.environ["MISTRAL_API_KEY"]
+client = Mistral(api_key=mistrtal_api_key)
+
+@time_step("Step 2: OCR Processing")
 def process_pdf_with_ocr(pdf_path: str) -> OCRResponse:
     """Process a PDF file with OCR and return structured response."""
     
@@ -133,12 +208,13 @@ def process_pdf_with_ocr(pdf_path: str) -> OCRResponse:
 # Process the PA form
 try:
     structured_response = process_pdf_with_ocr(pa_pdf_path)
+    print("Successfully processed PA form with OCR")
 except Exception as e:
     print(f"Error in OCR processing: {e}")
     exit(1)
 
 '''
-STEP 2:
+STEP 3:
 LLM Pre-Processing API Call
 - model: gemini-2.5-flash-preview-05-20
 - text:
@@ -149,6 +225,7 @@ LLM Pre-Processing API Call
 Parses over the markdown text from the OCR response and returns a JSON object with 
 the fillable fields parsed out and their corresponding value types.
 '''
+@time_step("Step 3: LLM Analysis")
 def process_with_llm(system_prompt: str, prompt: str) -> str:
     """Process OCR text with LLMs to extract structured information."""
     
@@ -168,18 +245,19 @@ def process_with_llm(system_prompt: str, prompt: str) -> str:
 try:
     # Process all pages from the OCR response
     llm_analysis = process_with_llm(system_prompt=get_system_prompt(), prompt=get_ocr_analysis_prompt(structured_response))
-    
+    print("Successfully processed PA form with LLM including OCR + PyMuPDF")
 except Exception as e:
     print(f"Error in LLM processing: {e}")
 
 
 '''
-STEP 3:
+STEP 4:
 Saving LLM Processing of PA Form
 
 Saves the processed OCR content with the fields, field options, and descriptions to a JSON folder organized by the patient's name similar to how it is provided in input data.
 '''
 
+@time_step("Step 4: Data Saving")
 def save_processed_data(patient_name: str, ocr_response: OCRResponse, llm_analysis: dict):
     """Save processed data in a nested folder structure matching input data organization."""
     
@@ -198,11 +276,17 @@ def save_processed_data(patient_name: str, ocr_response: OCRResponse, llm_analys
     with open(llm_file, 'w') as f:
         json.dump(llm_analysis, f, indent=2)
     
+    # Save PyMuPDF extracted field data
+    pymupdf_file = os.path.join(patient_dir, "PyMuPDF_Fields.json")
+    with open(pymupdf_file, 'w') as f:
+        json.dump(pa_pdf_fields, f, indent=2)
+    
     # Save combined results
     combined_file = os.path.join(patient_dir, "Combined_Analysis.json")
     combined_data = {
         "ocr_response": ocr_response.model_dump(),
         "llm_analysis": llm_analysis,
+        "pymupdf_fields": pa_pdf_fields,
         "metadata": {
             "processed_date": datetime.now().isoformat(),
             "patient_name": patient_name
@@ -219,7 +303,7 @@ save_processed_data(patient_name, structured_response, json.loads(llm_analysis))
 
 
 '''
-Step 4a:
+Step 5:
 AI Gathering of Necessary Field Data for Entry
 - model: gemini-2.5-flash-preview-05-20
 - text:
@@ -232,6 +316,7 @@ AI Gathering of Necessary Field Data for Entry
 Provided the full referral_package and the OCR derived fields, the AI model will be allowed to collect the information it deems necessary to fill in the fields appropriately. The AI model will be passed the extracted fields and the referral package pdf.
 '''
 
+@time_step("Step 5: Direct Field Data Collection")
 def gather_field_input_data(llm_field_analysis: dict) -> dict:
     """Gather and structure field data from PA form and referral package for form entry."""
     
@@ -272,15 +357,16 @@ def gather_field_input_data(llm_field_analysis: dict) -> dict:
     print(f"Field data saved to {field_data_file}")
     return field_data
 
-# # Process the field data
-# try:
-#     field_data_direct = gather_field_input_data(json.loads(llm_analysis))
-# except Exception as e:
-#     print(f"Error in field data gathering: {e}")
+# Process the field data
+try:
+    field_data_direct = gather_field_input_data(json.loads(llm_analysis))
+    print("Successfully processed PA and referral packaged directly with Gemini Document Analysis")
+except Exception as e:
+    print(f"Error in field data gathering: {e}")
     
 
 '''
-Step 4b:
+Step 6:
 AI Gathering of Necessary Field Data for Entry
 - model: gemini-2.5-flash-preview-05-20
 - text:
@@ -293,6 +379,7 @@ AI Gathering of Necessary Field Data for Entry
 Provided an OCR derived referral package and the OCR derived fields, the AI model will be allowed to collect the information it deems necessary to fill in the fields appropriately. The AI model will be passed the extracted fields and the extracted referral package pdf.
 '''
 
+@time_step("Step 6: OCR Field Data Collection")
 def gather_field_input_data_ocr(llm_analysis: dict):
     
     
@@ -333,5 +420,11 @@ def gather_field_input_data_ocr(llm_analysis: dict):
         
 try:
     field_data_ocr = gather_field_input_data_ocr(json.loads(llm_analysis))
+    print("Successfully processed PA and referral packaged with AI OCR + Gemini Document Analysis")
 except Exception as e:
     print(f"Error in field data gathering: {e}")
+
+# End overall timing
+overall_end_time = time.time()
+overall_duration = overall_end_time - overall_start_time
+print(f"\n🎯 Total processing time: {overall_duration:.2f} seconds ({overall_duration/60:.2f} minutes)")
