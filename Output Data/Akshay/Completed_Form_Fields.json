@@ -1,0 +1,1004 @@
+{
+  "answers": [
+    {
+      "name": "Indicate CB.1",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "Start of treatment:",
+      "context": "Subheading: Please indicate. This checkbox indicates if the patient is starting treatment.",
+      "answer": "True"
+    },
+    {
+      "name": "Indicate T.2",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Start date (MM)",
+      "context": "Subheading: Please indicate. This field captures the month of the start date for the treatment.",
+      "answer": "null"
+    },
+    {
+      "name": "Indicate T.3",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Start date (DD)",
+      "context": "Subheading: Please indicate. This field captures the day of the start date for the treatment.",
+      "answer": "null"
+    },
+    {
+      "name": "Indicate T.4",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Start date (YYYY)",
+      "context": "Subheading: Please indicate. This field captures the year of the start date for the treatment.",
+      "answer": "null"
+    },
+    {
+      "name": "Indicate CB.5",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "Continuation of therapy",
+      "context": "Subheading: Please indicate. This checkbox indicates if the patient is continuing therapy.",
+      "answer": "False"
+    },
+    {
+      "name": "Indicate T.6",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Date of last treatment (MM)",
+      "context": "Subheading: Please indicate. This field captures the month of the last treatment date for continuation of therapy.",
+      "answer": "null"
+    },
+    {
+      "name": "Indicate T.7",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Date of last treatment (DD)",
+      "context": "Subheading: Please indicate. This field captures the day of the last treatment date for continuation of therapy.",
+      "answer": "null"
+    },
+    {
+      "name": "Indicate T.8",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Date of last treatment (YYYY)",
+      "context": "Subheading: Please indicate. This field captures the year of the last treatment date for continuation of therapy.",
+      "answer": "null"
+    },
+    {
+      "name": "Request by T",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Precertification Requested By:",
+      "context": "Subheading: Precertification Requested By. This field captures the name of the person requesting precertification.",
+      "answer": "null"
+    },
+    {
+      "name": "Phone T",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Phone:",
+      "context": "Subheading: Precertification Requested By. This field captures the phone number of the person requesting precertification.",
+      "answer": "null"
+    },
+    {
+      "name": "Fax T",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Fax:",
+      "context": "Subheading: Precertification Requested By. This field captures the fax number of the person requesting precertification.",
+      "answer": "null"
+    },
+    {
+      "name": "T11",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Patient First Name",
+      "context": "Subheading: A. PATIENT INFORMATION. This field captures the first name of the patient.",
+      "answer": "Akshay"
+    },
+    {
+      "name": "T12",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Patient Last Name",
+      "context": "Subheading: A. PATIENT INFORMATION. This field captures the last name of the patient.",
+      "answer": "chaudhari"
+    },
+    {
+      "name": "T13",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Patient DOB (MM/DD/YYYY)",
+      "context": "Subheading: A. PATIENT INFORMATION. This field captures the date of birth of the patient.",
+      "answer": "02/17/1987"
+    },
+    {
+      "name": "T14",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Address:",
+      "context": "Subheading: A. PATIENT INFORMATION. This field captures the street address of the patient.",
+      "answer": "1460 El Camino Real"
+    },
+    {
+      "name": "T15",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "City:",
+      "context": "Subheading: A. PATIENT INFORMATION. This field captures the city of the patient's address.",
+      "answer": "Arlington"
+    },
+    {
+      "name": "T16",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "State:",
+      "context": "Subheading: A. PATIENT INFORMATION. This field captures the state of the patient's address.",
+      "answer": "VA"
+    },
+    {
+      "name": "T17",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "ZIP:",
+      "context": "Subheading: A. PATIENT INFORMATION. This field captures the ZIP code of the patient's address.",
+      "answer": "22407"
+    },
+    {
+      "name": "T18",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Patient Phone",
+      "context": "Subheading: A. PATIENT INFORMATION. This field captures the patient's primary phone number.",
+      "answer": "570-599-6973"
+    },
+    {
+      "name": "T19",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Work Phone:",
+      "context": "Subheading: A. PATIENT INFORMATION. This field captures the patient's work phone number.",
+      "answer": "null"
+    },
+    {
+      "name": "T20",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Cell Phone:",
+      "context": "Subheading: A. PATIENT INFORMATION. This field captures the patient's cell phone number.",
+      "answer": "null"
+    },
+    {
+      "name": "T21",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Email:",
+      "context": "Subheading: A. PATIENT INFORMATION. This field captures the patient's email address.",
+      "answer": "null"
+    },
+    {
+      "name": "T21B",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "lbs",
+      "context": "Subheading: A. PATIENT INFORMATION. This field captures the patient's weight in pounds.",
+      "answer": "190"
+    },
+    {
+      "name": "T21C",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "kgs",
+      "context": "Subheading: A. PATIENT INFORMATION. This field captures the patient's weight in kilograms.",
+      "answer": "86.18"
+    },
+    {
+      "name": "T21D",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "inches",
+      "context": "Subheading: A. PATIENT INFORMATION. This field captures the patient's height in inches.",
+      "answer": "73"
+    },
+    {
+      "name": "T21E",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "cms",
+      "context": "Subheading: A. PATIENT INFORMATION. This field captures the patient's height in centimeters.",
+      "answer": "null"
+    },
+    {
+      "name": "T21F",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Allergies:",
+      "context": "Subheading: A. PATIENT INFORMATION. This field captures any known allergies for the patient.",
+      "answer": "ibuprofen, acetaminophen"
+    },
+    {
+      "name": "Insurance Info T.1",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Aetna Member ID #:",
+      "context": "Subheading: B. INSURANCE INFORMATION. This field captures the patient's Aetna Member ID number.",
+      "answer": "null"
+    },
+    {
+      "name": "Insurance Info CB.4",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: B. INSURANCE INFORMATION. This checkbox indicates if the patient has other coverage.",
+      "answer": "False"
+    },
+    {
+      "name": "Insurance Info CB.5",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: B. INSURANCE INFORMATION. This checkbox indicates if the patient does not have other coverage.",
+      "answer": "True"
+    },
+    {
+      "name": "Insurance Info T.2",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Group #:",
+      "context": "Subheading: B. INSURANCE INFORMATION. This field captures the patient's group number for their insurance.",
+      "answer": "null"
+    },
+    {
+      "name": "Insurance Info T.6",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "If yes, provide ID#:",
+      "context": "Subheading: B. INSURANCE INFORMATION. This field captures the ID number if the patient has other coverage.",
+      "answer": "null"
+    },
+    {
+      "name": "Insurance Info T.7",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Carrier Name:",
+      "context": "Subheading: B. INSURANCE INFORMATION. This field captures the name of the insurance carrier if the patient has other coverage.",
+      "answer": "null"
+    },
+    {
+      "name": "Insurance Info T.3",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Insured:",
+      "context": "Subheading: B. INSURANCE INFORMATION. This field captures the name of the insured person if different from the patient.",
+      "answer": "Akshay chaudhari"
+    },
+    {
+      "name": "Insurance Info T.8",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Insured:",
+      "context": "Subheading: B. INSURANCE INFORMATION. This field captures the name of the insured person if different from the patient.",
+      "answer": "Akshay chaudhari"
+    },
+    {
+      "name": "Insurance Info CB.9",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: B. INSURANCE INFORMATION. This checkbox indicates if the patient has Medicare.",
+      "answer": "False"
+    },
+    {
+      "name": "Insurance Info CB.10",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: B. INSURANCE INFORMATION. This checkbox indicates if the patient does not have Medicare.",
+      "answer": "True"
+    },
+    {
+      "name": "Insurance Info T.11",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "If yes, provide ID #:",
+      "context": "Subheading: B. INSURANCE INFORMATION. This field captures the Medicare ID number.",
+      "answer": "null"
+    },
+    {
+      "name": "Insurance Info CB.12",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: B. INSURANCE INFORMATION. This checkbox indicates if the patient has Medicaid.",
+      "answer": "False"
+    },
+    {
+      "name": "Insurance Info CB.13",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: B. INSURANCE INFORMATION. This checkbox indicates if the patient does not have Medicaid.",
+      "answer": "True"
+    },
+    {
+      "name": "Insurance Info T.14",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "If yes, provide ID #:",
+      "context": "Subheading: B. INSURANCE INFORMATION. This field captures the Medicaid ID number.",
+      "answer": "null"
+    },
+    {
+      "name": "Presc Info T.1",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "First Name:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. This field captures the prescriber's first name.",
+      "answer": "Timothy"
+    },
+    {
+      "name": "Presc Info T.7",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Address:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. This field captures the prescriber's street address.",
+      "answer": "2755 College Ave Ste. 100"
+    },
+    {
+      "name": "Presc Info T.11",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Phone:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. This field captures the prescriber's phone number.",
+      "answer": "203-818-3060"
+    },
+    {
+      "name": "Presc Info T.12",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Fax:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. This field captures the prescriber's fax number.",
+      "answer": "203-818-3061"
+    },
+    {
+      "name": "Presc Info T.17",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Provider Email:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. This field captures the prescriber's email address.",
+      "answer": "null"
+    },
+    {
+      "name": "Presc Info T.2",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Last Name:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. This field captures the prescriber's last name.",
+      "answer": "Adam"
+    },
+    {
+      "name": "Presc Info CB.3",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "M.D.",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. This checkbox indicates if the prescriber is an M.D.",
+      "answer": "True"
+    },
+    {
+      "name": "Presc Info CB.4",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "D.O.",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. This checkbox indicates if the prescriber is a D.O.",
+      "answer": "False"
+    },
+    {
+      "name": "Presc Info CB.5",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "N.P.",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. This checkbox indicates if the prescriber is an N.P.",
+      "answer": "False"
+    },
+    {
+      "name": "Presc Info CB.6",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "P.A.",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. This checkbox indicates if the prescriber is a P.A.",
+      "answer": "False"
+    },
+    {
+      "name": "Presc Info T.8",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "City:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. This field captures the city of the prescriber's address.",
+      "answer": "Leesburg"
+    },
+    {
+      "name": "Presc Info T.9",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "State:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. This field captures the state of the prescriber's address.",
+      "answer": "VA"
+    },
+    {
+      "name": "Presc Info T.10",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "ZIP:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. This field captures the ZIP code of the prescriber's address.",
+      "answer": "20176"
+    },
+    {
+      "name": "Presc Info T.13",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "St Lic #:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. This field captures the prescriber's state license number.",
+      "answer": "null"
+    },
+    {
+      "name": "Presc Info T.14",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "NPI #:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. This field captures the prescriber's NPI number.",
+      "answer": "1331124163"
+    },
+    {
+      "name": "Presc Info T.15",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "DEA #:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. This field captures the prescriber's DEA number.",
+      "answer": "null"
+    },
+    {
+      "name": "Presc Info T.16",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "UPIN:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. This field captures the prescriber's UPIN number.",
+      "answer": "null"
+    },
+    {
+      "name": "Presc Info T.18",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Office Contact Name:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. This field captures the name of the office contact person.",
+      "answer": "null"
+    },
+    {
+      "name": "Presc Info T.19",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Phone:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. This field captures the phone number of the office contact person.",
+      "answer": "null"
+    },
+    {
+      "name": "Presc Info CB.20",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "Gastroenterologist",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. This checkbox indicates the prescriber's specialty is Gastroenterologist.",
+      "answer": "True"
+    },
+    {
+      "name": "Presc Info CB.21",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "Other:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. This checkbox indicates the prescriber's specialty is Other. Dependent on field 'Other:' for specialty information.",
+      "answer": "False"
+    },
+    {
+      "name": "Presc Info T.23",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Other:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. This field captures the prescriber's specialty if 'Other' is selected.",
+      "answer": "null"
+    },
+    {
+      "name": "Provider Admin CB.1",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "Self-administered",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. This checkbox indicates the place of administration is self-administered.",
+      "answer": "False"
+    },
+    {
+      "name": "Provider Admin CB.2",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "Physician's Office",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. This checkbox indicates the place of administration is a physician's office.",
+      "answer": "null"
+    },
+    {
+      "name": "Provider Admin CB.3",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "Outpatient Infusion Center",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. This checkbox indicates the place of administration is an outpatient infusion center.",
+      "answer": "null"
+    },
+    {
+      "name": "Provider Admin T.4",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Phone:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. This field captures the phone number for the outpatient infusion center.",
+      "answer": "null"
+    },
+    {
+      "name": "Provider Admin T.5",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Center Name:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. This field captures the name of the outpatient infusion center.",
+      "answer": "null"
+    },
+    {
+      "name": "Provider Admin CB.6",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "Home Infusion Center",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. This checkbox indicates the place of administration is a home infusion center.",
+      "answer": "null"
+    },
+    {
+      "name": "Provider Admin T.7",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Phone:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. This field captures the phone number for the home infusion center.",
+      "answer": "null"
+    },
+    {
+      "name": "Provider Admin T.8",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Agency Name:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. This field captures the name of the agency for the home infusion center.",
+      "answer": "null"
+    },
+    {
+      "name": "Provider Admin CB.9.0",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "Administration code(s)",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. This checkbox indicates that administration codes will be provided. Dependent on field 'CPT:' for the code.",
+      "answer": "False"
+    },
+    {
+      "name": "Provider Admin T.10.0.0",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "CPT:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. This field captures the CPT code for administration.",
+      "answer": "null"
+    },
+    {
+      "name": "Provider Admin T.10.1.0",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Address:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. This field captures the address of the dispensing provider/pharmacy.",
+      "answer": "null"
+    },
+    {
+      "name": "Provider Admin CB.11",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "Physician\u2019s Office",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. This checkbox indicates the dispensing provider/pharmacy is a Physician's Office.",
+      "answer": "null"
+    },
+    {
+      "name": "Provider Admin CB.12",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "Retail Pharmacy",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. This checkbox indicates the dispensing provider/pharmacy is a Retail Pharmacy.",
+      "answer": "null"
+    },
+    {
+      "name": "Provider Admin CB.13",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "Specialty Pharmacy",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. This checkbox indicates the dispensing provider/pharmacy is a Specialty Pharmacy.",
+      "answer": "True"
+    },
+    {
+      "name": "Provider Admin CB.14",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "Other",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. This checkbox indicates the dispensing provider/pharmacy is Other.",
+      "answer": "False"
+    },
+    {
+      "name": "Provider Admin T.17.0",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Name:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. This field captures the name of the dispensing provider/pharmacy.",
+      "answer": "CVS Caremark"
+    },
+    {
+      "name": "Provider Admin T.17.1",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Address:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. This field captures the address of the dispensing provider/pharmacy.",
+      "answer": "1580 Postal Road"
+    },
+    {
+      "name": "Provider Admin T.18",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Phone:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. This field captures the phone number of the dispensing provider/pharmacy.",
+      "answer": "1-866-386-7882"
+    },
+    {
+      "name": "Provider Admin T.19",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Fax:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. This field captures the fax number of the dispensing provider/pharmacy.",
+      "answer": "null"
+    },
+    {
+      "name": "Provider Admin T.20",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "TIN:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. This field captures the Taxpayer Identification Number (TIN) of the dispensing provider/pharmacy.",
+      "answer": "null"
+    },
+    {
+      "name": "Provider Admin T.21",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "PIN:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. This field captures the Pharmacy Identification Number (PIN) of the dispensing provider/pharmacy.",
+      "answer": "null"
+    },
+    {
+      "name": "Product T.1",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Dose:",
+      "context": "Subheading: E. PRODUCT INFORMATION. This field captures the requested dose of Skyrizi.",
+      "answer": "600mg IV; 180mg SQ or 360mg SQ"
+    },
+    {
+      "name": "Product T.2",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Frequency:",
+      "context": "Subheading: E. PRODUCT INFORMATION. This field captures the requested frequency of Skyrizi.",
+      "answer": "Week 0, 4, 8 for induction; every 8 weeks for maintenance"
+    },
+    {
+      "name": "Diagnosis T.1",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Primary ICD Code:",
+      "context": "Subheading: F. DIAGNOSIS INFORMATION. This field captures the primary ICD code for the diagnosis.",
+      "answer": "K50.111"
+    },
+    {
+      "name": "Diagnosis T.2",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Secondary ICD Code:",
+      "context": "Subheading: F. DIAGNOSIS INFORMATION. This field captures the secondary ICD code for the diagnosis.",
+      "answer": "null"
+    },
+    {
+      "name": "Diagnosis T.3",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Other ICD Code:",
+      "context": "Subheading: F. DIAGNOSIS INFORMATION. This field captures any other relevant ICD codes for the diagnosis.",
+      "answer": "null"
+    },
+    {
+      "name": "Clinical CB.0",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION. This checkbox indicates 'Yes' to the question about using the drug in combination with other biologics or targeted synthetic drugs.",
+      "answer": "False"
+    },
+    {
+      "name": "Clinical CB.1",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION. This checkbox indicates 'No' to the question about using the drug in combination with other biologics or targeted synthetic drugs.",
+      "answer": "True"
+    },
+    {
+      "name": "Clinical CB.2",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION. This checkbox indicates 'Yes' to the question about the patient having received prior therapy associated with an increased risk of tuberculosis (TB).",
+      "answer": "False"
+    },
+    {
+      "name": "Clinical CB.3",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION. This checkbox indicates 'No' to the question about the patient having received prior therapy associated with an increased risk of tuberculosis (TB).",
+      "answer": "True"
+    },
+    {
+      "name": "Clinical CB.4",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION. This checkbox indicates 'Yes' to the question about the patient having had a tuberculosis (TB) test within 6 months of initiating therapy.",
+      "answer": "False"
+    },
+    {
+      "name": "Clinical CB.5",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION. This checkbox indicates 'No' to the question about the patient having had a tuberculosis (TB) test within 6 months of initiating therapy.",
+      "answer": "True"
+    },
+    {
+      "name": "Clinical CB.6",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "PPD test",
+      "context": "Subheading: G. CLINICAL INFORMATION. This checkbox indicates that a PPD test was performed as part of the TB testing.",
+      "answer": "True"
+    },
+    {
+      "name": "Clinical CB.7",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "interferon-release assay (IGRA)",
+      "context": "Subheading: G. CLINICAL INFORMATION. This checkbox indicates that an interferon-release assay (IGRA) was performed as part of the TB testing.",
+      "answer": "True"
+    },
+    {
+      "name": "Clinical CB.8",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "chest x-ray",
+      "context": "Subheading: G. CLINICAL INFORMATION. This checkbox indicates that a chest x-ray was performed as part of the TB testing.",
+      "answer": "False"
+    },
+    {
+      "name": "Clinical CB.9",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "positive",
+      "context": "Subheading: G. CLINICAL INFORMATION. This checkbox indicates a positive result for the tuberculosis (TB) test.",
+      "answer": "False"
+    },
+    {
+      "name": "Clinical CB.10",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "negative",
+      "context": "Subheading: G. CLINICAL INFORMATION. This checkbox indicates a negative result for the tuberculosis (TB) test.",
+      "answer": "True"
+    },
+    {
+      "name": "Clinical CB.11",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "unknown",
+      "context": "Subheading: G. CLINICAL INFORMATION. This checkbox indicates the result of the tuberculosis (TB) test is unknown.",
+      "answer": "False"
+    },
+    {
+      "name": "Clinical CB.12",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "latent TB and treatment for latent TB has been initiated",
+      "context": "Subheading: G. CLINICAL INFORMATION. This checkbox indicates the patient has latent TB and treatment has been initiated.",
+      "answer": "False"
+    },
+    {
+      "name": "Clinical CB.13",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "latent TB and treatment for latent TB has been completed",
+      "context": "Subheading: G. CLINICAL INFORMATION. This checkbox indicates the patient has latent TB and treatment has been completed.",
+      "answer": "False"
+    },
+    {
+      "name": "Clinical CB.14",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "latent TB and treatment for latent TB has not been initiated",
+      "context": "Subheading: G. CLINICAL INFORMATION. This checkbox indicates the patient has latent TB and treatment has not been initiated.",
+      "answer": "False"
+    },
+    {
+      "name": "Clinical CB.15",
+      "page": 1,
+      "field_type_string": "CheckBox",
+      "field_label": "active TB",
+      "context": "Subheading: G. CLINICAL INFORMATION. This checkbox indicates the patient has active TB.",
+      "answer": "False"
+    },
+    {
+      "name": "T11",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Patient First Name",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). This field captures the first name of the patient.",
+      "answer": "Akshay"
+    },
+    {
+      "name": "T12",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Patient Last Name",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). This field captures the last name of the patient.",
+      "answer": "chaudhari"
+    },
+    {
+      "name": "T18",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Patient Phone",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). This field captures the patient's phone number.",
+      "answer": "570-599-6973"
+    },
+    {
+      "name": "T13",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Patient DOB (MM/DD/YYYY)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). This field captures the date of birth of the patient.",
+      "answer": "02/17/1987"
+    },
+    {
+      "name": "Clinical CB.19",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Crohn's Disease (CD). This checkbox indicates 'Yes' to the question about diagnosis of moderately to severely active Crohn's disease (CD).",
+      "answer": "True"
+    },
+    {
+      "name": "Clinical CB.20",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Crohn's Disease (CD). This checkbox indicates 'No' to the question about diagnosis of moderately to severely active Crohn's disease (CD).",
+      "answer": "False"
+    },
+    {
+      "name": "Clinical CB.21",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Crohn's Disease (CD). This checkbox indicates 'Yes' to the question about the drug being prescribed by or in consultation with a gastroenterologist.",
+      "answer": "True"
+    },
+    {
+      "name": "Clinical CB.22a",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Crohn's Disease (CD). This checkbox indicates 'No' to the question about the drug being prescribed by or in consultation with a gastroenterologist.",
+      "answer": "False"
+    },
+    {
+      "name": "Clinical CB.23a",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Crohn's Disease (CD). This checkbox indicates 'Yes' to the question about the request being for initiation of therapy with the intravenous loading dose.",
+      "answer": "True"
+    },
+    {
+      "name": "Clinical CB.24a",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Crohn's Disease (CD). This checkbox indicates 'No' to the question about the request being for initiation of therapy with the intravenous loading dose.",
+      "answer": "False"
+    },
+    {
+      "name": "Clinical CB.25",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Crohn's Disease (CD). This checkbox indicates 'Yes' to the question about the patient currently receiving the requested drug.",
+      "answer": "False"
+    },
+    {
+      "name": "Clinical CB.26",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Crohn's Disease (CD). This checkbox indicates 'No' to the question about the patient currently receiving the requested drug.",
+      "answer": "True"
+    },
+    {
+      "name": "Clinical T.16",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Please indicate loading dose at weeks 0, 4 and 8:",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Crohn's Disease (CD). This field captures the loading dose information if the patient is receiving it.",
+      "answer": "600mg IV"
+    },
+    {
+      "name": "Clinical T.17",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Please indicate maintenance dose:",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Crohn's Disease (CD). This field captures the maintenance dose information.",
+      "answer": "180mg SQ or 360mg SQ"
+    },
+    {
+      "name": "Clinical T.18",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "weeks",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Crohn's Disease (CD). This field captures the frequency of the maintenance dose in weeks.",
+      "answer": "8"
+    },
+    {
+      "name": "Clinical CB.27",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Crohn's Disease (CD). This checkbox indicates whether the patient has received 12 weeks of therapy or less.",
+      "answer": "True"
+    },
+    {
+      "name": "Clinical CB.28a",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Crohn's Disease (CD). This checkbox indicates 'No' to the question about whether the patient has received 12 weeks of therapy or less.",
+      "answer": "False"
+    },
+    {
+      "name": "Clinical T.42",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Date: (MM)",
+      "context": "Subheading: H. ACKNOWLEDGEMENT. This field captures the month of the date the request was completed.",
+      "answer": "05"
+    },
+    {
+      "name": "Clinical T.43",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Date: (DD)",
+      "context": "Subheading: H. ACKNOWLEDGEMENT. This field captures the day of the date the request was completed.",
+      "answer": "30"
+    },
+    {
+      "name": "Clinical T.44",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Date: (YYYY)",
+      "context": "Subheading: H. ACKNOWLEDGEMENT. This field captures the year of the date the request was completed.",
+      "answer": "2023"
+    }
+  ]
+}

@@ -87,7 +87,7 @@ def encode_pdf(pdf_path):
         return None
     
 # Path to your pdf
-pa_pdf_path = "./Input Data/Abdulla/PA.pdf"
+pa_pdf_path = "./Input Data/Amy/PA.pdf"
 
 # Getting the base64 string
 base64_pdf = encode_pdf(pa_pdf_path)
@@ -183,7 +183,7 @@ def process_pdf_with_ocr(pdf_path: str) -> OCRResponse:
                             top_left_y=image.top_left_y,
                             bottom_right_x=image.bottom_right_x,
                             bottom_right_y=image.bottom_right_y,
-                            image_base64=image.base64
+                            image_base64=image.image_base64
                         )
                         for image in page.images
                     ],
@@ -322,11 +322,11 @@ def gather_field_input_data_ocr(llm_analysis: dict):
     
     
     try:
-        referral_package_pdf_path = "./Input Data/Abdulla/referral_package.pdf"
+        referral_package_pdf_path = "./Input Data/Amy/referral_package.pdf"
         referral_package_structured_response = process_pdf_with_ocr(referral_package_pdf_path)
         
         output_base = "Output Data"
-        patient_dir = os.path.join(output_base, "Abdulla")
+        patient_dir = os.path.join(output_base, "Amy")
         os.makedirs(patient_dir, exist_ok=True)
         
     except Exception as e:
@@ -338,7 +338,7 @@ def gather_field_input_data_ocr(llm_analysis: dict):
         field_data_text = process_with_llm(get_system_data_collection_prompt(), 
                                            prompt=get_data_collection_prompt(llm_analysis, referral_package_ocr=referral_package_structured_response), 
                                            response_format=PAFormAnswers,
-                                        #    pdf_path=referral_package_pdf_path,
+                                           pdf_path=referral_package_pdf_path,
                                            model="gemini-2.5-flash-preview-05-20")
     except Exception as e:
         print(f"Error in LLM processing: {e}")
@@ -398,18 +398,23 @@ def fill_fields_with_pymupdf(completed_form_fields: dict, input_pdf_path: str):
             if (field_name, page_num) in answer_map:
                 answer = answer_map[(field_name, page_num)]
                 
+                # Skip null values - leave field blank
+                if answer is None or answer == "null" or answer == "":
+                    continue
+                
                 # Handle checkbox fields differently
                 if widget.field_type == pymupdf.PDF_WIDGET_TYPE_CHECKBOX:
-                    # Check if answer indicates the checkbox should be checked
-                    should_check = answer not in ["Not Checked", "", None, False, "false", "False"]
+                    # Only check if answer explicitly indicates it should be checked
+                    should_check = answer.lower() in ["checked", "true", "yes", "1", "on"]
                     widget.field_value = should_check
+                    print(f"Checkbox '{field_name}' on page {page_num}: {'checked' if should_check else 'unchecked'} (answer: {answer})")
                 else:
                     # For non-checkbox fields, set value directly
                     widget.field_value = answer
+                    # print(f"Filled field '{field_name}' on page {page_num} with value: {answer}")
                 
                 widget.update()
                 filled_count += 1
-                print(f"Filled field '{field_name}' on page {page_num} with value: {answer}")
     
     # Save the filled PDF
     doc.save(output_pdf_path)

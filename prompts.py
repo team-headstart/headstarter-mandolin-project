@@ -155,7 +155,7 @@ def get_system_data_collection_prompt() -> str:
                 "field_type_string": "CheckBox",
                 "field_label": "Start of treatment"
                 "context": "Subheading: Start of treatment/Continuation of therapy. This checkbox indicates if the request is for the start of a new treatment."
-                "answer:" "Checked"
+                "answer:" "True"
               }
             ]
           }
