@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, send_file, flash, redirect, u
 import os
 from werkzeug.utils import secure_filename
 from pdf_to_doc import convert_pdf_to_doc
-from pdf_form_extractor import PDFFormExtractor
+from pdf_form_extractor import PDFFormExtractor, debug_extraction_and_fields
 import tempfile
 import logging
 from datetime import datetime

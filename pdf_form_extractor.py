@@ -5,18 +5,12 @@ import pytesseract
 from pdf2image import convert_from_path
 import tempfile
 import os
+import fitz 
+import json
 
 class PDFFormExtractor:
     def __init__(self):
-        self.required_fields = {
-            'start_of_treatment': None,
-            'last_treatment_date': None,
-            'patient_first_name': None,
-            'patient_last_name': None,
-            'patient_address': None,
-            'insurance_member_id': None,
-            'insurance_group': None
-        }
+        pass  # No hardcoded fields!
 
     def _validate_file_path(self, file_path):
         """Validate if file exists and is accessible"""
@@ -180,84 +174,130 @@ class PDFFormExtractor:
         except Exception:
             return date_str
 
-    def fill_pdf_form(self, template_pdf_path, output_pdf_path, extracted_data):
-        """
-        Fill a PDF form with the extracted data
-        """
-        try:
-            # Validate and normalize file paths
-            template_pdf_path = self._validate_file_path(template_pdf_path)
-            
-            # Ensure output directory exists
-            output_dir = os.path.dirname(output_pdf_path)
-            if output_dir and not os.path.exists(output_dir):
-                os.makedirs(output_dir)
+    def fill_pdf_form(self, input_pdf, output_pdf, field_values):
+        doc = fitz.open(input_pdf)
+        for page in doc:
+            widgets = page.widgets()
+            if not widgets:
+                continue
+            for widget in widgets:
+                field_name = widget.field_name
+                if field_name in field_values:
+                    rect = widget.rect
+                    widget.delete()
+                    page.insert_textbox(
+                        rect,
+                        str(field_values[field_name]),
+                        fontsize=12,
+                        fontname="helv",
+                        color=(0, 0, 0),
+                        align=fitz.TEXT_ALIGN_LEFT,
+                    )
+        doc.save(output_pdf)
 
-            # Open the template PDF
-            with open(template_pdf_path, 'rb') as file:
-                reader = PyPDF2.PdfReader(file)
-                writer = PyPDF2.PdfWriter()
+def debug_extraction_and_fields(source_pdf, template_pdf):
+    """
+    Print the full OCR-extracted text from the source PDF and all form field names from the template PDF.
+    """
+    print("\n--- DEBUG: OCR-Extracted Text from Source PDF ---")
+    try:
+        images = convert_from_path(source_pdf)
+        text = ""
+        for i, image in enumerate(images):
+            page_text = pytesseract.image_to_string(image)
+            print(f"\n[Page {i+1}]\n{text}")
+            text += page_text + "\n"
+        print("\n--- END OF OCR TEXT ---\n")
+    except Exception as e:
+        print(f"Error extracting text from {source_pdf}: {e}")
 
-                # Process all pages
-                for page_num in range(len(reader.pages)):
-                    page = reader.pages[page_num]
-                    
-                    # If the PDF has form fields, fill them
-                    if '/AcroForm' in reader.trailer['/Root']:
-                        if page_num == 0:  # Only fill form fields on the first page
-                            for field in reader.get_fields().keys():
-                                field_lower = field.lower()
-                                # Map fields to extracted data
-                                if 'patient' in field_lower and 'name' in field_lower:
-                                    if 'first' in field_lower:
-                                        page[field] = extracted_data['patient_first_name']
-                                    elif 'last' in field_lower:
-                                        page[field] = extracted_data['patient_last_name']
-                                elif 'address' in field_lower:
-                                    page[field] = extracted_data['patient_address']
-                                elif 'member' in field_lower and 'id' in field_lower:
-                                    page[field] = extracted_data['insurance_member_id']
-                                elif 'group' in field_lower:
-                                    page[field] = extracted_data['insurance_group']
-                                elif 'start' in field_lower and 'treatment' in field_lower:
-                                    page[field] = extracted_data['start_of_treatment']
-                                elif 'last' in field_lower and 'treatment' in field_lower:
-                                    page[field] = extracted_data['last_treatment_date']
+    print("\n--- DEBUG: PDF Form Field Names in Template PDF ---")
+    try:
+        doc = fitz.open(template_pdf)
+        for page_num, page in enumerate(doc, 1):
+            widgets = page.widgets()
+            if widgets:
+                for widget in widgets:
+                    print(f"Page {page_num}: Field Name = '{widget.field_name}'")
+        print("--- END OF FIELD NAMES ---\n")
+    except Exception as e:
+        print(f"Error reading form fields from {template_pdf}: {e}")
 
-                    # Add the page to the writer
-                    writer.add_page(page)
+def get_template_field_names(template_pdf):
+    doc = fitz.open(template_pdf)
+    field_names = set()
+    for page in doc:
+        widgets = page.widgets()
+        if widgets:
+            for widget in widgets:
+                if widget.field_name:
+                    field_names.add(widget.field_name)
+    return list(field_names)
 
-                # Write the filled PDF
-                with open(output_pdf_path, 'wb') as output_file:
-                    writer.write(output_file)
+def extract_text_from_pdf(pdf_path):
+    images = convert_from_path(pdf_path)
+    text = ""
+    for image in images:
+        text += pytesseract.image_to_string(image) + "\n"
+    return text
 
-            return True
+def extract_field_values_from_text(field_names, text):
+    # This is a naive implementation. You should customize the regex for your forms.
+    field_values = {}
+    for field in field_names:
+        # Try to find a line that contains the field name (case-insensitive)
+        pattern = rf"{field}[:\s]+(.+)"
+        match = re.search(pattern, text, re.IGNORECASE)
+        if match:
+            value = match.group(1).strip()
+            # Optionally, clean up value (remove trailing junk, etc.)
+            field_values[field] = value
+        else:
+            field_values[field] = ""  # Or None
+    return field_values
 
-        except Exception as e:
-            raise Exception(f"Error filling PDF form: {str(e)}")
+def extract_data_according_to_template(source_pdf, template_pdf):
+    field_names = get_template_field_names(template_pdf)
+    text = extract_text_from_pdf(source_pdf)
+    field_values = extract_field_values_from_text(field_names, text)
+    return field_values
+
+def extract_template_to_json(template_pdf, output_json):
+    doc = fitz.open(template_pdf)
+    fields = []
+    for page_num, page in enumerate(doc, 1):
+        widgets = page.widgets()
+        if widgets:
+            for widget in widgets:
+                field_info = {
+                    "field_name": widget.field_name,
+                    "question": widget.field_name,  # You can improve this by prettifying or mapping
+                    "type": widget.field_type if hasattr(widget, "field_type") else "text",
+                    "page": page_num
+                }
+                fields.append(field_info)
+    with open(output_json, "w") as f:
+        json.dump(fields, f, indent=2)
+    print(f"Extracted template schema to {output_json}")
 
 def main():
     try:
-        # Example usage
-        extractor = PDFFormExtractor()
-        
-        # Extract data from source PDF
-        source_pdf = "/Users/padmaja/Documents/Headstarter/mandoline/headstarter-mandolin-project/Input Data/Adbulla/referral_package.pdf"
-        print(f"Extracting data from: {source_pdf}")
-        extracted_data = extractor.extract_data_from_pdf(source_pdf)
-        print("Extracted data:", extracted_data)
-        
-        # Fill target PDF form
-        template_pdf = "/Users/padmaja/Documents/Headstarter/mandoline/headstarter-mandolin-project/Input Data/Adbulla/PA.pdf"
+        source_pdf = "source.pdf"
+        template_pdf = "template.pdf"
         output_pdf = "filled_form.pdf"
-        print(f"Filling form template: {template_pdf}")
+
+        # Extract data dynamically
+        extracted_data = extract_data_according_to_template(source_pdf, template_pdf)
+        print("Extracted data:", extracted_data)
+
+        # Fill the form
+        extractor = PDFFormExtractor()
         extractor.fill_pdf_form(template_pdf, output_pdf, extracted_data)
         print(f"Form filled successfully. Output saved to: {output_pdf}")
-        
+
     except Exception as e:
         print(f"Error: {str(e)}")
         return 1
-    
     return 0
 
 if __name__ == "__main__":
