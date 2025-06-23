@@ -1,0 +1,546 @@
+{
+  "completed_form": {
+    "General Precertification Information": {
+      "Indicate Type of Request": [
+        "Start of treatment"
+      ],
+      "Start date": "2024-05-22",
+      "Date of last treatment": null,
+      "Precertification Requested By": "Erfan Rostami, BSN, RN",
+      "Precertification Requested By Phone": "615-343-1176",
+      "Precertification Requested By Fax": "615-343-1219"
+    },
+    "Patient Information": {
+      "First Name": "Shakh",
+      "Last Name": "Abdulla",
+      "DOB": "2001-04-01",
+      "Address": "425 Sherman Ave",
+      "City": "Nashville",
+      "State": "TN",
+      "ZIP": "37995",
+      "Home Phone": "865-395-3958",
+      "Work Phone": null,
+      "Cell Phone": "865-395-0481",
+      "E-mail": null,
+      "Current Weight": null,
+      "Height": null,
+      "Allergies": "No Known Allergies"
+    },
+    "Insurance Information": {
+      "Member ID #": "LAJM14345116",
+      "Does patient have other coverage?": false,
+      "Group #": "435000",
+      "Other Coverage ID #": null,
+      "Other Coverage Carrier Name": null,
+      "Insured 1": null,
+      "Insured 2": null,
+      "Insured 3": null
+    },
+    "Prescriber Information": {
+      "First Name": "Hao",
+      "Last Name": "Gu",
+      "Check one": [
+        "M.D."
+      ],
+      "Address": "3320 Montgomery Dr",
+      "City": "NASHVILLE",
+      "State": "TN",
+      "ZIP": "37361",
+      "Phone": "614-936-0065",
+      "Fax": "615-562-4820",
+      "St Lic #": null,
+      "NPI #": "1154611523",
+      "DEA #": null,
+      "UPIN": null,
+      "Provider Email": null,
+      "Office Contact Name": "Erfan Rostami",
+      "Office Contact Phone": "615-343-1176"
+    },
+    "Dispensing Provider/Administration Information": {
+      "Place of Administration": [
+        "Outpatient Infusion Center"
+      ],
+      "Dispensing Provider/Pharmacy": [
+        "Other"
+      ],
+      "Dispensing Provider/Pharmacy Other (specify)": "Infusion Center",
+      "Agency Name": null,
+      "Administration code(s) (CPT)": null,
+      "Place of Administration Phone": "614-295-7655",
+      "Place of Administration Fax": "614-225-3355",
+      "Place of Administration TIN": null,
+      "Place of Administration PIN": null,
+      "Place of Administration NPI": null,
+      "Dispensing Provider/Pharmacy Name": "Golden Gate Infusion Center",
+      "Dispensing Provider/Pharmacy Address": null,
+      "Dispensing Provider/Pharmacy City": null,
+      "Dispensing Provider/Pharmacy State": null,
+      "Dispensing Provider/Pharmacy ZIP": null,
+      "Dispensing Provider/Pharmacy Phone": "614-295-7655",
+      "Dispensing Provider/Pharmacy Fax": "614-225-3355",
+      "Dispensing Provider/Pharmacy NPI": null
+    },
+    "Product Information": {
+      "Request is for": [
+        "Truxima (rituximab-abbs)"
+      ],
+      "Dose": "694 mg",
+      "Directions for Use": "Days 1, 15 Load Then Once Every 24 Weeks; 1st infusion - initiate at 50mg/hr and if no infusion toxicity reaction, may increase by 50mg/hr every 30 minutes; Max Rate 400mg/hr; Subsequent infusions - initiate at 100mg/hr and if no infusion toxicity reaction, may increase by 100mg/hr every 30 min; Max Rate 400mg/hr",
+      "HCPCS Code": null
+    },
+    "Diagnosis Information": {
+      "Primary ICD Code": "G35",
+      "Other ICD Code": null
+    },
+    "Clinical Information": {
+      "Has the patient had prior therapy with the requested product within the last 365 days?": false,
+      "Has the patient had a trial and failure of any of the following rituximab biosimilars?": false,
+      "Rituximab Biosimilars Trial and Failure Options": null,
+      "When was the member's trial and failure of the preferred drug (rituximab biosimilars)?": null,
+      "Please describe the nature of the failure of the preferred drug (rituximab biosimilars)": null,
+      "Has the patient had an adverse reaction to any of the following rituximab biosimilars?": false,
+      "Rituximab Biosimilars Adverse Reaction Options": null,
+      "When was the member's adverse reaction to the preferred drug (rituximab biosimilars)?": null,
+      "Please describe the nature of the adverse reaction to the preferred drug (rituximab biosimilars)": null,
+      "Contraindications/Medical Reasons for not using Ruxience/Truxima": [],
+      "Has the patient had a trial and failure of any of the following (Inflectra, Renflexis, Simponi Aria)?": false,
+      "Inflectra, Renflexis, Simponi Aria Trial and Failure Options": null,
+      "When was the member's trial and failure of the preferred drug (Inflectra, Renflexis, Simponi Aria)?": null,
+      "Please describe the nature of the failure of the preferred drug (Inflectra, Renflexis, Simponi Aria)": null,
+      "Has the patient had an adverse reaction to any of the following (Inflectra, Renflexis, Simponi Aria)?": false,
+      "Inflectra, Renflexis, Simponi Aria Adverse Reaction Options": null,
+      "When was the member's adverse reaction to the preferred drug (Inflectra, Renflexis, Simponi Aria)?": null,
+      "Please describe the nature of the adverse reaction to the preferred drug (Inflectra, Renflexis, Simponi Aria)": null,
+      "Has the patient had a trial and failure of any of the following (Enbrel, Humira, etc.)?": false,
+      "Enbrel, Humira, etc. Trial and Failure Options": null,
+      "When was the member's trial and failure of the preferred drug (Enbrel, Humira, etc.)?": null,
+      "Please describe the nature of the failure of the preferred drug (Enbrel, Humira, etc.)": null,
+      "Has the patient had an adverse reaction to any of the following (Enbrel, Humira, etc.)?": false,
+      "Enbrel, Humira, etc. Adverse Reaction Options": null,
+      "When was the member's adverse reaction to the preferred drug (Enbrel, Humira, etc.)?": null,
+      "Please describe the nature of the adverse reaction to the preferred drug (Enbrel, Humira, etc.)": null,
+      "Contraindications/Medical Reasons for not using Inflectra/Renflexis/Simponi Aria": [],
+      "Contraindications/Medical Reasons for not using Enbrel/Humira/Idacio/Rinvoq/Tyenne SC/Xeljanz/Xeljanz XR": [],
+      "Will Rituxan (rituximab) be used concomitantly with apremilast, tofacitinib, or other biologic DMARDs?": false,
+      "Acute lymphoid leukemia - Documented diagnosis of Philadelphia chromosome-negative ALL?": false,
+      "Acute lymphoid leukemia - Rituxan (rituximab) used as induction/consolidation therapy?": null,
+      "Autoimmune hemolytic anemia - Documented diagnosis of refractory autoimmune hemolytic anemia?": false,
+      "ANCA-associated vasculitides - Applies to patient": [],
+      "ANCA-associated vasculitides - Will Rituxan (rituximab) be given in conjunction with glucocorticoids?": null,
+      "Autoimmune blistering diseases, corticosteroid-refractory - Documented diagnosis?": false,
+      "Autoimmune blistering diseases, corticosteroid-refractory - Applies to patient": null,
+      "B-cell lymphomas - Applies to patient": [],
+      "B-cell lymphomas - Other (specify)": null,
+      "Castleman's disease - Documented diagnosis of multicentric Castleman's disease?": false,
+      "Central nervous system lymphomas - Applies to patient": [],
+      "Chronic or small lymphocytic leukemia - Applies to patient": [],
+      "Cryoglobulinemia - Documented diagnosis?": false,
+      "Cryoglobulinemia - Clinical documentation that treatment with corticosteroids and other immunosuppressive agents was ineffective?": null,
+      "Graft versus host disease, chronic - Rituxan (rituximab) used as last-resort treatment?": false,
+      "Hairy cell leukemia - Applies to patient": [],
+      "Heart and solid organ transplant - Rituxan (rituximab) used for treatment or prevention of highly sensitized patients?": false,
+      "Heart and solid organ transplant - Patient type": null,
+      "Immune checkpoint-inhibitor related encephalitis - Which immune check-point inhibitor caused the encephalitis?": [],
+      "Immune checkpoint-inhibitor related encephalitis - Other (specify)": null,
+      "Rheumatoid Arthritis - Severity": null,
+      "Rheumatoid Arthritis - Is there evidence that the disease is active?": false,
+      "Rheumatoid Arthritis - Will Rituxan (rituximab) be used in combination with methotrexate?": false,
+      "Rheumatoid Arthritis - Was treatment with methotrexate ineffective, not tolerated or contraindicated?": null,
+      "Rheumatoid Arthritis - Methotrexate reason": null,
+      "Rheumatoid Arthritis - Was treatment with another conventional DMARD ineffective?": false,
+      "Rheumatoid Arthritis - Conventional DMARDs that were ineffective": null,
+      "Sj\u00f6gren syndrome - Documented diagnosis?": false,
+      "Sj\u00f6gren syndrome - Was treatment with corticosteroids and other immunosuppressive agents was ineffective?": null,
+      "Sj\u00f6gren syndrome - Medication 1": null,
+      "Sj\u00f6gren syndrome - Medication 1 Dates": null,
+      "Sj\u00f6gren syndrome - Medication 2": null,
+      "Sj\u00f6gren syndrome - Medication 2 Dates": null,
+      "Thrombotic thrombocytopenic purpura - Documented diagnosis of refractory TTP?": false,
+      "Waldenstrom's macroglobulinemia - Documented diagnosis?": false,
+      "Continuation Requests - Is this request a result of the patient receiving samples of Rituxan (rituximab)?": false,
+      "Continuation Requests - Length of time on Rituxan (rituximab)": null
+    }
+  },
+  "processing_notes": [
+    {
+      "field": "Date of last treatment",
+      "note": "Field depends on 'Continuation of therapy' request type, which was not indicated."
+    },
+    {
+      "field": "Work Phone",
+      "note": "Not mentioned in the referral document for the patient."
+    },
+    {
+      "field": "E-mail",
+      "note": "Not mentioned in the referral document for the patient."
+    },
+    {
+      "field": "Current Weight",
+      "note": "Not mentioned in the referral document for the patient."
+    },
+    {
+      "field": "Height",
+      "note": "Not mentioned in the referral document for the patient."
+    },
+    {
+      "field": "Does patient have other coverage?",
+      "note": "Inferred false as only primary insurance information was provided, with no mention of other coverage."
+    },
+    {
+      "field": "Other Coverage ID #",
+      "note": "Field depends on 'Does patient have other coverage?' being true, which was not indicated."
+    },
+    {
+      "field": "Other Coverage Carrier Name",
+      "note": "Field depends on 'Does patient have other coverage?' being true, which was not indicated."
+    },
+    {
+      "field": "Insured 1",
+      "note": "Only one subscriber was mentioned; no additional insured parties were explicitly listed."
+    },
+    {
+      "field": "Insured 2",
+      "note": "Only one subscriber was mentioned; no additional insured parties were explicitly listed."
+    },
+    {
+      "field": "Insured 3",
+      "note": "Only one subscriber was mentioned; no additional insured parties were explicitly listed."
+    },
+    {
+      "field": "St Lic #",
+      "note": "Not mentioned in the referral document for the prescriber."
+    },
+    {
+      "field": "DEA #",
+      "note": "Not mentioned in the referral document for the prescriber."
+    },
+    {
+      "field": "UPIN",
+      "note": "Not mentioned in the referral document for the prescriber."
+    },
+    {
+      "field": "Provider Email",
+      "note": "Not mentioned in the referral document for the prescriber."
+    },
+    {
+      "field": "Dispensing Provider/Pharmacy",
+      "note": "Inferred 'Other' and specified 'Infusion Center' as the document refers to a 'local infusion facility' that administers the drug, rather than a traditional pharmacy type from the options."
+    },
+    {
+      "field": "Dispensing Provider/Pharmacy Other (specify)",
+      "note": "Inferred 'Infusion Center' based on the document's description of 'local infusion facility'."
+    },
+    {
+      "field": "Agency Name",
+      "note": "Not mentioned in the referral document."
+    },
+    {
+      "field": "Administration code(s) (CPT)",
+      "note": "Not mentioned in the referral document."
+    },
+    {
+      "field": "Place of Administration TIN",
+      "note": "Not mentioned in the referral document."
+    },
+    {
+      "field": "Place of Administration PIN",
+      "note": "Not mentioned in the referral document."
+    },
+    {
+      "field": "Place of Administration NPI",
+      "note": "Not mentioned in the referral document."
+    },
+    {
+      "field": "Dispensing Provider/Pharmacy Address",
+      "note": "The address for Golden Gate Infusion Center was not provided in the document."
+    },
+    {
+      "field": "Dispensing Provider/Pharmacy City",
+      "note": "The city for Golden Gate Infusion Center was not provided in the document."
+    },
+    {
+      "field": "Dispensing Provider/Pharmacy State",
+      "note": "The state for Golden Gate Infusion Center was not provided in the document."
+    },
+    {
+      "field": "Dispensing Provider/Pharmacy ZIP",
+      "note": "The ZIP code for Golden Gate Infusion Center was not provided in the document."
+    },
+    {
+      "field": "Dispensing Provider/Pharmacy NPI",
+      "note": "Not mentioned in the referral document for the dispensing provider/pharmacy."
+    },
+    {
+      "field": "HCPCS Code",
+      "note": "Not mentioned in the referral document."
+    },
+    {
+      "field": "Other ICD Code",
+      "note": "Not mentioned in the referral document."
+    },
+    {
+      "field": "Has the patient had prior therapy with the requested product within the last 365 days?",
+      "note": "Inferred false as the document specifies 'First dose' and 'Second Initial Dose', indicating a new treatment course."
+    },
+    {
+      "field": "Has the patient had a trial and failure of any of the following rituximab biosimilars?",
+      "note": "Inferred false as no mention of trial and failure was found."
+    },
+    {
+      "field": "Rituximab Biosimilars Trial and Failure Options",
+      "note": "Field depends on 'Has the patient had a trial and failure of any of the following rituximab biosimilars?' being true, which was not indicated."
+    },
+    {
+      "field": "When was the member's trial and failure of the preferred drug (rituximab biosimilars)?",
+      "note": "Field depends on 'Has the patient had a trial and failure of any of the following rituximab biosimilars?' being true, which was not indicated."
+    },
+    {
+      "field": "Please describe the nature of the failure of the preferred drug (rituximab biosimilars)",
+      "note": "Field depends on 'Has the patient had a trial and failure of any of the following rituximab biosimilars?' being true, which was not indicated."
+    },
+    {
+      "field": "Has the patient had an adverse reaction to any of the following rituximab biosimilars?",
+      "note": "Inferred false as no mention of adverse reactions was found."
+    },
+    {
+      "field": "Rituximab Biosimilars Adverse Reaction Options",
+      "note": "Field depends on 'Has the patient had an adverse reaction to any of the following rituximab biosimilars?' being true, which was not indicated."
+    },
+    {
+      "field": "When was the member's adverse reaction to the preferred drug (rituximab biosimilars)?",
+      "note": "Field depends on 'Has the patient had an adverse reaction to any of the following rituximab biosimilars?' being true, which was not indicated."
+    },
+    {
+      "field": "Please describe the nature of the adverse reaction to the preferred drug (rituximab biosimilars)",
+      "note": "Field depends on 'Has the patient had an adverse reaction to any of the following rituximab biosimilars?' being true, which was not indicated."
+    },
+    {
+      "field": "Contraindications/Medical Reasons for not using Ruxience/Truxima",
+      "note": "No contraindications for Ruxience/Truxima were mentioned, and the patient is prescribed Truxima."
+    },
+    {
+      "field": "Has the patient had a trial and failure of any of the following (Inflectra, Renflexis, Simponi Aria)?",
+      "note": "Inferred false as no mention of trial and failure was found."
+    },
+    {
+      "field": "Inflectra, Renflexis, Simponi Aria Trial and Failure Options",
+      "note": "Field depends on 'Has the patient had a trial and failure of any of the following (Inflectra, Renflexis, Simponi Aria)?' being true, which was not indicated."
+    },
+    {
+      "field": "When was the member's trial and failure of the preferred drug (Inflectra, Renflexis, Simponi Aria)?",
+      "note": "Field depends on 'Has the patient had a trial and failure of any of the following (Inflectra, Renflexis, Simponi Aria)?' being true, which was not indicated."
+    },
+    {
+      "field": "Please describe the nature of the failure of the preferred drug (Inflectra, Renflexis, Simponi Aria)",
+      "note": "Field depends on 'Has the patient had a trial and failure of any of the following (Inflectra, Renflexis, Simponi Aria)?' being true, which was not indicated."
+    },
+    {
+      "field": "Has the patient had an adverse reaction to any of the following (Inflectra, Renflexis, Simponi Aria)?",
+      "note": "Inferred false as no mention of adverse reactions was found."
+    },
+    {
+      "field": "Inflectra, Renflexis, Simponi Aria Adverse Reaction Options",
+      "note": "Field depends on 'Has the patient had an adverse reaction to any of the following (Inflectra, Renflexis, Simponi Aria)?' being true, which was not indicated."
+    },
+    {
+      "field": "When was the member's adverse reaction to the preferred drug (Inflectra, Renflexis, Simponi Aria)?",
+      "note": "Field depends on 'Has the patient had an adverse reaction to any of the following (Inflectra, Renflexis, Simponi Aria)?' being true, which was not indicated."
+    },
+    {
+      "field": "Please describe the nature of the adverse reaction to the preferred drug (Inflectra, Renflexis, Simponi Aria)",
+      "note": "Field depends on 'Has the patient had an adverse reaction to any of the following (Inflectra, Renflexis, Simponi Aria)?' being true, which was not indicated."
+    },
+    {
+      "field": "Has the patient had a trial and failure of any of the following (Enbrel, Humira, etc.)?",
+      "note": "Inferred false as no mention of trial and failure was found."
+    },
+    {
+      "field": "Enbrel, Humira, etc. Trial and Failure Options",
+      "note": "Field depends on 'Has the patient had a trial and failure of any of the following (Enbrel, Humira, etc.)?' being true, which was not indicated."
+    },
+    {
+      "field": "When was the member's trial and failure of the preferred drug (Enbrel, Humira, etc.)?",
+      "note": "Field depends on 'Has the patient had a trial and failure of any of the following (Enbrel, Humira, etc.)?' being true, which was not indicated."
+    },
+    {
+      "field": "Please describe the nature of the failure of the preferred drug (Enbrel, Humira, etc.)",
+      "note": "Field depends on 'Has the patient had a trial and failure of any of the following (Enbrel, Humira, etc.)?' being true, which was not indicated."
+    },
+    {
+      "field": "Has the patient had an adverse reaction to any of the following (Enbrel, Humira, etc.)?",
+      "note": "Inferred false as no mention of adverse reactions was found."
+    },
+    {
+      "field": "Enbrel, Humira, etc. Adverse Reaction Options",
+      "note": "Field depends on 'Has the patient had an adverse reaction to any of the following (Enbrel, Humira, etc.)?' being true, which was not indicated."
+    },
+    {
+      "field": "When was the member's adverse reaction to the preferred drug (Enbrel, Humira, etc.)?",
+      "note": "Field depends on 'Has the patient had an adverse reaction to any of the following (Enbrel, Humira, etc.)?' being true, which was not indicated."
+    },
+    {
+      "field": "Please describe the nature of the adverse reaction to the preferred drug (Enbrel, Humira, etc.)",
+      "note": "Field depends on 'Has the patient had an adverse reaction to any of the following (Enbrel, Humira, etc.)?' being true, which was not indicated."
+    },
+    {
+      "field": "Contraindications/Medical Reasons for not using Inflectra/Renflexis/Simponi Aria",
+      "note": "No contraindications for these medications were mentioned."
+    },
+    {
+      "field": "Contraindications/Medical Reasons for not using Enbrel/Humira/Idacio/Rinvoq/Tyenne SC/Xeljanz/Xeljanz XR",
+      "note": "No contraindications for these medications were mentioned."
+    },
+    {
+      "field": "Will Rituxan (rituximab) be used concomitantly with apremilast, tofacitinib, or other biologic DMARDs?",
+      "note": "Inferred false as no concomitant use of these medications was mentioned."
+    },
+    {
+      "field": "Acute lymphoid leukemia - Documented diagnosis of Philadelphia chromosome-negative ALL?",
+      "note": "Inferred false as no mention of this diagnosis was found."
+    },
+    {
+      "field": "Acute lymphoid leukemia - Rituxan (rituximab) used as induction/consolidation therapy?",
+      "note": "Field depends on 'Acute lymphoid leukemia - Documented diagnosis of Philadelphia chromosome-negative ALL?' being true, which was not indicated."
+    },
+    {
+      "field": "Autoimmune hemolytic anemia - Documented diagnosis of refractory autoimmune hemolytic anemia?",
+      "note": "Inferred false as no mention of this diagnosis was found."
+    },
+    {
+      "field": "ANCA-associated vasculitides - Applies to patient",
+      "note": "No mention of ANCA-associated vasculitides was found."
+    },
+    {
+      "field": "ANCA-associated vasculitides - Will Rituxan (rituximab) be given in conjunction with glucocorticoids?",
+      "note": "No mention of ANCA-associated vasculitides was found, despite glucocorticoid administration."
+    },
+    {
+      "field": "Autoimmune blistering diseases, corticosteroid-refractory - Documented diagnosis?",
+      "note": "Inferred false as no mention of this diagnosis was found."
+    },
+    {
+      "field": "Autoimmune blistering diseases, corticosteroid-refractory - Applies to patient",
+      "note": "Field depends on 'Autoimmune blistering diseases, corticosteroid-refractory - Documented diagnosis?' being true, which was not indicated."
+    },
+    {
+      "field": "B-cell lymphomas - Applies to patient",
+      "note": "No mention of B-cell lymphomas was found."
+    },
+    {
+      "field": "B-cell lymphomas - Other (specify)",
+      "note": "Field depends on 'B-cell lymphomas - Applies to patient' selecting 'Other', which was not indicated."
+    },
+    {
+      "field": "Castleman's disease - Documented diagnosis of multicentric Castleman's disease?",
+      "note": "Inferred false as no mention of this diagnosis was found."
+    },
+    {
+      "field": "Central nervous system lymphomas - Applies to patient",
+      "note": "No mention of Central nervous system lymphomas was found."
+    },
+    {
+      "field": "Chronic or small lymphocytic leukemia - Applies to patient",
+      "note": "No mention of Chronic or small lymphocytic leukemia was found."
+    },
+    {
+      "field": "Cryoglobulinemia - Documented diagnosis?",
+      "note": "Inferred false as no mention of this diagnosis was found."
+    },
+    {
+      "field": "Cryoglobulinemia - Clinical documentation that treatment with corticosteroids and other immunosuppressive agents was ineffective?",
+      "note": "Field depends on 'Cryoglobulinemia - Documented diagnosis?' being true, which was not indicated."
+    },
+    {
+      "field": "Graft versus host disease, chronic - Rituxan (rituximab) used as last-resort treatment?",
+      "note": "Inferred false as no mention of this diagnosis or treatment scenario was found."
+    },
+    {
+      "field": "Hairy cell leukemia - Applies to patient",
+      "note": "No mention of Hairy cell leukemia was found."
+    },
+    {
+      "field": "Heart and solid organ transplant - Rituxan (rituximab) used for treatment or prevention of highly sensitized patients?",
+      "note": "Inferred false as no mention of heart or solid organ transplant was found."
+    },
+    {
+      "field": "Heart and solid organ transplant - Patient type",
+      "note": "Field depends on 'Heart and solid organ transplant - Rituxan (rituximab) used for treatment or prevention of highly sensitized patients?' being true, which was not indicated."
+    },
+    {
+      "field": "Immune checkpoint-inhibitor related encephalitis - Which immune check-point inhibitor caused the encephalitis?",
+      "note": "No mention of immune checkpoint-inhibitor related encephalitis was found."
+    },
+    {
+      "field": "Immune checkpoint-inhibitor related encephalitis - Other (specify)",
+      "note": "Field depends on 'Immune checkpoint-inhibitor related encephalitis - Which immune check-point inhibitor caused the encephalitis?' selecting 'Other', which was not indicated."
+    },
+    {
+      "field": "Rheumatoid Arthritis - Severity",
+      "note": "No mention of Rheumatoid Arthritis was found."
+    },
+    {
+      "field": "Rheumatoid Arthritis - Is there evidence that the disease is active?",
+      "note": "Inferred false as no mention of Rheumatoid Arthritis was found."
+    },
+    {
+      "field": "Rheumatoid Arthritis - Will Rituxan (rituximab) be used in combination with methotrexate?",
+      "note": "Inferred false as no mention of Rheumatoid Arthritis or combination therapy was found."
+    },
+    {
+      "field": "Rheumatoid Arthritis - Was treatment with methotrexate ineffective, not tolerated or contraindicated?",
+      "note": "Field depends on 'Rheumatoid Arthritis - Will Rituxan (rituximab) be used in combination with methotrexate?' being true, which was not indicated."
+    },
+    {
+      "field": "Rheumatoid Arthritis - Methotrexate reason",
+      "note": "Field depends on 'Rheumatoid Arthritis - Was treatment with methotrexate ineffective, not tolerated or contraindicated?' being true, which was not indicated."
+    },
+    {
+      "field": "Rheumatoid Arthritis - Was treatment with another conventional DMARD ineffective?",
+      "note": "Inferred false as no mention of Rheumatoid Arthritis or other DMARD treatment was found."
+    },
+    {
+      "field": "Rheumatoid Arthritis - Conventional DMARDs that were ineffective",
+      "note": "Field depends on 'Rheumatoid Arthritis - Was treatment with another conventional DMARD ineffective?' being true, which was not indicated."
+    },
+    {
+      "field": "Sj\u00f6gren syndrome - Documented diagnosis?",
+      "note": "Inferred false as no mention of Sj\u00f6gren syndrome was found."
+    },
+    {
+      "field": "Sj\u00f6gren syndrome - Was treatment with corticosteroids and other immunosuppressive agents was ineffective?",
+      "note": "Field depends on 'Sj\u00f6gren syndrome - Documented diagnosis?' being true, which was not indicated."
+    },
+    {
+      "field": "Sj\u00f6gren syndrome - Medication 1",
+      "note": "Field depends on 'Sj\u00f6gren syndrome - Was treatment with corticosteroids and other immunosuppressive agents was ineffective?' being true, which was not indicated."
+    },
+    {
+      "field": "Sj\u00f6gren syndrome - Medication 1 Dates",
+      "note": "Field depends on 'Sj\u00f6gren syndrome - Was treatment with corticosteroids and other immunosuppressive agents was ineffective?' being true, which was not indicated."
+    },
+    {
+      "field": "Sj\u00f6gren syndrome - Medication 2",
+      "note": "Field depends on 'Sj\u00f6gren syndrome - Was treatment with corticosteroids and other immunosuppressive agents was ineffective?' being true, which was not indicated."
+    },
+    {
+      "field": "Sj\u00f6gren syndrome - Medication 2 Dates",
+      "note": "Field depends on 'Sj\u00f6gren syndrome - Was treatment with corticosteroids and other immunosuppressive agents was ineffective?' being true, which was not indicated."
+    },
+    {
+      "field": "Thrombotic thrombocytopenic purpura - Documented diagnosis of refractory TTP?",
+      "note": "Inferred false as no mention of this diagnosis was found."
+    },
+    {
+      "field": "Waldenstrom's macroglobulinemia - Documented diagnosis?",
+      "note": "Inferred false as no mention of this diagnosis was found."
+    },
+    {
+      "field": "Continuation Requests - Is this request a result of the patient receiving samples of Rituxan (rituximab)?",
+      "note": "Inferred false as this is an initial request, not a continuation."
+    },
+    {
+      "field": "Continuation Requests - Length of time on Rituxan (rituximab)",
+      "note": "Field depends on being a continuation request, which was not indicated."
+    }
+  ]
+}

@@ -8,7 +8,7 @@ from mistralai import Mistral
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
-from prompts import get_ocr_analysis_prompt, get_system_prompt, get_system_data_collection_prompt, get_data_collection_prompt
+from prompts import get_ocr_analysis_prompt, get_system_prompt, get_system_data_collection_prompt, get_data_collection_prompt, get_pdf_analysis_prompt
 from datetime import datetime
 import pymupdf
 import time
@@ -55,25 +55,24 @@ class OCRResponse(BaseModel):
 
 class PAFormField(BaseModel):
     name: str
-    type: int
-    value: str
     page: int
-    field_type: int
     field_type_string: str
     field_label: str
+    context: str = Field(default="")
     
 class PAFormAnswer(BaseModel):
     name: str
-    type: int
-    value: str
     page: int
-    field_type: int
     field_type_string: str
     field_label: str
+    context: str
     answer: str = Field(default="Answer to the question based on the provided referral package data.")
 
 class PAFormFields(BaseModel):
     fields: List[PAFormField]
+    
+class PAFormAnswers(BaseModel):
+    answers: List[PAFormAnswer]
 
 def encode_pdf(pdf_path):
     """Encode the pdf to base64."""
@@ -120,7 +119,6 @@ def extract_pa_pdf_fields(pdf_path: str) -> dict:
                 "field_label": w.field_label,
             }
             fields.append(field)
-            print(field)
     return fields
 pa_pdf_fields = extract_pa_pdf_fields(pa_pdf_path)
 
@@ -226,25 +224,39 @@ Parses over the markdown text from the OCR response and returns a JSON object wi
 the fillable fields parsed out and their corresponding value types.
 '''
 @time_step("Step 3: LLM Analysis")
-def process_with_llm(system_prompt: str, prompt: str) -> str:
+def process_with_llm(system_prompt: str, prompt: str, pdf_path: str, response_format: str = None, model: str = "gemini-2.5-flash-lite-preview-06-17",) -> str:
     """Process OCR text with LLMs to extract structured information."""
+    
+    gemini_upload_filepath = pathlib.Path(pdf_path)
     
     client = genai.Client(api_key=os.environ["GOOGLE_API_KEY"])
     
     response = client.models.generate_content(
-        model="gemini-2.5-flash-preview-05-20",
+        model=model,
         config=types.GenerateContentConfig(
             system_instruction=system_prompt,
-            response_mime_type="application/json"),
-        contents=[prompt]
+            response_mime_type="application/json",
+            response_schema=response_format
+            ),
+          contents=[
+            types.Part.from_bytes(
+                data=gemini_upload_filepath.read_bytes(),
+                mime_type='application/pdf',
+            ),
+            prompt]
     )
-    
     # print(response.text)
     return response.text
 
+
+
 try:
     # Process all pages from the OCR response
-    llm_analysis = process_with_llm(system_prompt=get_system_prompt(), prompt=get_ocr_analysis_prompt(structured_response))
+    llm_analysis = process_with_llm(system_prompt=get_system_prompt(), 
+                                    prompt=get_pdf_analysis_prompt(
+                                        pa_pdf_fields=structured_pa_pdf_fields, ocr_text=structured_response), 
+                                    response_format=PAFormFields, 
+                                    pdf_path=pa_pdf_path)
     print("Successfully processed PA form with LLM including OCR + PyMuPDF")
 except Exception as e:
     print(f"Error in LLM processing: {e}")
@@ -266,34 +278,10 @@ def save_processed_data(patient_name: str, ocr_response: OCRResponse, llm_analys
     patient_dir = os.path.join(output_base, patient_name)
     os.makedirs(patient_dir, exist_ok=True)
     
-    # Save OCR response
-    ocr_file = os.path.join(patient_dir, "PA_OCR_Markdown.json")
-    with open(ocr_file, 'w') as f:
-        json.dump(ocr_response.model_dump(), f, indent=2)
-    
     # Save LLM analysis
     llm_file = os.path.join(patient_dir, "Extracted_Fields.json")
     with open(llm_file, 'w') as f:
         json.dump(llm_analysis, f, indent=2)
-    
-    # Save PyMuPDF extracted field data
-    pymupdf_file = os.path.join(patient_dir, "PyMuPDF_Fields.json")
-    with open(pymupdf_file, 'w') as f:
-        json.dump(pa_pdf_fields, f, indent=2)
-    
-    # Save combined results
-    combined_file = os.path.join(patient_dir, "Combined_Analysis.json")
-    combined_data = {
-        "ocr_response": ocr_response.model_dump(),
-        "llm_analysis": llm_analysis,
-        "pymupdf_fields": pa_pdf_fields,
-        "metadata": {
-            "processed_date": datetime.now().isoformat(),
-            "patient_name": patient_name
-        }
-    }
-    with open(combined_file, 'w') as f:
-        json.dump(combined_data, f, indent=2)
     
     print(f"Processed data saved to {patient_dir}")
 
@@ -391,17 +379,17 @@ def gather_field_input_data_ocr(llm_analysis: dict):
         patient_dir = os.path.join(output_base, "Abdulla")
         os.makedirs(patient_dir, exist_ok=True)
         
-        # Save OCR response
-        ocr_file = os.path.join(patient_dir, "Referral_Package_OCR_Markdown.json")
-        with open(ocr_file, 'w') as f:
-            json.dump(referral_package_structured_response.model_dump(), f, indent=2)
     except Exception as e:
         print(f"Error in OCR processing: {e}")
         exit(1)
 
     try:
     # Process all pages from the OCR response
-        field_data_text = process_with_llm(get_system_data_collection_prompt(), prompt=get_data_collection_prompt(llm_analysis, referral_package_ocr=referral_package_structured_response))
+        field_data_text = process_with_llm(get_system_data_collection_prompt(), 
+                                           prompt=get_data_collection_prompt(llm_analysis, referral_package_ocr=referral_package_structured_response), 
+                                           response_format=PAFormAnswers,
+                                           pdf_path=referral_package_pdf_path,
+                                           model="gemini-2.5-pro")
     except Exception as e:
         print(f"Error in LLM processing: {e}")
         
@@ -410,7 +398,7 @@ def gather_field_input_data_ocr(llm_analysis: dict):
     # Save the field data
     patient_name = os.path.basename(os.path.dirname(pa_pdf_path))
     output_dir = os.path.join("Output Data", patient_name)
-    field_data_file = os.path.join(output_dir, "Field_Data_OCR.json")
+    field_data_file = os.path.join(output_dir, "Completed_Form_Fields.json")
     
     with open(field_data_file, 'w') as f:
         json.dump(field_data, f, indent=2)
