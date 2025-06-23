@@ -224,27 +224,40 @@ Parses over the markdown text from the OCR response and returns a JSON object wi
 the fillable fields parsed out and their corresponding value types.
 '''
 @time_step("Step 3: LLM Analysis")
-def process_with_llm(system_prompt: str, prompt: str, pdf_path: str, response_format: str = None, model: str = "gemini-2.5-flash-lite-preview-06-17",) -> str:
+def process_with_llm(system_prompt: str, prompt: str, pdf_path: str = None, response_format: str = None, model: str = "gemini-2.5-flash-lite-preview-06-17",) -> str:
     """Process OCR text with LLMs to extract structured information."""
     
-    gemini_upload_filepath = pathlib.Path(pdf_path)
+
     
     client = genai.Client(api_key=os.environ["GOOGLE_API_KEY"])
     
-    response = client.models.generate_content(
-        model=model,
-        config=types.GenerateContentConfig(
-            system_instruction=system_prompt,
-            response_mime_type="application/json",
-            response_schema=response_format
-            ),
-          contents=[
-            types.Part.from_bytes(
-                data=gemini_upload_filepath.read_bytes(),
-                mime_type='application/pdf',
-            ),
-            prompt]
-    )
+    if pdf_path:
+        gemini_upload_filepath = pathlib.Path(pdf_path)
+    
+        response = client.models.generate_content(
+            model=model,
+            config=types.GenerateContentConfig(
+                system_instruction=system_prompt,
+                response_mime_type="application/json",
+                response_schema=response_format
+                ),
+            contents=[
+                types.Part.from_bytes(
+                    data=gemini_upload_filepath.read_bytes(),
+                    mime_type='application/pdf',
+                ),
+                prompt]
+        )   
+    else:
+        response = client.models.generate_content(
+            model=model,
+            config=types.GenerateContentConfig(
+                system_instruction=system_prompt,
+                response_mime_type="application/json",
+                response_schema=response_format
+                ),
+            contents=[prompt]
+        )   
     # print(response.text)
     return response.text
 
@@ -290,69 +303,6 @@ patient_name = os.path.basename(os.path.dirname(pa_pdf_path))
 save_processed_data(patient_name, structured_response, json.loads(llm_analysis))
 
 
-# '''
-# Step 5:
-# AI Gathering of Necessary Field Data for Entry
-# - model: gemini-2.5-flash-preview-05-20
-# - text:
-#     - type: application/json
-#         - llm_analysis
-#     - type: application/pdf
-#         - referral_package.pdf
-# - response_format: json_object
-
-# Provided the full referral_package and the OCR derived fields, the AI model will be allowed to collect the information it deems necessary to fill in the fields appropriately. The AI model will be passed the extracted fields and the referral package pdf.
-# '''
-
-# @time_step("Step 5: Direct Field Data Collection")
-# def gather_field_input_data(llm_field_analysis: dict) -> dict:
-#     """Gather and structure field data from PA form and referral package for form entry."""
-    
-#     client = genai.Client(api_key=os.environ["GOOGLE_API_KEY"])
-    
-#     # Referral package path
-#     referral_package_pdf_path = "./Input Data/Abdulla/referral_package.pdf"
-#     filepath = pathlib.Path(referral_package_pdf_path)
-    
-#     system_prompt = get_system_data_collection_prompt()
-#     prompt = get_data_collection_prompt(llm_field_analysis)
-    
-#     # Get the model's analysis
-#     response = client.models.generate_content(
-#         model="gemini-2.5-flash-preview-05-20",
-#         config=types.GenerateContentConfig(
-#             system_instruction=system_prompt,
-#             response_mime_type="application/json"),
-#         contents=[
-#             types.Part.from_bytes(
-#                 data=filepath.read_bytes(),
-#                 mime_type='application/pdf',
-#             ),
-#             prompt]
-#     )
-    
-#     # Parse and return the structured field data
-#     field_data = json.loads(response.text)
-    
-#     # Save the field data
-#     patient_name = os.path.basename(os.path.dirname(pa_pdf_path))
-#     output_dir = os.path.join("Output Data", patient_name)
-#     field_data_file = os.path.join(output_dir, "Field_Data_Direct.json")
-    
-#     with open(field_data_file, 'w') as f:
-#         json.dump(field_data, f, indent=2)
-    
-#     print(f"Field data saved to {field_data_file}")
-#     return field_data
-
-# # Process the field data
-# try:
-#     field_data_direct = gather_field_input_data(json.loads(llm_analysis))
-#     print("Successfully processed PA and referral packaged directly with Gemini Document Analysis")
-# except Exception as e:
-#     print(f"Error in field data gathering: {e}")
-    
-
 '''
 Step 5:
 AI Gathering of Necessary Field Data for Entry
@@ -388,8 +338,8 @@ def gather_field_input_data_ocr(llm_analysis: dict):
         field_data_text = process_with_llm(get_system_data_collection_prompt(), 
                                            prompt=get_data_collection_prompt(llm_analysis, referral_package_ocr=referral_package_structured_response), 
                                            response_format=PAFormAnswers,
-                                           pdf_path=referral_package_pdf_path,
-                                           model="gemini-2.5-pro")
+                                        #    pdf_path=referral_package_pdf_path,
+                                           model="gemini-2.5-flash-preview-05-20")
     except Exception as e:
         print(f"Error in LLM processing: {e}")
         
@@ -407,10 +357,87 @@ def gather_field_input_data_ocr(llm_analysis: dict):
     return field_data
         
 try:
-    field_data_ocr = gather_field_input_data_ocr(json.loads(llm_analysis))
+    filled_field_data = gather_field_input_data_ocr(json.loads(llm_analysis))
     print("Successfully processed PA and referral packaged with AI OCR + Gemini Document Analysis")
 except Exception as e:
     print(f"Error in field data gathering: {e}")
+    
+    
+'''
+Step 7:
+Filling in the fields using PyMuPDF
+
+Using the completed form fields gathered from the previous step, PyMuPDF will be used to fill in the fields in the PA form.
+'''
+
+@time_step("Step 7: PyMuPDF Field Filling")
+def fill_fields_with_pymupdf(completed_form_fields: dict, input_pdf_path: str):
+    """Fill fields in the PA form using PyMuPDF based on field identifiers."""
+    
+    # Open the PDF document
+    doc = pymupdf.open(input_pdf_path)
+    
+    # Create output path
+    patient_name = os.path.basename(os.path.dirname(input_pdf_path))
+    output_dir = os.path.join("Output Data", patient_name)
+    os.makedirs(output_dir, exist_ok=True)
+    output_pdf_path = os.path.join(output_dir, "Filled_PA_Form.pdf")
+    
+    # Create a map of field names and their corresponding answers
+    answer_map = {
+        (answer["name"], answer["page"]): answer["answer"]
+        for answer in completed_form_fields["answers"]
+    }
+    
+    # Fill the fields in the PDF
+    filled_count = 0
+    for page_num, page in enumerate(doc, start=1):
+        widgets = page.widgets()
+        for widget in widgets:
+            field_name = widget.field_name
+            if (field_name, page_num) in answer_map:
+                answer = answer_map[(field_name, page_num)]
+                
+                # Handle checkbox fields differently
+                if widget.field_type == pymupdf.PDF_WIDGET_TYPE_CHECKBOX:
+                    # Check if answer indicates the checkbox should be checked
+                    should_check = answer not in ["Not Checked", "", None, False, "false", "False"]
+                    widget.field_value = should_check
+                else:
+                    # For non-checkbox fields, set value directly
+                    widget.field_value = answer
+                
+                widget.update()
+                filled_count += 1
+                print(f"Filled field '{field_name}' on page {page_num} with value: {answer}")
+    
+    # Save the filled PDF
+    doc.save(output_pdf_path)
+    doc.close()
+    
+    print(f"Successfully filled {filled_count} fields")
+    print(f"Filled PDF saved to: {output_pdf_path}")
+    
+    return {
+        "filled_fields_count": filled_count,
+        "total_fields_found": len(answer_map),
+        "output_path": output_pdf_path
+    }
+
+# Process the field filling
+try:
+    
+    # Fill the fields
+    filling_result = fill_fields_with_pymupdf(
+        completed_form_fields=filled_field_data,
+        input_pdf_path=pa_pdf_path
+    )
+    
+    print("Successfully completed field filling with PyMuPDF")
+    print(filling_result)
+    
+except Exception as e:
+    print(f"Error in field filling: {e}")
 
 # End overall timing
 overall_end_time = time.time()

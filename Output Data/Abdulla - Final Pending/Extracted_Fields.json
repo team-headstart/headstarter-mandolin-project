@@ -1,0 +1,2356 @@
+{
+  "fields": [
+    {
+      "name": "CB1",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Start of treatment",
+      "context": "Subheading: A. PATIENT INFORMATION. Check this box if this is the start of a new treatment."
+    },
+    {
+      "name": "T2",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Start date: (MM)",
+      "context": "Subheading: A. PATIENT INFORMATION. To be filled if 'Start of treatment' is checked. Provides the month for the start date of the treatment."
+    },
+    {
+      "name": "T3",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Start date: (DD)",
+      "context": "Subheading: A. PATIENT INFORMATION. To be filled if 'Start of treatment' is checked. Provides the day for the start date of the treatment."
+    },
+    {
+      "name": "T4",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Start date: (YYYY)",
+      "context": "Subheading: A. PATIENT INFORMATION. To be filled if 'Start of treatment' is checked. Provides the year for the start date of the treatment."
+    },
+    {
+      "name": "CB5",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Continuation of therapy",
+      "context": "Subheading: A. PATIENT INFORMATION. Check this box if this is a continuation of an existing therapy."
+    },
+    {
+      "name": "T6",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Date of last treatment: (MM)",
+      "context": "Subheading: A. PATIENT INFORMATION. To be filled if 'Continuation of therapy' is checked. Provides the month for the date of the last treatment."
+    },
+    {
+      "name": "T7",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Date of last treatment: (DD)",
+      "context": "Subheading: A. PATIENT INFORMATION. To be filled if 'Continuation of therapy' is checked. Provides the day for the date of the last treatment."
+    },
+    {
+      "name": "T8",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Date of last treatment: (YYYY)",
+      "context": "Subheading: A. PATIENT INFORMATION. To be filled if 'Continuation of therapy' is checked. Provides the year for the date of the last treatment."
+    },
+    {
+      "name": "T9",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Precertification Requested By:",
+      "context": "Subheading: A. PATIENT INFORMATION. Field to indicate who is requesting the precertification (e.g., physician's office, patient)."
+    },
+    {
+      "name": "T10",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Phone:",
+      "context": "Subheading: A. PATIENT INFORMATION. Phone number of the person or entity requesting precertification."
+    },
+    {
+      "name": "T11",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Fax:",
+      "context": "Subheading: A. PATIENT INFORMATION. Fax number of the person or entity requesting precertification."
+    },
+    {
+      "name": "T12",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Patient First Name",
+      "context": "Subheading: A. PATIENT INFORMATION. First name of the patient."
+    },
+    {
+      "name": "T13",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Patient Last Name",
+      "context": "Subheading: A. PATIENT INFORMATION. Last name of the patient."
+    },
+    {
+      "name": "T14",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Patient DOB (MM/DD/YYYY)",
+      "context": "Subheading: A. PATIENT INFORMATION. Date of birth of the patient in MM/DD/YYYY format."
+    },
+    {
+      "name": "T15",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Address:",
+      "context": "Subheading: A. PATIENT INFORMATION. Street address of the patient."
+    },
+    {
+      "name": "T16",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "City:",
+      "context": "Subheading: A. PATIENT INFORMATION. City of the patient's address."
+    },
+    {
+      "name": "T17",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "State:",
+      "context": "Subheading: A. PATIENT INFORMATION. State of the patient's address."
+    },
+    {
+      "name": "T18",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "ZIP:",
+      "context": "Subheading: A. PATIENT INFORMATION. ZIP code of the patient's address."
+    },
+    {
+      "name": "T19",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Patient Phone",
+      "context": "Subheading: A. PATIENT INFORMATION. Primary phone number for the patient."
+    },
+    {
+      "name": "T20",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Work Phone:",
+      "context": "Subheading: A. PATIENT INFORMATION. Work phone number for the patient."
+    },
+    {
+      "name": "T21",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Cell Phone:",
+      "context": "Subheading: A. PATIENT INFORMATION. Cell phone number for the patient."
+    },
+    {
+      "name": "T22",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "E-mail:",
+      "context": "Subheading: A. PATIENT INFORMATION. Email address for the patient."
+    },
+    {
+      "name": "T24",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "lbs",
+      "context": "Subheading: A. PATIENT INFORMATION. Input field for patient's weight in pounds."
+    },
+    {
+      "name": "T25",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "kgs",
+      "context": "Subheading: A. PATIENT INFORMATION. Input field for patient's weight in kilograms."
+    },
+    {
+      "name": "T26",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "inches",
+      "context": "Subheading: A. PATIENT INFORMATION. Input field for patient's height in inches."
+    },
+    {
+      "name": "T27",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "cms",
+      "context": "Subheading: A. PATIENT INFORMATION. Input field for patient's height in centimeters."
+    },
+    {
+      "name": "T23",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Allergies:",
+      "context": "Subheading: A. PATIENT INFORMATION. Field to list any known allergies for the patient."
+    },
+    {
+      "name": "T28",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Member ID #:",
+      "context": "Subheading: B. INSURANCE INFORMATION. Member identification number for the patient."
+    },
+    {
+      "name": "T29",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Group #:",
+      "context": "Subheading: B. INSURANCE INFORMATION. Group number associated with the patient's insurance."
+    },
+    {
+      "name": "T30",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Insured:",
+      "context": "Subheading: B. INSURANCE INFORMATION. Name of the insured individual."
+    },
+    {
+      "name": "CB31",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: B. INSURANCE INFORMATION. Checkbox for 'Does patient have other coverage?' indicating 'Yes'."
+    },
+    {
+      "name": "CB32",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: B. INSURANCE INFORMATION. Checkbox for 'Does patient have other coverage?' indicating 'No'."
+    },
+    {
+      "name": "T33",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "If yes, provide ID#:",
+      "context": "Subheading: B. INSURANCE INFORMATION. Dependent on 'Does patient have other coverage?' being 'Yes'. Field to provide the ID number for the other coverage."
+    },
+    {
+      "name": "T34",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Carrier Name:",
+      "context": "Subheading: B. INSURANCE INFORMATION. Name of the insurance carrier, if applicable."
+    },
+    {
+      "name": "T35",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Insured:",
+      "context": "Subheading: B. INSURANCE INFORMATION. Name of the insured, for secondary insurance if applicable."
+    },
+    {
+      "name": "T42",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "First Name:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. First name of the prescriber."
+    },
+    {
+      "name": "T43",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Last Name:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. Last name of the prescriber."
+    },
+    {
+      "name": "CB44",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "M.D.",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. Checkbox to indicate the prescriber's professional designation as M.D."
+    },
+    {
+      "name": "CB45",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "D.O.",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. Checkbox to indicate the prescriber's professional designation as D.O."
+    },
+    {
+      "name": "CB46",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "N.P.",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. Checkbox to indicate the prescriber's professional designation as Nurse Practitioner (N.P.)."
+    },
+    {
+      "name": "CB47",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "P.A.",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. Checkbox to indicate the prescriber's professional designation as Physician Assistant (P.A.)."
+    },
+    {
+      "name": "T48",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Address:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. Street address of the prescriber."
+    },
+    {
+      "name": "T49",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "City:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. City of the prescriber's address."
+    },
+    {
+      "name": "T50",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "State:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. State of the prescriber's address."
+    },
+    {
+      "name": "T51",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "ZIP:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. ZIP code of the prescriber's address."
+    },
+    {
+      "name": "T52",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Phone:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. Phone number of the prescriber."
+    },
+    {
+      "name": "T53",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Fax:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. Fax number of the prescriber."
+    },
+    {
+      "name": "T54",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "St Lic #:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. State license number of the prescriber."
+    },
+    {
+      "name": "T55",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "NPI #:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. National Provider Identifier (NPI) of the prescriber."
+    },
+    {
+      "name": "T56",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "DEA #:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. Drug Enforcement Administration (DEA) number of the prescriber."
+    },
+    {
+      "name": "T57",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "UPIN:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. User Personal Identification Number (UPIN) of the prescriber."
+    },
+    {
+      "name": "T58.0",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Provider Email:",
+      "context": "Subheading: C. PRESCRIBER INFORMATION. Email address of the prescriber."
+    },
+    {
+      "name": "T58.1",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Office Contact Name:",
+      "context": "Subheading: C. PRESCHIBER INFORMATION. Name of the contact person in the prescriber's office."
+    },
+    {
+      "name": "T59",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Phone:",
+      "context": "Subheading: C. PRESCHIBER INFORMATION. Phone number for the office contact."
+    },
+    {
+      "name": "Provider Admin CB.1",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Self-administered",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Place of Administration. Check if the medication is self-administered by the patient."
+    },
+    {
+      "name": "Provider Admin CB.2",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Physician\u2019s Office",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Place of Administration. Check if the medication is administered in a physician's office."
+    },
+    {
+      "name": "Provider Admin CB.3",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Home",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Place of Administration. Check if the medication is administered at home."
+    },
+    {
+      "name": "Provider Admin CB.4",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Outpatient Infusion Center",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Place of Administration. Check if the medication is administered at an outpatient infusion center."
+    },
+    {
+      "name": "Provider Admin T.5",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Name:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Name of the Outpatient Infusion Center."
+    },
+    {
+      "name": "Provider Admin CB.7",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Home Infusion Center",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Place of Administration. Check if the medication is administered by a home infusion center."
+    },
+    {
+      "name": "Provider Admin T.6",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Phone:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Phone number of the Home Infusion Center."
+    },
+    {
+      "name": "Provider Admin T.8",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Agency Name:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Name of the agency providing home infusion services."
+    },
+    {
+      "name": "Provider Admin CB.10",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Administration code(s)",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Checkbox indicating administration codes will be provided."
+    },
+    {
+      "name": "Provider Admin T.9",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "CPT:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Current Procedural Terminology (CPT) code for the administration of the drug."
+    },
+    {
+      "name": "Provider Admin T.11A",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Address:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Street address of the dispensing provider/pharmacy."
+    },
+    {
+      "name": "Provider Admin T.13",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "City:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. City of the dispensing provider/pharmacy."
+    },
+    {
+      "name": "Provider Admin T.14",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "State:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. State of the dispensing provider/pharmacy."
+    },
+    {
+      "name": "Provider Admin T.15",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "ZIP:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. ZIP code of the dispensing provider/pharmacy."
+    },
+    {
+      "name": "Provider Admin T.16",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Phone:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Phone number of the dispensing provider/pharmacy."
+    },
+    {
+      "name": "Provider Admin T.17A",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Fax:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Fax number of the dispensing provider/pharmacy."
+    },
+    {
+      "name": "Provider Admin T.18",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "TIN:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Taxpayer Identification Number (TIN) of the dispensing provider/pharmacy."
+    },
+    {
+      "name": "Provider Admin T.19",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "PIN:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Pharmacy Identification Number (PIN) of the dispensing provider/pharmacy."
+    },
+    {
+      "name": "Provider Admin T.20",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "NPI:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. National Provider Identifier (NPI) of the dispensing provider/pharmacy."
+    },
+    {
+      "name": "Provider Admin CB.21",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Outpatient Dialysis Center",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Dispensing Provider/Pharmacy. Check if the medication is dispensed by an outpatient dialysis center."
+    },
+    {
+      "name": "Provider Admin CB.22",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Physician\u2019s Office",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Dispensing Provider/Pharmacy. Check if the medication is dispensed by a physician's office."
+    },
+    {
+      "name": "Provider Admin CB.23.0.0",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Retail Pharmacy",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Dispensing Provider/Pharmacy. Check if the medication is dispensed by a retail pharmacy."
+    },
+    {
+      "name": "Provider Admin CB.24.0.0",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Specialty Pharmacy",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Dispensing Provider/Pharmacy. Check if the medication is dispensed by a specialty pharmacy."
+    },
+    {
+      "name": "Provider Admin CB.25",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Mail Order",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Dispensing Provider/Pharmacy. Check if the medication is dispensed via mail order."
+    },
+    {
+      "name": "Provider Admin CB.26",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Other:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Dispensing Provider/Pharmacy. Check if the dispensing provider is 'Other'."
+    },
+    {
+      "name": "Provider Admin T.27",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Other:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Dispensing Provider/Pharmacy. Specify the type of 'Other' dispensing provider."
+    },
+    {
+      "name": "Provider Admin T.28",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Name:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Dispensing Provider/Pharmacy. Name of the dispensing provider/pharmacy."
+    },
+    {
+      "name": "Provider Admin T.29a",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Address:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Dispensing Provider/Pharmacy. Street address of the dispensing provider/pharmacy."
+    },
+    {
+      "name": "Provider Admin T.30a",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "City:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Dispensing Provider/Pharmacy. City of the dispensing provider/pharmacy."
+    },
+    {
+      "name": "Provider Admin T.31",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "State:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Dispensing Provider/Pharmacy. State of the dispensing provider/pharmacy."
+    },
+    {
+      "name": "Provider Admin T.32",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "ZIP:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Dispensing Provider/Pharmacy. ZIP code of the dispensing provider/pharmacy."
+    },
+    {
+      "name": "Provider Admin T.33",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Phone:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Dispensing Provider/Pharmacy. Phone number of the dispensing provider/pharmacy."
+    },
+    {
+      "name": "Provider Admin T.34",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Fax:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Dispensing Provider/Pharmacy. Fax number of the dispensing provider/pharmacy."
+    },
+    {
+      "name": "Provider Admin T.35",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "TIN:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Dispensing Provider/Pharmacy. Taxpayer Identification Number (TIN) of the dispensing provider/pharmacy."
+    },
+    {
+      "name": "Provider Admin T.36",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "PIN:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Dispensing Provider/Pharmacy. Pharmacy Identification Number (PIN) of the dispensing provider/pharmacy."
+    },
+    {
+      "name": "Provider Admin T.37",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "NPI:",
+      "context": "Subheading: D. DISPENSING PROVIDER/ADMINISTRATION INFORMATION. Dispensing Provider/Pharmacy. National Provider Identifier (NPI) of the dispensing provider/pharmacy."
+    },
+    {
+      "name": "CB60",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Riabni (rituximab-arrx)",
+      "context": "Subheading: E. PRODUCT INFORMATION. Check if the request is for Riabni (rituximab-arrx)."
+    },
+    {
+      "name": "CB61",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Rituxan (rituximab)",
+      "context": "Subheading: E. PRODUCT INFORMATION. Check if the request is for Rituxan (rituximab)."
+    },
+    {
+      "name": "CB62",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Ruxience (rituximab-pvvr)",
+      "context": "Subheading: E. PRODUCT INFORMATION. Check if the request is for Ruxience (rituximab-pvvr)."
+    },
+    {
+      "name": "CB63",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Truxima (rituximab-abbs)",
+      "context": "Subheading: E. PRODUCT INFORMATION. Check if the request is for Truxima (rituximab-abbs)."
+    },
+    {
+      "name": "T64",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Dose:",
+      "context": "Subheading: E. PRODUCT INFORMATION. Dosage of the requested medication."
+    },
+    {
+      "name": "T65",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Directions for Use:",
+      "context": "Subheading: E. PRODUCT INFORMATION. Instructions for how the medication should be used."
+    },
+    {
+      "name": "T66",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "HCPCS Code:",
+      "context": "Subheading: E. PRODUCT INFORMATION. Healthcare Common Procedure Coding System (HCPCS) code for the product."
+    },
+    {
+      "name": "T67",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Primary ICD Code:",
+      "context": "Subheading: F. DIAGNOSIS INFORMATION. Primary International Classification of Diseases (ICD) code for the patient's condition."
+    },
+    {
+      "name": "CB68",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Other ICD Code:",
+      "context": "Subheading: F. DIAGNOSIS INFORMATION. Checkbox to indicate that an 'Other ICD Code' will be provided."
+    },
+    {
+      "name": "T69",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Other ICD Code:",
+      "context": "Subheading: F. DIAGNOSIS INFORMATION. Dependent on 'Other ICD Code:' checkbox. Field to provide the other ICD code."
+    },
+    {
+      "name": "CB70",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION. For Initiation Requests. Checkbox for 'Has the patient had prior therapy with the requested product within the last 365 days?' indicating 'Yes'."
+    },
+    {
+      "name": "CB71",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION. For Initiation Requests. Checkbox for 'Has the patient had prior therapy with the requested product within the last 365 days?' indicating 'No'."
+    },
+    {
+      "name": "CB72",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION. For Initiation Requests. Checkbox for 'Has the patient had a trial and failure of any of the following rituximab biosimilars?' indicating 'No'."
+    },
+    {
+      "name": "CB73",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Ruxience (rituximab-pvvr)",
+      "context": "Subheading: G. CLINICAL INFORMATION. For Initiation Requests. Dependent on 'Has the patient had a trial and failure of any of the following rituximab biosimilars?' being 'Yes'. Check if the patient had a trial and failure with Ruxience (rituximab-pvvr)."
+    },
+    {
+      "name": "CB74",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Truxima (rituximab-abbs)",
+      "context": "Subheading: G. CLINICAL INFORMATION. For Initiation Requests. Dependent on 'Has the patient had a trial and failure of any of the following rituximab biosimilars?' being 'Yes'. Check if the patient had a trial and failure with Truxima (rituximab-abbs)."
+    },
+    {
+      "name": "T75",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "When was the member\u2019s trial and failure of the preferred drug?",
+      "context": "Subheading: G. CLINICAL INFORMATION. For Initiation Requests. Dependent on 'Has the patient had a trial and failure of any of the following rituximab biosimilars?' being 'Yes'. Date of trial and failure of the preferred drug."
+    },
+    {
+      "name": "T76",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Please describe the nature of the failure of the preferred drug",
+      "context": "Subheading: G. CLINICAL INFORMATION. For Initiation Requests. Dependent on 'Has the patient had a trial and failure of any of the following rituximab biosimilars?' being 'Yes'. Description of the failure of the preferred drug."
+    },
+    {
+      "name": "CB77",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION. For Initiation Requests. Checkbox for 'Has the patient had an adverse reaction to any of the following rituximab biosimilars?' indicating 'No'."
+    },
+    {
+      "name": "CB78",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Ruxience (rituximab-pvvr)",
+      "context": "Subheading: G. CLINICAL INFORMATION. For Initiation Requests. Dependent on 'Has the patient had an adverse reaction to any of the following rituximab biosimilars?' being 'Yes'. Check if the patient had an adverse reaction to Ruxience (rituximab-pvvr)."
+    },
+    {
+      "name": "CB79",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Truxima (rituximab-abbs)",
+      "context": "Subheading: G. CLINICAL INFORMATION. For Initiation Requests. Dependent on 'Has the patient had an adverse reaction to any of the following rituximab biosimilars?' being 'Yes'. Check if the patient had an adverse reaction to Truxima (rituximab-abbs)."
+    },
+    {
+      "name": "T80",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "When was the member\u2019s adverse reaction to the preferred drug?",
+      "context": "Subheading: G. CLINICAL INFORMATION. For Initiation Requests. Dependent on 'Has the patient had an adverse reaction to any of the following rituximab biosimilars?' being 'Yes'. Date of the adverse reaction to the preferred drug."
+    },
+    {
+      "name": "T81",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Please describe the nature of the adverse reaction to the preferred drug",
+      "context": "Subheading: G. CLINICAL INFORMATION. For Initiation Requests. Dependent on 'Has the patient had an adverse reaction to any of the following rituximab biosimilars?' being 'Yes'. Description of the adverse reaction to the preferred drug."
+    },
+    {
+      "name": "CB82",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Ruxience (rituximab-pvvr)",
+      "context": "Subheading: G. CLINICAL INFORMATION. For Initiation Requests. Dependent on 'Please explain if there are any contraindications or other medical reason(s) that the patient cannot use any of the following preferred biosimilar products when indicated for the patient's diagnosis?' being 'Yes'. Check if Ruxience (rituximab-pvvr) cannot be used."
+    },
+    {
+      "name": "CB83",
+      "page": 2,
+      "field_type_string": "CheckBox",
+      "field_label": "Truxima (rituximab-abbs)",
+      "context": "Subheading: G. CLINICAL INFORMATION. For Initiation Requests. Dependent on 'Please explain if there are any contraindications or other medical reason(s) that the patient cannot use any of the following preferred biosimilar products when indicated for the patient's diagnosis?' being 'Yes'. Check if Truxima (rituximab-abbs) cannot be used."
+    },
+    {
+      "name": "T84",
+      "page": 2,
+      "field_type_string": "Text",
+      "field_label": "Please explain if there are any contraindications or other medical reason(s) that the patient cannot use any of the following preferred biosimilar products when indicated for the patient\u2019s diagnosis?",
+      "context": "Subheading: G. CLINICAL INFORMATION. For Initiation Requests. Field to explain reasons why preferred biosimilar products cannot be used."
+    },
+    {
+      "name": "T12",
+      "page": 3,
+      "field_type_string": "Text",
+      "field_label": "Patient First Name",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). First name of the patient. This field is a duplicate of T12 on page 2."
+    },
+    {
+      "name": "T13",
+      "page": 3,
+      "field_type_string": "Text",
+      "field_label": "Patient Last Name",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Last name of the patient. This field is a duplicate of T13 on page 2."
+    },
+    {
+      "name": "T19",
+      "page": 3,
+      "field_type_string": "Text",
+      "field_label": "Patient Phone",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Phone number of the patient. This field is a duplicate of T19 on page 2."
+    },
+    {
+      "name": "T14",
+      "page": 3,
+      "field_type_string": "Text",
+      "field_label": "Patient DOB (MM/DD/YYYY)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Date of birth of the patient. This field is a duplicate of T14 on page 2."
+    },
+    {
+      "name": "CB86",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Inflectra (infliximab-dyyb)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had a trial and failure of any of the following?' being 'Yes'. Check if patient had a trial and failure with Inflectra."
+    },
+    {
+      "name": "CB87",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Renflexis (infliximab-abda)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had a trial and failure of any of the following?' being 'Yes'. Check if patient had a trial and failure with Renflexis."
+    },
+    {
+      "name": "CB88",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Simponi Aria (golimumab)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had a trial and failure of any of the following?' being 'Yes'. Check if patient had a trial and failure with Simponi Aria."
+    },
+    {
+      "name": "T89",
+      "page": 3,
+      "field_type_string": "Text",
+      "field_label": "When was the member\u2019s trial and failure of the preferred drug?",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had a trial and failure of any of the following?' being 'Yes'. Date of trial and failure of the preferred drug."
+    },
+    {
+      "name": "T90",
+      "page": 3,
+      "field_type_string": "Text",
+      "field_label": "Please describe the nature of the failure of the preferred drug",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had a trial and failure of any of the following?' being 'Yes'. Description of the failure of the preferred drug."
+    },
+    {
+      "name": "CB85",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Checkbox for 'Has the patient had an adverse reaction to any of the following?' indicating 'No'."
+    },
+    {
+      "name": "CB92",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Inflectra (infliximab-dyyb)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had an adverse reaction to any of the following?' being 'Yes'. Check if patient had an adverse reaction to Inflectra."
+    },
+    {
+      "name": "CB93",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Renflexis (infliximab-abda)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had an adverse reaction to any of the following?' being 'Yes'. Check if patient had an adverse reaction to Renflexis."
+    },
+    {
+      "name": "CB94",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Simponi Aria (golimumab)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had an adverse reaction to any of the following?' being 'Yes'. Check if patient had an adverse reaction to Simponi Aria."
+    },
+    {
+      "name": "T95",
+      "page": 3,
+      "field_type_string": "Text",
+      "field_label": "When was the member\u2019s adverse reaction to the preferred drug?",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had an adverse reaction to any of the following?' being 'Yes'. Date of adverse reaction to the preferred drug."
+    },
+    {
+      "name": "T96a",
+      "page": 3,
+      "field_type_string": "Text",
+      "field_label": "Please describe the nature of the adverse reaction to the preferred drug",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had an adverse reaction to any of the following?' being 'Yes'. Description of the adverse reaction to the preferred drug."
+    },
+    {
+      "name": "CB91",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Checkbox for 'Has the patient had a trial and failure of any of the following?' indicating 'No'."
+    },
+    {
+      "name": "CB98a",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Enbrel (etanercept)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had a trial and failure of any of the following?' being 'Yes'. Check if patient had a trial and failure with Enbrel."
+    },
+    {
+      "name": "CB99a",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Humira (adalimumab)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had a trial and failure of any of the following?' being 'Yes'. Check if patient had a trial and failure with Humira."
+    },
+    {
+      "name": "CB100a",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Idacio (adalimumab-aacf)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had a trial and failure of any of the following?' being 'Yes'. Check if patient had a trial and failure with Idacio."
+    },
+    {
+      "name": "CB101a",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Rinvoq (upadacitinib)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had a trial and failure of any of the following?' being 'Yes'. Check if patient had a trial and failure with Rinvoq."
+    },
+    {
+      "name": "CB102a",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Tyenne SC (tocilizumab-aazg)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had a trial and failure of any of the following?' being 'Yes'. Check if patient had a trial and failure with Tyenne SC."
+    },
+    {
+      "name": "CB103a",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Xeljanz/Xeljanz XR (tofacitinib)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had a trial and failure of any of the following?' being 'Yes'. Check if patient had a trial and failure with Xeljanz/Xeljanz XR."
+    },
+    {
+      "name": "T104",
+      "page": 3,
+      "field_type_string": "Text",
+      "field_label": "When was the member\u2019s trial and failure of the preferred drug?",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had a trial and failure of any of the following?' being 'Yes'. Date of trial and failure of the preferred drug."
+    },
+    {
+      "name": "T105",
+      "page": 3,
+      "field_type_string": "Text",
+      "field_label": "Please describe the nature of the failure of the preferred drug",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had a trial and failure of any of the following?' being 'Yes'. Description of the failure of the preferred drug."
+    },
+    {
+      "name": "CB97",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Checkbox for 'Has the patient had a trial and failure of any of the following?' indicating 'No'."
+    },
+    {
+      "name": "CB107z",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Enbrel (etanercept)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had a trial and failure of any of the following?' being 'Yes'. Check if patient had a trial and failure with Enbrel."
+    },
+    {
+      "name": "CB108z",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Humira (adalimumab)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had a trial and failure of any of the following?' being 'Yes'. Check if patient had a trial and failure with Humira."
+    },
+    {
+      "name": "CB109z",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Idacio (adalimumab-aacf)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had a trial and failure of any of the following?' being 'Yes'. Check if patient had a trial and failure with Idacio."
+    },
+    {
+      "name": "CB110z",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Rinvoq (upadacitinib)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had a trial and failure of any of the following?' being 'Yes'. Check if patient had a trial and failure with Rinvoq."
+    },
+    {
+      "name": "CB111z",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Tyenne SC (tocilizumab-aazg)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had a trial and failure of any of the following?' being 'Yes'. Check if patient had a trial and failure with Tyenne SC."
+    },
+    {
+      "name": "CB112z",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Xeljanz/Xeljanz XR (tofacitinib)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had a trial and failure of any of the following?' being 'Yes'. Check if patient had a trial and failure with Xeljanz/Xeljanz XR."
+    },
+    {
+      "name": "T113",
+      "page": 3,
+      "field_type_string": "Text",
+      "field_label": "When was the member\u2019s adverse reaction to the preferred drug?",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had a trial and failure of any of the following?' being 'Yes'. Date of adverse reaction to the preferred drug."
+    },
+    {
+      "name": "T114",
+      "page": 3,
+      "field_type_string": "Text",
+      "field_label": "Please describe the nature of the adverse reaction to the preferred drug",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Has the patient had a trial and failure of any of the following?' being 'Yes'. Description of the adverse reaction to the preferred drug."
+    },
+    {
+      "name": "CB106z",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Checkbox for 'Has the patient had a trial and failure of any of the following?' indicating 'No'."
+    },
+    {
+      "name": "T118",
+      "page": 3,
+      "field_type_string": "Text",
+      "field_label": "Please explain if there are any contraindications or other medical reason(s) that the patient cannot use any of the following preferred products when indicated for the patient's diagnosis?",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Checkbox to explain contraindications or other medical reasons for not using preferred products."
+    },
+    {
+      "name": "CB115z",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Inflectra (infliximab-dyyb)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Please explain if there are any contraindications or other medical reason(s) that the patient cannot use any of the following preferred products when indicated for the patient's diagnosis?' being 'Yes'. Check if Inflectra cannot be used."
+    },
+    {
+      "name": "CB116z",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Renflexis (infliximab-abda)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Please explain if there are any contraindications or other medical reason(s) that the patient cannot use any of the following preferred products when indicated for the patient's diagnosis?' being 'Yes'. Check if Renflexis cannot be used."
+    },
+    {
+      "name": "CB117z",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Simponi Aria (golimumab)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Please explain if there are any contraindications or other medical reason(s) that the patient cannot use any of the following preferred products when indicated for the patient's diagnosis?' being 'Yes'. Check if Simponi Aria cannot be used."
+    },
+    {
+      "name": "T125",
+      "page": 3,
+      "field_type_string": "Text",
+      "field_label": "Please explain if there are contraindications or any other medical reason(s) that the patient cannot use any of the following preferred products when indicated for the patient\u2019s diagnosis?",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Checkbox to explain contraindications or other medical reasons for not using preferred products."
+    },
+    {
+      "name": "CB119z",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Enbrel (etanercept)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Please explain if there are contraindications or any other medical reason(s) that the patient cannot use any of the following preferred products when indicated for the patient's diagnosis?' being 'Yes'. Check if Enbrel cannot be used."
+    },
+    {
+      "name": "CB120z",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Humira (adalimumab)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Please explain if there are contraindications or any other medical reason(s) that the patient cannot use any of the following preferred products when indicated for the patient's diagnosis?' being 'Yes'. Check if Humira cannot be used."
+    },
+    {
+      "name": "CB121z",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Idacio (adalimumab-aacf)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Please explain if there are contraindications or any other medical reason(s) that the patient cannot use any of the following preferred products when indicated for the patient's diagnosis?' being 'Yes'. Check if Idacio cannot be used."
+    },
+    {
+      "name": "CB122z",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Rinvoq (upadacitinib)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Please explain if there are contraindications or any other medical reason(s) that the patient cannot use any of the following preferred products when indicated for the patient's diagnosis?' being 'Yes'. Check if Rinvoq cannot be used."
+    },
+    {
+      "name": "CB123z",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Tyenne SC (tocilizumab-aazg)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Please explain if there are contraindications or any other medical reason(s) that the patient cannot use any of the following preferred products when indicated for the patient's diagnosis?' being 'Yes'. Check if Tyenne SC cannot be used."
+    },
+    {
+      "name": "CB124z",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Xeljanz/Xeljanz XR (tofacitinib)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Initiation Requests continued. Dependent on 'Please explain if there are contraindications or any other medical reason(s) that the patient cannot use any of the following preferred products when indicated for the patient's diagnosis?' being 'Yes'. Check if Xeljanz/Xeljanz XR cannot be used."
+    },
+    {
+      "name": "CB96.4.0",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For All Requests. Checkbox for 'Will Rituxan (rituximab) be used concomitantly with apremilast, tofacitinib, or other biologic DMARDs?' indicating 'Yes'."
+    },
+    {
+      "name": "CB98",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For All Requests. Checkbox for 'Will Rituxan (rituximab) be used concomitantly with apremilast, tofacitinib, or other biologic DMARDs?' indicating 'No'."
+    },
+    {
+      "name": "CB99.0",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Acute lymphoid leukemia. Checkbox for 'Does the patient have a documented diagnosis of Philadelphia chromosome-negative acute lymphoid leukemia (ALL)?' indicating 'Yes'."
+    },
+    {
+      "name": "CB100.0",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Acute lymphoid leukemia. Checkbox for 'Does the patient have a documented diagnosis of Philadelphia chromosome-negative acute lymphoid leukemia (ALL)?' indicating 'No'."
+    },
+    {
+      "name": "CB101.0",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Acute lymphoid leukemia. Checkbox for 'Is Rituxan (rituximab) being used as induction/consolidation therapy?' indicating 'Yes'."
+    },
+    {
+      "name": "CB102.0",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Acute lymphoid leukemia. Checkbox for 'Is Rituxan (rituximab) being used as induction/consolidation therapy?' indicating 'No'."
+    },
+    {
+      "name": "CB103",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Autoimmune hemolytic anemia. Checkbox for 'Does the patient have a documented diagnosis of refractory autoimmune hemolytic anemia?' indicating 'Yes'."
+    },
+    {
+      "name": "CB104",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Autoimmune hemolytic anemia. Checkbox for 'Does the patient have a documented diagnosis of refractory autoimmune hemolytic anemia?' indicating 'No'."
+    },
+    {
+      "name": "CB104a",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Wegener granulomatosis",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Anti-neutrophil cytoplasmic antibody-associated (ANCA-associated) vasculitides. Check if the patient has Wegener granulomatosis."
+    },
+    {
+      "name": "CB104b",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Churg-Strauss syndrome",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Anti-neutrophil cytoplasmic antibody-associated (ANCA-associated) vasculitides. Check if the patient has Churg-Strauss syndrome."
+    },
+    {
+      "name": "CB104c",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "microscopic polyangiitis",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Anti-neutrophil cytoplasmic antibody-associated (ANCA-associated) vasculitides. Check if the patient has microscopic polyangiitis."
+    },
+    {
+      "name": "CB104d",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "pauci-immune glomerulonephritis",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Anti-neutrophil cytoplasmic antibody-associated (ANCA-associated) vasculitides. Check if the patient has pauci-immune glomerulonephritis."
+    },
+    {
+      "name": "CB105",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Anti-neutrophil cytoplasmic antibody-associated (ANCA-associated) vasculitides. Checkbox for 'Will Rituxan (rituximab) be given in conjunction with glucocorticoids?' indicating 'Yes'."
+    },
+    {
+      "name": "CB106",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Anti-neutrophil cytoplasmic antibody-associated (ANCA-associated) vasculitides. Checkbox for 'Will Rituxan (rituximab) be given in conjunction with glucocorticoids?' indicating 'No'."
+    },
+    {
+      "name": "CB106a",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Autoimmune blistering diseases, corticosteroid-refractory. Checkbox for 'Does the patient have a documented diagnosis of corticosteroid-refractory autoimmune blistering disease?' indicating 'Yes'."
+    },
+    {
+      "name": "CB107",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "pemphigus vulgaris",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Autoimmune blistering diseases, corticosteroid-refractory. Dependent on 'Does the patient have a documented diagnosis of corticosteroid-refractory autoimmune blistering disease?' being 'Yes'. Select if the patient has pemphigus vulgaris."
+    },
+    {
+      "name": "CB108",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "pemphigus folliaceus",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Autoimmune blistering diseases, corticosteroid-refractory. Dependent on 'Does the patient have a documented diagnosis of corticosteroid-refractory autoimmune blistering disease?' being 'Yes'. Select if the patient has pemphigus folliaceus."
+    },
+    {
+      "name": "CB109",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "bullous pemphigoid",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Autoimmune blistering diseases, corticosteroid-refractory. Dependent on 'Does the patient have a documented diagnosis of corticosteroid-refractory autoimmune blistering disease?' being 'Yes'. Select if the patient has bullous pemphigoid."
+    },
+    {
+      "name": "CB110",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "cicatricial pemphigoid",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Autoimmune blistering diseases, corticosteroid-refractory. Dependent on 'Does the patient have a documented diagnosis of corticosteroid-refractory autoimmune blistering disease?' being 'Yes'. Select if the patient has cicatricial pemphigoid."
+    },
+    {
+      "name": "CB111",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "epidermolysis bullosa acquisita",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Autoimmune blistering diseases, corticosteroid-refractory. Dependent on 'Does the patient have a documented diagnosis of corticosteroid-refractory autoimmune blistering disease?' being 'Yes'. Select if the patient has epidermolysis bullosa acquisita."
+    },
+    {
+      "name": "CB112",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "paraneoplastic pemphigus",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Autoimmune blistering diseases, corticosteroid-refractory. Dependent on 'Does the patient have a documented diagnosis of corticosteroid-refractory autoimmune blistering disease?' being 'Yes'. Select if the patient has paraneoplastic pemphigus."
+    },
+    {
+      "name": "CB113",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "None of the above",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Autoimmune blistering diseases, corticosteroid-refractory. Dependent on 'Does the patient have a documented diagnosis of corticosteroid-refractory autoimmune blistering disease?' being 'Yes'. Select if none of the above apply."
+    },
+    {
+      "name": "CB106b",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Autoimmune blistering diseases, corticosteroid-refractory. Checkbox for 'Does the patient have a documented diagnosis of corticosteroid-refractory autoimmune blistering disease?' indicating 'No'."
+    },
+    {
+      "name": "CB114",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "AIDS-related B-cell lymphoma",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). B-cell lymphomas. Dependent on a previous selection indicating B-cell lymphoma. Select if the patient has AIDS-related B-cell lymphoma."
+    },
+    {
+      "name": "CB115",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Burkitt lymphoma",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). B-cell lymphomas. Dependent on a previous selection indicating B-cell lymphoma. Select if the patient has Burkitt lymphoma."
+    },
+    {
+      "name": "CB116",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Diffuse large B-cell lymphoma",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). B-cell lymphomas. Dependent on a previous selection indicating B-cell lymphoma. Select if the patient has Diffuse large B-cell lymphoma."
+    },
+    {
+      "name": "CB117",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Follicular lymphoma",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). B-cell lymphomas. Dependent on a previous selection indicating B-cell lymphoma. Select if the patient has Follicular lymphoma."
+    },
+    {
+      "name": "CB118",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Gastric MALT lymphoma",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). B-cell lymphomas. Dependent on a previous selection indicating B-cell lymphoma. Select if the patient has Gastric MALT lymphoma."
+    },
+    {
+      "name": "CB119",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "High-grade B-Cell lymphoma",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). B-cell lymphomas. Dependent on a previous selection indicating B-cell lymphoma. Select if the patient has High-grade B-Cell lymphoma."
+    },
+    {
+      "name": "CB120",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Mantle cell lymphoma",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). B-cell lymphomas. Dependent on a previous selection indicating B-cell lymphoma. Select if the patient has Mantle cell lymphoma."
+    },
+    {
+      "name": "CB121",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Nodal marginal zone lymphoma",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). B-cell lymphomas. Dependent on a previous selection indicating B-cell lymphoma. Select if the patient has Nodal marginal zone lymphoma."
+    },
+    {
+      "name": "CB122",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Nongastric MALT lymphoma",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). B-cell lymphomas. Dependent on a previous selection indicating B-cell lymphoma. Select if the patient has Nongastric MALT lymphoma."
+    },
+    {
+      "name": "CB123",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Primary cutaneous B-cell lymphomas",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). B-cell lymphomas. Dependent on a previous selection indicating B-cell lymphoma. Select if the patient has Primary cutaneous B-cell lymphomas."
+    },
+    {
+      "name": "CB124",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Splenic marginal zone lymphoma",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). B-cell lymphomas. Dependent on a previous selection indicating B-cell lymphoma. Select if the patient has Splenic marginal zone lymphoma."
+    },
+    {
+      "name": "CB125",
+      "page": 3,
+      "field_type_string": "CheckBox",
+      "field_label": "Other:",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). B-cell lymphomas. Dependent on a previous selection indicating B-cell lymphoma. Check if the patient has another type of B-cell lymphoma."
+    },
+    {
+      "name": "T126",
+      "page": 3,
+      "field_type_string": "Text",
+      "field_label": "Other:",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). B-cell lymphomas. Dependent on 'Other:' checkbox being selected. Specify the type of B-cell lymphoma."
+    },
+    {
+      "name": "T12",
+      "page": 4,
+      "field_type_string": "Text",
+      "field_label": "Patient First Name",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). First name of the patient. This field is a duplicate of T12 on page 2 and 3."
+    },
+    {
+      "name": "T13",
+      "page": 4,
+      "field_type_string": "Text",
+      "field_label": "Patient Last Name",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Last name of the patient. This field is a duplicate of T13 on page 2 and 3."
+    },
+    {
+      "name": "T19",
+      "page": 4,
+      "field_type_string": "Text",
+      "field_label": "Patient Phone",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Phone number of the patient. This field is a duplicate of T19 on page 2 and 3."
+    },
+    {
+      "name": "T14",
+      "page": 4,
+      "field_type_string": "Text",
+      "field_label": "Patient DOB (MM/DD/YYYY)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Date of birth of the patient. This field is a duplicate of T14 on page 2 and 3."
+    },
+    {
+      "name": "CB127",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Castleman's disease. Checkbox for 'Does the patient have a documented diagnosis of multicentric Castleman's disease?' indicating 'Yes'."
+    },
+    {
+      "name": "CB128",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Castleman's disease. Checkbox for 'Does the patient have a documented diagnosis of multicentric Castleman's disease?' indicating 'No'."
+    },
+    {
+      "name": "CB129",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "leptomeningeal metastases from lymphoma",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Central nervous system lymphomas. Dependent on a previous selection indicating CNS lymphoma. Select if the patient has leptomeningeal metastases from lymphoma."
+    },
+    {
+      "name": "CB130",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "primary CNS lymphoma",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Central nervous system lymphomas. Dependent on a previous selection indicating CNS lymphoma. Select if the patient has primary CNS lymphoma."
+    },
+    {
+      "name": "CB131",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "none of the above",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Central nervous system lymphomas. Dependent on a previous selection indicating CNS lymphoma. Select if none of the above apply."
+    },
+    {
+      "name": "CB132",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "chronic lymphocytic leukemia (CLL)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Chronic or small lymphocytic leukemia. Dependent on a previous selection indicating chronic or small lymphocytic leukemia. Select if the patient has chronic lymphocytic leukemia (CLL)."
+    },
+    {
+      "name": "CB133",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "small lymphocytic leukemia",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Chronic or small lymphocytic leukemia. Dependent on a previous selection indicating chronic or small lymphocytic leukemia. Select if the patient has small lymphocytic leukemia."
+    },
+    {
+      "name": "CB134",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "none of the above",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Chronic or small lymphocytic leukemia. Dependent on a previous selection indicating chronic or small lymphocytic leukemia. Select if none of the above apply."
+    },
+    {
+      "name": "CB135",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Cryoglobulinemia. Checkbox for 'Does the patient have a documented diagnosis of cryoglobulinemia?' indicating 'Yes'."
+    },
+    {
+      "name": "CB136",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Cryoglobulinemia. Checkbox for 'Does the patient have a documented diagnosis of cryoglobulinemia?' indicating 'No'."
+    },
+    {
+      "name": "CB139",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Cryoglobulinemia. Checkbox for 'Is there clinical documentation that the treatment with corticosteroids and other immunosuppressive agents was ineffective?' indicating 'Yes'."
+    },
+    {
+      "name": "CB140",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Cryoglobulinemia. Checkbox for 'Is there clinical documentation that the treatment with corticosteroids and other immunosuppressive agents was ineffective?' indicating 'No'."
+    },
+    {
+      "name": "CB144",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Graft versus host disease, chronic. Checkbox for 'Is there a documentation that Rituxan (rituximab) being used as last-resort treatment for chronic graft versus host disease (GVHD)?' indicating 'Yes'."
+    },
+    {
+      "name": "CB145",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Graft versus host disease, chronic. Checkbox for 'Is there a documentation that Rituxan (rituximab) being used as last-resort treatment for chronic graft versus host disease (GVHD)?' indicating 'No'."
+    },
+    {
+      "name": "CB141",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "relapsed hairy cell leukemia",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Hairy cell leukemia. Dependent on a previous selection indicating hairy cell leukemia. Select if the patient has relapsed hairy cell leukemia."
+    },
+    {
+      "name": "CB142",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "refractory hairy cell leukemia",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Hairy cell leukemia. Dependent on a previous selection indicating hairy cell leukemia. Select if the patient has refractory hairy cell leukemia."
+    },
+    {
+      "name": "CB143",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "none of the above",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Hairy cell leukemia. Dependent on a previous selection indicating hairy cell leukemia. Select if none of the above apply."
+    },
+    {
+      "name": "CB137",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Heart and solid organ transplant. Checkbox for 'Is there a documentation that Rituxan (rituximab) is being used for treatment or prevention (desensitization) of highly sensitized patients with antibody mediated rejection in heart transplant recipients and other solid organ transplant recipients?' indicating 'Yes'."
+    },
+    {
+      "name": "CB146",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "heart transplant recipient",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Heart and solid organ transplant. Dependent on 'Is there a documentation that Rituxan (rituximab) is being used for treatment or prevention...' being 'Yes'. Select if the patient is a heart transplant recipient."
+    },
+    {
+      "name": "CB147",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "other solid organ transplant recipient",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Heart and solid organ transplant. Dependent on 'Is there a documentation that Rituxan (rituximab) is being used for treatment or prevention...' being 'Yes'. Select if the patient is an other solid organ transplant recipient."
+    },
+    {
+      "name": "CB138",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Heart and solid organ transplant. Checkbox for 'Is there a documentation that Rituxan (rituximab) is being used for treatment or prevention...' indicating 'No'."
+    },
+    {
+      "name": "CB148",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Bavencio (avelumab)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Immune checkpoint-inhibitor related encephalitis. Dependent on 'Please identify which immune check-point inhibitor caused the encephalitis:'. Check if Bavencio (avelumab) caused the encephalitis."
+    },
+    {
+      "name": "CB149",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Imfinzi (durvalumab)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Immune checkpoint-inhibitor related encephalitis. Dependent on 'Please identify which immune check-point inhibitor caused the encephalitis:'. Check if Imfinzi (durvalumab) caused the encephalitis."
+    },
+    {
+      "name": "CB150",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Keytruda (pembrolizumab)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Immune checkpoint-inhibitor related encephalitis. Dependent on 'Please identify which immune check-point inhibitor caused the encephalitis:'. Check if Keytruda (pembrolizumab) caused the encephalitis."
+    },
+    {
+      "name": "CB151",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Opdivo (nivolumab)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Immune checkpoint-inhibitor related encephalitis. Dependent on 'Please identify which immune check-point inhibitor caused the encephalitis:'. Check if Opdivo (nivolumab) caused the encephalitis."
+    },
+    {
+      "name": "CB152",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Tecentriq (atezolizumab)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Immune checkpoint-inhibitor related encephalitis. Dependent on 'Please identify which immune check-point inhibitor caused the encephalitis:'. Check if Tecentriq (atezolizumab) caused the encephalitis."
+    },
+    {
+      "name": "CB153",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Yervoy (ipilimumab)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Immune checkpoint-inhibitor related encephalitis. Dependent on 'Please identify which immune check-point inhibitor caused the encephalitis:'. Check if Yervoy (ipilimumab) caused the encephalitis."
+    },
+    {
+      "name": "CB154",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Other:",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Immune checkpoint-inhibitor related encephalitis. Dependent on 'Please identify which immune check-point inhibitor caused the encephalitis:'. Check if another immune checkpoint inhibitor caused the encephalitis."
+    },
+    {
+      "name": "T155",
+      "page": 4,
+      "field_type_string": "Text",
+      "field_label": "Other:",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Immune checkpoint-inhibitor related encephalitis. Dependent on 'Other:' checkbox being selected. Specify the immune checkpoint inhibitor."
+    },
+    {
+      "name": "CB156",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Immune or idiopathic thrombocytopenic purpura. Checkbox for 'Does the patient have a documented diagnosis of refractory immune or idiopathic thrombocytopenic purpura (ITP)?' indicating 'Yes'."
+    },
+    {
+      "name": "CB158",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "refractory immune thrombocytopenic purpura",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Immune or idiopathic thrombocytopenic purpura. Dependent on 'Does the patient have a documented diagnosis of refractory immune or idiopathic thrombocytopenic purpura (ITP)?' being 'Yes'. Check if the patient has refractory immune thrombocytopenic purpura."
+    },
+    {
+      "name": "CB159",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "idiopathic thrombocytopenic purpura (ITP)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Immune or idiopathic thrombocytopenic purpura. Dependent on 'Does the patient have a documented diagnosis of refractory immune or idiopathic thrombocytopenic purpura (ITP)?' being 'Yes'. Check if the patient has idiopathic thrombocytopenic purpura (ITP)."
+    },
+    {
+      "name": "CB157",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Immune or idiopathic thrombocytopenic purpura. Checkbox for 'Does the patient have a documented diagnosis of refractory immune or idiopathic thrombocytopenic purpura (ITP)?' indicating 'No'."
+    },
+    {
+      "name": "CB160",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Kidney transplant, rejection prophylaxis. Checkbox for 'Is Rituxan (rituximab) being used as rejection prophylaxis in sensitized kidney transplant recipients with donor specific antibodies?' indicating 'Yes'."
+    },
+    {
+      "name": "CB161",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Kidney transplant, rejection prophylaxis. Checkbox for 'Is Rituxan (rituximab) being used as rejection prophylaxis in sensitized kidney transplant recipients with donor specific antibodies?' indicating 'No'."
+    },
+    {
+      "name": "CB162",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Lymphocyte-predominant Hodgkin's lymphoma. Checkbox for 'Does the patient have a documented diagnosis of lymphocyte-predominant Hodgkin's lymphoma?' indicating 'Yes'."
+    },
+    {
+      "name": "CB163",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Lymphocyte-predominant Hodgkin's lymphoma. Checkbox for 'Does the patient have a documented diagnosis of lymphocyte-predominant Hodgkin's lymphoma?' indicating 'No'."
+    },
+    {
+      "name": "CB164",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Relapsing-remitting MS (RRMS)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Multiple Sclerosis. Dependent on 'Please indicate the type of multiple sclerosis the patient has been diagnosed with:'. Check if the patient has Relapsing-remitting MS (RRMS)."
+    },
+    {
+      "name": "CB165",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Secondary-progressive MS (SPMS)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Multiple Sclerosis. Dependent on 'Please indicate the type of multiple sclerosis the patient has been diagnosed with:'. Check if the patient has Secondary-progressive MS (SPMS)."
+    },
+    {
+      "name": "CB166",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Primary-progressive MS (PPMS)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Multiple Sclerosis. Dependent on 'Please indicate the type of multiple sclerosis the patient has been diagnosed with:'. Check if the patient has Primary-progressive MS (PPMS)."
+    },
+    {
+      "name": "CB167",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Progressive-relapsing MS (PRMS)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Multiple Sclerosis. Dependent on 'Please indicate the type of multiple sclerosis the patient has been diagnosed with:'. Check if the patient has Progressive-relapsing MS (PRMS)."
+    },
+    {
+      "name": "CB168",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Multiple Sclerosis. Checkbox for 'Has the patient discontinued other medications used for treating MS (not including Ampyra)?' indicating 'Yes'."
+    },
+    {
+      "name": "CB169",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Multiple Sclerosis. Checkbox for 'Has the patient discontinued other medications used for treating MS (not including Ampyra)?' indicating 'No'."
+    },
+    {
+      "name": "CB170",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Myasthenia gravis (MuSK-MG). Checkbox for 'Does the patient have a documented diagnosis of muscle-specific tyrosine kinase myasthenia gravis (MuSK-MG)?' indicating 'Yes'."
+    },
+    {
+      "name": "CB172",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Myasthenia gravis (MuSK-MG). Dependent on 'Does the patient have a documented diagnosis of muscle-specific tyrosine kinase myasthenia gravis (MuSK-MG)?' being 'Yes'. Checkbox for 'Has the patient had an unsatisfactory response to initial immunotherapy?' indicating 'Yes'."
+    },
+    {
+      "name": "CB173",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Myasthenia gravis (MuSK-MG). Dependent on 'Does the patient have a documented diagnosis of muscle-specific tyrosine kinase myasthenia gravis (MuSK-MG)?' being 'Yes'. Checkbox for 'Has the patient had an unsatisfactory response to initial immunotherapy?' indicating 'No'."
+    },
+    {
+      "name": "CB171",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Myasthenia gravis (MuSK-MG). Checkbox for 'Does the patient have a documented diagnosis of muscle-specific tyrosine kinase myasthenia gravis (MuSK-MG)?' indicating 'No'."
+    },
+    {
+      "name": "CB174",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Neuromyelitis optica (Devic's disease). Checkbox for 'Does the patient have a documented diagnosis of neuromyelitis optica (Devic's disease)?' indicating 'Yes'."
+    },
+    {
+      "name": "CB175",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Neuromyelitis optica (Devic's disease). Checkbox for 'Does the patient have a documented diagnosis of neuromyelitis optica (Devic's disease)?' indicating 'No'."
+    },
+    {
+      "name": "CB176",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Neuromyelitis optica (Devic's disease). Dependent on 'Does the patient have a documented diagnosis of neuromyelitis optica (Devic's disease)?' being 'Yes'. Checkbox for 'Was the treatment with at least one immunotherapy ineffective?' indicating 'Yes'."
+    },
+    {
+      "name": "CB177",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Neuromyelitis optica (Devic's disease). Dependent on 'Does the patient have a documented diagnosis of neuromyelitis optica (Devic's disease)?' being 'Yes'. Checkbox for 'Was the treatment with at least one immunotherapy ineffective?' indicating 'No'."
+    },
+    {
+      "name": "CB178",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Opsoclonus-myoclonus-ataxia (opsoclonus myoclonus syndrome). Checkbox for 'Does the patient have a documented diagnosis of opsoclonus-myoclonus-ataxia (OMA) associated with neuroblastoma?' indicating 'Yes'."
+    },
+    {
+      "name": "CB179",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Opsoclonus-myoclonus-ataxia (opsoclonus myoclonus syndrome). Checkbox for 'Does the patient have a documented diagnosis of opsoclonus-myoclonus-ataxia (OMA) associated with neuroblastoma?' indicating 'No'."
+    },
+    {
+      "name": "CB180",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Opsoclonus-myoclonus-ataxia (opsoclonus myoclonus syndrome). Dependent on 'Does the patient have a documented diagnosis of opsoclonus-myoclonus-ataxia (OMA) associated with neuroblastoma?' being 'Yes'. Checkbox for 'Is the patient refractory to steroids, chemotherapy and intravenous immunoglobulins?' indicating 'Yes'."
+    },
+    {
+      "name": "T189",
+      "page": 4,
+      "field_type_string": "Text",
+      "field_label": "Medication:",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Opsoclonus-myoclonus-ataxia (opsoclonus myoclonus syndrome). Dependent on 'Is the patient refractory to steroids, chemotherapy and intravenous immunoglobulins?' being 'Yes'. Field to provide the name of the medication tried."
+    },
+    {
+      "name": "T190",
+      "page": 4,
+      "field_type_string": "Text",
+      "field_label": "Date: (MM)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Opsoclonus-myoclonus-ataxia (opsoclonus myoclonus syndrome). Dependent on 'Is the patient refractory to steroids, chemotherapy and intravenous immunoglobulins?' being 'Yes'. Field to provide the month for the date range of the medication tried."
+    },
+    {
+      "name": "T191",
+      "page": 4,
+      "field_type_string": "Text",
+      "field_label": "Date: (DD)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Opsoclonus-myoclonus-ataxia (opsoclonus myoclonus syndrome). Dependent on 'Is the patient refractory to steroids, chemotherapy and intravenous immunoglobulins?' being 'Yes'. Field to provide the day for the date range of the medication tried."
+    },
+    {
+      "name": "T192",
+      "page": 4,
+      "field_type_string": "Text",
+      "field_label": "Date: (YYYY)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Opsoclonus-myoclonus-ataxia (opsoclonus myoclonus syndrome). Dependent on 'Is the patient refractory to steroids, chemotherapy and intravenous immunoglobulins?' being 'Yes'. Field to provide the year for the date range of the medication tried."
+    },
+    {
+      "name": "T193",
+      "page": 4,
+      "field_type_string": "Text",
+      "field_label": "Date: (MM)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Opsoclonus-myoclonus-ataxia (opsoclonus myoclonus syndrome). Dependent on 'Is the patient refractory to steroids, chemotherapy and intravenous immunoglobulins?' being 'Yes'. Field to provide the month for the date range of the medication tried."
+    },
+    {
+      "name": "T194",
+      "page": 4,
+      "field_type_string": "Text",
+      "field_label": "Date: (DD)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Opsoclonus-myoclonus-ataxia (opsoclonus myoclonus syndrome). Dependent on 'Is the patient refractory to steroids, chemotherapy and intravenous immunoglobulins?' being 'Yes'. Field to provide the day for the date range of the medication tried."
+    },
+    {
+      "name": "T195",
+      "page": 4,
+      "field_type_string": "Text",
+      "field_label": "Date: (YYYY)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Opsoclonus-myoclonus-ataxia (opsoclonus myoclonus syndrome). Dependent on 'Is the patient refractory to steroids, chemotherapy and intravenous immunoglobulins?' being 'Yes'. Field to provide the year for the date range of the medication tried."
+    },
+    {
+      "name": "T196",
+      "page": 4,
+      "field_type_string": "Text",
+      "field_label": "Medication:",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Opsoclonus-myoclonus-ataxia (opsoclonus myoclonus syndrome). Dependent on 'Is the patient refractory to steroids, chemotherapy and intravenous immunoglobulins?' being 'Yes'. Field to provide the name of the medication tried."
+    },
+    {
+      "name": "T197",
+      "page": 4,
+      "field_type_string": "Text",
+      "field_label": "Date: (MM)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Opsoclonus-myoclonus-ataxia (opsoclonus myoclonus syndrome). Dependent on 'Is the patient refractory to steroids, chemotherapy and intravenous immunoglobulins?' being 'Yes'. Field to provide the month for the date range of the medication tried."
+    },
+    {
+      "name": "T198",
+      "page": 4,
+      "field_type_string": "Text",
+      "field_label": "Date: (DD)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Opsoclonus-myoclonus-ataxia (opsoclonus myoclonus syndrome). Dependent on 'Is the patient refractory to steroids, chemotherapy and intravenous immunoglobulins?' being 'Yes'. Field to provide the day for the date range of the medication tried."
+    },
+    {
+      "name": "T199",
+      "page": 4,
+      "field_type_string": "Text",
+      "field_label": "Date: (YYYY)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Opsoclonus-myoclonus-ataxia (opsoclonus myoclonus syndrome). Dependent on 'Is the patient refractory to steroids, chemotherapy and intravenous immunoglobulins?' being 'Yes'. Field to provide the year for the date range of the medication tried."
+    },
+    {
+      "name": "T200",
+      "page": 4,
+      "field_type_string": "Text",
+      "field_label": "Date: (MM)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Opsoclonus-myoclonus-ataxia (opsoclonus myoclonus syndrome). Dependent on 'Is the patient refractory to steroids, chemotherapy and intravenous immunoglobulins?' being 'Yes'. Field to provide the month for the date range of the medication tried."
+    },
+    {
+      "name": "T201",
+      "page": 4,
+      "field_type_string": "Text",
+      "field_label": "Date: (DD)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Opsoclonus-myoclonus-ataxia (opsoclonus myoclonus syndrome). Dependent on 'Is the patient refractory to steroids, chemotherapy and intravenous immunoglobulins?' being 'Yes'. Field to provide the day for the date range of the medication tried."
+    },
+    {
+      "name": "T202",
+      "page": 4,
+      "field_type_string": "Text",
+      "field_label": "Date: (YYYY)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Opsoclonus-myoclonus-ataxia (opsoclonus myoclonus syndrome). Dependent on 'Is the patient refractory to steroids, chemotherapy and intravenous immunoglobulins?' being 'Yes'. Field to provide the year for the date range of the medication tried."
+    },
+    {
+      "name": "CB181",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Opsoclonus-myoclonus-ataxia (opsoclonus myoclonus syndrome). Dependent on 'Is the patient refractory to steroids, chemotherapy and intravenous immunoglobulins?' being 'Yes'. Checkbox for 'Is the patient refractory to steroids, chemotherapy and intravenous immunoglobulins?' indicating 'No'."
+    },
+    {
+      "name": "CB203",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Post-transplant lymphoproliferative disorder. Checkbox for 'Is Rituxan (rituximab) being used as treatment of post-transplant lymphoproliferative disorder?' indicating 'Yes'."
+    },
+    {
+      "name": "CB204",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Post-transplant lymphoproliferative disorder. Checkbox for 'Is Rituxan (rituximab) being used as treatment of post-transplant lymphoproliferative disorder?' indicating 'No'."
+    },
+    {
+      "name": "CB205",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Post-transplant lymphoproliferative disorder. Checkbox for 'Is Rituxan (rituximab) being used as prophylaxis for Epstein-Barr virus (EBV) post-transplant lymphoproliferative disorder?' indicating 'Yes'."
+    },
+    {
+      "name": "CB206",
+      "page": 4,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Post-transplant lymphoproliferative disorder. Checkbox for 'Is Rituxan (rituximab) being used as prophylaxis for Epstein-Barr virus (EBV) post-transplant lymphoproliferative disorder?' indicating 'No'."
+    },
+    {
+      "name": "T12",
+      "page": 5,
+      "field_type_string": "Text",
+      "field_label": "Patient First Name",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). First name of the patient. This field is a duplicate of T12 on pages 2, 3 and 4."
+    },
+    {
+      "name": "T13",
+      "page": 5,
+      "field_type_string": "Text",
+      "field_label": "Patient Last Name",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Last name of the patient. This field is a duplicate of T13 on pages 2, 3 and 4."
+    },
+    {
+      "name": "T19",
+      "page": 5,
+      "field_type_string": "Text",
+      "field_label": "Patient Phone",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Phone number of the patient. This field is a duplicate of T19 on pages 2, 3 and 4."
+    },
+    {
+      "name": "T14",
+      "page": 5,
+      "field_type_string": "Text",
+      "field_label": "Patient DOB (MM/DD/YYYY)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Date of birth of the patient. This field is a duplicate of T14 on pages 2, 3 and 4."
+    },
+    {
+      "name": "CB207",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "Mild",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Rheumatoid Arthritis. Indicate the severity of the patient's rheumatoid arthritis: Mild."
+    },
+    {
+      "name": "CB208",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "Moderate",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Rheumatoid Arthritis. Indicate the severity of the patient's rheumatoid arthritis: Moderate."
+    },
+    {
+      "name": "CB209",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "Severe",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Rheumatoid Arthritis. Indicate the severity of the patient's rheumatoid arthritis: Severe."
+    },
+    {
+      "name": "CB210",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Rheumatoid Arthritis. Checkbox for 'Is there evidence that the disease is active?' indicating 'Yes'."
+    },
+    {
+      "name": "CB211",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Rheumatoid Arthritis. Checkbox for 'Is there evidence that the disease is active?' indicating 'No'."
+    },
+    {
+      "name": "CB212",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Rheumatoid Arthritis. Checkbox for 'Will Rituxan (rituximab) be used in combination with methotrexate?' indicating 'Yes'."
+    },
+    {
+      "name": "CB213",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Rheumatoid Arthritis. Checkbox for 'Will Rituxan (rituximab) be used in combination with methotrexate?' indicating 'No'."
+    },
+    {
+      "name": "CB214",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Rheumatoid Arthritis. Dependent on 'Will Rituxan (rituximab) be used in combination with methotrexate?' being 'Yes'. Checkbox for 'Was treatment with methotrexate ineffective, not tolerated or contraindicated?' indicating 'Yes'."
+    },
+    {
+      "name": "CB216",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "ineffective",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Rheumatoid Arthritis. Dependent on 'Was treatment with methotrexate ineffective, not tolerated or contraindicated?' being 'Yes'. Select 'ineffective'."
+    },
+    {
+      "name": "CB217",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "not tolerated",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Rheumatoid Arthritis. Dependent on 'Was treatment with methotrexate ineffective, not tolerated or contraindicated?' being 'Yes'. Select 'not tolerated'."
+    },
+    {
+      "name": "CB218",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "contraindicated",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Rheumatoid Arthritis. Dependent on 'Was treatment with methotrexate ineffective, not tolerated or contraindicated?' being 'Yes'. Select 'contraindicated'."
+    },
+    {
+      "name": "CB215",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Rheumatoid Arthritis. Dependent on 'Will Rituxan (rituximab) be used in combination with methotrexate?' being 'Yes'. Checkbox for 'Was treatment with methotrexate ineffective, not tolerated or contraindicated?' indicating 'No'."
+    },
+    {
+      "name": "CB223",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Rheumatoid Arthritis. Checkbox for 'Was treatment with another conventional DMARD ineffective?' indicating 'Yes'."
+    },
+    {
+      "name": "CB225",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "azathioprine",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Rheumatoid Arthritis. Dependent on 'Was treatment with another conventional DMARD ineffective?' being 'Yes'. Select 'azathioprine'."
+    },
+    {
+      "name": "CB226",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "cyclosporine",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Rheumatoid Arthritis. Dependent on 'Was treatment with another conventional DMARD ineffective?' being 'Yes'. Select 'cyclosporine'."
+    },
+    {
+      "name": "CB227",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "hydroxychloroquine",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Rheumatoid Arthritis. Dependent on 'Was treatment with another conventional DMARD ineffective?' being 'Yes'. Select 'hydroxychloroquine'."
+    },
+    {
+      "name": "CB228",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "leflunomide",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Rheumatoid Arthritis. Dependent on 'Was treatment with another conventional DMARD ineffective?' being 'Yes'. Select 'leflunomide'."
+    },
+    {
+      "name": "CB229",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "sulfasalazine",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Rheumatoid Arthritis. Dependent on 'Was treatment with another conventional DMARD ineffective?' being 'Yes'. Select 'sulfasalazine'."
+    },
+    {
+      "name": "CB224",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Rheumatoid Arthritis. Checkbox for 'Was treatment with another conventional DMARD ineffective?' indicating 'No'."
+    },
+    {
+      "name": "CB281",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Sj\u00f6gren syndrome. Checkbox for 'Does the patient have a documented diagnosis of Sj\u00f6gren's syndrome?' indicating 'Yes'."
+    },
+    {
+      "name": "CB282",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Sj\u00f6gren syndrome. Checkbox for 'Does the patient have a documented diagnosis of Sj\u00f6gren's syndrome?' indicating 'No'."
+    },
+    {
+      "name": "CB283",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Sj\u00f6gren syndrome. Dependent on 'Does the patient have a documented diagnosis of Sj\u00f6gren's syndrome?' being 'Yes'. Checkbox for 'Was treatment with corticosteroids and other immunosuppressive agents ineffective?' indicating 'Yes'."
+    },
+    {
+      "name": "T285",
+      "page": 5,
+      "field_type_string": "Text",
+      "field_label": "Medication:",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Sj\u00f6gren syndrome. Dependent on 'Was treatment with corticosteroids and other immunosuppressive agents ineffective?' being 'Yes'. Field to provide the name of the corticosteroid or immunosuppressive agent used."
+    },
+    {
+      "name": "T286",
+      "page": 5,
+      "field_type_string": "Text",
+      "field_label": "Date: (MM)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Sj\u00f6gren syndrome. Dependent on 'Was treatment with corticosteroids and other immunosuppressive agents ineffective?' being 'Yes'. Field to provide the month for the date range of the medication used."
+    },
+    {
+      "name": "T287",
+      "page": 5,
+      "field_type_string": "Text",
+      "field_label": "Date: (DD)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Sj\u00f6gren syndrome. Dependent on 'Was treatment with corticosteroids and other immunosuppressive agents ineffective?' being 'Yes'. Field to provide the day for the date range of the medication used."
+    },
+    {
+      "name": "T288",
+      "page": 5,
+      "field_type_string": "Text",
+      "field_label": "Date: (YYYY)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Sj\u00f6gren syndrome. Dependent on 'Was treatment with corticosteroids and other immunosuppressive agents ineffective?' being 'Yes'. Field to provide the year for the date range of the medication used."
+    },
+    {
+      "name": "T289",
+      "page": 5,
+      "field_type_string": "Text",
+      "field_label": "Date: (MM)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Sj\u00f6gren syndrome. Dependent on 'Was treatment with corticosteroids and other immunosuppressive agents ineffective?' being 'Yes'. Field to provide the month for the date range of the medication used."
+    },
+    {
+      "name": "T290",
+      "page": 5,
+      "field_type_string": "Text",
+      "field_label": "Date: (DD)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Sj\u00f6gren syndrome. Dependent on 'Was treatment with corticosteroids and other immunosuppressive agents ineffective?' being 'Yes'. Field to provide the day for the date range of the medication used."
+    },
+    {
+      "name": "T291",
+      "page": 5,
+      "field_type_string": "Text",
+      "field_label": "Date: (YYYY)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Sj\u00f6gren syndrome. Dependent on 'Was treatment with corticosteroids and other immunosuppressive agents ineffective?' being 'Yes'. Field to provide the year for the date range of the medication used."
+    },
+    {
+      "name": "T292",
+      "page": 5,
+      "field_type_string": "Text",
+      "field_label": "Medication:",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Sj\u00f6gren syndrome. Dependent on 'Was treatment with corticosteroids and other immunosuppressive agents ineffective?' being 'Yes'. Field to provide the name of the corticosteroid or immunosuppressive agent used."
+    },
+    {
+      "name": "T293",
+      "page": 5,
+      "field_type_string": "Text",
+      "field_label": "Date: (MM)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Sj\u00f6gren syndrome. Dependent on 'Was treatment with corticosteroids and other immunosuppressive agents ineffective?' being 'Yes'. Field to provide the month for the date range of the medication used."
+    },
+    {
+      "name": "T294",
+      "page": 5,
+      "field_type_string": "Text",
+      "field_label": "Date: (DD)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Sj\u00f6gren syndrome. Dependent on 'Was treatment with corticosteroids and other immunosuppressive agents ineffective?' being 'Yes'. Field to provide the day for the date range of the medication used."
+    },
+    {
+      "name": "T295",
+      "page": 5,
+      "field_type_string": "Text",
+      "field_label": "Date: (YYYY)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Sj\u00f6gren syndrome. Dependent on 'Was treatment with corticosteroids and other immunosuppressive agents ineffective?' being 'Yes'. Field to provide the year for the date range of the medication used."
+    },
+    {
+      "name": "T296",
+      "page": 5,
+      "field_type_string": "Text",
+      "field_label": "Date: (MM)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Sj\u00f6gren syndrome. Dependent on 'Was treatment with corticosteroids and other immunosuppressive agents ineffective?' being 'Yes'. Field to provide the month for the date range of the medication used."
+    },
+    {
+      "name": "T297",
+      "page": 5,
+      "field_type_string": "Text",
+      "field_label": "Date: (DD)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Sj\u00f6gren syndrome. Dependent on 'Was treatment with corticosteroids and other immunosuppressive agents ineffective?' being 'Yes'. Field to provide the day for the date range of the medication used."
+    },
+    {
+      "name": "T298",
+      "page": 5,
+      "field_type_string": "Text",
+      "field_label": "Date: (YYYY)",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Sj\u00f6gren syndrome. Dependent on 'Was treatment with corticosteroids and other immunosuppressive agents ineffective?' being 'Yes'. Field to provide the year for the date range of the medication used."
+    },
+    {
+      "name": "CB224",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Sj\u00f6gren syndrome. Dependent on 'Does the patient have a documented diagnosis of Sj\u00f6gren's syndrome?' being 'Yes'. Checkbox for 'Was treatment with corticosteroids and other immunosuppressive agents ineffective?' indicating 'No'."
+    },
+    {
+      "name": "CB284",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Sj\u00f6gren syndrome. Checkbox for 'Was treatment with corticosteroids and other immunosuppressive agents ineffective?' indicating 'No'."
+    },
+    {
+      "name": "CB299",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Thrombotic thrombocytopenic purpura. Checkbox for 'Does the patient have a documented diagnosis of refractory thrombotic thrombocytopenic purpura (TTP)?' indicating 'Yes'."
+    },
+    {
+      "name": "CB300",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Thrombotic thrombocytopenic purpura. Checkbox for 'Does the patient have a documented diagnosis of refractory thrombotic thrombocytopenic purpura (TTP)?' indicating 'No'."
+    },
+    {
+      "name": "CB301",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Waldenstrom's macroglobulinemia. Checkbox for 'Does the patient have a documented diagnosis of Waldenstr\u00f6m macroglobulinemia?' indicating 'Yes'."
+    },
+    {
+      "name": "CB302",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). Waldenstrom's macroglobulinemia. Checkbox for 'Does the patient have a documented diagnosis of Waldenstr\u00f6m macroglobulinemia?' indicating 'No'."
+    },
+    {
+      "name": "CB303",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Continuation Requests. Checkbox for 'Is this continuation request a result of the patient receiving samples of Rituxan (rituximab)?' indicating 'Yes'."
+    },
+    {
+      "name": "CB304",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Continuation Requests. Checkbox for 'Is this continuation request a result of the patient receiving samples of Rituxan (rituximab)?' indicating 'No'."
+    },
+    {
+      "name": "T305",
+      "page": 5,
+      "field_type_string": "Text",
+      "field_label": "Please indicate the length of time on Rituxan (rituximab):",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For Continuation Requests. Dependent on 'Is this continuation request a result of the patient receiving samples of Rituxan (rituximab)?' being 'Yes'. Field to indicate the duration of Rituxan use."
+    },
+    {
+      "name": "CB310",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "Mild",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For rheumatoid arthritis only. Indicate the severity of the disease at baseline (pretreatment with Rituxan (rituximab)): Mild."
+    },
+    {
+      "name": "CB311",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "Moderate",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For rheumatoid arthritis only. Indicate the severity of the disease at baseline (pretreatment with Rituxan (rituximab)): Moderate."
+    },
+    {
+      "name": "CB312",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "Severe",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For rheumatoid arthritis only. Indicate the severity of the disease at baseline (pretreatment with Rituxan (rituximab)): Severe."
+    },
+    {
+      "name": "CB306",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For rheumatoid arthritis only. Checkbox for 'Is there clinical documentation supporting disease stability?' indicating 'Yes'."
+    },
+    {
+      "name": "CB307",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For rheumatoid arthritis only. Checkbox for 'Is there clinical documentation supporting disease stability?' indicating 'No'."
+    },
+    {
+      "name": "CB308",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For rheumatoid arthritis only. Checkbox for 'Is there clinical documentation supporting disease improvement?' indicating 'Yes'."
+    },
+    {
+      "name": "CB309",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For rheumatoid arthritis only. Checkbox for 'Is there clinical documentation supporting disease improvement?' indicating 'No'."
+    },
+    {
+      "name": "CB313",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For all other indications. Checkbox for 'Is there clinical documentation supporting disease stability?' indicating 'Yes'."
+    },
+    {
+      "name": "CB314",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For all other indications. Checkbox for 'Is there clinical documentation supporting disease stability?' indicating 'No'."
+    },
+    {
+      "name": "CB315",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "Yes",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For all other indications. Checkbox for 'Is there clinical documentation supporting disease improvement?' indicating 'Yes'."
+    },
+    {
+      "name": "CB316",
+      "page": 5,
+      "field_type_string": "CheckBox",
+      "field_label": "No",
+      "context": "Subheading: G. CLINICAL INFORMATION (Continued). For all other indications. Checkbox for 'Is there clinical documentation supporting disease improvement?' indicating 'No'."
+    },
+    {
+      "name": "T317",
+      "page": 5,
+      "field_type_string": "Text",
+      "field_label": "Date: (MM)",
+      "context": "Subheading: H. ACKNOWLEDGEMENT. Date the request was completed by signature. Provides the month."
+    },
+    {
+      "name": "T318",
+      "page": 5,
+      "field_type_string": "Text",
+      "field_label": "Date: (DD)",
+      "context": "Subheading: H. ACKNOWLEDGEMENT. Date the request was completed by signature. Provides the day."
+    },
+    {
+      "name": "T319",
+      "page": 5,
+      "field_type_string": "Text",
+      "field_label": "Date: (YYYY)",
+      "context": "Subheading: H. ACKNOWLEDGEMENT. Date the request was completed by signature. Provides the year."
+    }
+  ]
+}
