@@ -1,0 +1,14 @@
+{
+  "timestamp": "20250622_234624",
+  "source_file": "20250622_234624_source_referral_package.pdf",
+  "template_file": "20250622_234624_template_PA.pdf",
+  "extracted_data": {
+    "start_of_treatment": "05/15/2024",
+    "last_treatment_date": null,
+    "patient_first_name": "Shakh",
+    "patient_last_name": "Abdulla",
+    "patient_address": "00\n\nmery Dr NASHVILLE TN 37361",
+    "insurance_member_id": "041152153",
+    "insurance_group": "would"
+  }
+}
