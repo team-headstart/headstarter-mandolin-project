@@ -1,0 +1,220 @@
+{
+  "answers": [
+    {
+      "name": "member.last_name",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Last name:",
+      "context": "Subheading: Member Information. The member's last name is required.",
+      "answer": "Chen"
+    },
+    {
+      "name": "member.first_name",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "First name:",
+      "context": "Subheading: Member Information. The member's first name is required.",
+      "answer": "Amy"
+    },
+    {
+      "name": "member.medicaid_id",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Medicaid ID number:",
+      "context": "Subheading: Member Information. The member's Medicaid ID number is required.",
+      "answer": "null"
+    },
+    {
+      "name": "member.dob",
+      "page": 1,
+      "field_type_string": "Date",
+      "field_label": "Date of birth:",
+      "context": "Subheading: Member Information. The member's date of birth is required.",
+      "answer": "1983-05-23"
+    },
+    {
+      "name": "member.weight_kg",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Weight in kilograms:",
+      "context": "Subheading: Member Information. The member's weight in kilograms is required.",
+      "answer": "50.9 kg"
+    },
+    {
+      "name": "prescriber.last_name",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Last name:",
+      "context": "Subheading: Prescriber information. The prescriber's last name is required.",
+      "answer": "Nicole"
+    },
+    {
+      "name": "prescriber.first_name",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "First name:",
+      "context": "Subheading: Prescriber information. The prescriber's first name is required.",
+      "answer": "Angela"
+    },
+    {
+      "name": "prescriber.npi_number",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "NPI number:",
+      "context": "Subheading: Prescriber information. The prescriber's NPI number is required.",
+      "answer": "null"
+    },
+    {
+      "name": "prescriber.phone",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Phone number:",
+      "context": "Subheading: Prescriber information. The prescriber's phone number is required.",
+      "answer": "421-771-9001"
+    },
+    {
+      "name": "prescriber.fax",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Fax number:",
+      "context": "Subheading: Prescriber information. The prescriber's fax number is required.",
+      "answer": "1-244-345-8459"
+    },
+    {
+      "name": "drug.name",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Drug name:",
+      "context": "Subheading: Drug information. The name of the drug is required.",
+      "answer": "VYEPTI"
+    },
+    {
+      "name": "drug.strength",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Drug strength:",
+      "context": "Subheading: Drug information. The strength of the drug is required.",
+      "answer": "100 mg/mL"
+    },
+    {
+      "name": "drug.length_of_therapy",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Length of therapy:",
+      "context": "Subheading: Drug information. The length of therapy is required.",
+      "answer": "null"
+    },
+    {
+      "name": "drug.form",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Drug form:",
+      "context": "Subheading: Drug information. The form of the drug is required.",
+      "answer": "solution"
+    },
+    {
+      "name": "drug.dosing_frequency",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Dosing frequency:",
+      "context": "Subheading: Drug information. The dosing frequency of the drug is required.",
+      "answer": "Once"
+    },
+    {
+      "name": "drug.quantity",
+      "page": 1,
+      "field_type_string": "Text",
+      "field_label": "Quantity:",
+      "context": "Subheading: Drug information. The quantity of the drug is required.",
+      "answer": "1 mL"
+    },
+    {
+      "name": "clinical.migraine_diagnosis_criteria",
+      "page": 2,
+      "field_type_string": "Radio",
+      "field_label": "Does the member have a diagnosis of migraine with or without aura based on International Classification of Headache Disorders (ICHD-III) diagnostic criteria?",
+      "context": "Subheading: Drug information. This question is part of the criteria for preventive treatment of migraine and requires a Yes or No answer.",
+      "answer": "True"
+    },
+    {
+      "name": "clinical.age_over_18",
+      "page": 2,
+      "field_type_string": "Radio",
+      "field_label": "Is the member \u2265 18 years of age?",
+      "context": "Subheading: Drug information. This question is part of the criteria for preventive treatment of migraine and requires a Yes or No answer.",
+      "answer": "True"
+    },
+    {
+      "name": "clinical.utilizing_prophylactic_modalities",
+      "page": 2,
+      "field_type_string": "Radio",
+      "field_label": "Has the member been utilizing prophylactic intervention modalities (for example, pharmacotherapy, behavioral therapy, physical therapy, etc.)?",
+      "context": "Subheading: Drug information. This question is part of the criteria for preventive treatment of migraine and requires a Yes or No answer.",
+      "answer": "True"
+    },
+    {
+      "name": "clinical.chronic_migraine_diagnosis",
+      "page": 2,
+      "field_type_string": "Radio",
+      "field_label": "Does the member have a diagnosis of chronic migraines defined as 15 or more headache (tension-type-like and/or migraine-like) days per month for > three months?",
+      "context": "Subheading: Drug information. This question is part of the criteria for preventive treatment of migraine and requires a Yes or No answer. If 'Yes', additional criteria (a, b, c, d) must also be met.",
+      "answer": "True"
+    },
+    {
+      "name": "clinical.frequent_episodic_migraine",
+      "page": 3,
+      "field_type_string": "Radio",
+      "field_label": "Does the member have diagnosis of frequent episodic migraines defined as at least five headache attacks lasting 4 to 72 hours (when untreated or unsuccessfully treated)?",
+      "context": "Subheading: Drug information. This question requires a Yes or No answer. If 'Yes', additional criteria (a, b) must also be met.",
+      "answer": "False"
+    },
+    {
+      "name": "drug.vyepti_not_in_combination_cgrp",
+      "page": 3,
+      "field_type_string": "Radio",
+      "field_label": "Will Vyepti not be used in combination with prophylactic calcitonin gene-related peptide (CGRP) inhibitors? (for example, erenumab, galcanezumab, fremanezumab, atogepant, rimegepant, etc.)",
+      "context": "Subheading: Drug information. This question requires a Yes or No answer.",
+      "answer": "False"
+    },
+    {
+      "name": "renewal.meet_initial_criteria",
+      "page": 3,
+      "field_type_string": "Radio",
+      "field_label": "Does the member continue to meet the initial criteria?",
+      "context": "Subheading: For renewal, complete the following questions to receive a 12-month approval. This question requires a Yes or No answer.",
+      "answer": "null"
+    },
+    {
+      "name": "renewal.no_unacceptable_toxicity",
+      "page": 3,
+      "field_type_string": "Radio",
+      "field_label": "Does the member have an absence of unacceptable toxicity from the drug?",
+      "context": "Subheading: For renewal, complete the following questions to receive a 12-month approval. This question requires a Yes or No answer.",
+      "answer": "null"
+    },
+    {
+      "name": "renewal.clinical_response",
+      "page": 3,
+      "field_type_string": "Radio",
+      "field_label": "Has the member experienced a clinical response as evidenced by:",
+      "context": "Subheading: For renewal, complete the following questions to receive a 12-month approval. This question requires a Yes or No answer. The response should be based on criteria a or b.",
+      "answer": "null"
+    },
+    {
+      "name": "prescriber.signature",
+      "page": 3,
+      "field_type_string": "Signature",
+      "field_label": "Prescriber signature (required)",
+      "context": "Subheading: Prescriber signature (required). The prescriber's signature is required to confirm the accuracy of the information provided.",
+      "answer": "null"
+    },
+    {
+      "name": "prescriber.date",
+      "page": 3,
+      "field_type_string": "Date",
+      "field_label": "Date",
+      "context": "Subheading: Prescriber signature (required). The date the prescriber signed is required.",
+      "answer": "null"
+    }
+  ]
+}
