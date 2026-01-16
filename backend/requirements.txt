@@ -1,0 +1,21 @@
+# FastAPI and Server
+fastapi
+uvicorn[standard]
+python-multipart
+
+# Pydantic and Settings Management
+pydantic
+pydantic-settings
+python-dotenv
+
+# AI and LLM
+google-generativeai
+mistralai
+
+# PDF Processing
+PyMuPDF  # For reading and writing PDFs
+Pillow   # For image processing, often used with OCR
+
+# Utilities
+thefuzz[speedup]  # For fuzzy string matching (e.g., field names)
+requests          # For making HTTP requests, if needed 

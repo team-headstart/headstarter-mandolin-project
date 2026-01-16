@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply transition-colors duration-200;
+  }
+  
+  body {
+    @apply font-sans antialiased;
+  }
+}
+
+@layer components {
+  .gradient-bg-dark {
+    background: linear-gradient(135deg, #000435 0%, #000435 20%, #000000 35%, #1a1a1a 50%, #000000 65%, #000435 80%, #000435 100%);
+  }
+  
+  .gradient-bg-light {
+    background: linear-gradient(135deg, #f9fafb 0%, #e5e7eb 25%, #d1d5db 50%, #e5e7eb 75%, #f9fafb 100%);
+  }
+  
+  .glass-effect {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .glass-effect-light {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .text-shadow-dark {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .glow-shadow {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+  
+  .glow-shadow-light {
+    box-shadow: 0 0 15px rgba(79, 70, 229, 0.2);
+  }
+}
